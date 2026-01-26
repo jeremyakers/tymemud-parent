@@ -18,12 +18,12 @@ This workspace contains three separate git repositories:
 
 ### Git Repository Structure
 
-- **`MM3/src/`** - Local git repository tracking branch `svn/MM_3_Final` (stable/production MUD code)
-- **`MM32/src/`** - Local git repository tracking branch `svn/MM_3-2_Start` (development MUD code)
-- **`public_html/`** - Local git repository for the website (PHP/Apache assets)
+- **`<your_worktree_parent>/MM3/src/`** - Local git repository tracking branch `svn/MM_3_Final` (stable/production MUD code)
+- **`<your_worktree_parent>/MM32/src/`** - Local git repository tracking branch `svn/MM_3-2_Start` (development MUD code)
+- **`<your_worktree_parent>/public_html/`** - Local git repository for the website (PHP/Apache assets)
 
-The MUD repositories connect to the same remote: `jeremyakers/tymemud-src.git`  
-The website repository connects to: `jeremyakers/tymemud-web.git`
+The MUD source (src) repositories connect to the same remote: `jeremyakers/tymemud-src.git`  
+The website (public_html) repository connects to: `jeremyakers/tymemud-web.git`
 
 **Important:** All git operations (commit, push, merge) must be run from within the relevant repo directory AFTER YOU COPY TO YOUR OWN WORKTREE:
 - `cd MM3/src` for stable MUD branch operations
@@ -59,7 +59,7 @@ The website repository connects to: `jeremyakers/tymemud-web.git`
 
 ### lib workflow (world data repo)
 
-The world data (`lib/`) is a **separate repository** and follows a stricter promotion flow:
+The world data (`lib/`) is a **separate repository** (Which must also be copied to your worktree) and follows a stricter promotion flow:
 
 1. **All lib changes land in `builder` first**
 2. Deploy/test on the **builderport** server
@@ -76,35 +76,43 @@ This is intentional so builders can safely validate world/command table changes 
 1. **Identify which MikkiMUD version (each has its own branch) you're working on and CREATE YOUR OWN WORKTREE:**
    - MikkiMUD 3.0 (MM3) Files are in `MM3/src/` → Using branch `svn/MM_3_Final` → Use `MM3/src/MANIFESTO.md`
    - MikkiMUD 3.2 (MM32) Files are in `MM32/src/` → Using branch `svn/MM_3-2_Start` → Use `MM32/src/MANIFESTO.md`
-   -- Pull these branches into subfolder that you create under _agent_work/<your worktree name>/
-   --- See "parallel safety" #6 below for details.
 
-2. **Load the appropriate MANIFESTO.md:**
+2. IMPORTANT: **Parallel-safe workflow (worktrees, ports, PRs):**
+   - Multiple Agents (Human and AI alike!) are working in parallel on this project!
+   - Follow `docs/agents/parallel-safety.md` (**mandatory**) for:
+     - how to create your own `_agent_work/<agent_name>/MM3/{src,lib}` and `_agent_work/<agent_name>/MM32/{src,lib}` worktrees
+     - how to pick/register ports (`tmp/agent_ports.tsv`) and stop only your own server PIDs
+     - YOU ARE RESPONSIBLE FOR CREATING Pull Requests for your work! Do not ask the user to do it for you!
+     - PR-only submission rules (no direct pushes to `svn/MM_3_Final` / `svn/MM_3-2_Start`)
+     - PR hygiene: **never** push new commits expecting to “update” a merged/closed PR (open a new PR instead)
+
+3. **Load the appropriate MANIFESTO.md:**
    - Read the branch-specific MANIFESTO.md before making changes
    - Follow all coding rules and patterns defined in that file
 
-3. **Respect branch boundaries:**
+4. **Respect branch boundaries:**
    - Don't mix MM3 and MM32 code patterns
    - Each branch may have different standards and features
 
-4. **Fix the cause; don’t work around it (avoid masking bugs):**
+5. **Fix the cause; don’t work around it (avoid masking bugs):**
    - Prefer **ordering/state fixes** that ensure required data is set before it’s used (e.g., set `attack_weapon` when a form is chosen, not later).
    - Avoid “fallbacks” that **change output to look valid** while hiding incorrect engine state (e.g., printing some other weapon/bodypart instead of surfacing the bad state).
    - It is OK to use **data-coverage fallbacks** (e.g., default prose if a DB text slot is missing). That masks missing content, not an engine bug.
 
-5. **When referencing files/paths in agent messages (clickable links in Cursor):**
+6. **When referencing files/paths in agent messages (clickable links in IDE):**
    - Always use paths **relative to the project root** (this repo root folder), not relative to a sub-repo like `MM32/src/`.
      - Good: `_agent_work/channeling_agent/MM32/src/docs/release/mm32-3.2-tuning-report.md`
      - Bad (ambiguous when multiple agent worktrees exist): `MM32/src/docs/release/mm32-3.2-tuning-report.md`
    - Wrap paths in **inline code** (backticks): `` `relative/path/from/repo/root` ``
    - **Do not** use Markdown link syntax (`[text](path)`) for local files; plain inline paths are what Cursor auto-links reliably.
 
-6. **Parallel-safe workflow (worktrees, ports, PRs):**
-   - Follow `docs/agents/parallel-safety.md` (**mandatory**) for:
-     - how to create your own `_agent_work/<agent_name>/MM3/{src,lib}` and `_agent_work/<agent_name>/MM32/{src,lib}` worktrees
-     - how to pick/register ports (`tmp/agent_ports.tsv`) and stop only your own server PIDs
-     - PR-only submission rules (no direct pushes to `svn/MM_3_Final` / `svn/MM_3-2_Start`)
-     - PR hygiene: **never** push new commits expecting to “update” a merged/closed PR (open a new PR instead)
+7. **ALWAYS TRACK changes, task status, important context, TODOs, etc in durable files (Not in chat).**
+   - Chat's only retain limited context and as you work, context is lost
+   - Always follow the "memory bank" rules in RULES_INDEX.md
+   - Always track details on changes you make in CHANGELOG.md
+   - Put the *details* of your changes in the changelog and then *summarize* to chat. Do not use the user chat interface to provide lengthy detailed explanations of changes.
+   - When writing to memory bank, changelogs, etc: Always identify yourself as to which agent you are making the change or adding the memory bank entry
+   -- This ensures each agent knows what other agents are changing
 
 ---
 
@@ -112,7 +120,7 @@ This is intentional so builders can safely validate world/command table changes 
 
 - **Rules System:** See `RULES_INDEX.md` for AI agent rule discovery
 - **Agent Protocol:** See `AGENTS.md` for MODE/ACT workflow and rule loading
-- **Parallel-safety / worktrees / ports:** See `docs/agents/parallel-safety.md`
+- **Parallel-safety / worktrees / ports:** See `docs/agents/parallel-safety.md` (ALWAYS REQUIRED)
 - **Design Notes (combat/channeling):** See `Combat_Channeling_Design_Notes/`
 - **Design Notes (building/ubermap):** See `Building_Design_Notes/` and `docs/ubermap/`
 - **Project docs:** See `docs/`
