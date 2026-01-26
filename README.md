@@ -12,9 +12,10 @@
 
 ## Repository Structure
 
-This workspace contains three separate git repositories:
+Each workspace contains three separate git repositories:
 
-### DO NOT WORK DIRECTLY IN THESE TOP LEVEL FOLDERS
+### DO NOT WORK OUTSIDE YOUR OWN WORKTREES
+### DO NOT EDIT FILES UNDER _human_work - YOU MAY USE THIS AS THE BASIS FOR CREATING YOUR OWN WORKTREE
 
 ### Git Repository Structure
 
