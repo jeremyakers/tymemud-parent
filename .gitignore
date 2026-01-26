@@ -1,0 +1,19 @@
+# Nested repos (managed separately)
+MM3/
+MM32/
+public_html/
+
+# Agent scratch / ephemeral
+_agent_work/
+tmp/
+
+# editor/tooling caches
+.cursor/
+.vscode/
+.ruff_cache/
+
+# logs / pids / misc artifacts
+*.pid
+*.log
+*.tgz
+*.zip

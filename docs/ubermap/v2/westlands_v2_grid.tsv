@@ -1,0 +1,29 @@
+gx	gy	label	zone_id	notes
+# Grid size: 20 cols (gx=0..19), 15 rows (gy=0..14)
+# Fill in `zone_id` as expansion decisions are made. Reuse v1-adjacent gaps when sensible.
+# Suggested convention:
+# - Keep existing v1 zone ids where applicable (Tar Valon / Caemlyn / Cairhien / Aringill region).
+# - For immediate neighbors, reuse unused numeric gaps near the v1 blocks.
+# - For far expansion, allocate new ids in a dedicated block (TBD).
+0	0			Top-left
+19	0			Top-right
+0	14			Bottom-left
+19	14			Bottom-right
+
+# Approximate anchors (rough grid placement; refine as needed)
+15	4	Tar Valon (anchor)		Approximate placement
+12	7	Caemlyn (anchor)		Approximate placement
+15	6	Cairhien (anchor)		Approximate placement
+15	7	Aringill (anchor)		Approximate placement
+16	11	Tear (anchor)		Approximate placement
+3	10	Tanchico (anchor)		Approximate placement
+18	2	Fal Dara (anchor)		Approximate placement
+
+# v1 zone ids (roughly placed onto the Westlands grid; these are the existing overland blocks)
+15	4	Tar Valon west	469	v1
+16	4	Tar Valon east	468	v1
+12	7	Caemlyn countryside	640	v1
+13	7	Andoran countryside	639	v1
+14	7	Aringill countryside	638	v1
+15	6	Cairhien countryside	537	v1
+16	6	East of Cairhien	536	v2 uses existing gap (already exists in repo)

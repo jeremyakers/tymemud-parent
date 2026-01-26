@@ -1,0 +1,828 @@
+diff --git a/genwld.c b/genwld.c
+index a9e3566..929dd46 100644
+--- a/genwld.c
++++ b/genwld.c
+@@ -663,6 +663,11 @@ void assign_room_location(FILE *fp, int curx, int cury, int curz, room_num roomn
+ #define UBERMAP_ENABLE_COMPONENT_PUSH_AWAY 0
+ #define UBERMAP_ENABLE_COMPONENT_SPIRAL_NUDGE 0
+ 
++/* Active only during a TV-only export run (UBERMAP_TV_ONLY=1). */
++static int g_tv_only_active = 0;
++static unsigned char *g_tv_physical_scope = NULL; /* room_num-indexed bitmap */
++static unsigned char *g_tv_constraint_scope = NULL; /* room_num-indexed bitmap */
++
+ static int zone_vnum_for_room(room_num rnum)
+ {
+   zone_num zi;
+@@ -675,14 +680,6 @@ static int zone_vnum_for_room(room_num rnum)
+   return zone_table[zi].number;
+ }
+ 
+-/* Linked zones: now discovered dynamically via reachability from the overland component.
+- * We keep this stub for easier future rollback/feature flags. */
+-static int ubermap_allow_linked_zone(int zv)
+-{
+-  (void)zv;
+-  return 1;
+-}
+-
+ static int is_scope_room(room_num rnum)
+ {
+   int zv = zone_vnum_for_room(rnum);
+@@ -724,7 +721,12 @@ static int is_scope_room(room_num rnum)
+  */
+ static int is_ubermap_seed_zone_vnum(int zv)
+ {
+-  if (zv == 611)
++  /* Zones in the numeric seed range that are NOT part of the overland macro grid. */
++  if (zv == 611 || zv == 486 || zv == 626)
++    return 0;
++  /* TV-only SVG should be locally laid out; do not pin the nearby river-ring tiles
++   * to their global overland coordinates. */
++  if (g_tv_only_active && (zv == 468 || zv == 469))
+     return 0;
+   return (zv >= UBERMAP_ZONE_MIN && zv <= UBERMAP_ZONE_MAX);
+ }
+@@ -740,6 +742,10 @@ static int is_macro_overland_tile_room(room_num rnum)
+   /* Zone 611 is interiors/templates (not a macro tile grid). */
+   if (zv == 611)
+     return 0;
++  /* TV-only SVG uses a local coordinate frame: treat the nearby Erinin tiles as city-scale,
++   * not as full overland macro tiles (keeps the SVG compact/readable). */
++  if (g_tv_only_active && (zv == 468 || zv == 469))
++    return 0;
+   /* Bridge overlay zones: keep these tight like city streets. */
+   if (zv == 486 || zv == 626)
+     return 0;
+@@ -780,6 +786,14 @@ struct bridge_underlay_override {
+ static const struct bridge_underlay_override g_bridge_underlay_overrides[] = {
+   /* Aringill: bridge 62600 crosses the river at 63863. */
+   { 62600, 63863 },
++  /* Tar Valon: fixed bridge/rivertile overlays (map-only). */
++  { 48600, 46948 }, /* Jualdhe <-> Tar Valon: overlay west channel */
++  { 48603, 46948 }, /* Darein <-> Tar Valon: overlay west channel */
++  { 48606, 46948 }, /* Alindaer <-> Tar Valon: overlay west channel */
++  { 48609, 46822 }, /* Luagde <-> Tar Valon: overlay east channel (north) */
++  { 48612, 46822 }, /* Daghain <-> Tar Valon: overlay east channel (north) */
++  { 48615, 46832 }, /* Osenrein <-> Tar Valon: overlay east channel (mid) */
++  { 48618, 46875 }, /* Road bridge over the Osendrelle Erinin */
+ };
+ 
+ static void svg_escape_append(char *dst, size_t dst_sz, size_t *io_len, const char *src)
+@@ -859,6 +873,52 @@ static void strip_mud_color_title(char *dst, size_t dst_sz, const char *src)
+   dst[n] = '\0';
+ }
+ 
++/* TV-only scoping: keep only the immediate Erinin river-ring tiles from the overland.
++ * Tar Valon has many long edges to far-away towns; including those makes the TV-only SVG
++ * hard to validate. This is a visualization filter only (does not affect game data). */
++static int tv_overland_room_is_erinin(room_num r)
++{
++  char name_clean[256];
++  char lower[256];
++  size_t i;
++
++  if (r < 0 || r >= top_of_world)
++    return 0;
++  strip_mud_color_title(name_clean, sizeof(name_clean), world[r].name);
++  for (i = 0; i + 1 < sizeof(lower) && name_clean[i]; i++)
++    lower[i] = (char)tolower((unsigned char)name_clean[i]);
++  lower[i] = '\0';
++
++  if (strstr(lower, "erinin"))
++    return 1;
++  if (strstr(lower, "surrounds tar valon"))
++    return 1;
++  return 0;
++}
++
++static int tv_room_is_unused_placeholder(room_num r)
++{
++  char name_clean[256];
++  char lower[256];
++  size_t i;
++
++  if (r < 0 || r >= top_of_world)
++    return 0;
++  if (!world[r].name)
++    return 0;
++
++  strip_mud_color_title(name_clean, sizeof(name_clean), world[r].name);
++  for (i = 0; i + 1 < sizeof(lower) && name_clean[i]; i++)
++    lower[i] = (char)tolower((unsigned char)name_clean[i]);
++  lower[i] = '\0';
++
++  if (strncmp(lower, "!unused", 6) == 0)
++    return 1;
++  if (strstr(lower, "unused room"))
++    return 1;
++  return 0;
++}
++
+ static room_num bridge_underlay_room_for_bridge(room_num bridge_rnum, int *out_is_override, const char **out_reason)
+ {
+   long bv;
+@@ -1020,16 +1080,78 @@ static int room_has_any_non_bidir_exit(room_num rnum)
+   return 0;
+ }
+ 
++/* Forward decl (defined later). Used by TV-scope physical checks. */
++static int has_reverse_exit(room_num to, room_num from, int dir_from_to);
++
++static int room_scope_exit_count(room_num rnum, unsigned char *scope)
++{
++  int j;
++  int n = 0;
++  if (!scope)
++    return room_exit_count(rnum);
++  if (rnum < 0 || rnum >= top_of_world)
++    return 0;
++  for (j = 0; j < NUM_OF_DIRS; j++) {
++    ROOM_DIRECTION_DATA *ex = world[rnum].dir_option[j];
++    room_num to;
++    if (!ex || ex->to_room <= NOWHERE)
++      continue;
++    to = ex->to_room;
++    if (to < 0 || to >= top_of_world)
++      continue;
++    if (!scope[to])
++      continue;
++    n++;
++  }
++  return n;
++}
++
++static int room_has_any_non_bidir_exit_in_scope(room_num rnum, unsigned char *scope)
++{
++  int dir;
++  if (!scope)
++    return room_has_any_non_bidir_exit(rnum);
++  if (rnum < 0 || rnum >= top_of_world)
++    return 1;
++  for (dir = 0; dir < NUM_OF_DIRS; dir++) {
++    ROOM_DIRECTION_DATA *ex = world[rnum].dir_option[dir];
++    room_num to;
++    int rev;
++    if (!ex || ex->to_room <= NOWHERE)
++      continue;
++    to = ex->to_room;
++    if (to < 0 || to >= top_of_world)
++      continue;
++    if (!scope[to])
++      continue;
++    rev = rev_dir[dir];
++    if (rev < 0 || rev >= NUM_OF_DIRS)
++      return 1;
++    if (!has_reverse_exit(to, rnum, rev))
++      return 1;
++  }
++  return 0;
++}
++
+ /* “Physical” rooms participate in the X/Y/Z solve and the main SVG/coords export.
+  * North-star: ubermap.jpg. Rooms that are disconnected by design (0 exits) are excluded. */
+ static int is_physical_room(room_num rnum)
+ {
+   if (rnum < 0 || rnum >= top_of_world)
+     return 0;
+-  if (room_exit_count(rnum) <= 0)
+-    return 0;
+-  if (room_has_any_non_bidir_exit(rnum))
+-    return 0;
++  /* TV-only SVG: treat "physical" as "physically connected within the TV scope" so
++   * exits to out-of-scope rooms don't fragment the city into dozens of components. */
++  if (g_tv_only_active && g_tv_physical_scope) {
++    if (room_scope_exit_count(rnum, g_tv_physical_scope) <= 0)
++      return 0;
++    if (room_has_any_non_bidir_exit_in_scope(rnum, g_tv_physical_scope))
++      return 0;
++  } else {
++    if (room_exit_count(rnum) <= 0)
++      return 0;
++    if (room_has_any_non_bidir_exit(rnum))
++      return 0;
++  }
+   /* Teleporters are non-physical by definition (destinations can change mid-game). */
+   if (ROOM_FLAGGED(rnum, ROOM_TELEPORT) || world[rnum].teleport_room > NOWHERE)
+     return 0;
+@@ -1169,11 +1291,24 @@ static int is_physical_constraint_edge(room_num from, int dir, ROOM_DIRECTION_DA
+     return 0;
+   if (from < 0 || from >= top_of_world || to < 0 || to >= top_of_world)
+     return 0;
+-  if (!is_physical_room(from) || !is_physical_room(to))
+-    return 0;
+   if (dir < 0 || dir >= NUM_OF_DIRS)
+     return 0;
+ 
++  /* TV-only: don't let a single broken/one-way exit fragment the city into dozens of
++   * disconnected components. Treat constraints as *per-edge* bidirectional checks within
++   * the TV scope, instead of requiring both endpoint rooms to be globally "physical". */
++  if (g_tv_only_active && g_tv_constraint_scope) {
++    if (!g_tv_constraint_scope[from] || !g_tv_constraint_scope[to])
++      return 0;
++    if (ROOM_FLAGGED(from, ROOM_TELEPORT) || ROOM_FLAGGED(to, ROOM_TELEPORT))
++      return 0;
++    if (world[from].teleport_room > NOWHERE || world[to].teleport_room > NOWHERE)
++      return 0;
++  } else {
++    if (!is_physical_room(from) || !is_physical_room(to))
++      return 0;
++  }
++
+   rev = (dir >= 0 && dir < NUM_OF_DIRS) ? rev_dir[dir] : -1;
+   if (rev < 0)
+     return 0;
+@@ -1248,69 +1383,6 @@ static int rects_overlap(int a_minx, int a_miny, int a_maxx, int a_maxy,
+   return 1;
+ }
+ 
+-/* Case-insensitive substring match (ASCII only). */
+-static int contains_ci(const char *hay, const char *needle)
+-{
+-  size_t nlen;
+-  size_t i;
+-  if (!hay || !needle)
+-    return 0;
+-  nlen = strlen(needle);
+-  if (nlen == 0)
+-    return 1;
+-  for (i = 0; hay[i]; i++) {
+-    size_t j;
+-    for (j = 0; j < nlen; j++) {
+-      unsigned char hc = (unsigned char)hay[i + j];
+-      unsigned char nc = (unsigned char)needle[j];
+-      if (!hc)
+-        break;
+-      if (tolower(hc) != tolower(nc))
+-        break;
+-    }
+-    if (j == nlen)
+-      return 1;
+-  }
+-  return 0;
+-}
+-
+-/* Case-insensitive whole-word match (ASCII only). Word chars = [A-Za-z0-9_]. */
+-static int contains_ci_word(const char *hay, const char *needle)
+-{
+-  size_t nlen;
+-  size_t i;
+-  if (!hay || !needle)
+-    return 0;
+-  nlen = strlen(needle);
+-  if (nlen == 0)
+-    return 1;
+-
+-  for (i = 0; hay[i]; i++) {
+-    size_t j;
+-    for (j = 0; j < nlen; j++) {
+-      unsigned char hc = (unsigned char)hay[i + j];
+-      unsigned char nc = (unsigned char)needle[j];
+-      if (!hc)
+-        break;
+-      if (tolower(hc) != tolower(nc))
+-        break;
+-    }
+-    if (j == nlen) {
+-      unsigned char prev = (i == 0) ? 0 : (unsigned char)hay[i - 1];
+-      unsigned char next = (unsigned char)hay[i + nlen];
+-      int prev_is_word = (prev && (isalnum(prev) || prev == '_'));
+-      int next_is_word = (next && (isalnum(next) || next == '_'));
+-      /* Treat MUD color codes like "`6" as non-word boundaries so whole-word matches
+-       * still work on strings like "`6Bridge`7". */
+-      if (prev_is_word && isdigit(prev) && i >= 2 && hay[i - 2] == '`')
+-        prev_is_word = 0;
+-      if (!prev_is_word && !next_is_word)
+-        return 1;
+-    }
+-  }
+-  return 0;
+-}
+-
+ enum ubermap_stack_kind {
+   STACK_NONE = 0,
+   STACK_BRIDGE = 1,
+@@ -1683,6 +1755,25 @@ void assign_room_locations()
+   int component_offset_x = 0;
+   int major_seed_cid = -1;
+ 
++  /* Tar Valon debug scope:
++   * When enabled, restrict solve + SVG exports to the Tar Valon system so we can
++   * iterate without overland noise.
++   *
++   * Enable with: UBERMAP_TV_ONLY=1 (optional: UBERMAP_TV_HOPS=2)
++   *
++   * Notes:
++   * - tv_report_scope includes rooms reached by any exits (so broken topology is visible in reports)
++   * - in_scope (solve/SVG) remains restricted to physical rooms only, per policy */
++  int tv_only = 0;
++  int tv_hops = 2;
++  int tv_zone_min = 90;
++  int tv_zone_max = 98; /* inclusive */
++  int tv_include_486 = 1;
++  int tv_include_overland = 1; /* 468/469 endpoints (Erinin-filtered) */
++  int tv_overland_hops = 2; /* small local patch of Erinin tiles around TV */
++  unsigned char *tv_report_scope = NULL;
++  int skip_overland_reachability_filter = 0;
++
+   unsigned char *in_scope = NULL;
+   unsigned char *visited = NULL;
+   unsigned char *seed_scope = NULL;
+@@ -1709,6 +1800,9 @@ void assign_room_locations()
+   FILE *oos_fp = NULL;
+   FILE *zones_fp = NULL;
+   FILE *svg_fp = NULL;
++  FILE *tv_rooms_fp = NULL;
++  FILE *tv_edges_fp = NULL;
++  FILE *tv_audit_fp = NULL;
+   FILE *dupe_fp = NULL;
+   FILE *dupe_base_fp = NULL;
+   FILE *stack_fp = NULL;
+@@ -1728,6 +1822,9 @@ void assign_room_locations()
+   char oos_path[256] = {0};
+   char zones_path[256] = {0};
+   char svg_path[256] = {0};
++  char tv_rooms_path[256] = {0};
++  char tv_edges_path[256] = {0};
++  char tv_audit_path[256] = {0};
+   char dupe_path[256] = {0};
+   char dupe_base_path[256] = {0};
+   char stack_path[256] = {0};
+@@ -1735,6 +1832,46 @@ void assign_room_locations()
+   char bridge_underlay_path[256] = {0};
+   char unreach_path[256] = {0};
+ 
++  {
++    const char *e = getenv("UBERMAP_TV_ONLY");
++    if (e && *e && strcmp(e, "0") != 0)
++      tv_only = 1;
++    e = getenv("UBERMAP_TV_HOPS");
++    if (e && *e) {
++      int h = atoi(e);
++      if (h >= 0 && h <= 8)
++        tv_hops = h;
++    }
++    e = getenv("UBERMAP_TV_ZONE_MAX");
++    if (e && *e) {
++      int m = atoi(e);
++      if (m >= 90 && m <= 98)
++        tv_zone_max = m;
++    }
++    e = getenv("UBERMAP_TV_INCLUDE_486");
++    if (e && *e) {
++      /* Default is 1; set to 0 to exclude zone 486 for tighter city-only renders. */
++      if (strcmp(e, "0") == 0)
++        tv_include_486 = 0;
++    }
++    e = getenv("UBERMAP_TV_INCLUDE_OVERLAND");
++    if (e && *e) {
++      /* Default is 1; set to 0 to exclude 468/469 endpoints for tighter city-only renders. */
++      if (strcmp(e, "0") == 0)
++        tv_include_overland = 0;
++    }
++    e = getenv("UBERMAP_TV_OVERLAND_HOPS");
++    if (e && *e) {
++      /* Default is small (2): include a local patch of Erinin tiles so the river ring is visible. */
++      int h2 = atoi(e);
++      if (h2 >= 0 && h2 <= 8)
++        tv_overland_hops = h2;
++    }
++  }
++  /* Make TV-only mode visible to helper functions (e.g. seed-zone classification). */
++  g_tv_only_active = tv_only ? 1 : 0;
++  skip_overland_reachability_filter = tv_only ? 1 : 0;
++
+   in_scope = (unsigned char *)calloc((size_t)top_of_world + 1, 1);
+   seed_scope = (unsigned char *)calloc((size_t)top_of_world + 1, 1);
+   seed_connected = (unsigned char *)calloc((size_t)top_of_world + 1, 1);
+@@ -1760,6 +1897,213 @@ void assign_room_locations()
+     goto cleanup_new;
+   }
+ 
++  /* -----------------------------
++   * TV-only scope selection (optional)
++   * ----------------------------- */
++  if (tv_only) {
++    room_num *frontier = NULL;
++    room_num *next = NULL;
++    int fcount = 0, ncount = 0;
++    int depth;
++
++    tv_report_scope = (unsigned char *)calloc((size_t)top_of_world + 1, 1);
++    frontier = (room_num *)malloc(sizeof(room_num) * (size_t)top_of_world);
++    next = (room_num *)malloc(sizeof(room_num) * (size_t)top_of_world);
++    if (!tv_report_scope || !frontier || !next) {
++      slog("SYSERR: genwld.c:assign_room_locations: OOM allocating TV scope buffers");
++      goto cleanup_new;
++    }
++
++    /* Seed: all rooms in Tar Valon zones (90..tv_zone_max) and optional zone 486 (bridges). */
++    for (i = 0; i < top_of_world; i++) {
++      int zv = zone_vnum_for_room(i);
++      if ((zv < tv_zone_min || zv > tv_zone_max) && !(tv_include_486 && zv == 486))
++        continue;
++      tv_report_scope[i] = 1;
++      frontier[fcount++] = i;
++      if (zv >= 0 && zv <= max_zone_vnum)
++        zone_in_scope[zv] = 1;
++    }
++
++    if (tv_include_overland) {
++      /* Also seed: directly connected overland endpoints in zones 468/469 from any TV/486 room. */
++      for (i = 0; i < top_of_world; i++) {
++        int zv = zone_vnum_for_room(i);
++        if ((zv < tv_zone_min || zv > tv_zone_max) && !(tv_include_486 && zv == 486))
++          continue;
++        for (j = 0; j < NUM_OF_DIRS; j++) {
++          ROOM_DIRECTION_DATA *ex = world[i].dir_option[j];
++          room_num to;
++          int tzv;
++          if (!ex || ex->to_room <= NOWHERE)
++            continue;
++          to = ex->to_room;
++          if (to < 0 || to >= top_of_world)
++            continue;
++          tzv = zone_vnum_for_room(to);
++          if (tzv != 468 && tzv != 469)
++            continue;
++          /* TV-only view should include just the Erinin river-ring tiles near Tar Valon,
++           * not far-away overland towns reachable via long edges. */
++          if (!tv_overland_room_is_erinin(to))
++            continue;
++          if (!tv_report_scope[to]) {
++            tv_report_scope[to] = 1;
++            frontier[fcount++] = to;
++          }
++          if (tzv >= 0 && tzv <= max_zone_vnum)
++            zone_in_scope[tzv] = 1;
++        }
++      }
++    }
++
++    /* Expand by hops over ANY exits so broken topology still appears in scope reports. */
++    for (depth = 0; depth < tv_hops; depth++) {
++      ncount = 0;
++      for (i = 0; i < fcount; i++) {
++        room_num r = frontier[i];
++        int rzv = zone_vnum_for_room(r);
++
++        /* Do not expand outward from overland endpoints; we handle a tiny overland-only
++         * expansion separately (tv_overland_hops) to keep the TV view focused. */
++        if (rzv == 468 || rzv == 469)
++          continue;
++        for (j = 0; j < NUM_OF_DIRS; j++) {
++          ROOM_DIRECTION_DATA *ex = world[r].dir_option[j];
++          room_num to;
++          int tzv;
++          if (!ex || ex->to_room <= NOWHERE)
++            continue;
++          to = ex->to_room;
++          if (to < 0 || to >= top_of_world)
++            continue;
++          tzv = zone_vnum_for_room(to);
++          /* Hard cap the TV-only scope to TV zones (90-98), the bridge/peripheral zone (486),
++           * and the minimal overland endpoints (468/469). Anything else stays out-of-scope
++           * (but will still show up as (oos) in the audit exit list). */
++          if (!((tzv >= tv_zone_min && tzv <= tv_zone_max) ||
++                (tv_include_486 && tzv == 486) ||
++                (tv_include_overland && (tzv == 468 || tzv == 469))))
++            continue;
++          if ((tzv == 468 || tzv == 469) && !tv_overland_room_is_erinin(to))
++            continue;
++          if (tv_report_scope[to])
++            continue;
++          tv_report_scope[to] = 1;
++          next[ncount++] = to;
++          if (tzv >= 0 && tzv <= max_zone_vnum)
++            zone_in_scope[tzv] = 1;
++        }
++      }
++      /* next -> frontier */
++      fcount = ncount;
++      for (i = 0; i < fcount; i++)
++        frontier[i] = next[i];
++      if (fcount <= 0)
++        break;
++    }
++
++    /* Optional: expand within 468/469 along Erinin-named tiles only, to make the river ring
++     * around Tar Valon visible without pulling in far-away overland noise. */
++    if (tv_include_overland && tv_overland_hops > 0) {
++      int ofcount = 0;
++      int oncount = 0;
++
++      /* Seed overland frontier from whatever overland endpoints are already in the TV scope. */
++      for (i = 0; i < top_of_world; i++) {
++        int zv = zone_vnum_for_room(i);
++        if (!tv_report_scope[i])
++          continue;
++        if (zv != 468 && zv != 469)
++          continue;
++        frontier[ofcount++] = i;
++      }
++
++      for (depth = 0; depth < tv_overland_hops; depth++) {
++        oncount = 0;
++        for (i = 0; i < ofcount; i++) {
++          room_num r = frontier[i];
++          for (j = 0; j < NUM_OF_DIRS; j++) {
++            ROOM_DIRECTION_DATA *ex = world[r].dir_option[j];
++            room_num to;
++            int tzv;
++            if (!ex || ex->to_room <= NOWHERE)
++              continue;
++            to = ex->to_room;
++            if (to < 0 || to >= top_of_world)
++              continue;
++            tzv = zone_vnum_for_room(to);
++            if (tzv != 468 && tzv != 469)
++              continue;
++            if (!tv_overland_room_is_erinin(to))
++              continue;
++            if (tv_report_scope[to])
++              continue;
++            tv_report_scope[to] = 1;
++            next[oncount++] = to;
++            if (tzv >= 0 && tzv <= max_zone_vnum)
++              zone_in_scope[tzv] = 1;
++          }
++        }
++        ofcount = oncount;
++        for (i = 0; i < ofcount; i++)
++          frontier[i] = next[i];
++        if (ofcount <= 0)
++          break;
++      }
++    }
++
++    /* Ensure bridge-underlay rooms are included in TV scope so overlays can resolve
++     * to real map coords (otherwise the underlay may remain unvisited and map to 0,0). */
++    for (i = 0; i < top_of_world; i++) {
++      if (!tv_report_scope[i])
++        continue;
++      if (is_bridge_overlay_room(i)) {
++        room_num ur = bridge_underlay_room_for_bridge(i, NULL, NULL);
++        if (ur > NOWHERE && ur >= 0 && ur < top_of_world) {
++          tv_report_scope[ur] = 1;
++          {
++            int tzv = zone_vnum_for_room(ur);
++            if (tzv >= 0 && tzv <= max_zone_vnum)
++              zone_in_scope[tzv] = 1;
++          }
++        }
++      }
++    }
++
++    /* Solve/SVG scope:
++     * For TV-only visualization, include the whole TV scope (minus isolated dead-ends),
++     * and treat constraints as per-edge bidirectional checks within the scope. */
++    g_tv_physical_scope = tv_report_scope;
++    g_tv_constraint_scope = tv_report_scope;
++    for (i = 0; i < top_of_world; i++) {
++      if (!tv_report_scope[i])
++        continue;
++      /* Keep the solve/SVG scope restricted to "physical" rooms:
++       * - excludes teleport transition rooms (e.g. "Going down the ... Stairwell..")
++       * - excludes rooms with any one-way/broken exits within the TV scope
++       *
++       * The full TV scope is still exported in the scope TSVs for auditing. */
++      if (!is_physical_room(i))
++        continue;
++      if (tv_room_is_unused_placeholder(i))
++        continue;
++      if (1) {
++        in_scope[i] = 1;
++        scope_count++;
++      }
++    }
++
++    free(frontier);
++    free(next);
++
++    if (scope_count <= 0)
++      goto cleanup_new;
++
++    /* Skip the normal ubermap zone discovery; we already filled zone_in_scope + in_scope. */
++    goto tv_scope_ready;
++  }
++
+   /* Seed scope: ONLY rooms connected to the main Ubermap overland component.
+    *
+    * Simple overland-only mode does NOT do connectivity filtering: we include the explicit
+@@ -1916,6 +2260,7 @@ void assign_room_locations()
+   if (scope_count <= 0)
+     goto cleanup_new;
+ 
++tv_scope_ready:
+   scope_rooms = (room_num *)malloc(sizeof(room_num) * (size_t)scope_count);
+   queue = (room_num *)malloc(sizeof(room_num) * (size_t)scope_count);
+   if (!scope_rooms || !queue) {
+@@ -3377,10 +3722,17 @@ void assign_room_locations()
+   }
+ 
+   /* Export. */
+-  coords_fp = open_export_file("ubermap_coords_468_640_pluslinked.tsv", coords_path, sizeof(coords_path));
+-  edges_fp = open_export_file("ubermap_edges_468_640_pluslinked.tsv", edges_path, sizeof(edges_path));
+-  crossz_fp = open_export_file("ubermap_crossz_edges_468_640_pluslinked.tsv", crossz_path, sizeof(crossz_path));
+-  dirmis_fp = open_export_file("ubermap_direction_mismatch_edges_468_640_pluslinked.tsv", dirmis_path, sizeof(dirmis_path));
++  if (tv_only) {
++    coords_fp = open_export_file("ubermap_tv_coords.tsv", coords_path, sizeof(coords_path));
++    edges_fp = open_export_file("ubermap_tv_edges.tsv", edges_path, sizeof(edges_path));
++    crossz_fp = open_export_file("ubermap_tv_crossz_edges.tsv", crossz_path, sizeof(crossz_path));
++    dirmis_fp = open_export_file("ubermap_tv_direction_mismatch_edges.tsv", dirmis_path, sizeof(dirmis_path));
++  } else {
++    coords_fp = open_export_file("ubermap_coords_468_640_pluslinked.tsv", coords_path, sizeof(coords_path));
++    edges_fp = open_export_file("ubermap_edges_468_640_pluslinked.tsv", edges_path, sizeof(edges_path));
++    crossz_fp = open_export_file("ubermap_crossz_edges_468_640_pluslinked.tsv", crossz_path, sizeof(crossz_path));
++    dirmis_fp = open_export_file("ubermap_direction_mismatch_edges_468_640_pluslinked.tsv", dirmis_path, sizeof(dirmis_path));
++  }
+   dirmis_overland_fp = open_export_file("ubermap_direction_mismatch_edges_468_640_pluslinked_overland.tsv",
+                                        dirmis_overland_path, sizeof(dirmis_overland_path));
+   dirmis_class_fp = open_export_file("ubermap_direction_mismatch_classified_468_640_pluslinked.tsv",
+@@ -3390,7 +3742,13 @@ void assign_room_locations()
+   long_fp = open_export_file("ubermap_long_edges_468_640_pluslinked.tsv", long_path, sizeof(long_path));
+   oos_fp = open_export_file("ubermap_exits_outofscope_468_640_pluslinked.tsv", oos_path, sizeof(oos_path));
+   zones_fp = open_export_file("ubermap_scope_zones_468_640_pluslinked.tsv", zones_path, sizeof(zones_path));
+-  svg_fp = open_export_file("ubermap_468_640_pluslinked_z0.svg", svg_path, sizeof(svg_path));
++  svg_fp = open_export_file(tv_only ? "ubermap_tv_z0.svg" : "ubermap_468_640_pluslinked_z0.svg", svg_path, sizeof(svg_path));
++  tv_rooms_fp = open_export_file(tv_only ? "ubermap_tv_scope_rooms.tsv" : "ubermap_scope_rooms_468_640_pluslinked.tsv",
++                                 tv_rooms_path, sizeof(tv_rooms_path));
++  tv_edges_fp = open_export_file(tv_only ? "ubermap_tv_scope_edges.tsv" : "ubermap_scope_edges_468_640_pluslinked.tsv",
++                                 tv_edges_path, sizeof(tv_edges_path));
++  tv_audit_fp = open_export_file(tv_only ? "ubermap_tv_audit.tsv" : "ubermap_audit_468_640_pluslinked.tsv",
++                                 tv_audit_path, sizeof(tv_audit_path));
+   dupe_fp = open_export_file("ubermap_duplicate_centers_468_640_pluslinked.tsv", dupe_path, sizeof(dupe_path));
+   dupe_base_fp = open_export_file("ubermap_duplicate_centers_base_468_640_pluslinked.tsv", dupe_base_path, sizeof(dupe_base_path));
+   stack_fp = open_export_file("ubermap_stacked_rooms_468_640_pluslinked.tsv", stack_path, sizeof(stack_path));
+@@ -3403,7 +3761,134 @@ void assign_room_locations()
+     for (i = 0; i <= max_zone_vnum; i++) {
+       if (!zone_in_scope || !zone_in_scope[i])
+         continue;
+-      fprintf(zones_fp, "%d\t1\t%s\n", i, (i >= UBERMAP_ZONE_MIN && i <= UBERMAP_ZONE_MAX) ? "seed" : "linked");
++      if (tv_only)
++        fprintf(zones_fp, "%d\t1\ttv\n", i);
++      else
++        fprintf(zones_fp, "%d\t1\t%s\n", i, (i >= UBERMAP_ZONE_MIN && i <= UBERMAP_ZONE_MAX) ? "seed" : "linked");
++    }
++  }
++
++  if (tv_rooms_fp) {
++    char name_clean[256];
++    fprintf(tv_rooms_fp, "vnum\tzone\tphysical\tname\n");
++    for (i = 0; i < top_of_world; i++) {
++      if (tv_only) {
++        if (!tv_report_scope || !tv_report_scope[i])
++          continue;
++      } else {
++        if (!in_scope[i])
++          continue;
++      }
++      name_clean[0] = '\0';
++      if (world[i].name)
++        strip_mud_color_title(name_clean, sizeof(name_clean), world[i].name);
++      fprintf(tv_rooms_fp, "%ld\t%d\t%d\t%s\n",
++              world[i].number,
++              zone_vnum_for_room(i),
++              is_physical_room(i) ? 1 : 0,
++              name_clean);
++    }
++  }
++
++  if (tv_edges_fp) {
++    fprintf(tv_edges_fp, "from_vnum\tdir\tto_vnum\tbidir\tin_solve_scope\n");
++    for (i = 0; i < top_of_world; i++) {
++      if (tv_only) {
++        if (!tv_report_scope || !tv_report_scope[i])
++          continue;
++      } else {
++        if (!in_scope[i])
++          continue;
++      }
++      for (j = 0; j < NUM_OF_DIRS; j++) {
++        ROOM_DIRECTION_DATA *ex = world[i].dir_option[j];
++        room_num to;
++        int bidir = 0;
++        if (!ex || ex->to_room <= NOWHERE)
++          continue;
++        to = ex->to_room;
++        if (to < 0 || to >= top_of_world)
++          continue;
++        if (tv_only) {
++          if (!tv_report_scope || !tv_report_scope[to])
++            continue;
++        } else {
++          if (!in_scope[to])
++            continue;
++        }
++        if (has_reverse_exit(to, i, rev_dir[j]))
++          bidir = 1;
++        fprintf(tv_edges_fp, "%ld\t%s\t%ld\t%d\t%d\n",
++                world[i].number,
++                dirs[j],
++                world[to].number,
++                bidir,
++                (in_scope[i] && in_scope[to]) ? 1 : 0);
++      }
++    }
++  }
++
++  if (tv_audit_fp) {
++    fprintf(tv_audit_fp, "vnum\tzone\tsector\tbase_x\tbase_y\tbase_z\tmapx\tmapy\tmapz\tphysical\tname\texits\n");
++    for (i = 0; i < scope_count; i++) {
++      room_num r = scope_rooms[i];
++      ROOM_DATA *room = &world[r];
++      int mx, my, mz;
++      enum ubermap_stack_kind sk;
++      const char *sreason = "none";
++      char name_clean[256];
++      char exits_buf[2048];
++      size_t elen = 0;
++      int k;
++
++      if (!visited[r])
++        continue;
++      map_coords_for_room(r, &mx, &my, &mz, &sk, &sreason);
++
++      name_clean[0] = '\0';
++      if (room->name)
++        strip_mud_color_title(name_clean, sizeof(name_clean), room->name);
++
++      exits_buf[0] = '\0';
++      for (k = 0; k < NUM_OF_DIRS; k++) {
++        ROOM_DIRECTION_DATA *ex = room->dir_option[k];
++        room_num to;
++        int is_oos = 0;
++        int is_bidir = 0;
++        char tmp[128];
++
++        if (!ex || ex->to_room <= NOWHERE)
++          continue;
++        to = ex->to_room;
++        if (to < 0 || to >= top_of_world)
++          continue;
++        if (tv_only) {
++          if (!tv_report_scope || !tv_report_scope[to])
++            is_oos = 1;
++        } else {
++          if (!in_scope[to])
++            is_oos = 1;
++        }
++        if (has_reverse_exit(to, r, rev_dir[k]))
++          is_bidir = 1;
++
++        snprintf(tmp, sizeof(tmp), "%s->%ld%s%s; ",
++                 dirs[k],
++                 world[to].number,
++                 is_oos ? "(oos)" : "",
++                 (!is_bidir) ? "(!bidir)" : "");
++        svg_escape_append(exits_buf, sizeof(exits_buf), &elen, tmp);
++      }
++
++      fprintf(tv_audit_fp, "%ld\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%s\t%s\n",
++              room->number,
++              zone_vnum_for_room(r),
++              room->sector_type,
++              room->locx, room->locy, room->locz,
++              mx, my, mz,
++              is_physical_room(r) ? 1 : 0,
++              name_clean,
++              exits_buf);
+     }
+   }
+ 
+@@ -3655,7 +4140,7 @@ void assign_room_locations()
+     fprintf(coords_fp, "vnum\tx\ty\tz\tzone\tsector\twidth\theight\tmapx\tmapy\tmapz\tphysical\tstack_kind\tstack_reason\n");
+     /* Compute reachability from the main overland component using bidirectional exits,
+      * then omit unreachable rooms from the map export. Still report them for triage. */
+-    if (!reachable && queue && seed_connected) {
++    if (!skip_overland_reachability_filter && !reachable && queue && seed_connected) {
+       int qh2 = 0, qt2 = 0;
+       reachable = (unsigned char *)calloc((size_t)top_of_world + 1, 1);
+       if (reachable) {
+@@ -3710,7 +4195,7 @@ void assign_room_locations()
+       const char *sreason = "none";
+       if (!visited[r])
+         continue;
+-      if (reachable && !reachable[r]) {
++      if (!skip_overland_reachability_filter && reachable && !reachable[r]) {
+         if (unreach_fp)
+           fprintf(unreach_fp, "%ld\t%d\t%d\t%d\t%d\tno_overland_path\n",
+                   room->number, zone_vnum_for_room(r),
+@@ -4651,7 +5136,6 @@ void assign_room_locations()
+     const int SCALE = 4;
+     const int MARGIN = 10;
+     const int LABEL_H = 18;
+-    const int LAYER_PAD = 12;
+     int minx = INT_MAX, miny = INT_MAX, maxx = INT_MIN, maxy = INT_MIN;
+     const int Z_FILTER = 0;
+ 
+@@ -5005,6 +5489,9 @@ void assign_room_locations()
+   }
+ 
+ cleanup_new:
++  /* TV-only scope pointers (used for per-run physical/constraint evaluation). */
++  g_tv_physical_scope = NULL;
++  g_tv_constraint_scope = NULL;
+   if (coords_fp) fclose(coords_fp);
+   if (edges_fp) fclose(edges_fp);
+   if (crossz_fp) fclose(crossz_fp);

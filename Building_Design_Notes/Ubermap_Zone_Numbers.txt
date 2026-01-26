@@ -1,0 +1,9 @@
+Hey Jeremy, we're looking at importing 143 zones for the continent (possibly 320, but more likely the former).  I'm trying to judge how many zones we're either keeping or recycling, and I was wondering about renumbering them.
+
+I'd like to number the areas so that numbers ending in zero are always the start of a new row on the continent, but in order to do that, we've got to clear up some area space (or else start numbering at like, 600).  Could we remove all the existing areas on the BP to a backup folder, create our continent map and number it in the low numbers, and then port back the few old areas we want to keep with new area numbers? It's real quick to change those - I've had to do it several times for the continent map.  What I'm worried about is if it might crash the main port if the mud tries to load some eq on a person that is no longer answering to the right vnum, cuz it moved.  What do you think?
+
+As it is, we're already going to be redoing some of the exits to the old zones anyway, to attach them to the new map.  On the one hand, this is unnecessary work, but if we don't do it, we're going to have like, 4 zones out of every 50 used, up until 600 when we start the continent map.  That just seems stupid to me.
+
+Also, do you know of a way to do a find/replace command to replace all instances of something in VI? I looked online and don't see a way to do it.  I've been making the 562 number changes to each template zone in microsoft word, then uploading each version of that zone to the builderport that way.  It takes me 3 minutes of upload time, so if there's a way to do that totally in VI, it'd save a lot of time over 143 zones :p
+
+-Nico

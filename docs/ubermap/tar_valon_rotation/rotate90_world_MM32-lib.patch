@@ -1,0 +1,11253 @@
+diff --git a/world/wld/468.wld b/world/wld/468.wld
+index 7b0cbf1..4581388 100644
+--- a/world/wld/468.wld
++++ b/world/wld/468.wld
+@@ -351,10 +351,6 @@ D1
+ ~
+ ~
+ 0 0 46812
+-D2
+-~
+-~
+-0 0 46821
+ D3
+ ~
+ ~
+@@ -640,23 +636,10 @@ G
+  0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ S
+ #46820
+-`^The Erinin Surrounds Tar Valon`0~
+-`6The River `^Erinin`6 circles the island of Tar Valon. To the 
+-south the `7Wh`&i`7t`&e `7T`&owe`7r `6stands proudly in the midst of the 
+-city. The river is at least fifty spans wide, and it's 
+-waters move slowly. Many ships drift to and from the city 
+-and surrounding areas.`0 
+-`7The riverway continues east and west.`7
+-~
+-468 a 6 10 10
+-D1
+-~
+-~
+-0 0 46821
+-D3
+-~
++`7This will be disconnected`7~
++Disconnect me!
+ ~
+-0 0 46929
++468 a 2 10 10
+ R
+ In the Wake of an Army~
+      `2It is immediately evident that a large number of troops
+@@ -668,27 +651,10 @@ G
+  0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ S
+ #46821
+-`^The Erinin Surrounds Tar Valon`0~
+-`6The River `^Erinin`6 circles the island of Tar Valon. To the 
+-south the `7Wh`&i`7t`&e `7T`&owe`7r `6stands proudly in the midst of the 
+-city. The river is at least fifty spans wide, and it's 
+-waters move slowly. Many ships drift to and from the city 
+-and surrounding areas.`0 
+-`7The riverway continues east and west.`7
+-~
+-468 a 6 10 10
+-D0
+-~
+-~
+-0 0 46811
+-D1
+-~
+-~
+-0 0 46822
+-D3
+-~
++`7This will be disconnected`7~
++Disconnect me!
+ ~
+-0 0 46820
++468 a 2 10 10
+ R
+ In the Wake of an Army~
+      `2It is immediately evident that a large number of troops
+@@ -717,10 +683,6 @@ D2
+ ~
+ ~
+ 0 0 46832
+-D3
+-~
+-~
+-0 0 46821
+ R
+ In the Wake of an Army~
+      `2It is immediately evident that a large number of troops
+@@ -1298,23 +1260,10 @@ G
+  0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ S
+ #46840
+-`^The Erinin Surrounds Tar Valon`0~
+-`6The River `^Erinin`6 circles the island of Tar Valon. To the 
+-north the `7Wh`&i`7t`&e `7T`&owe`7r `6stands proudly in the midst of the 
+-city. The river is at least fifty spans wide, and it's 
+-waters move slowly. Many ships drift to and from the city 
+-and surrounding areas.`0 
+-`7The riverway continues east and west.`7
+-~
+-468 a 6 10 10
+-D1
+-~
+-~
+-0 0 46841
+-D3
+-~
++`7This will be disconnected`7~
++Disconnect me!
+ ~
+-0 0 46949
++468 a 2 10 10
+ R
+ In the Wake of an Army~
+      `2It is immediately evident that a large number of troops
+@@ -1326,27 +1275,10 @@ G
+  0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ S
+ #46841
+-`^The Erinin Surrounds Tar Valon`0~
+-`6The River `^Erinin`6 circles the island of Tar Valon. To the 
+-north the `7Wh`&i`7t`&e `7T`&owe`7r `6stands proudly in the midst of the 
+-city. The river is at least fifty spans wide, and it's 
+-waters move slowly. Many ships drift to and from the city 
+-and surrounding areas.`0 
+-`7The riverway continues east and west.`7
+-~
+-468 a 6 10 10
+-D1
+-~
+-~
+-0 0 46842
+-D2
+-~
+-~
+-0 0 46851
+-D3
+-~
++`7This will be disconnected`7~
++Disconnect me!
+ ~
+-0 0 46840
++468 a 2 10 10
+ R
+ In the Wake of an Army~
+      `2It is immediately evident that a large number of troops
+@@ -1379,10 +1311,6 @@ D2
+ ~
+ ~
+ 0 0 46852
+-D3
+-~
+-~
+-0 0 46841
+ R
+ In the Wake of an Army~
+      `2It is immediately evident that a large number of troops
+@@ -1394,14 +1322,13 @@ G
+  0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ S
+ #46843
+-`2L`@a`2rg`@e `2Fi`3e`2l`@d`2s of Cr`@o`2ps`0~
+-`2Fields of crops cover the land like a `1ch`8e`1ck`8er`7-`1b`8oa`1rd`2.
+-The land is fertile and well-irrigated this close
+-to the Erinin`2. A few `3tr`2ee`3s `2dot the landscape. The
+-`^River Erinin `2lies northeast. `*A`6l`^i`7n`&d`^a`6e`*r `2is not far 
+-to the southwest.`0
++`^The Erinin`7~
++`6Here the Osendrelle branch of the `^Erinin`6 runs swift and deep. The water
++slides by in long, steady currents, and the sound of it carries across the
++open banks.`0
++`7The riverway continues north, east, and west.`7
+ ~
+-468 a 2 10 10
++468 a 6 10 10
+ D0
+ ~
+ ~
+@@ -1683,10 +1610,6 @@ The `6road`3 lies just south of here, and both east and west
+ lead towards `8v`&i`8ll`&a`8g`&e`8s.`0
+ ~
+ 468 a 4 10 10
+-D0
+-~
+-~
+-0 0 46841
+ D1
+ ~
+ ~
+diff --git a/world/wld/469.wld b/world/wld/469.wld
+index 800dbda..56f5999 100644
+--- a/world/wld/469.wld
++++ b/world/wld/469.wld
+@@ -957,17 +957,17 @@ S
+ #46929
+ `^River Erinin`7~
+ 
+-`7The riverway continues east and west.`7
++`7The riverway continues north and south.`7
+ ~
+ 469 a 6 10 10
+-D1
+-~
+-~
+-0 0 46820
+ D3
+ ~
+ ~
+ 0 0 46928
++D2
++~
++~
++0 0 46939
+ R
+ In the Wake of an Army~
+      `2It is immediately evident that a large number of troops
+@@ -1272,6 +1272,10 @@ D3
+ ~
+ ~
+ 0 0 46937
++D1
++~
++~
++0 0 46939
+ R
+ In the Wake of an Army~
+      `2It is immediately evident that a large number of troops
+@@ -1283,10 +1287,23 @@ G
+  0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ S
+ #46939
+-`7This will be disconnected`7~
+-Disconnect me!
++`^River Erinin`7~
++
++`7The riverway continues north and south.`7
+ ~
+-469 a 2 10 10
++469 a 6 10 10
++D0
++~
++~
++0 0 46929
++D2
++~
++~
++0 0 46949
++D3
++~
++~
++0 0 46938
+ R
+ In the Wake of an Army~
+      `2It is immediately evident that a large number of troops
+@@ -1602,15 +1619,11 @@ G
+  0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ S
+ #46949
+-`^The Erinin`7 ~
++`^River Erinin`7~
+ 
+-`7The riverway continues east and west.`7
++`7The riverway continues north and south.`7
+ ~
+ 469 a 6 10 10
+-D1
+-~
+-~
+-0 0 46840
+ D2
+ ~
+ ~
+@@ -1619,6 +1632,10 @@ D3
+ ~
+ ~
+ 0 0 46948
++D0
++~
++~
++0 0 46939
+ R
+ In the Wake of an Army~
+      `2It is immediately evident that a large number of troops
+@@ -1937,13 +1954,12 @@ G
+  0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ S
+ #46959
+-`#Farmlands`7~
+-`7Low stone walls and broken fence rails hint at fields worked hard through
+-better years. A butterfly drifts past, pale wings flashing when it turns into
+-the sun. The air smells of sun and grass, and the breeze tastes faintly of
+-dust. The sky is wide and pale, bright enough to make distance feel deceptive.`7
++`^River Erinin`7~
++`6The river runs broad here, the surface rippling in long, dark bands. The
++current pulls steadily south, and the banks rise and fall in gentle slopes.`0
++`7The riverway continues north and south.`7
+ ~
+-469 a 2 10 10
++469 a 6 10 10
+ D0
+ ~
+ ~
+@@ -2282,14 +2298,12 @@ G
+  0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ S
+ #46969
+-The Road East and West~
+-The road stretches east and west cutting through low `2gra`@ssl`2ands`7
+-on either side.  The road itself looks well traveled with foot
+-traffic keeping the grass from reclaiming it.  The cries and
+-calls of various animals ring out from the distance.
+-`7The road continues east and west.`7
++`^River Erinin`7~
++`6The river bends and widens, the current still running south. Far off, the
++White Tower is only a pale needle above the trees.`0
++`7The riverway continues north and south.`7
+ ~
+-469 a 11 10 10
++469 a 6 10 10
+ D0
+ ~
+ ~
+@@ -2644,13 +2658,12 @@ G
+  0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ S
+ #46979
+-`@Rolling Grassland`7~
+-`3The earth is firm here, the grass worn thin where travelers and animals have
+-passed. The Tar Valon countryside continues on, fading into distance in every
+-direction. A rabbit freezes in the weeds, then bolts away in a blur of brown.
+-High above, a hawk circles once and then vanishes into the glare.`7
++`^River Erinin`7~
++`6The river continues south, carrying reeds and driftwood along its slow, broad
++flow. The far bank is a dark line against the sky.`0
++`7The riverway continues north and south.`7
+ ~
+-469 a 2 10 10
++469 a 6 10 10
+ D0
+ ~
+ ~
+@@ -3009,14 +3022,12 @@ G
+  0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ S
+ #46989
+-`@Open Plains`7~
+-`7Open ground stretches out, broken only by wildflowers and the occasional
+-stubborn scrub. A thin line of trees marks the edge of something different,
+-though it is far away. Grasshoppers flit up at your approach and vanish again
+-into the tangle. The day is bright and clear, the sort that makes far things
+-look close.`7
++`^River Erinin`7~
++`6The river runs south in a wide, slow sweep. Waterfowl drift on the current,
++and the sound of the flow is a constant, low hush.`0
++`7The riverway continues north and south.`7
+ ~
+-469 a 2 10 10
++469 a 6 10 10
+ D0
+ ~
+ ~
+diff --git a/world/wld/486.wld b/world/wld/486.wld
+index 397d155..19a065c 100644
+--- a/world/wld/486.wld
++++ b/world/wld/486.wld
+@@ -42,14 +42,14 @@ G
+ S
+ #48602
+ `6The `*J`6u`&a`7ld`6h`7e - `&T`6a`7r `&V`6al`7on `6Bridge`7~
+-`7This Ogier-built stone bridge heads `6south`7 out of
++`7This Ogier-built stone bridge heads `6northwest`7 out of
+ Tar Valon towards the outlying village of Jualdhe.
+ The Allindrelle Erinin rushes past below while Tower 
+ Guards watch over travelers heading to and from
+  the ancient stronghold of the Aes Sedai.
+ ~
+ 486 a 1 10 10
+-D0
++D8
+ ~
+ ~
+ 0 0 9076
+@@ -108,11 +108,11 @@ S
+ #48605
+ `6The `*D`6a`&r`7e`6i`*n `6- `&T`6a`7r `&V`6al`7on `6Bridge~
+ `7The bridge crossing between Darein to the `6south`7 and Tar Valon to 
+-the `&north`7 reaches 50 spans above the water, and runs a half mile long 
++the `&northeast`7 reaches 50 spans above the water, and runs a half mile long 
+ completely unsupported.
+ ~
+ 486 a 1 10 10
+-D0
++D6
+ ~
+ ~
+ 0 0 9085
+@@ -184,14 +184,14 @@ S
+ `6The `*A`6l`^i`7n`&d`^a`6e`*r `6- `&T`6a`7r `&V`6al`7on `6Bridge`7~
+ The awe-inspiring Ogier stonework of this bridge is just a 
+ preview of the similarly wrought city beyond.  Tar Valon fills
+-the horizon to the northwest, her fabled buildings more akin to
++the horizon to the northeast, her fabled buildings more akin to
+ sculpture, rise over the island, culminating in a view of the
+ `&W`7hite `&T`7ower.  To the southeast lies the village of Alindair the
+ largest of the bridge-villages that surround the city on both sides
+ of the River Erinin.
+ ~
+ 486 a 1 10 10
+-D0
++D6
+ ~
+ ~
+ 0 0 9000
+@@ -251,7 +251,7 @@ G
+ S
+ #48611
+ `6The `^L`6uagde - `&T`6a`7r `&V`6al`7on `6Bridge`7~
+-To the southeast, the gleaming spire of the `&W`7hite `&T`7ower can be
++To the southwest, the gleaming spire of the `&W`7hite `&T`7ower can be
+ seen, marking the center of Tar Valon.  To the northwest, the tiny
+ village of Luagde rests on the banks of the Erinen on the way to 
+ the Borderlands.
+@@ -261,7 +261,7 @@ D0
+ ~
+ ~
+ 0 0 48610
+-D2
++D9
+ ~
+ ~
+ 0 0 9046
+@@ -327,7 +327,7 @@ D0
+ ~
+ ~
+ 0 0 48613
+-D2
++D7
+ ~
+ ~
+ 0 0 9040
+@@ -383,7 +383,7 @@ G
+ S
+ #48617
+ `6The `^O`6senrein - `&T`6a`7r `&V`6al`7on `6Bridge`7~
+-The stone bridge passes southwest towards Tar Valon.  Just beyond
++The stone bridge passes northwest towards Tar Valon.  Just beyond
+ the bridge, rise the immense trees of the Ogier who built it.
+ Above them rises the beautifully forbidding pinnacle of the
+ `&W`7hite `&T`7ower, a pillar of strength and, for many, a place of fear.
+@@ -393,7 +393,7 @@ D0
+ ~
+ ~
+ 0 0 48616
+-D2
++D7
+ ~
+ ~
+ 0 0 9026
+diff --git a/world/wld/90.wld b/world/wld/90.wld
+index 2329656..2b3f4d7 100644
+--- a/world/wld/90.wld
++++ b/world/wld/90.wld
+@@ -8,23 +8,23 @@ to enter or leave the city. The peace is ably kept by the Tower Guard,
+ their distinctive gray cloaks emblazoned with the Flame of Tar Valon
+ peppering the crowds. To the `6east`7 and `&west`7 of the bridge stands a
+ guard tower, each almost a small replica of the White Tower itself.
+-The bridge to Alindaer continues to the `6south`7, while the city of
+-Tar Valon stretches to the `&north`7.
++The bridge to Alindaer continues to the `6southwest`7, while the city of
++Tar Valon stretches to the `&north`7, `6east`7, and `&south`7.
+ ~
+ 90 0 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9001
+-D1
++D2
+ ~
+ ~
+ 0 0 9190
+-D2
++D9
+ ~
+ ~
+ 0 0 48608
+-D3
++D0
+ ~
+ ~
+ 0 0 9189
+@@ -44,11 +44,11 @@ smaller crowd, but the throngs never truly dissipate. `6South`7 lies the
+ bridge to Alindaer, while the road to the Tower continues `&west`7.
+ ~
+ 90 0 1 10 10
+-D2
++D3
+ ~
+ ~
+ 0 0 9000
+-D3
++D0
+ ~
+ ~
+ 0 0 9002
+@@ -68,11 +68,11 @@ smaller crowd, but the throngs never truly dissipate. `6East`7 lies the
+ bridge to Alindaer, while the road to the Tower continues `&west`7.
+ ~
+ 90 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9001
+-D3
++D0
+ ~
+ ~
+ 0 0 9003
+@@ -92,11 +92,11 @@ smaller crowd, but the throngs never truly dissipate. `6East`7 lies the
+ bridge to Alindaer, while the road to the Tower continues `&west`7.
+ ~
+ 90 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9002
+-D3
++D0
+ ~
+ ~
+ 0 0 9004
+@@ -114,11 +114,11 @@ to the Tower, farther to the `&north`7. A few shops and taverns mix with
+ greenswards and residential buildings.
+ ~
+ 90 0 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9005
+-D1
++D2
+ ~
+ ~
+ 0 0 9003
+@@ -136,11 +136,11 @@ to the Tower, farther to the `&north`7. A few shops and taverns mix with
+ greenswards and residential buildings.
+ ~
+ 90 0 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9006
+-D2
++D3
+ ~
+ ~
+ 0 0 9004
+@@ -160,19 +160,19 @@ to the Alindaer bridge. To the `6east`7 and `&west`7 a somewhat quieter
+ road winds its way around the island.
+ ~
+ 90 0 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9007
+-D1
++D2
+ ~
+ ~
+ 0 0 9113
+-D2
++D3
+ ~
+ ~
+ 0 0 9005
+-D3
++D0
+ ~
+ ~
+ 0 0 9112
+@@ -190,11 +190,11 @@ to the Tower, farther to the `&north`7. A few shops and taverns mix with
+ greenswards and residential buildings.
+ ~
+ 90 0 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9008
+-D2
++D3
+ ~
+ ~
+ 0 0 9006
+@@ -212,11 +212,11 @@ to the Tower, farther to the `&north`7. A few shops and taverns mix with
+ greenswards and residential buildings.
+ ~
+ 90 0 1 10 10
+-D2
++D3
+ ~
+ ~
+ 0 0 9007
+-D3
++D0
+ ~
+ ~
+ 0 0 9009
+@@ -237,11 +237,11 @@ The road to the bridge continues to the `6east`7, and `&west`7 is the fabled
+ `8W`7hite `&T`7ower itself.
+ ~
+ 90 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9008
+-D3
++D0
+ ~
+ ~
+ 0 0 9010
+@@ -262,11 +262,11 @@ The road to the bridge continues to the `6east`7, and `&west`7 is the fabled
+ `8W`7hite `&T`7ower itself.
+ ~
+ 90 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9009
+-D3
++D0
+ ~
+ ~
+ 0 0 9093
+@@ -284,11 +284,11 @@ and laborers who make their living caring for the `1A`2e`3s`4 S`5e`6d`8a`&i`7
+ and their guests. To the `&south`7 lies the bridge to Jualdhe.
+ ~
+ 90 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9102
+-D3
++D0
+ ~
+ ~
+ 0 0 9084
+@@ -308,19 +308,19 @@ and `6west`7 lies the city. To the `&east`7 the harbor waits, and `6north`7 lies
+ a high guard tower.
+ ~
+ 90 0 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9192
+-D1
++D2
+ ~
+ ~
+ 0 0 9165
+-D2
++D3
+ ~
+ ~
+ 0 0 9157
+-D3
++D0
+ ~
+ ~
+ 0 0 9013
+@@ -343,11 +343,11 @@ sky with screeching demands for food and scraps, signaling clearly that
+ the harbor is just a little farther `&east`7. 
+ ~
+ 90 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9012
+-D3
++D0
+ ~
+ ~
+ 0 0 9014
+@@ -367,11 +367,11 @@ the street. Even at this distance, the `&W`7hite `&T`7ower dominates
+ the skyline farther to the `&west`7.
+ ~
+ 90 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9013
+-D3
++D0
+ ~
+ ~
+ 0 0 9015
+@@ -392,15 +392,15 @@ the skyline further to the `&west`7. To the `6south`7, the sounds of
+ rough men drinking and gambling float from a dingy door.
+ ~
+ 90 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9014
+-D2
++D3
+ ~
+ ~
+ 0 0 9212
+-D3
++D0
+ ~
+ ~
+ 0 0 9016
+@@ -420,11 +420,11 @@ the street. Even at this distance, the `&W`7hite `&T`7ower dominates
+ the skyline farther to the `&west`7.
+ ~
+ 90 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9015
+-D3
++D0
+ ~
+ ~
+ 0 0 9017
+@@ -443,11 +443,11 @@ work by the harbor to the `6east`7. Farther to the `&west`7 the road
+ leads toward the `&W`7hite `&T`7ower.
+ ~
+ 90 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9016
+-D3
++D0
+ ~
+ ~
+ 0 0 9018
+@@ -466,11 +466,11 @@ work by the harbor to the `6east`7. To the `&north`7 the road leads
+ toward the `&W`7hite `&T`7ower.
+ ~
+ 90 0 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9019
+-D1
++D2
+ ~
+ ~
+ 0 0 9017
+@@ -491,15 +491,15 @@ toward the `&W`7hite `&T`7ower. A sign hangs above a door to the
+ olive branch.
+ ~
+ 90 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 1 0 9211
+-D2
++D3
+ ~
+ ~
+ 0 0 9018
+-D3
++D0
+ ~
+ ~
+ 0 0 9020
+@@ -518,11 +518,11 @@ work by the harbor to the `6east`7. To the `&west`7 the road leads
+ toward the `&W`7hite `&T`7ower.
+ ~
+ 90 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9019
+-D3
++D0
+ ~
+ ~
+ 0 0 9021
+@@ -541,19 +541,19 @@ south gate, or `&east`7 to the busy Southharbor district. To the `6north`7 and `
+ a somewhat quieter road winds its way around the island.
+ ~
+ 90 0 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9118
+-D1
++D2
+ ~
+ ~
+ 0 0 9020
+-D2
++D3
+ ~
+ ~
+ 0 0 9117
+-D3
++D0
+ ~
+ ~
+ 0 0 9022
+@@ -572,11 +572,11 @@ walks can be seen, some approaching the gates in awe,
+ others walking to the `&east`7 and their passage home.
+ ~
+ 90 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9021
+-D3
++D0
+ ~
+ ~
+ 0 0 9023
+@@ -595,11 +595,11 @@ walks can be seen, some approaching the gates in awe,
+ others walking to the `&east`7 and their passage home.
+ ~
+ 90 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9022
+-D3
++D0
+ ~
+ ~
+ 0 0 9024
+@@ -618,11 +618,11 @@ walks can be seen, some approaching the gates in awe,
+ others walking to the `&east`7 and their passage home.
+ ~
+ 90 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9023
+-D3
++D0
+ ~
+ ~
+ 0 0 9025
+@@ -641,11 +641,11 @@ walks can be seen, some approaching the gates in awe,
+ others walking to the `&east`7 and their passage home.
+ ~
+ 90 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9024
+-D3
++D0
+ ~
+ ~
+ 0 0 9095
+@@ -665,22 +665,22 @@ or leave the city. The peace is ably kept by the Tower Guard, their
+ distinctive gray cloaks emblazoned with the Flame of Tar Valon peppering
+ the crowds. To the `6east`7 and `&west`7 of the bridge stands a guard tower, each
+ almost a small replica of the White Tower itself. The bridge to Osenrein
+-continues to the `6north`7, while the city of Tar Valon stretches to the `&south`7.
++continues to the `6southeast`7, while the city of Tar Valon stretches to the `&north`7, `&south`7, and `&west`7.
+ ~
+ 90 0 1 10 10
+-D0
++D8
+ ~
+ ~
+ 0 0 48617
+-D1
++D2
+ ~
+ ~
+ 0 0 9193
+-D2
++D3
+ ~
+ ~
+ 0 0 9027
+-D3
++D0
+ ~
+ ~
+ 0 0 9194
+@@ -698,11 +698,11 @@ making their way home to the village of Osenrein or the
+ farmsteads beyond.
+ ~
+ 90 0 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9026
+-D2
++D3
+ ~
+ ~
+ 0 0 9028
+@@ -721,11 +721,11 @@ farmsteads beyond. To the east towering trees peek over the high
+ white wall of the `2Ogier Grove`7.
+ ~
+ 90 0 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9027
+-D2
++D3
+ ~
+ ~
+ 0 0 9029
+@@ -744,11 +744,11 @@ farmsteads beyond. To the east towering trees peek over the high
+ white wall of the `2Ogier Grove`7.
+ ~
+ 90 0 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9028
+-D2
++D3
+ ~
+ ~
+ 0 0 9030
+@@ -767,11 +767,11 @@ farmsteads beyond. To the east towering trees peek over the high
+ white wall of the `2Ogier Grove`7.
+ ~
+ 90 0 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9029
+-D2
++D3
+ ~
+ ~
+ 0 0 9031
+@@ -790,15 +790,15 @@ on it's way to the Osenrein bridge. A large gate is
+ to the `2east`7 - the entrance to the city's `2Ogier Grove`7.
+ ~
+ 90 0 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9030
+-D1
++D2
+ ~
+ ~
+ 0 0 9199
+-D3
++D0
+ ~
+ ~
+ 0 0 9032
+@@ -816,11 +816,11 @@ the `&east`7 a gate can be seen at a bend in the
+ road ahead. leading to the `2Ogier Grove`7.
+ ~
+ 90 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9031
+-D3
++D0
+ ~
+ ~
+ 0 0 9033
+@@ -840,19 +840,19 @@ Osenrein. To the `6north`7 and `&south`7 a somewhat quieter road winds
+ its way around the island.
+ ~
+ 90 0 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9121
+-D1
++D2
+ ~
+ ~
+ 0 0 9032
+-D2
++D3
+ ~
+ ~
+ 0 0 9120
+-D3
++D0
+ ~
+ ~
+ 0 0 9034
+@@ -872,11 +872,11 @@ To the `&east`7, the road continues on its way to
+ the Osenrein Bridge.
+ ~
+ 90 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9033
+-D3
++D0
+ ~
+ ~
+ 0 0 9035
+@@ -896,11 +896,11 @@ To the `&east`7, the road continues on its way to
+ the Osenrein Bridge.
+ ~
+ 90 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9034
+-D3
++D0
+ ~
+ ~
+ 0 0 9036
+@@ -920,11 +920,11 @@ To the `&east`7, the road continues on its way to
+ the Osenrein Bridge.
+ ~
+ 90 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9035
+-D2
++D3
+ ~
+ ~
+ 0 0 9037
+@@ -944,11 +944,11 @@ To the `&north`7, the road continues on its way to
+ the Osenrein Bridge.
+ ~
+ 90 0 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9036
+-D3
++D0
+ ~
+ ~
+ 0 0 9038
+@@ -968,11 +968,11 @@ above the street, while the road to the `&east`7 continues
+ on its way to the Osenrein Bridge.
+ ~
+ 90 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9037
+-D3
++D0
+ ~
+ ~
+ 0 0 9039
+@@ -992,11 +992,11 @@ above the street, while the road to the `&east`7 continues
+ on its way to the Osenrein Bridge.
+ ~
+ 90 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9038
+-D2
++D3
+ ~
+ ~
+ 0 0 9097
+@@ -1016,22 +1016,22 @@ or leave the city. The peace is ably kept by the Tower Guard, their
+ distinctive gray cloaks emblazoned with the Flame of Tar Valon peppering
+ the crowds. To the `6east`7 and `&west`7 of the bridge stands a guard tower, each
+ almost a small replica of the White Tower itself. The bridge to Daghain
+-continues to the `6north`7, while the city of Tar Valon stretches to the `&south`7.
++continues to the `6southeast`7, while the city of Tar Valon stretches to the `&north`7, `&south`7, and `&west`7.
+ ~
+ 90 0 1 10 10
+-D0
++D8
+ ~
+ ~
+ 0 0 48614
+-D1
++D2
+ ~
+ ~
+ 0 0 9195
+-D2
++D3
+ ~
+ ~
+ 0 0 9041
+-D3
++D0
+ ~
+ ~
+ 0 0 9196
+@@ -1052,11 +1052,11 @@ that invite one to sit and admire the carefully orchestrated
+ view.
+ ~
+ 90 0 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9040
+-D2
++D3
+ ~
+ ~
+ 0 0 9042
+@@ -1076,19 +1076,19 @@ to the Daghain bridge. To the `6east`7 and `&west`7 a somewhat quieter
+ road winds its way around the island.
+ ~
+ 90 0 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9041
+-D1
++D2
+ ~
+ ~
+ 0 0 9128
+-D2
++D3
+ ~
+ ~
+ 0 0 9043
+-D3
++D0
+ ~
+ ~
+ 0 0 9129
+@@ -1107,11 +1107,11 @@ The shining walls of the `&W`7hite `&T`7ower dominate the view
+ To the `6south`7, while to the `&north`7 lies the bridge to Daghain.
+ ~
+ 90 0 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9042
+-D2
++D3
+ ~
+ ~
+ 0 0 9044
+@@ -1131,11 +1131,11 @@ of a neighbor, to come inside and eat. The shining walls of the `&W`7hite
+ lies the bridge to Daghain.
+ ~
+ 90 0 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9043
+-D2
++D3
+ ~
+ ~
+ 0 0 9045
+@@ -1154,11 +1154,11 @@ caring for the Aes Sedai and their guests. To the `&north`7 lies the bridge
+ to Daghain.
+ ~
+ 90 0 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9044
+-D2
++D3
+ ~
+ ~
+ 0 0 9099
+@@ -1178,22 +1178,22 @@ or leave the city. The peace is ably kept by the Tower Guard, their
+ distinctive gray cloaks emblazoned with the Flame of Tar Valon peppering
+ the crowds. To the `6east`7 and `&west`7 of the bridge stands a guard tower, each
+ almost a small replica of the White Tower itself. The bridge to Luagde
+-continues to the `6north`7, while the city of Tar Valon stretches to the `&south`7.
++continues to the `6northeast`7, while the city of Tar Valon stretches to the `&north`7, `&south`7, and `&west`7.
+ ~
+ 90 0 1 10 10
+-D0
++D6
+ ~
+ ~
+ 0 0 48611
+-D1
++D2
+ ~
+ ~
+ 0 0 9197
+-D2
++D3
+ ~
+ ~
+ 0 0 9047
+-D3
++D0
+ ~
+ ~
+ 0 0 9198
+@@ -1214,11 +1214,11 @@ that invite one to sit and admire the carefully orchestrated
+ view.
+ ~
+ 90 0 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9046
+-D2
++D3
+ ~
+ ~
+ 0 0 9048
+@@ -1237,19 +1237,19 @@ for the sound of commerce floating through the air from the  `6south`7. To the
+ road winds its way around the island.
+ ~
+ 90 0 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9047
+-D1
++D2
+ ~
+ ~
+ 0 0 9136
+-D2
++D3
+ ~
+ ~
+ 0 0 9049
+-D3
++D0
+ ~
+ ~
+ 0 0 9137
+@@ -1272,11 +1272,11 @@ The shining walls of the `&W`7hite `&T`7ower dominate the view
+ To the `6south`7, while to the `&north`7 lies the bridge to Luagde.
+ ~
+ 90 0 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9048
+-D2
++D3
+ ~
+ ~
+ 0 0 9050
+@@ -1296,11 +1296,11 @@ of a neighbor, to come inside and eat. The shining walls of the `&W`7hite
+ lies the bridge to Luagde.
+ ~
+ 90 0 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9049
+-D1
++D2
+ ~
+ ~
+ 0 0 9051
+@@ -1320,11 +1320,11 @@ of a neighbor, to come inside and eat. The shining walls of the `&W`7hite
+ lies the bridge to Luagde.
+ ~
+ 90 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9052
+-D3
++D0
+ ~
+ ~
+ 0 0 9050
+@@ -1344,11 +1344,11 @@ The shining walls of the `&W`7hite `&T`7ower dominate the view to the `6east`7,
+ while to the `&west`7 lies the bridge to Luagde.
+ ~
+ 90 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9053
+-D3
++D0
+ ~
+ ~
+ 0 0 9051
+@@ -1368,11 +1368,11 @@ The shining walls of the `&W`7hite `&T`7ower dominate the view to the `6south`7,
+ while to the `&west`7 lies the bridge to Luagde.
+ ~
+ 90 0 1 10 10
+-D2
++D3
+ ~
+ ~
+ 0 0 9054
+-D3
++D0
+ ~
+ ~
+ 0 0 9052
+@@ -1391,11 +1391,11 @@ eye upward. To the `&north`7, the road continues on its way to the
+ Luagde Bridge.
+ ~
+ 90 0 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9053
+-D1
++D2
+ ~
+ ~
+ 0 0 9055
+@@ -1414,11 +1414,11 @@ eye upward. To the `&west`7, the road continues on its way to the
+ Luagde Bridge.
+ ~
+ 90 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9056
+-D3
++D0
+ ~
+ ~
+ 0 0 9054
+@@ -1438,11 +1438,11 @@ To the `6east`7, the fabled `&W`7hite `&T`7ower rises above the city, while to t
+  `&west`7, the road continues on its way to the Luagde Bridge.
+ ~
+ 90 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9057
+-D3
++D0
+ ~
+ ~
+ 0 0 9055
+@@ -1462,11 +1462,11 @@ To the `6south`7, the fabled `&W`7hite `&T`7ower rises above the city, while to
+  `&west`7, the road continues on its way to the Luagde Bridge.
+ ~
+ 90 0 1 10 10
+-D2
++D3
+ ~
+ ~
+ 0 0 9106
+-D3
++D0
+ ~
+ ~
+ 0 0 9056
+@@ -1486,19 +1486,19 @@ and `&west`7, while `6east`7 lies the city. To the `&south`7 the island's
+ protective wall is broken by a high guard tower.
+ ~
+ 90 0 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9174
+-D1
++D2
+ ~
+ ~
+ 0 0 9059
+-D2
++D3
+ ~
+ ~
+ 0 0 9184
+-D3
++D0
+ ~
+ ~
+ 0 0 9175
+@@ -1521,11 +1521,11 @@ sky with screeching demands for food and scraps, signaling clearly that
+ the harbor is just a little farther `&west`7. 
+ ~
+ 90 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9060
+-D3
++D0
+ ~
+ ~
+ 0 0 9058
+@@ -1545,11 +1545,11 @@ the street. Even at this distance, the White Tower dominates
+ the skyline farther to the `&east`7.
+ ~
+ 90 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9061
+-D3
++D0
+ ~
+ ~
+ 0 0 9059
+@@ -1569,11 +1569,11 @@ but the throngs never truly dissipate. `6West`7 lies Northharbor, while the
+ road to the Tower continues `&east`7.
+ ~
+ 90 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9062
+-D3
++D0
+ ~
+ ~
+ 0 0 9060
+@@ -1593,11 +1593,11 @@ but the throngs never truly dissipate. `6West`7 lies Northharbor, while the
+ road to the Tower continues `&east`7.
+ ~
+ 90 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9063
+-D3
++D0
+ ~
+ ~
+ 0 0 9061
+@@ -1616,11 +1616,11 @@ work by the harbor to the `6west`7. Farther to the `&east`7 the road
+ leads toward the `&W`7hite `&T`7ower.
+ ~
+ 90 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9064
+-D3
++D0
+ ~
+ ~
+ 0 0 9062
+@@ -1642,15 +1642,15 @@ water. The door stands open, allowing both people and the smell
+ of fish to find their way to the street.
+ ~
+ 90 0 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9214
+-D1
++D2
+ ~
+ ~
+ 0 0 9065
+-D3
++D0
+ ~
+ ~
+ 0 0 9063
+@@ -1669,11 +1669,11 @@ work by the harbor to the `^west`7. Farther to the `&east`7 the road
+ leads toward the `&W`7hite `&T`7ower.
+ ~
+ 90 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9066
+-D3
++D0
+ ~
+ ~
+ 0 0 9064
+@@ -1692,19 +1692,19 @@ north gate, or `&west`7 to the busy Northharbor district. To the `6north`7 and `
+ a somewhat quieter road winds its way around the island.
+ ~
+ 90 0 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9141
+-D1
++D2
+ ~
+ ~
+ 0 0 9067
+-D2
++D3
+ ~
+ ~
+ 0 0 9142
+-D3
++D0
+ ~
+ ~
+ 0 0 9065
+@@ -1724,11 +1724,11 @@ above the street, while the road to the `&west`7 continues
+ on its way to Northharbor.
+ ~
+ 90 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9068
+-D3
++D0
+ ~
+ ~
+ 0 0 9066
+@@ -1748,11 +1748,11 @@ above the street, while the road to the `&west`7 continues
+ on its way to Northharbor.
+ ~
+ 90 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9069
+-D3
++D0
+ ~
+ ~
+ 0 0 9067
+@@ -1772,11 +1772,11 @@ above the street, while the road to the `&west`7 continues
+ on its way to Northharbor.
+ ~
+ 90 0 1 10 10
+-D2
++D3
+ ~
+ ~
+ 0 0 9070
+-D3
++D0
+ ~
+ ~
+ 0 0 9068
+@@ -1794,11 +1794,11 @@ the `&north`7 the road seems to turn again, as it heads
+ toward Northharbor.
+ ~
+ 90 0 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9069
+-D2
++D3
+ ~
+ ~
+ 0 0 9071
+@@ -1818,11 +1818,11 @@ of a neighbor, to come inside and eat. The shining walls of the `&W`7hite
+ lies Northharbor.
+ ~
+ 90 0 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9070
+-D1
++D2
+ ~
+ ~
+ 0 0 9072
+@@ -1841,11 +1841,11 @@ caring for the `1A`2e`3s`4 S`5e`6d`8a`&i`7 and their guests. To the `&west`7 lie
+ Northharbor.
+ ~
+ 90 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9073
+-D3
++D0
+ ~
+ ~
+ 0 0 9071
+@@ -1864,11 +1864,11 @@ caring for the `1A`2e`3s`4 S`5e`6d`8a`&i`7 and their guests. To the `&west`7 lie
+ Northharbor.
+ ~
+ 90 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9074
+-D3
++D0
+ ~
+ ~
+ 0 0 9072
+@@ -1887,11 +1887,11 @@ walks can be seen, some approaching the gates in awe,
+ others walking to the `&west`7 and their passage home.
+ ~
+ 90 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9075
+-D3
++D0
+ ~
+ ~
+ 0 0 9073
+@@ -1910,11 +1910,11 @@ walks can be seen, some approaching the gates in awe,
+ others walking to the `&west`7 and their passage home.
+ ~
+ 90 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9104
+-D3
++D0
+ ~
+ ~
+ 0 0 9074
+@@ -1934,22 +1934,22 @@ or leave the city. The peace is ably kept by the Tower Guard, their
+ distinctive gray cloaks emblazoned with the Flame of Tar Valon peppering
+ the crowds. To the `6east`7 and `&west`7 of the bridge stands a guard tower, each
+ almost a small replica of the `&W`7hite `&T`7ower itself. The bridge to Jualdhe
+-continues to the `6south`7, while the city of Tar Valon stretches to the `&north`7.
++continues to the `6northwest`7, while the city of Tar Valon stretches to the `&north`7, `6east`7, and `&south`7.
+ ~
+ 90 0 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9077
+-D1
++D2
+ ~
+ ~
+ 0 0 9186
+-D2
++D7
+ ~
+ ~
+ 0 0 48602
+-D3
++D0
+ ~
+ ~
+ 0 0 9185
+@@ -1968,11 +1968,11 @@ farmsteads beyond. The guard tower dominates the sky,
+ casting the road in shadow.
+ ~
+ 90 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9078
+-D2
++D3
+ ~
+ ~
+ 0 0 9076
+@@ -1991,11 +1991,11 @@ farmsteads beyond. The guard tower dominates the sky,
+ casting the road in shadow.
+ ~
+ 90 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9079
+-D3
++D0
+ ~
+ ~
+ 0 0 9077
+@@ -2014,11 +2014,11 @@ farmsteads beyond. The guard tower dominates the sky,
+ casting the road in shadow.
+ ~
+ 90 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9080
+-D3
++D0
+ ~
+ ~
+ 0 0 9078
+@@ -2040,11 +2040,11 @@ to the `&W`7hite `&T`7ower, and continues `&west`7 to the
+ Jualdhe Bridge.
+ ~
+ 90 0 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9081
+-D3
++D0
+ ~
+ ~
+ 0 0 9079
+@@ -2066,11 +2066,11 @@ to the `&W`7hite `&T`7ower, and continues `&south`7 to the
+ Jualdhe Bridge.
+ ~
+ 90 0 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9082
+-D2
++D3
+ ~
+ ~
+ 0 0 9080
+@@ -2089,19 +2089,19 @@ Guardsmen mingle with merchants and other visitors making their way
+ and `&west`7 a somewhat quieter road winds its way around the island.
+ ~
+ 90 0 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9083
+-D1
++D2
+ ~
+ ~
+ 0 0 9153
+-D2
++D3
+ ~
+ ~
+ 0 0 9081
+-D3
++D0
+ ~
+ ~
+ 0 0 9152
+@@ -2121,11 +2121,11 @@ of a neighbor, to come inside and eat. The shining walls of the `&W`7hite
+ the bridge to Jualdhe.
+ ~
+ 90 0 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9084
+-D2
++D3
+ ~
+ ~
+ 0 0 9082
+@@ -2143,11 +2143,11 @@ who make their living caring for the `1A`2e`3s`4 S`5e`6d`8a`&i`7 and their guest
+ To the `&south`7 lies the bridge to Jualdhe.
+ ~
+ 90 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9011
+-D2
++D3
+ ~
+ ~
+ 0 0 9083
+@@ -2167,22 +2167,22 @@ or leave the city. The peace is ably kept by the Tower Guard, their
+ distinctive brown cloaks emblazoned with the Flame of Tar Valon peppering
+ the crowds. To the `6east`7 and `&west`7 of the bridge stands a guard tower, each
+ almost a small replica of the White Tower itself. The bridge to Darein
+-continues to the `6south`7, while the city of Tar Valon stretches to the `&north`7.
++continues to the `6southwest`7, while the city of Tar Valon stretches to the `&north`7, `6east`7, and `&south`7.
+ ~
+ 90 0 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9086
+-D1
++D2
+ ~
+ ~
+ 0 0 9188
+-D2
++D9
+ ~
+ ~
+ 0 0 48605
+-D3
++D0
+ ~
+ ~
+ 0 0 9187
+@@ -2202,11 +2202,11 @@ smaller crowd, but the throngs never truly dissipate. `6South`7 lies the
+ bridge to Darein, while the road to the Tower continues `&north`7.
+ ~
+ 90 0 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9087
+-D2
++D3
+ ~
+ ~
+ 0 0 9085
+@@ -2226,11 +2226,11 @@ smaller crowd, but the throngs never truly dissipate. `6South`7 lies the
+ bridge to Darein, while the road to the Tower continues `&north`7.
+ ~
+ 90 0 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9088
+-D2
++D3
+ ~
+ ~
+ 0 0 9086
+@@ -2249,11 +2249,11 @@ The shining walls of the `&W`7hite `&T`7ower dominate the view
+ to the `6north`7, while to the `&south`7 lies the bridge to Darein.
+ ~
+ 90 0 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9089
+-D2
++D3
+ ~
+ ~
+ 0 0 9087
+@@ -2272,19 +2272,19 @@ or `&north`7 to the `&W`7hite `&T`7ower. To the `6east`7 and `&west`7 a somewhat
+ road winds its way around the island.
+ ~
+ 90 0 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9090
+-D1
++D2
+ ~
+ ~
+ 0 0 9109
+-D2
++D3
+ ~
+ ~
+ 0 0 9088
+-D3
++D0
+ ~
+ ~
+ 0 0 9156
+@@ -2303,11 +2303,11 @@ who make their living caring for the Aes Sedai and their guests. To the
+ `&north`7 lies the bridge to Darein.
+ ~
+ 90 0 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9091
+-D2
++D3
+ ~
+ ~
+ 0 0 9089
+@@ -2326,20 +2326,20 @@ continue to the `6west`7 and `&east`7, and the road to the Darein Bridge
+ is to the  `6south`7.
+ ~
+ 90 c 1 10 10
+-D0
++D1
+ A large wooden gate.
+ ~
+ gate wooden large~
+ 1 0 9601
+-D1
++D2
+ ~
+ ~
+ 0 0 9092
+-D2
++D3
+ ~
+ ~
+ 0 0 9090
+-D3
++D0
+ ~
+ ~
+ 0 0 9100
+@@ -2357,11 +2357,11 @@ other. This is the heart of the city, in more ways than one. The road
+ which surrounds the `&W`7hite `&T`7ower continues to the `6west`7 and `&east`7.
+ ~
+ 90 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9093
+-D3
++D0
+ ~
+ ~
+ 0 0 9091
+@@ -2380,15 +2380,15 @@ which surrounds the `&W`7hite `&T`7ower continues to the `6north`7 and `&west`7,
+ while to the `6east`7 the road to the Alindaer bridge beckons.
+ ~
+ 90 0 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9094
+-D1
++D2
+ ~
+ ~
+ 0 0 9010
+-D3
++D0
+ ~
+ ~
+ 0 0 9092
+@@ -2406,11 +2406,11 @@ other. This is the heart of the city, in more ways than one. The road
+ which surrounds the `&W`7hite `&T`7ower continues to the `6north`7 and `&south`7.
+ ~
+ 90 0 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9095
+-D2
++D3
+ ~
+ ~
+ 0 0 9093
+@@ -2429,19 +2429,19 @@ carved upon it dance as if alive. The walls continue to the `6north`7 and
+ `&south`7, and the road to the harbor district is to the `6east`7.
+ ~
+ 90 c 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9096
+-D1
++D2
+ ~
+ ~
+ 0 0 9025
+-D2
++D3
+ ~
+ ~
+ 0 0 9094
+-D3
++D0
+ ~
+ gate sunrise~
+ 1 0 9647
+@@ -2459,11 +2459,11 @@ other. This is the heart of the city, in more ways than one. The road
+ which surrounds the `&W`7hite `&T`7ower continues to the `6north`7 and `&south`7.
+ ~
+ 90 0 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9097
+-D2
++D3
+ ~
+ ~
+ 0 0 9095
+@@ -2482,15 +2482,15 @@ which surrounds the `&W`7hite `&T`7ower continues to the `6south`7 and `&west`7,
+ while to the `6north`7 the road to the Osenrein bridge beckons.
+ ~
+ 90 0 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9039
+-D2
++D3
+ ~
+ ~
+ 0 0 9096
+-D3
++D0
+ ~
+ ~
+ 0 0 9098
+@@ -2508,11 +2508,11 @@ other. This is the heart of the city, in more ways than one. The road
+ which surrounds the `&W`7hite `&T`7ower continues to the `6east`7 and `&west`7.
+ ~
+ 90 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9097
+-D3
++D0
+ ~
+ ~
+ 0 0 9099
+@@ -2531,19 +2531,19 @@ continue to the `6west`7 and `&east`7, and the road to the Daghain Bridge
+ is to the  `6north`7.
+ ~
+ 90 c 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9045
+-D1
++D2
+ ~
+ ~
+ 0 0 9098
+-D2
++D3
+ ~
+ gate tarlomen~
+ 1 0 9659
+-D3
++D0
+ ~
+ ~
+ 0 0 9108
+diff --git a/world/wld/91.wld b/world/wld/91.wld
+index 659cb61..470b9c3 100644
+--- a/world/wld/91.wld
++++ b/world/wld/91.wld
+@@ -6,11 +6,11 @@ other. This is the heart of the city, in more ways than one. The road
+ which surrounds the `&W`7hite `&T`7ower continues to the `6west`7 and `&east`7.
+ ~
+ 91 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9091
+-D3
++D0
+ ~
+ ~
+ 0 0 9101
+@@ -28,11 +28,11 @@ other. This is the heart of the city, in more ways than one. The road
+ which surrounds the `&W`7hite `&T`7ower continues to the `6west`7 and `&east`7.
+ ~
+ 91 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9100
+-D3
++D0
+ ~
+ ~
+ 0 0 9102
+@@ -51,15 +51,15 @@ which surrounds the `&W`7hite `&T`7ower continues to the `6north`7 and `&east`7,
+ while to the `6west`7 the road to the Jualdhe bridge beckons.
+ ~
+ 91 0 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9103
+-D1
++D2
+ ~
+ ~
+ 0 0 9101
+-D3
++D0
+ ~
+ ~
+ 0 0 9011
+@@ -77,11 +77,11 @@ other. This is the heart of the city, in more ways than one. The road
+ which surrounds the `&W`7hite `&T`7ower continues to the `6north`7 and `&south`7.
+ ~
+ 91 0 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9104
+-D2
++D3
+ ~
+ ~
+ 0 0 9102
+@@ -101,19 +101,19 @@ the scene carved upon it dance as if alive. The walls continue to the
+ to the `6west`7.
+ ~
+ 91 0 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9105
+-D1
++D2
+ ~
+ gate sunset east~
+ 1 0 9624
+-D2
++D3
+ ~
+ ~
+ 0 0 9103
+-D3
++D0
+ ~
+ ~
+ 0 0 9075
+@@ -131,11 +131,11 @@ other. This is the heart of the city, in more ways than one. The road
+ which surrounds the `&W`7hite `&T`7ower continues to the `6north`7 and `&south`7.
+ ~
+ 91 0 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9106
+-D2
++D3
+ ~
+ ~
+ 0 0 9104
+@@ -154,15 +154,15 @@ which surrounds the `&W`7hite `&T`7ower continues to the `6east`7 and `&south`7,
+ while to the `6north`7 the road to the Luagde bridge beckons.
+ ~
+ 91 0 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9057
+-D1
++D2
+ ~
+ ~
+ 0 0 9107
+-D2
++D3
+ ~
+ ~
+ 0 0 9105
+@@ -180,11 +180,11 @@ other. This is the heart of the city, in more ways than one. The road
+ which surrounds the `&W`7hite `&T`7ower continues to the `6east`7 and `&west`7.
+ ~
+ 91 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9108
+-D3
++D0
+ ~
+ ~
+ 0 0 9106
+@@ -202,11 +202,11 @@ other. This is the heart of the city, in more ways than one. The road
+ which surrounds the `&W`7hite `&T`7ower continues to the `6east`7 and `&west`7.
+ ~
+ 91 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9099
+-D3
++D0
+ ~
+ ~
+ 0 0 9107
+@@ -226,11 +226,11 @@ business. Carts rumble `6west`7 toward the Darein Road, and others
+ make their way `&east`7 toward the Alindaer Road.
+ ~
+ 91 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9110
+-D3
++D0
+ ~
+ ~
+ 0 0 9089
+@@ -250,11 +250,11 @@ business. Carts rumble `6west`7 toward the Darein Road, and others
+ make their way `&east`7 toward the Alindaer Road.
+ ~
+ 91 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9111
+-D3
++D0
+ ~
+ ~
+ 0 0 9109
+@@ -274,11 +274,11 @@ business. Carts rumble `6west`7 toward the Darein Road, and others
+ make their way `&east`7 toward the Alindaer Road.
+ ~
+ 91 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9112
+-D3
++D0
+ ~
+ ~
+ 0 0 9110
+@@ -298,11 +298,11 @@ business. Carts rumble `6west`7 toward the Darein Road, and others
+ make their way `&east`7 toward the Alindaer Road.
+ ~
+ 91 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9006
+-D3
++D0
+ ~
+ ~
+ 0 0 9111
+@@ -322,11 +322,11 @@ business. Carts rumble `6east`7 toward the harbor district, and visitors make
+ their way `&west`7 toward the Alindaer Road.
+ ~
+ 91 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9114
+-D3
++D0
+ ~
+ ~
+ 0 0 9006
+@@ -346,11 +346,11 @@ business. Carts rumble `6north`7 toward the harbor district, and visitors
+ make their way `&west`7 toward the Alindaer Road.
+ ~
+ 91 0 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9115
+-D3
++D0
+ ~
+ ~
+ 0 0 9113
+@@ -370,11 +370,11 @@ business. Carts rumble `6north`7 toward the harbor district, and visitors
+ make their way `&south`7 toward the Alindaer Road.
+ ~
+ 91 0 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9116
+-D2
++D3
+ ~
+ ~
+ 0 0 9114
+@@ -394,11 +394,11 @@ business. Carts rumble `6north`7 toward the harbor district, and visitors
+ make their way `&south`7 toward the Alindaer Road.
+ ~
+ 91 0 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9117
+-D2
++D3
+ ~
+ ~
+ 0 0 9115
+@@ -418,11 +418,11 @@ business. Carts rumble `6north`7 toward the harbor district, and visitors
+ make their way `&south`7 toward the Alindaer Road.
+ ~
+ 91 0 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9021
+-D2
++D3
+ ~
+ ~
+ 0 0 9116
+@@ -442,11 +442,11 @@ business. Carts rumble `6north`7 toward the Osenrein Road, and
+ visitors make their way `&south`7 toward the harbor district.
+ ~
+ 91 0 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9119
+-D2
++D3
+ ~
+ ~
+ 0 0 9021
+@@ -466,11 +466,11 @@ business. Carts rumble `6north`7 toward the Osenrein Road, and
+ visitors make their way `&south`7 toward the harbor district.
+ ~
+ 91 0 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9120
+-D2
++D3
+ ~
+ ~
+ 0 0 9118
+@@ -490,11 +490,11 @@ business. Carts rumble `6north`7 toward the Osenrein Road, and
+ visitors make their way `&south`7 toward the harbor district.
+ ~
+ 91 0 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9033
+-D2
++D3
+ ~
+ ~
+ 0 0 9119
+@@ -514,11 +514,11 @@ business. Carts rumble `6south`7 toward the Osenrein Road, and  `&north`7
+ toward the Daghain Road.
+ ~
+ 91 0 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9122
+-D2
++D3
+ ~
+ ~
+ 0 0 9033
+@@ -538,11 +538,11 @@ business. Carts rumble `6south`7 toward the Osenrein Road, and  `&west`7
+ toward the Daghain Road.
+ ~
+ 91 0 1 10 10
+-D2
++D3
+ ~
+ ~
+ 0 0 9121
+-D3
++D0
+ ~
+ ~
+ 0 0 9123
+@@ -562,11 +562,11 @@ business. Carts rumble `6east`7 toward the Osenrein Road, and  `&west`7
+ toward the Daghain Road.
+ ~
+ 91 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9122
+-D3
++D0
+ ~
+ ~
+ 0 0 9124
+@@ -586,11 +586,11 @@ business. Carts rumble `6east`7 toward the Osenrein Road, and  `&west`7
+ toward the Daghain Road.
+ ~
+ 91 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9123
+-D3
++D0
+ ~
+ ~
+ 0 0 9125
+@@ -610,11 +610,11 @@ business. Carts rumble `6east`7 toward the Osenrein Road, and  `&west`7
+ toward the Daghain Road.
+ ~
+ 91 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9124
+-D3
++D0
+ ~
+ ~
+ 0 0 9126
+@@ -634,11 +634,11 @@ business. Carts rumble `6east`7 toward the Osenrein Road, and  `&west`7
+ toward the Daghain Road.
+ ~
+ 91 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9125
+-D3
++D0
+ ~
+ ~
+ 0 0 9127
+@@ -658,11 +658,11 @@ business. Carts rumble `6east`7 toward the Osenrein Road, and  `&west`7
+ toward the Daghain Road.
+ ~
+ 91 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9126
+-D3
++D0
+ ~
+ ~
+ 0 0 9128
+@@ -682,11 +682,11 @@ business. Carts rumble `6east`7 toward the Osenrein Road, and  `&west`7
+ toward the Daghain Road.
+ ~
+ 91 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9127
+-D3
++D0
+ ~
+ ~
+ 0 0 9042
+@@ -706,11 +706,11 @@ business. Carts rumble `6east`7 toward the Daghain Road, and others
+ make their way `&west`7 toward the Luagde Road.
+ ~
+ 91 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9042
+-D3
++D0
+ ~
+ ~
+ 0 0 9130
+@@ -730,11 +730,11 @@ business. Carts rumble `6east`7 toward the Daghain Road, and others
+ make their way `&west`7 toward the Luagde Road.
+ ~
+ 91 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9129
+-D3
++D0
+ ~
+ ~
+ 0 0 9131
+@@ -754,11 +754,11 @@ business. Carts rumble `6east`7 toward the Daghain Road, and others
+ make their way `&west`7 toward the Luagde Road.
+ ~
+ 91 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9130
+-D3
++D0
+ ~
+ ~
+ 0 0 9132
+@@ -778,11 +778,11 @@ business. Carts rumble `6east`7 toward the Daghain Road, and others
+ make their way `&west`7 toward the Luagde Road.
+ ~
+ 91 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9131
+-D3
++D0
+ ~
+ ~
+ 0 0 9133
+@@ -802,11 +802,11 @@ business. Carts rumble `6east`7 toward the Daghain Road, and others
+ make their way `&west`7 toward the Luagde Road.
+ ~
+ 91 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9132
+-D3
++D0
+ ~
+ ~
+ 0 0 9134
+@@ -826,11 +826,11 @@ business. Carts rumble `6east`7 toward the Daghain Road, and others
+ make their way `&west`7 toward the Luagde Road.
+ ~
+ 91 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9133
+-D3
++D0
+ ~
+ ~
+ 0 0 9135
+@@ -850,11 +850,11 @@ business. Carts rumble `6east`7 toward the Daghain Road, and others
+ make their way `&west`7 toward the Luagde Road.
+ ~
+ 91 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9134
+-D3
++D0
+ ~
+ ~
+ 0 0 9136
+@@ -874,7 +874,7 @@ business. Carts rumble `6east`7 toward the Daghain Road, and others
+ make their way `&west`7 toward the Luagde Road.
+ ~
+ 91 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9135
+@@ -882,7 +882,7 @@ D2
+ ~
+ ~
+ 0 0 -1
+-D3
++D0
+ ~
+ ~
+ 0 0 9048
+@@ -902,11 +902,11 @@ business. Carts rumble `6east`7 toward the Luagde Road, and visitors
+ make their way `&west`7 toward the harbor district.
+ ~
+ 91 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9048
+-D3
++D0
+ ~
+ ~
+ 0 0 9138
+@@ -926,11 +926,11 @@ business. Carts rumble `6east`7 toward the Luagde Road, and visitors
+ make their way `&south`7 toward the harbor district.
+ ~
+ 91 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9137
+-D2
++D3
+ ~
+ ~
+ 0 0 9139
+@@ -950,11 +950,11 @@ business. Carts rumble `6north`7 toward the Luagde Road, and visitors
+ make their way `&south`7 toward the harbor district.
+ ~
+ 91 0 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9138
+-D2
++D3
+ ~
+ ~
+ 0 0 9140
+@@ -976,15 +976,15 @@ stands a most extraordinary building. It looks like a rather large
+ `*b`&lu`4e`7 cat!
+ ~
+ 91 0 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9139
+-D2
++D3
+ ~
+ ~
+ 0 0 9141
+-D3
++D0
+ ~
+ ~
+ 1 0 9213
+@@ -1004,11 +1004,11 @@ business. Carts rumble `6north`7 toward the Luagde Road, and visitors
+ make their way `&south`7 toward the harbor district.
+ ~
+ 91 0 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9140
+-D2
++D3
+ ~
+ ~
+ 0 0 9066
+@@ -1028,11 +1028,11 @@ business. Carts rumble `6north`7 toward the harbor district, and
+ others make their way `&south`7 toward the Jualdhe Road.
+ ~
+ 91 0 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9066
+-D2
++D3
+ ~
+ ~
+ 0 0 9143
+@@ -1052,11 +1052,11 @@ business. Carts rumble `6north`7 toward the harbor district, and
+ others make their way `&south`7 toward the Jualdhe Road.
+ ~
+ 91 0 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9142
+-D2
++D3
+ ~
+ ~
+ 0 0 9144
+@@ -1076,11 +1076,11 @@ business. Carts rumble `6north`7 toward the harbor district, and
+ others make their way `&south`7 toward the Jualdhe Road.
+ ~
+ 91 0 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9143
+-D2
++D3
+ ~
+ ~
+ 0 0 9145
+@@ -1100,11 +1100,11 @@ business. Carts rumble `6north`7 toward the harbor district, and
+ others make their way `&south`7 toward the Jualdhe Road.
+ ~
+ 91 0 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9144
+-D2
++D3
+ ~
+ ~
+ 0 0 9146
+@@ -1124,11 +1124,11 @@ business. Carts rumble `6north`7 toward the harbor district, and
+ others make their way `&south`7 toward the Jualdhe Road.
+ ~
+ 91 0 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9145
+-D2
++D3
+ ~
+ ~
+ 0 0 9147
+@@ -1148,11 +1148,11 @@ business. Carts rumble `6north`7 toward the harbor district, and
+ others make their way `&east`7 toward the Jualdhe Road.
+ ~
+ 91 0 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9146
+-D1
++D2
+ ~
+ ~
+ 0 0 9148
+@@ -1172,11 +1172,11 @@ business. Carts rumble `6west`7 toward the harbor district, and
+ others make their way `&east`7 toward the Jualdhe Road.
+ ~
+ 91 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9149
+-D3
++D0
+ ~
+ ~
+ 0 0 9147
+@@ -1196,11 +1196,11 @@ business. Carts rumble `6west`7 toward the harbor district, and
+ others make their way `&east`7 toward the Jualdhe Road.
+ ~
+ 91 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9150
+-D3
++D0
+ ~
+ ~
+ 0 0 9148
+@@ -1220,11 +1220,11 @@ business. Carts rumble `6west`7 toward the harbor district, and
+ others make their way `&east`7 toward the Jualdhe Road.
+ ~
+ 91 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9151
+-D3
++D0
+ ~
+ ~
+ 0 0 9149
+@@ -1244,11 +1244,11 @@ business. Carts rumble `6west`7 toward the harbor district, and
+ others make their way `&east`7 toward the Jualdhe Road.
+ ~
+ 91 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9152
+-D3
++D0
+ ~
+ ~
+ 0 0 9150
+@@ -1268,11 +1268,11 @@ business. Carts rumble `6west`7 toward the harbor district, and
+ others make their way `&east`7 toward the Jualdhe Road.
+ ~
+ 91 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9082
+-D3
++D0
+ ~
+ ~
+ 0 0 9151
+@@ -1292,11 +1292,11 @@ business. Carts rumble `6east`7 toward the Darein Road, and others
+ make their way `&west`7 toward the Jualdhe Road.
+ ~
+ 91 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9154
+-D3
++D0
+ ~
+ ~
+ 0 0 9082
+@@ -1316,11 +1316,11 @@ business. Carts rumble `6east`7 toward the Darein Road, and others
+ make their way `&west`7 toward the Jualdhe Road.
+ ~
+ 91 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9155
+-D3
++D0
+ ~
+ ~
+ 0 0 9153
+@@ -1340,11 +1340,11 @@ business. Carts rumble `6east`7 toward the Darein Road, and others
+ make their way `&west`7 toward the Jualdhe Road.
+ ~
+ 91 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9156
+-D3
++D0
+ ~
+ ~
+ 0 0 9154
+@@ -1364,11 +1364,11 @@ business. Carts rumble `6east`7 toward the Darein Road, and others
+ make their way `&west`7 toward the Jualdhe Road.
+ ~
+ 91 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9089
+-D3
++D0
+ ~
+ ~
+ 0 0 9155
+@@ -1386,15 +1386,15 @@ island hugs the docks, forcing traffic to move either `&north`7 toward the
+ city, or farther along the docks to the `6south`7.
+ ~
+ 91 0 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9012
+-D1
++D2
+ ~
+ ~
+ 0 0 9168
+-D2
++D3
+ ~
+ ~
+ 0 0 9158
+@@ -1412,15 +1412,15 @@ island hugs the docks, forcing traffic to move either `&north`7 toward the
+ city, or farther along the docks to the `6south`7.
+ ~
+ 91 0 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9157
+-D1
++D2
+ ~
+ ~
+ 0 0 9167
+-D2
++D3
+ ~
+ ~
+ 0 0 9159
+@@ -1437,15 +1437,15 @@ high guard tower. The docks themselves are jammed with traffic moving
+ `&north`7 toward the city, or farther along the docks to the `6east`7.
+ ~
+ 91 0 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9158
+-D1
++D2
+ ~
+ ~
+ 0 0 9160
+-D2
++D3
+ ~
+ ~
+ 0 0 9191
+@@ -1463,15 +1463,15 @@ island hugs the docks, forcing traffic to move either `&west`7 toward the
+ city, or farther along the docks to the `6east`7.
+ ~
+ 91 0 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9167
+-D1
++D2
+ ~
+ ~
+ 0 0 9161
+-D3
++D0
+ ~
+ ~
+ 0 0 9159
+@@ -1489,11 +1489,11 @@ into the harbor to the `6north`7, narrowing the passage to the river. The docks
+ continue to the `&west`7.
+ ~
+ 91 0 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9166
+-D3
++D0
+ ~
+ ~
+ 0 0 9160
+@@ -1511,11 +1511,11 @@ into the harbor to the `6south`7, narrowing the passage to the river. The docks
+ continue to the `&north`7.
+ ~
+ 91 0 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9163
+-D3
++D0
+ ~
+ ~
+ 0 0 9169
+@@ -1532,11 +1532,11 @@ sailing vessels of every size and type. The docks continue to the `6south`7 and
+ `&west`7.
+ ~
+ 91 0 1 10 10
+-D2
++D3
+ ~
+ ~
+ 0 0 9162
+-D3
++D0
+ ~
+ ~
+ 0 0 9164
+@@ -1554,15 +1554,15 @@ island hugs the docks, forcing traffic to move either `&west`7 toward the
+ city, or farther along the docks to the `6east`7.
+ ~
+ 91 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9163
+-D2
++D3
+ ~
+ ~
+ 0 0 9169
+-D3
++D0
+ ~
+ ~
+ 0 0 9165
+@@ -1580,15 +1580,15 @@ island hugs the docks, forcing traffic to move either `&west`7 toward the
+ city, or farther along the docks to the `6east`7.
+ ~
+ 91 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9164
+-D2
++D3
+ ~
+ ~
+ 0 0 9168
+-D3
++D0
+ ~
+ ~
+ 0 0 9012
+@@ -1609,7 +1609,7 @@ Small fishing boats dart between the larger ships as they make their way past
+ the walls and to the river proper.
+ ~
+ 91 a 6 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9169
+@@ -1617,11 +1617,11 @@ D1
+ ~
+ ~
+ 0 0 46832
+-D2
++D3
+ ~
+ ~
+ 0 0 9161
+-D3
++D0
+ ~
+ ~
+ 0 0 9167
+@@ -1639,19 +1639,19 @@ laden with trade goods and smaller vessels carrying visitors make their way
+ dart between the larger ships as they make their way `6east`7 to the river proper.
+ ~
+ 91 a 6 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9168
+-D1
++D2
+ ~
+ ~
+ 0 0 9166
+-D2
++D3
+ ~
+ ~
+ 0 0 9160
+-D3
++D0
+ ~
+ ~
+ 0 0 9158
+@@ -1670,19 +1670,19 @@ the island extend across the harbors exit, protecting all inside from the raging
+ waters of the river.
+ ~
+ 91 a 6 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9165
+-D1
++D2
+ ~
+ ~
+ 0 0 9169
+-D2
++D3
+ ~
+ ~
+ 0 0 9167
+-D3
++D0
+ ~
+ ~
+ 0 0 9157
+@@ -1700,19 +1700,19 @@ laden with trade goods and smaller vessels carrying visitors make their way
+ dart between the larger ships as they make their way `6south`7 to the river proper.
+ ~
+ 91 a 6 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9164
+-D1
++D2
+ ~
+ ~
+ 0 0 9162
+-D2
++D3
+ ~
+ ~
+ 0 0 9166
+-D3
++D0
+ ~
+ ~
+ 0 0 9168
+@@ -1730,11 +1730,11 @@ into the harbor to the `6south`7, narrowing the passage to the river. The docks
+ continue to the `&east`7.
+ ~
+ 91 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9171
+-D2
++D3
+ ~
+ ~
+ 0 0 9182
+@@ -1752,15 +1752,15 @@ island hugs the docks, forcing traffic to move either `&east`7 toward the
+ city, or farther along the docks to the `6west`7.
+ ~
+ 91 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9172
+-D2
++D3
+ ~
+ ~
+ 0 0 9181
+-D3
++D0
+ ~
+ ~
+ 0 0 9170
+@@ -1778,15 +1778,15 @@ moving `&south`7 toward the city, or farther along the docks to
+ the `6west`7.
+ ~
+ 91 0 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9183
+-D2
++D3
+ ~
+ ~
+ 0 0 9173
+-D3
++D0
+ ~
+ ~
+ 0 0 9171
+@@ -1804,15 +1804,15 @@ island hugs the docks, forcing traffic to move either `&south`7 toward the
+ city, or farther along the docks to the `6north`7.
+ ~
+ 91 0 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9172
+-D2
++D3
+ ~
+ ~
+ 0 0 9174
+-D3
++D0
+ ~
+ ~
+ 0 0 9181
+@@ -1830,15 +1830,15 @@ island hugs the docks, forcing traffic to move either `&south`7 toward the
+ city, or farther along the docks to the `6north`7.
+ ~
+ 91 0 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9173
+-D2
++D3
+ ~
+ ~
+ 0 0 9058
+-D3
++D0
+ ~
+ ~
+ 0 0 9180
+@@ -1856,15 +1856,15 @@ island hugs the docks, forcing traffic to move either `&east`7 toward the
+ city, or farther along the docks to the `6west`7.
+ ~
+ 91 0 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9180
+-D1
++D2
+ ~
+ ~
+ 0 0 9058
+-D3
++D0
+ ~
+ ~
+ 0 0 9176
+@@ -1882,15 +1882,15 @@ island hugs the docks, forcing traffic to move either `&east`7 toward the
+ city, or farther along the docks to the `6west`7.
+ ~
+ 91 0 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9179
+-D1
++D2
+ ~
+ ~
+ 0 0 9175
+-D3
++D0
+ ~
+ ~
+ 0 0 9177
+@@ -1909,11 +1909,11 @@ waiting to be checked by customs. The docks continue to the `6north`7
+ and `&east`7.
+ ~
+ 91 0 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9178
+-D1
++D2
+ ~
+ ~
+ 0 0 9176
+@@ -1931,11 +1931,11 @@ into the harbor to the `6east`7, narrowing the passage to the river. The docks
+ continue to the `&south`7.
+ ~
+ 91 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9179
+-D2
++D3
+ ~
+ ~
+ 0 0 9177
+@@ -1953,19 +1953,19 @@ laden with trade goods and smaller vessels carrying visitors make their way
+ dart between the larger ships as they make their way `6north`7 to the river proper.
+ ~
+ 91 a 6 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9182
+-D1
++D2
+ ~
+ ~
+ 0 0 9180
+-D2
++D3
+ ~
+ ~
+ 0 0 9176
+-D3
++D0
+ ~
+ ~
+ 0 0 9178
+@@ -1984,19 +1984,19 @@ the island extend across the harbors exit, protecting all inside from the raging
+ waters of the river.
+ ~
+ 91 a 6 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9181
+-D1
++D2
+ ~
+ ~
+ 0 0 9174
+-D2
++D3
+ ~
+ ~
+ 0 0 9175
+-D3
++D0
+ ~
+ ~
+ 0 0 9179
+@@ -2014,19 +2014,19 @@ laden with trade goods and smaller vessels carrying visitors make their way
+ dart between the larger ships as they make their way `6west`7 to the river proper.
+ ~
+ 91 a 6 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9171
+-D1
++D2
+ ~
+ ~
+ 0 0 9173
+-D2
++D3
+ ~
+ ~
+ 0 0 9180
+-D3
++D0
+ ~
+ ~
+ 0 0 9182
+@@ -2047,15 +2047,15 @@ Small fishing boats dart between the larger ships as they make their way past
+ the walls and to the river proper.
+ ~
+ 91 a 6 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9170
+-D1
++D2
+ ~
+ ~
+ 0 0 9181
+-D2
++D3
+ ~
+ ~
+ 0 0 9179
+@@ -2083,7 +2083,7 @@ the most foolish would disturb him without need. The door to the
+ outside is to the `6south`7.
+ ~
+ 91 0 1 10 10
+-D2
++D3
+ ~
+ ~
+ 0 0 9172
+@@ -2107,7 +2107,7 @@ the most foolish would disturb him without need. The door to the
+ outside is to the `6north`7.
+ ~
+ 91 0 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9058
+@@ -2131,7 +2131,7 @@ the most foolish would disturb him without need. The door to the
+ outside is to the `6east`7.
+ ~
+ 91 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9076
+@@ -2155,7 +2155,7 @@ the most foolish would disturb him without need. The door to the
+ outside is to the `6west`7.
+ ~
+ 91 0 1 10 10
+-D3
++D0
+ ~
+ ~
+ 0 0 9076
+@@ -2179,7 +2179,7 @@ the most foolish would disturb him without need. The door to the
+ outside is to the `6east`7.
+ ~
+ 91 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9085
+@@ -2207,7 +2207,7 @@ D2
+ ~
+ ~
+ 0 0 -1
+-D3
++D0
+ ~
+ ~
+ 0 0 9085
+@@ -2231,7 +2231,7 @@ the most foolish would disturb him without need. The door to the
+ outside is to the `6east`7.
+ ~
+ 91 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9000
+@@ -2255,7 +2255,7 @@ the most foolish would disturb him without need. The door to the
+ outside is to the `6west`7.
+ ~
+ 91 0 1 10 10
+-D3
++D0
+ ~
+ ~
+ 0 0 9000
+@@ -2279,7 +2279,7 @@ the most foolish would disturb him without need. The door to the
+ outside is to the `6north`7.
+ ~
+ 91 0 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9159
+@@ -2303,7 +2303,7 @@ the most foolish would disturb him without need. The door to the
+ outside is to the `6south`7.
+ ~
+ 91 0 1 10 10
+-D2
++D3
+ ~
+ ~
+ 0 0 9012
+@@ -2327,7 +2327,7 @@ the most foolish would disturb him without need. The door to the
+ outside is to the `6west`7.
+ ~
+ 91 0 1 10 10
+-D3
++D0
+ ~
+ ~
+ 0 0 9026
+@@ -2351,7 +2351,7 @@ the most foolish would disturb him without need. The door to the
+ outside is to the `6east`7.
+ ~
+ 91 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9026
+@@ -2375,7 +2375,7 @@ the most foolish would disturb him without need. The door to the
+ outside is to the `6west`7.
+ ~
+ 91 0 1 10 10
+-D3
++D0
+ ~
+ ~
+ 0 0 9040
+@@ -2399,7 +2399,7 @@ the most foolish would disturb him without need. The door to the
+ outside is to the `6east`7.
+ ~
+ 91 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9040
+@@ -2423,7 +2423,7 @@ the most foolish would disturb him without need. The door to the
+ outside is to the `6west`7.
+ ~
+ 91 0 1 10 10
+-D3
++D0
+ ~
+ ~
+ 0 0 9046
+@@ -2447,7 +2447,7 @@ the most foolish would disturb him without need. The door to the
+ outside is to the `6east`7.
+ ~
+ 91 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9046
+@@ -2467,15 +2467,15 @@ S
+ `6off to the `2north`6 and `2east`6.
+ ~
+ 91 0 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9202
+-D1
++D2
+ ~
+ ~
+ 0 0 9205
+-D3
++D0
+ ~
+ ~
+ 0 0 9031
+diff --git a/world/wld/92.wld b/world/wld/92.wld
+index 6908967..bdf9051 100644
+--- a/world/wld/92.wld
++++ b/world/wld/92.wld
+@@ -10,7 +10,7 @@
+ `6through the fence to the `2south`6.
+ ~
+ 92 0 1 10 10
+-D2
++D3
+ ~
+ gate fence~
+ 2 9200 9201
+@@ -31,15 +31,15 @@ S
+ `6itself continues to the `2east`6 and `2south`6.
+ ~
+ 92 0 0 10 10
+-D0
++D1
+ ~
+ gate fence~
+ 2 9200 9200
+-D1
++D2
+ ~
+ ~
+ 0 0 9203
+-D2
++D3
+ ~
+ ~
+ 0 0 9202
+@@ -59,15 +59,15 @@ S
+ `6plantlife to the `2north`6, `2east`6, and `2south`6.
+ ~
+ 92 0 0 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9201
+-D1
++D2
+ ~
+ ~
+ 0 0 9204
+-D2
++D3
+ ~
+ ~
+ 0 0 9199
+@@ -87,11 +87,11 @@ S
+ `6Grove, the path moves vaguely `2west`6 and `2south`6.
+ ~
+ 92 0 0 10 10
+-D2
++D3
+ ~
+ ~
+ 0 0 9204
+-D3
++D0
+ ~
+ ~
+ 0 0 9201
+@@ -111,15 +111,15 @@ S
+ `6The trail meanders to the `2north`6, `2west`6, and `2south`6.
+ ~
+ 92 0 0 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9203
+-D2
++D3
+ ~
+ ~
+ 0 0 9205
+-D3
++D0
+ ~
+ ~
+ 0 0 9202
+@@ -139,19 +139,19 @@ S
+ `6plantlife in every direction.
+ ~
+ 92 0 0 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9204
+-D1
++D2
+ ~
+ ~
+ 0 0 9207
+-D2
++D3
+ ~
+ ~
+ 0 0 9206
+-D3
++D0
+ ~
+ ~
+ 0 0 9199
+@@ -171,11 +171,11 @@ S
+ `6The trail meanders to the `2north`6 and `2east`6.
+ ~
+ 92 0 0 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9205
+-D1
++D2
+ ~
+ ~
+ 0 0 9208
+@@ -195,15 +195,15 @@ S
+ `6The trail meanders to the `2west`6 and `2south`6.
+ ~
+ 92 0 0 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9209
+-D2
++D3
+ ~
+ ~
+ 0 0 9208
+-D3
++D0
+ ~
+ ~
+ 0 0 9205
+@@ -223,15 +223,15 @@ S
+ `6Grove, the path moves vaguely `2west`6, `2north`6, and `2east`6.
+ ~
+ 92 0 0 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9207
+-D1
++D2
+ ~
+ ~
+ 0 0 9210
+-D3
++D0
+ ~
+ ~
+ 0 0 9206
+@@ -251,11 +251,11 @@ S
+ `6Grove, the path moves vaguely `2west`6 and `2south`6.
+ ~
+ 92 0 0 10 10
+-D2
++D3
+ ~
+ ~
+ 0 0 9210
+-D3
++D0
+ ~
+ ~
+ 0 0 9207
+@@ -275,11 +275,11 @@ S
+ `2north`6 and `2west`6, the Grove thickens into forest again.
+ ~
+ 92 0 0 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9209
+-D3
++D0
+ ~
+ ~
+ 0 0 9208
+@@ -298,7 +298,7 @@ ships officers who tend to congregate here. The Southharbor Road is just
+ outside, to the `6west`7.
+ ~
+ 92 0 0 10 10
+-D3
++D0
+ ~
+ ~
+ 1 0 9019
+@@ -318,7 +318,7 @@ interested in drinking as much as possible than anything else, but in the far co
+ the distinctive sounds of a dice game can be heard above the general din.
+ ~
+ 92 0 0 10 10
+-D0
++D1
+ ~
+ ~
+ 1 0 9015
+@@ -337,15 +337,15 @@ yet still manages to evoke a cozy atmosphere. A swinging door to the west
+ leads to the kitchen, while a small hallway lies to the north.
+ ~
+ 92 cd 0 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9216
+-D1
++D2
+ ~
+ ~
+ 1 0 9140
+-D3
++D0
+ ~
+ ~
+ 0 0 9215
+@@ -364,7 +364,7 @@ all available at a reasonable price. In spite of the stench, large crowds wander
+ between the tables, sampling the wares and haggling over their purchases.
+ ~
+ 92 0 0 10 10
+-D2
++D3
+ ~
+ ~
+ 0 0 9064
+@@ -386,7 +386,7 @@ alcove to the north is piled high with barrels and heavily laden shelves
+ of jars and bottles.
+ ~
+ 92 0 0 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9213
+@@ -402,11 +402,11 @@ A flower decked table lies beneath a mirror across the hall from a small
+ wooden door. The well-lit stairway leads to the inns few rooms upstairs.
+ ~
+ 92 0 0 10 10
+-D2
++D3
+ ~
+ ~
+ 0 0 9213
+-D3
++D0
+ ~
+ ~
+ 0 0 9217
+@@ -429,7 +429,7 @@ the room. Two other chairs are against the wall to the right, a small round
+ table between them. 
+ ~
+ 92 0 0 10 10
+-D1
++D2
+ ~
+ ~
+ 1 0 9216
+@@ -447,11 +447,11 @@ lamp set in iron brackets on the wall so that even at night the
+ inn's patrons and staff can move around without trouble.
+ ~
+ 92 0 0 10 10
+-D0
++D1
+ ~
+ ~
+ 1 0 9220
+-D3
++D0
+ ~
+ ~
+ 1 0 9219
+@@ -474,7 +474,7 @@ stand below the west window, right next to the bare brick fireplace. A
+ thin rug covers the sections of the floor that might otherwise be visible.
+ ~
+ 92 0 0 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9218
+@@ -494,7 +494,7 @@ the east window, right next to the bare stone fireplace. A thick rug
+ covers the sections of the floor that might otherwise be visible.
+ ~
+ 92 0 0 10 10
+-D2
++D3
+ ~
+ ~
+ 0 0 9218
+diff --git a/world/wld/93.wld b/world/wld/93.wld
+index fea2903..4359dec 100644
+--- a/world/wld/93.wld
++++ b/world/wld/93.wld
+@@ -8,7 +8,7 @@ mist, and occasionally fades from view. There is an
+ intersection to your south.
+ ~
+ 0 ce 1
+-D2
++D3
+ An Intersection
+ ~
+ ~
+@@ -23,12 +23,12 @@ world, replaced by an eerie fog that clouds the streets and
+ sky alike.
+ ~
+ 0 c 1
+-D0
++D1
+ A Gathering area.
+ ~
+ ~
+ 0 -1 9300
+-D3
++D0
+ The road west.
+ ~
+ ~
+@@ -43,12 +43,12 @@ dryness, and carries a sense of foreboding. The sky above is a
+ sunburnt red color barely visible through the eerie haze.
+ ~
+ 0 c 1
+-D1
++D2
+ The mist blocks any further view.
+ ~
+ ~
+ 0 -1 9301
+-D3
++D0
+ The list block any further view.
+ ~
+ ~
+@@ -62,12 +62,12 @@ unnatural fog closes in from all sides, making breathing
+ strained and every step a labor.
+ ~
+ 0 c 1
+-D1
++D2
+ The mist blocks your view.
+ ~
+ ~
+ 0 -1 9302
+-D3
++D0
+ The mist blocks further view.
+ ~
+ ~
+@@ -82,12 +82,12 @@ your passing. The tel'aran'rhiod of your world has truly been
+ deformed, and you stand on the edge of the unknown.
+ ~
+ 0 c 1
+-D1
++D2
+ A the mist blocks any view.
+ ~
+ ~
+ 0 -1 9303
+-D3
++D0
+ Mist blocks your view.
+ ~
+ ~
+@@ -105,17 +105,17 @@ east. To your north, the eternity of grayness makes this bleak
+ world seem joyous.
+ ~
+ 0 0 1
+-D0
++D1
+ An infinity of nothing.
+ ~
+ ~
+ 0 -1 9355
+-D2
++D3
+ The swirling mist blocks your view.
+ ~
+ ~
+ 0 -1 9306
+-D3
++D0
+ On the edge of the pattern.
+ ~
+ ~
+@@ -132,17 +132,17 @@ dark fears, lost in chaos and hunger... the only urges they
+ know.
+ ~
+ 0 0 1
+-D0
++D1
+ The mists block your view.
+ ~
+ ~
+ 0 -1 9305
+-D2
++D3
+ The mist blocks any further view.
+ ~
+ ~
+ 0 -1 9307
+-D3
++D0
+ The mists block your view.
+ ~
+ ~
+@@ -158,17 +158,17 @@ fall in unison before you, in challenge, while others look at
+ you with longing eyes hungering for your soul.
+ ~
+ 0 0 1
+-D0
++D1
+ Mist stretches for ever.
+ ~
+ ~
+ 0 -1 9306
+-D2
++D3
+ Mist clouds your view and block your passage.
+ ~
+ ~
+ 0 -1 9308
+-D3
++D0
+ Mist's eternity.
+ ~
+ ~
+@@ -183,17 +183,17 @@ your mind reeling, and your prayers to the creator seem
+ futile. There is no escape but through this misty dreamscape.
+ ~
+ 0 0 1
+-D0
++D1
+ Mist seems to stretch forever.
+ ~
+ ~
+ 0 -1 9307
+-D1 
++D2
+ A wall of mist.
+ ~
+ ~
+ 0 -1 9304
+-D2
++D3
+ The mist stretches forever.
+ ~
+ ~
+@@ -208,12 +208,12 @@ stare at you in hope and fear. Nothing seems as you expect it,
+ and there are things here that are danger embodied.
+ ~
+ 0 0 2
+-D0
++D1
+ The mists rises to block your passage
+ ~
+ ~
+ 0 -1 9308
+-D3
++D0
+ The mist blocks your view.
+ ~
+ ~
+@@ -230,12 +230,12 @@ contort in the rock face crying out in a song of agony. What
+ sort of horror could do this to the living ?
+ ~
+ 0 0 2
+-D2
++D3
+ The mist.
+ ~
+ ~
+ 0 -1 9311
+-D3
++D0
+ The mist continues forever.
+ ~
+ ~
+@@ -250,12 +250,12 @@ horrors of this place require caution, as every step could be
+ your last.
+ ~
+ 0 0 2
+-D0
++D1
+ Sounds echo through the mist.
+ ~
+ ~
+ 0 -1 9310
+-D3
++D0
+ The mist continues forever.
+ ~
+ ~
+@@ -270,12 +270,12 @@ place is almost as deafening as the screams that echo out of
+ the fog. The next could be yours.
+ ~
+ 0 0 2
+-D1
++D2
+ The mist stretches on forever.
+ ~
+ ~
+ 0 -1 9311
+-D3
++D0
+ The mist covers your view.
+ ~
+ ~
+@@ -312,22 +312,22 @@ the mist catch your eye, before fading into nothing. Something
+ is watching you. 
+ ~
+ 0 0 2
+-D0
++D1
+ The mist allows you passage north.
+ ~
+ ~
+ 0 -1 9315
+-D1
++D2
+ The Mist allows passage east.
+ ~
+ ~
+ 0 -1 9309
+-D2
++D3
+ The mist allows passage south.
+ ~
+ ~
+ 0 -1 9313
+-D3 
++D0
+ The mist allows passage west.
+ ~
+ ~
+@@ -344,17 +344,17 @@ sense of foreboding..... perhaps something does still await
+ more victims.
+ ~
+ 0 0 2
+-D0
++D1
+ The mist allows passage north.
+ ~
+ ~
+ 0 -1 9316
+-D2 
++D3
+ The mist clouds any view.
+ ~
+ ~
+ 0 -1 9314
+-D3
++D0
+ Mist rolls on forever.
+ ~
+ ~
+@@ -370,22 +370,22 @@ others smiling in utter joy before drifting back into
+ nothingness.
+ ~
+ 0 0 2
+-D0 
++D1
+ Mist blocks any further view.
+ ~
+ ~
+ 0 -1 9317
+-D1
++D2
+ Mist blocks any further view.
+ ~
+ ~
+ 0 -1 9307
+-D2
++D3
+ Mist blocks any further view.
+ ~
+ ~
+ 0 -1 9315
+-D3
++D0
+ Mist blocks any further view.
+ ~
+ ~
+@@ -401,17 +401,17 @@ barbaric terror, as the need for food turns into the need to
+ kill. The taste of blood is addictive.
+ ~
+ 0 0 2
+-D1
++D2
+ The mist continues forever.
+ ~
+ ~
+ 0 -1 9306
+-D2
++D3
+ The mist blocks view.
+ ~
+ ~
+ 0 -1 9316
+-D3
++D0
+ The mist continues.
+ ~
+ ~
+@@ -427,17 +427,17 @@ Outside the reach of the pattern is truly nothing, and it is
+ hard to return from the void.
+ ~
+ 0 0 2
+-D0
++D1
+ The Void.
+ ~
+ ~
+ 0 -1 9355
+-D1
++D2
+ The Edge of the pattern.
+ ~
+ ~
+ 0 -1 9305
+-D3
++D0
+ The edge of the pattern.
+ ~
+ ~
+@@ -455,17 +455,17 @@ east. To your north, the eternity of grayness makes this bleak
+ world seem joyous.
+ ~
+ 0 0 2
+-D0
++D1
+ The Void
+ ~
+ ~
+ 0 -1 9355
+-D1
++D2
+ The Edge of the pattern.
+ ~
+ ~
+ 0 -1 9318
+-D2
++D3
+ The Mist stretched out forever.
+ ~
+ ~
+@@ -480,12 +480,12 @@ brighter here, their flickering colors reflected in the
+ mirror surface of the lake.
+ ~
+ 0 0 2
+-D0
++D1
+ The mist blocks any further view.
+ ~
+ ~
+ 0 -1 9319
+-D3
++D0
+ The mist extends on forever.
+ ~
+ ~
+@@ -501,12 +501,12 @@ closes in from all sides, making breathing strained and every
+ dangerous step a labor.
+ ~
+ 0 0 2
+-D1
++D2
+ The mist clouds further view.
+ ~
+ ~
+ 0 -1 9316
+-D2
++D3
+ The mist clouds further view.
+ ~
+ ~
+@@ -523,12 +523,12 @@ whole place holds a sense of emptiness. Perhaps here the good
+ forces don't always win.
+ ~
+ 0 0 2
+-D0
++D1
+ The Mist covers the entire world.
+ ~
+ ~
+ 0 -1 9321
+-D2
++D3
+ The Mist stretches east.
+ ~
+ ~
+@@ -543,12 +543,12 @@ your eye keep you on your toes, and on the move. There is much
+ in this strange world that would delight in your death.
+ ~
+ 0 0 2
+-D1
++D2
+ The mist continues seemingly forever.
+ ~
+ ~
+ 0 -1 9314
+-D3
++D0
+ The mist blocks any further view.
+ ~
+ ~
+@@ -563,7 +563,7 @@ the scorches of countless fires, and thick masses of metal
+ recount the heat that razed this place of death.
+ ~
+ 0 0 2
+-D2
++D3
+ The haze and the mist blocks your view.
+ ~
+ ~
+@@ -577,17 +577,17 @@ limbs. The mist glows and whirls through all the colors in a
+ detached display of mystery. You dare not stop to ponder.
+ ~
+ 0 0 2
+-D0
++D1
+ There is a haze to your north.
+ ~
+ ~
+ 0 -1 9324
+-D1
++D2
+ Mist blocks your view.
+ ~
+ ~
+ 0 -1 9312
+-D3
++D0
+ Mist blocks your view.
+ ~
+ ~
+@@ -602,12 +602,12 @@ reading you... weighing and evaluating your worth and strength
+ against theirs. 
+ ~
+ 0 0 2
+-D2
++D3
+ Mist stretches forever.
+ ~
+ ~
+ 0 -1 9327
+-D3
++D0
+ Mist covers the land.
+ ~
+ ~
+@@ -622,17 +622,17 @@ place is almost as deafening as the screams that echo out of
+ the fog. The next could be yours.
+ ~
+ 0 0 2
+-D0
++D1
+ The mist extends forever.
+ ~
+ ~
+ 0 -1 9326
+-D2
++D3
+ The mist covers the ground.
+ ~
+ ~
+ 0 -1 9328
+-D3
++D0
+ The Mist stretches forever.
+ ~
+ ~
+@@ -647,12 +647,12 @@ fog is thick here, and reaches out to you in its deadly grasp.
+ Travelling blind is never safe... here it can be deadly.
+ ~
+ 0 0 2
+-D0
++D1
+ The mist is too thick to make anything out.
+ ~
+ ~
+ 0 -1 9327
+-D1
++D2
+ The mist stretches out forever.
+ ~
+ ~
+@@ -668,12 +668,12 @@ closes in from all sides, making breathing strained and every
+ dangerous step a labor.
+ ~
+ 0 0 2
+-D1
++D2
+ The mist stretches forever.
+ ~
+ ~
+ 0 -1 9325
+-D3
++D0
+ The mist stretches forever.
+ ~
+ ~
+@@ -688,17 +688,17 @@ place is almost as deafening as the screams that echo out of
+ the fog. The next could be yours.
+ ~
+ 0 0 2
+-D0
++D1
+ The mist blocks your view.
+ ~
+ ~
+ 0 -1 9331
+-D1
++D2
+ The mist stretches forever.
+ ~
+ ~
+ 0 -1 9329
+-D3
++D0
+ The mist seems to reach out forever.
+ ~
+ ~
+@@ -714,12 +714,12 @@ barbaric terror, as the need for food turns into the need to
+ kill. The taste of blood is addictive.
+ ~
+ 0 0 2
+-D0
++D1
+ Mist forever.
+ ~
+ ~
+ 0 -1 9332
+-D3
++D0
+ A blanket of fog.
+ ~
+ ~
+@@ -734,12 +734,12 @@ carvings can be made out on the rock, depicting human
+ sacrifice to a huge boar-like figure in shining red armor. 
+ ~
+ 0 0 2
+-D2
++D3
+ The mist covers everything.
+ ~
+ ~
+ 0 -1 9331
+-D3 
++D0
+ The mist continues forever.
+ ~
+ ~
+@@ -754,12 +754,12 @@ brighter here, their flickering colours reflected in the
+ mirror surface of the lake.
+ ~
+ 0 0 2
+-D0
++D1
+ The mist blocks our view.
+ ~
+ ~
+ 0 -1 9334
+-D1
++D2
+ The mist covers everything.
+ ~
+ ~
+@@ -775,17 +775,17 @@ others smiling in utter joy before drifting back into
+ nothingness.
+ ~
+ 0 0 2
+-D1
++D2
+ Mist rolls on forever.
+ ~
+ ~
+ 0 -1 9326
+-D2
++D3
+ The mist covers everything.
+ ~
+ ~
+ 0 -1 9333
+-D3 
++D0
+ The mist blocks every view.
+ ~
+ ~
+@@ -799,12 +799,12 @@ nervous tension that seems to drip from your forehead like
+ sweat. You never know when they will strike next.
+ ~
+ 0 0 2
+-D1
++D2
+ The mist stretches forever.
+ ~
+ ~
+ 0 -1 9334
+-D2
++D3
+ The fog covers everything.
+ ~
+ ~
+@@ -820,12 +820,12 @@ closes in from all sides, making breathing strained and every
+ dangerous step a labor.
+ ~
+ 0 0 2
+-D0
++D1
+ Mist forever.
+ ~
+ ~
+ 0 -1 9335
+-D2
++D3
+ The mist stretches forever.
+ ~
+ ~
+@@ -841,17 +841,17 @@ maybe the wheel has already mapped out its path for you in
+ this world.
+ ~
+ 0 0 2
+-D0
++D1
+ The mist covers everything.
+ ~
+ ~
+ 0 -1 9336
+-D1
++D2
+ Mists.
+ ~
+ ~
+ 0 -1 9332
+-D3
++D0
+ A blanket of mist.
+ ~
+ ~
+@@ -866,12 +866,12 @@ fog is thick here, and reaches out to you in its deadly grasp.
+ Travelling blind is never safe... here it can be deadly.
+ ~
+ 0 0 2
+-D1
++D2
+ Nothing but fog
+ ~
+ ~
+ 0 -1 9331
+-D2
++D3
+ The fog reaches forever.
+ ~
+ ~
+@@ -888,22 +888,22 @@ fear and anticipation. Your corpse will feed these trees for
+ days.
+ ~
+ 0 0 2
+-D0
++D1
+ Mist forever.
+ ~
+ ~
+ 0 -1 9338
+-D1
++D2
+ An eternity of mist.
+ ~
+ ~
+ 0 -1 9330
+-D2
++D3
+ Nothing but mist.
+ ~
+ ~
+ 0 -1 9340
+-D3
++D0
+ Nothing but mist.
+ ~
+ ~
+@@ -918,12 +918,12 @@ reading you... weighing and evaluating your worth and strength
+ against theirs. 
+ ~
+ 0 0 2
+-D0
++D1
+ There are shapes in the mist.
+ ~
+ ~
+ 0 -1 9339
+-D2
++D3
+ Mist.
+ ~
+ ~
+@@ -939,17 +939,17 @@ barbaric terror, as the need for food turns into the need to
+ kill. The taste of blood is addictive.
+ ~
+ 0 0 2
+-D0
++D1
+ An Eternity of Mist.
+ ~
+ ~
+ 0 -1 9340
+-D1
++D2
+ The mist continues forever.
+ ~
+ ~
+ 0 -1 9342
+-D2
++D3
+ Nothing!
+ ~
+ ~
+@@ -966,17 +966,17 @@ dark fears, lost in chaos and hunger... the only urges they
+ know.
+ ~
+ 0 0 2
+-D0
++D1
+ The mists block your view.
+ ~
+ ~
+ 0 -1 9343
+-D2
++D3
+ Mist forever.
+ ~
+ ~
+ 0 -1 9358
+-D3
++D0
+ Mist forever.
+ ~
+ ~
+@@ -992,12 +992,12 @@ others smiling in utter joy before drifting back into
+ nothingness.
+ ~
+ 0 0 2
+-D1
++D2
+ Nothing but mist.
+ ~
+ ~
+ 0 -1 9344
+-D2
++D3
+ Mist stretches forever.
+ ~
+ ~
+@@ -1013,12 +1013,12 @@ closes in from all sides, making breathing strained and every
+ dangerous step a labor.
+ ~
+ 0 0 2
+-D1
++D2
+ Mist forever.
+ ~
+ ~
+ 0 -1 9346
+-D3
++D0
+ Nothing but mist.
+ ~
+ ~
+@@ -1035,7 +1035,7 @@ slightly thinning it. Suddenly the ground shifts beneath
+ you... something is here.
+ ~
+ 0 0 2
+-D1
++D2
+ The mists.
+ ~
+ ~
+@@ -1050,17 +1050,17 @@ your eye keep you on your toes, and on the move. There is much
+ in this strange world that would delight in your death.
+ ~
+ 0 0 2
+-D1
++D2
+ Mist continues forever.
+ ~
+ ~
+ 0 -1 9348
+-D2
++D3
+ Mist.
+ ~
+ ~
+ 0 -1 9347
+-D3
++D0
+ Nothing but fog.
+ ~
+ ~
+@@ -1076,12 +1076,12 @@ barbaric terror, as the need for food turns into the need to
+ kill. The taste of blood is addictive.
+ ~
+ 0 0 2
+-D0
++D1
+ Mist forever.
+ ~
+ ~
+ 0 -1 9346
+-D3
++D0
+ A blanket of fog.
+ ~
+ ~
+@@ -1095,12 +1095,12 @@ limbs. The mist glows and whirls through all the colours in a
+ detached display of mystery. You dare not stop to ponder.
+ ~
+ 0 0 2
+-D2
++D3
+ An eternity of fog.
+ ~
+ ~
+ 0 -1 9349
+-D3
++D0
+ Mist forever.
+ ~
+ ~
+@@ -1117,17 +1117,17 @@ dark fears, lost in chaos and hunger... the only urges they
+ know.
+ ~
+ 0 0 1
+-D0
++D1
+ The mists block your view.
+ ~
+ ~
+ 0 -1 9348
+-D1
++D2
+ Mist forever.
+ ~
+ ~
+ 0 -1 9350
+-D2
++D3
+ Mist.
+ ~
+ ~
+@@ -1142,12 +1142,12 @@ fog is thick here, and reaches out to you in its deadly grasp.
+ Travelling blind is never safe... here it can be deadly.
+ ~
+ 0 0 2
+-D0
++D1
+ The mist is too thick to make anything out.
+ ~
+ ~
+ 0 -1 9351
+-D3
++D0
+ The mist stretches out forever.
+ ~
+ ~
+@@ -1162,12 +1162,12 @@ place is almost as deafening as the screams that echo out of
+ the fog. The next could be yours.
+ ~
+ 0 0 2
+-D0
++D1
+ The mist extends forever.
+ ~
+ ~
+ 0 -1 9352
+-D2
++D3
+ The mist covers the ground.
+ ~
+ ~
+@@ -1183,12 +1183,12 @@ barbaric terror, as the need for food turns into the need to
+ kill. The taste of blood is addictive.
+ ~
+ 0 0 2
+-D0
++D1
+ An Eternity of Mist.
+ ~
+ ~
+ 0 -1 9311
+-D2
++D3
+ Mist forever.
+ ~
+ ~
+@@ -1203,12 +1203,12 @@ air, possibly there is nothing else below. This could be your
+ only way out of this strange reflection of the world of man.
+ ~
+ 0 h 2
+-D1
++D2
+ Mist
+ ~
+ ~
+ 0 -1 9337
+-D3
++D0
+ The Bridge continues.
+ ~
+ ~
+@@ -1228,22 +1228,22 @@ Bridge beneath you starts of crumble slightly, decay reaches
+ even unto here. How much longer can you trust your footing.
+ ~
+ 0 h 2
+-D0
++D1
+ Mist
+ ~
+ ~
+ 0 -1 9350
+-D1
++D2
+ The bridge.
+ ~
+ ~
+ 0 -1 9353
+-D2
++D3
+ The mist.
+ ~
+ ~
+ 0 -1 9324
+-D3
++D0
+ ESCAPE!!!!
+ ~
+ ~
+@@ -1261,22 +1261,22 @@ void. Even the creator cannot reach outside the pattern.
+ Perhaps you are truly doomed to float here forever.
+ ~
+ 0 cdefgh 0
+-D0
++D1
+ Nowhere.
+ ~
+ ~
+ 0 -1 9355
+-D1
++D2
+ nowhere.
+ ~
+ ~
+ 0 -1 9357
+-D2
++D3
+ nowhere
+ ~
+ ~
+ 0 -1 9355
+-D3
++D0
+ Nowhere.
+ ~
+ ~
+@@ -1289,22 +1289,22 @@ void. Even the creator cannot reach outside the pattern.
+ Perhaps you are truly doomed to float here forever.
+ ~
+ 0 cdefg 0
+-D0
++D1
+ Nowhere.
+ ~
+ ~
+ 0 -1 9355
+-D1
++D2
+ nowhere.
+ ~
+ ~
+ 0 -1 9356
+-D2
++D3
+ nowhere
+ ~
+ ~
+ 0 -1 9355
+-D3
++D0
+ Nowhere.
+ ~
+ ~
+@@ -1317,22 +1317,22 @@ void. Even the creator cannot reach outside the pattern.
+ Perhaps you are truly doomed to float here forever.
+ ~
+ 0 dcefgh 0
+-D0
++D1
+ Nowhere.
+ ~
+ ~
+ 0 -1 9356
+-D1
++D2
+ nowhere.
+ ~
+ ~
+ 0 -1 9357
+-D2
++D3
+ nowhere
+ ~
+ ~
+ 0 -1 9357
+-D3
++D0
+ Nowhere.
+ ~
+ ~
+@@ -1347,22 +1347,22 @@ ancient need to kill. You wonder how long you can continue
+ through this terror, before it consumes you too...
+ ~
+ 0 0 2
+-D0 
++D1
+ Mist blocks your view.
+ ~
+ ~
+ 0 -1 9342
+-D1
++D2
+ More mist.
+ ~
+ ~
+ 0 -1 9376
+-D2
++D3
+ Mist forever.
+ ~
+ ~
+ 0 -1 9359
+-D3
++D0
+ Only more fog.
+ ~
+ ~
+@@ -1378,12 +1378,12 @@ closes in from all sides, making breathing strained and every
+ dangerous step a labor.
+ ~
+ 0 0 2
+-D0
++D1
+ Mist.
+ ~
+ ~
+ 0 -1 9358
+-D2
++D3
+ Alas more fog.
+ ~
+ ~
+@@ -1399,12 +1399,12 @@ attack. Perhaps there is something more deadly holding them by
+ fear.
+ ~
+ 0 0 2
+-D0
++D1
+ The mist.
+ ~
+ ~
+ 0 -1 9361
+-D3
++D0
+ Only more fog.
+ ~
+ ~
+@@ -1420,12 +1420,12 @@ others smiling in utter joy before drifting back into
+ nothingness.
+ ~
+ 0 0 2
+-D1
++D2
+ The fog rises to block your view.
+ ~
+ ~
+ 0 -1 9358
+-D2
++D3
+ Only more mist.
+ ~
+ ~
+@@ -1441,17 +1441,17 @@ fall in unison before you, in challenge, while others look at
+ you with longing eyes hungering for your soul.
+ ~
+ 0 0 1
+-D0
++D1
+ Mist stretches for ever.
+ ~
+ ~
+ 0 -1 9363
+-D1
++D2
+ An eternity of mist.
+ ~
+ ~
+ 0 -1 9380
+-D3
++D0
+ Mist stretches out forever.
+ ~
+ ~
+@@ -1467,22 +1467,22 @@ the mist catch your eye, before fading into nothing. Something
+ is watching you. 
+ ~
+ 0 0 2
+-D0
++D1
+ The mist allows you passage north.
+ ~
+ ~
+ 0 -1 9364
+-D1
++D2
+ The Mist allows passage east.
+ ~
+ ~
+ 0 -1 9360
+-D2
++D3
+ The mist allows passage south.
+ ~
+ ~
+ 0 -1 9362
+-D3 
++D0
+ The mist allows passage west.
+ ~
+ ~
+@@ -1498,12 +1498,12 @@ shivers, that reach deep into your bones. Death here is
+ perhaps more permanent than in the world of man.
+ ~
+ 0 0 2
+-D0
++D1
+ Mist forever.
+ ~
+ ~
+ 0 -1 9365
+-D2
++D3
+ Only mist.
+ ~
+ ~
+@@ -1518,12 +1518,12 @@ fog is thick here, and reaches out to you in its deadly grasp.
+ Travelling blind is never safe... here it can be deadly.
+ ~
+ 0 0 2
+-D2
++D3
+ The mist blocks your view.
+ ~
+ ~
+ 0 -1 9364
+-D3
++D0
+ Nothing but mist.
+ ~
+ ~
+@@ -1538,12 +1538,12 @@ reading you... weighing and evaluating your worth and strength
+ against theirs. 
+ ~
+ 0 0 2
+-D0
++D1
+ An eternity of mist.
+ ~
+ ~
+ 0 -1 9367
+-D1
++D2
+ Mist forever.
+ ~
+ ~
+@@ -1559,12 +1559,12 @@ barbaric terror, as the need for food turns into the need to
+ kill. The taste of blood is addictive.
+ ~
+ 0 0 2
+-D1
++D2
+ Mist forever.
+ ~
+ ~
+ 0 -1 9363
+-D2
++D3
+ Alas ... there is nothing but mist.
+ ~
+ ~
+@@ -1579,7 +1579,7 @@ ancient need to kill. You wonder how long you can continue
+ through this terror, before it consumes you too...
+ ~
+ 0 0 2
+-D0
++D1
+ Mist forever.
+ ~
+ ~
+@@ -1595,12 +1595,12 @@ barbaric terror, as the need for food turns into the need to
+ kill. The taste of blood is addictive.
+ ~
+ 0 0 2
+-D0
++D1
+ An Eternity of Mist.
+ ~
+ ~
+ 0 -1 9371
+-D1
++D2
+ The mist continues forever.
+ ~
+ ~
+@@ -1615,7 +1615,7 @@ murder. The strange creaking of the tomb's stone fills you
+ with terror...
+ ~
+ 0 0 2
+-D1
++D2
+ Mist.
+ ~
+ ~
+@@ -1631,17 +1631,17 @@ others smiling in utter joy before drifting back into
+ nothingness.
+ ~
+ 0 0 2
+-D0
++D1
+ The mist stretches forever.
+ ~
+ ~
+ 0 -1 9372
+-D2
++D3
+ Mist forever.
+ ~
+ ~
+ 0 -1 9369
+-D3
++D0
+ Something rises out of the mist.
+ ~
+ ~
+@@ -1658,17 +1658,17 @@ dark fears, lost in chaos and hunger... the only urges they
+ know.
+ ~
+ 0 0 2
+-D0
++D1
+ Mist forever.
+ ~
+ ~
+ 0 -1 9374
+-D1
++D2
+ Alas... more mist.
+ ~
+ ~
+ 0 -1 9373
+-D2
++D3
+ More mist.
+ ~
+ ~
+@@ -1683,12 +1683,12 @@ your eye keep you on your toes, and on the move. There is much
+ in this strange world that would delight in your death.
+ ~
+ 0 0 2
+-D0
++D1
+ Mist forever.
+ ~
+ ~
+ 0 -1 9375
+-D3
++D0
+ An eternity of mist.
+ ~
+ ~
+@@ -1703,12 +1703,12 @@ fog is thick here, and reaches out to you in its deadly grasp.
+ Travelling blind is never safe... here it can be deadly.
+ ~
+ 0 0 2
+-D1
++D2
+ Mist forever.
+ ~
+ ~
+ 0 -1 9375
+-D2
++D3
+ Nothing but mist.
+ ~
+ ~
+@@ -1723,17 +1723,17 @@ reading you... weighing and evaluating your worth and strength
+ against theirs. 
+ ~
+ 0 0 2
+-D1
++D2
+ Mist forever.
+ ~
+ ~
+ 0 -1 9339
+-D2
++D3
+ More mist.
+ ~
+ ~
+ 0 -1 9373
+-D3
++D0
+ Nothing but mist.
+ ~
+ ~
+@@ -1750,12 +1750,12 @@ dark fears, lost in chaos and hunger... the only urges they
+ know.
+ ~
+ 0 0 1
+-D1
++D2
+ Mist forever.
+ ~
+ ~
+ 0 -1 9377
+-D3
++D0
+ More mist.
+ ~
+ ~
+@@ -1771,12 +1771,12 @@ barbaric terror, as the need for food turns into the need to
+ kill. The taste of blood is addictive.
+ ~
+ 0 0 2
+-D0
++D1
+ An Eternity of Mist.
+ ~
+ ~
+ 0 -1 9378
+-D3
++D0
+ The mist continues forever.
+ ~
+ ~
+@@ -1791,12 +1791,12 @@ fog is thick here, and reaches out to you in its deadly grasp.
+ Travelling blind is never safe... here it can be deadly.
+ ~
+ 0 0 2
+-D0
++D1
+ The mist is too thick to make anything out.
+ ~
+ ~
+ 0 -1 9349
+-D2
++D3
+ More mist.
+ ~
+ ~
+@@ -1811,12 +1811,12 @@ place is almost as deafening as the screams that echo out of
+ the fog. The next could be yours.
+ ~
+ 0 0 2
+-D0
++D1
+ The mist extends forever.
+ ~
+ ~
+ 0 -1 9359
+-D3
++D0
+ More mist.
+ ~
+ ~
+@@ -1831,12 +1831,12 @@ stare at you in hope and fear. Nothing seems as you expect it,
+ and there are things here that are danger embodied.
+ ~
+ 0 0 2
+-D1
++D2
+ Mist forever...
+ ~
+ ~
+ 0 -1 9379
+-D3
++D0
+ More mist.
+ ~
+ ~
+diff --git a/world/wld/94.wld b/world/wld/94.wld
+index 578c10d..77de155 100644
+--- a/world/wld/94.wld
++++ b/world/wld/94.wld
+@@ -12,19 +12,19 @@ tapestries adorn the walls, which are paneled in rich,
+ p`8o`3lish`8e`3d w`8oo`3d.`0
+ ~
+ 94 d 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9407
+-D1
++D2
+ ~
+ ~
+ 0 0 9405
+-D2
++D3
+ ~
+ ~
+ 0 0 9402
+-D3
++D0
+ ~
+ ~
+ 0 0 9403
+@@ -50,19 +50,19 @@ many places by tapestries as well as the multi-colored `1A`2e`3s`#
+ S`6e`&d`8a`1i `7banner.
+ ~
+ 94 d 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9402
+-D1
++D2
+ ~
+ ~
+ 0 0 9413
+-D2
++D3
+ ~
+ door great south~
+ 1 0 9410
+-D3
++D0
+ ~
+ ~
+ 0 0 9414
+@@ -84,15 +84,15 @@ many places by tapestries as well as the multi-colored `1A`2e`3s`#
+ S`6e`&d`8a`1i `7banner.
+ ~
+ 94 d 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9400
+-D1
++D2
+ ~
+ ~
+ 0 0 9499
+-D2
++D3
+ ~
+ ~
+ 0 0 9401
+@@ -114,11 +114,11 @@ many places by tapestries as well as the multi-colored `1A`2e`3s
+ `#S`6e`&d`8a`1i `7banner.
+ ~
+ 94 d 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9400
+-D3
++D0
+ ~
+ ~
+ 0 0 9404
+@@ -140,19 +140,19 @@ many places by tapestries as well as the multi-colored `1A`2e`3s
+ `#S`6e`&d`8a`1i `7banner.
+ ~
+ 94 d 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9417
+-D1
++D2
+ ~
+ ~
+ 0 0 9403
+-D2
++D3
+ ~
+ ~
+ 0 0 9416
+-D3
++D0
+ ~
+ door great west~
+ 1 0 9631
+@@ -174,11 +174,11 @@ many places by tapestries as well as the multi-colored `1A`2e`3s
+ `#S`6e`&d`8a`1i `7banner.
+ ~
+ 94 d 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9406
+-D3
++D0
+ ~
+ ~
+ 0 0 9400
+@@ -200,19 +200,19 @@ many places by tapestries as well as the multi-colored `1A`2e`3s
+ `#S`6e`&d`8a`1i `7banner.
+ ~
+ 94 d 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9422
+-D1
++D2
+ ~
+ door great east~
+ 1 0 9605
+-D2
++D3
+ ~
+ ~
+ 0 0 9411
+-D3
++D0
+ ~
+ ~
+ 0 0 9405
+@@ -234,11 +234,11 @@ many places by tapestries as well as the multi-colored `1A`2e`3s
+ `#S`6e`&d`8a`1i `7banner.
+ ~
+ 94 d 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9408
+-D2
++D3
+ ~
+ ~
+ 0 0 9400
+@@ -260,19 +260,19 @@ many places by tapestries as well as the multi-colored `1A`2e`3s`#
+ S`6e`&d`8a`1i `7banner.
+ ~
+ 94 d 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9409
+-D1
++D2
+ ~
+ ~
+ 0 0 9420
+-D2
++D3
+ ~
+ ~
+ 0 0 9407
+-D3
++D0
+ ~
+ ~
+ 0 0 9419
+@@ -292,7 +292,7 @@ sloping ceiling. `8Gran`7i`&t`7e `8st`7ai`8rs `7lead up and down to the
+ large entrance.`0
+ ~
+ 94 d 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9657
+@@ -315,19 +315,19 @@ elevated plateau made of `1sw`!i`1rl`!e`1d r`!e`1d m`8a`1rbl`8e `7which then
+ leads into the White Tower itself.`0
+ ~
+ 94 c 1 10 10
+-D0
++D1
+ ~
+ door great north~
+ 1 0 9401
+-D1
++D2
+ ~
+ ~
+ 0 0 9698
+-D2
++D3
+ ~
+ ~
+ 0 0 9604
+-D3
++D0
+ ~
+ ~
+ 0 0 9612
+@@ -348,11 +348,11 @@ of the Flame of Tar Valon done in a d`!ee`1p m`!a`1r`!oo`1n. A window
+ on the eastern wall shows the `#Healing Halls `1outside.`0
+ ~
+ 94 d 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9406
+-D3
++D0
+ ~
+ ~
+ 0 0 9412
+@@ -371,11 +371,11 @@ northwest. The large area rug is made up of many patterened
+ `&fl`7ue`&r`8-`&di`8-`7l`&i`7s`1. Long white tables clothes cover the tables.`0
+ ~
+ 94 d 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9411
+-D2
++D3
+ ~
+ ~
+ 0 0 9413
+@@ -396,11 +396,11 @@ from the past are kept inside, locked and warder with the
+ `8O`7n`&e `8P`7o`&w`7e`8r `1to prevent anyone from taking them.`0
+ ~
+ 94 d 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9412
+-D3
++D0
+ ~
+ ~
+ 0 0 9401
+@@ -419,11 +419,11 @@ here. Several leather chairs are placed here, most with
+ a small `3d`8a`3rk w`8oo`3d `2table placed next to it.`0
+ ~
+ 94 d 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9415
+-D1
++D2
+ ~
+ ~
+ 0 0 9401
+@@ -447,11 +447,11 @@ couches. A large `1f`!i`1r`#e`1pl`!a`#c`1e `2dominates the room, it's `#gold
+ are portraits of the wall of past military generals.`0
+ ~
+ 94 d 1 10 10
+-D2
++D3
+ ~
+ ~
+ 0 0 9414
+-D3
++D0
+ ~
+ ~
+ 0 0 9416
+@@ -471,11 +471,11 @@ room. Throws have been placed over many of the chairs. The
+ room is brightly lit and is an excellent reading room.`0
+ ~
+ 94 d 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9404
+-D1
++D2
+ ~
+ ~
+ 0 0 9415
+@@ -499,11 +499,11 @@ windows with light and dark blue cushions and offer an
+ excellent view of the Library outside. 
+ ~
+ 94 d 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9418
+-D2
++D3
+ ~
+ ~
+ 0 0 9404
+@@ -524,11 +524,11 @@ mirrors dot the walls here and `&white lilies `6fill the many
+ vases in this room.
+ ~
+ 94 d 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9419
+-D3
++D0
+ ~
+ ~
+ 0 0 9417
+@@ -549,11 +549,11 @@ area rug are `^light blue`6 and `5mauve`6. The furniture and tables
+ in this sitting room are angular and oblong.
+ ~
+ 94 d 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9408
+-D2
++D3
+ ~
+ ~
+ 0 0 9418
+@@ -574,11 +574,11 @@ parchment. The training yards are visible through
+ a window on the northern wall.`0
+ ~
+ 94 d 1 10 10
+-D2
++D3
+ ~
+ ~
+ 0 0 9421
+-D3
++D0
+ ~
+ ~
+ 0 0 9408
+@@ -597,11 +597,11 @@ southwestern half. The floor is covered by a large bl`7a`&c`7k
+ w`8oo`3d `8table. `3P`#a`3le `#g`3o`#lden `3w`8oo`3d `8panels the walls.`
+ ~
+ 94 d 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9420
+-D1
++D2
+ ~
+ ~
+ 0 0 9422
+@@ -622,11 +622,11 @@ hutch that is full of small nicknacks, some of them
+ made of `8C`7ue`8nd`&i`8ll`7a`8r.`0
+ ~
+ 94 d 1 10 10
+-D2
++D3
+ ~
+ ~
+ 0 0 9406
+-D3
++D0
+ ~
+ ~
+ 0 0 9421
+@@ -653,11 +653,11 @@ to wind downward to the main floor of the `&Wh`7i`&te `&T`7o`&wer`3,
+ and upward to the `6g`^ue`6st `3rooms and `#n`&o`#ble `3suites.`0
+ ~
+ 94 d 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9424
+-D2
++D3
+ ~
+ ~
+ 1 0 9434
+@@ -683,11 +683,11 @@ south is the main stairway, and beyond that, the laundry
+ and baths.`0
+ ~
+ 94 d 1 10 10
+-D2
++D3
+ ~
+ ~
+ 0 0 9423
+-D3
++D0
+ ~
+ ~
+ 0 0 9425
+@@ -710,19 +710,19 @@ kitchens come from the west, and east is the arch that leads
+ to the stairs.
+ ~
+ 94 d 1 10 10
+-D0
++D1
+ ~
+ ~
+ 1 0 9428
+-D1
++D2
+ ~
+ ~
+ 0 0 9424
+-D2
++D3
+ ~
+ ~
+ 1 0 9429
+-D3
++D0
+ ~
+ ~
+ 0 0 9426
+@@ -745,19 +745,19 @@ to within an inch of its existence, no doubt accomplished
+ by the hands of diligent `&No`7vic`&e`7s`6.`7
+ ~
+ 94 d 1 10 10
+-D0
++D1
+ ~
+ ~
+ 1 0 9430
+-D1
++D2
+ ~
+ ~
+ 0 0 9425
+-D2
++D3
+ ~
+ ~
+ 1 0 9431
+-D3
++D0
+ ~
+ ~
+ 0 0 9427
+@@ -775,15 +775,15 @@ across from it. On the western wall is a window which allows
+ a small trickle of `#l`3ig`#h`3t`6 to dance upon the bare `8g`7re`8y`6 stone floor.`7
+ ~
+ 94 d 1 10 10
+-D0
++D1
+ ~
+ ~
+ 1 0 9432
+-D1
++D2
+ ~
+ ~
+ 0 0 9426
+-D2
++D3
+ ~
+ ~
+ 1 0 9433
+@@ -808,7 +808,7 @@ candlesticks placed in the center of the table, provide
+ a soft ambient `3l`7ig`3ht`6 for those who dine.`7
+ ~
+ 94 d 1 10 10
+-D2
++D3
+ ~
+ ~
+ 1 0 9425
+@@ -832,7 +832,7 @@ that sit in a silver bowl in the middle of the table, the effect
+ is bright and cheerful. 
+ ~
+ 94 d 1 10 10
+-D0
++D1
+ ~
+ ~
+ 1 0 9425
+@@ -848,7 +848,7 @@ S
+ ceiling with boxes, bins, and sacks of every description.`7
+ ~
+ 94 d 0 10 10
+-D2
++D3
+ ~
+ ~
+ 0 0 9426
+@@ -864,7 +864,7 @@ S
+ ceiling with boxes, bins, and sacks of every description.`7
+ ~
+ 94 d 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9426
+@@ -889,7 +889,7 @@ congratulations to Laras for a job well done, given on the
+ occasion of her 25th year as Head Cook. `7
+ ~
+ 94 d 1 10 10
+-D2
++D3
+ ~
+ ~
+ 1 0 9427
+@@ -905,7 +905,7 @@ S
+ ceiling with boxes, barrels, and sacks of every description. `7
+ ~
+ 94 d 1 10 10
+-D0
++D1
+ ~
+ ~
+ 1 0 9427
+@@ -924,11 +924,11 @@ leads to the main stairway, while to the east are the laundry
+ and baths.`7
+ ~
+ 94 d 1 10 10
+-D0
++D1
+ ~
+ ~
+ 1 0 9423
+-D1
++D2
+ ~
+ ~
+ 0 0 9435
+@@ -948,19 +948,19 @@ north and south, the laundry area continues to the east, and
+ the main stairway is to the west. `7
+ ~
+ 94 d 1 10 10
+-D0
++D1
+ ~
+ ~
+ 1 0 9438
+-D1
++D2
+ ~
+ ~
+ 0 0 9436
+-D2
++D3
+ ~
+ ~
+ 1 0 9439
+-D3
++D0
+ ~
+ ~
+ 0 0 9434
+@@ -980,19 +980,19 @@ north and south, the laundry area continues to the west, and
+ the baths are to the east. `7
+ ~
+ 94 d 1 10 10
+-D0
++D1
+ ~
+ ~
+ 1 0 9440
+-D1
++D2
+ ~
+ ~
+ 0 0 9437
+-D2
++D3
+ ~
+ ~
+ 1 0 9441
+-D3
++D0
+ ~
+ ~
+ 0 0 9435
+@@ -1010,15 +1010,15 @@ the women's bathing area, and one to the south leads to the
+ men's.`7
+ ~
+ 94 d 1 10 10
+-D0
++D1
+ ~
+ ~
+ 1 0 9442
+-D2
++D3
+ ~
+ ~
+ 1 0 9443
+-D3
++D0
+ ~
+ ~
+ 0 0 9436
+@@ -1039,7 +1039,7 @@ spaced a few feet apart provide a place for the `&No`7vi`&c`7es `6to
+ sit while preparing for the baths.`7
+ ~
+ 94 d 1 10 10
+-D2
++D3
+ ~
+ ~
+ 1 0 9435
+@@ -1059,7 +1059,7 @@ back wall, flanked by two equally simple wooden chairs and
+ covered by various bits of paper and parchment. `7
+ ~
+ 94 d 1 10 10
+-D0
++D1
+ ~
+ ~
+ 1 0 9435
+@@ -1084,7 +1084,7 @@ dot the room, and several floor-length mirrors are
+ placed about.`7
+ ~
+ 94 d 1 10 10
+-D2
++D3
+ ~
+ ~
+ 1 0 9436
+@@ -1105,7 +1105,7 @@ chairs dot the room, and a few floor length mirrors are placed
+ about the room.`7
+ ~
+ 94 d 1 10 10
+-D0
++D1
+ ~
+ ~
+ 1 0 9436
+@@ -1128,7 +1128,7 @@ stands of candles that bathe each tub in its own pool of soft
+ `3light`6.`7
+ ~
+ 94 d 1 10 10
+-D2
++D3
+ ~
+ ~
+ 1 0 9437
+@@ -1151,7 +1151,7 @@ stands of candles that bathe each tub in its own pool of soft
+ `3light`6.`7
+ ~
+ 94 d 1 10 10
+-D0
++D1
+ ~
+ ~
+ 1 0 9437
+@@ -1178,11 +1178,11 @@ the `8l`7au`8ndry `3and `8k`7i`8tch`7e`8ns`3, and upward to `&A`7cc`&e`7pt`&e`7d
+ cl`8a`3ssr`8oo`3m wing.`0
+ ~
+ 94 d 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9452
+-D2
++D3
+ ~
+ ~
+ 0 0 9462
+@@ -1216,11 +1216,11 @@ p`8o`3lish`8e`3d w`8oo`3d. The stairs continue to wind downward to the
+ `&Novice `3wings.`0
+ ~
+ 94 d 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9472
+-D2
++D3
+ ~
+ ~
+ 0 0 9482
+@@ -1254,11 +1254,11 @@ wind downward to the `&A`7cc`&e`7pt`&e`7d `3quarters and the cl`8a`3ssr`8oo`3m
+ wing, and upward to the private quarters of the `1A`2e`3s `4S`&e`8d`#a`2i`3.`0
+ ~
+ 94 d 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9700
+-D2
++D3
+ ~
+ ~
+ 0 0 9710
+@@ -1290,7 +1290,7 @@ and M`#i`3str`#e`3ss of N`#o`3vic`#e`3s' offices, and upward to the private
+ offices of the `&A`7j`&a`7h `&S`7i`&tters`3.`0
+ ~
+ 94 d 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9501
+@@ -1321,7 +1321,7 @@ stairs continue to wind downward to the private Ajah quarters,
+ and upward to the `&H`7a`&ll `7of the `&Wh`7i`&te `&T`7o`&wer`3.`0
+ ~
+ 94 d 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9537
+@@ -1387,7 +1387,7 @@ ivory silk provide places for sitting while waiting for an
+ audience with the Amyrlin Seat.`0
+ ~
+ 94 d 1 10 10
+-D0
++D1
+ ~
+ ~
+ 1 9510 9498
+@@ -1421,7 +1421,7 @@ the north beyond the garden, the sound of cooing pigeons can be
+ heard as they fly to and from a small structure there.`0
+ ~
+ 94 d 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9725
+@@ -1444,11 +1444,11 @@ cover the walls and a runner of `6b`^l`6ue c`^a`6rp`^e`6t `7runs down the
+ entire length of the white tiled floor.`0
+ ~
+ 94 d 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9453
+-D2
++D3
+ ~
+ ~
+ 0 0 9444
+@@ -1467,19 +1467,19 @@ cover the walls and a runner of `6b`^l`6ue c`^a`6rp`^e`6t `7runs down the
+ entire length of the white tiled floor.`0
+ ~
+ 94 d 1 10 10
+-D0
++D1
+ ~
+ door pale golden~
+ 1 0 9460
+-D1
++D2
+ ~
+ ~
+ 0 0 9454
+-D2
++D3
+ ~
+ door pale golden~
+ 1 0 9461
+-D3
++D0
+ ~
+ ~
+ 0 0 9452
+@@ -1498,19 +1498,19 @@ cover the walls and a runner of `6b`^l`6ue c`^a`6rp`^e`6t `7runs down the
+ entire length of the white tiled floor.`0
+ ~
+ 94 d 1 10 10
+-D0
++D1
+ ~
+ door pale golden~
+ 1 0 9458
+-D1
++D2
+ ~
+ ~
+ 0 0 9455
+-D2
++D3
+ ~
+ door pale golden~
+ 1 0 9459
+-D3
++D0
+ ~
+ ~
+ 0 0 9453
+@@ -1529,15 +1529,15 @@ cover the walls and a runner of `6b`^l`6ue c`^a`6rp`^e`6t `7runs down the
+ entire length of the white tiled floor.`0
+ ~
+ 94 d 1 10 10
+-D0
++D1
+ ~
+ door pale golden~
+ 1 0 9456
+-D2
++D3
+ ~
+ door pale golden~
+ 1 0 9457
+-D3
++D0
+ ~
+ ~
+ 0 0 9454
+@@ -1562,7 +1562,7 @@ carved in lacy patterns and left open, revealing a white
+ stone windowsill and an expansive view of Tar Valon.`0
+ ~
+ 94 d 1 10 10
+-D2
++D3
+ ~
+ door pale golden~
+ 1 0 9455
+@@ -1591,7 +1591,7 @@ carved in lacy patterns and left open, revealing a white
+ stone windowsill and an expansive view of Tar Valon.`0
+ ~
+ 94 d 1 10 10
+-D0
++D1
+ ~
+ door pale golden~
+ 1 0 9455
+@@ -1618,7 +1618,7 @@ and left open, revealing a white stone windowsill and an
+ expansive view of Tar Valon.`0
+ ~
+ 94 d 1 10 10
+-D2
++D3
+ ~
+ door pale golden~
+ 1 0 9454
+@@ -1641,7 +1641,7 @@ and left open, revealing a white stone windowsill and an
+ expansive view of Tar Valon.`0
+ ~
+ 94 d 1 10 10
+-D0
++D1
+ ~
+ door pale golden~
+ 1 0 9454
+@@ -1664,7 +1664,7 @@ and left open, revealing a white stone windowsill and an
+ expansive view of Tar Valon.`0
+ ~
+ 94 d 1 10 10
+-D2
++D3
+ ~
+ door pale golden~
+ 1 0 9453
+@@ -1687,7 +1687,7 @@ and left open, revealing a white stone windowsill and an
+ expansive view of Tar Valon.`0
+ ~
+ 94 d 1 10 10
+-D0
++D1
+ ~
+ door pale golden~
+ 1 0 9453
+@@ -1705,11 +1705,11 @@ separated by small niches displaying expensive statues and
+ vases of untold value.  
+ ~
+ 94 d 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9444
+-D3
++D0
+ ~
+ ~
+ 0 0 9463
+@@ -1727,15 +1727,15 @@ and a runner of `2green`7 carpet runs down the entire length of
+ the buttery `3yellow`7 tiled floor.
+ ~
+ 94 d 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9464
+-D1
++D2
+ ~
+ ~
+ 0 0 9462
+-D2
++D3
+ ~
+ ~
+ 0 0 9468
+@@ -1756,11 +1756,11 @@ wall opposite the entry hall done in delicate pastel hues. To the
+ double-paneled doors to the `&west `7lead to the suite's sitting room.
+ ~
+ 94 d 1 10 10
+-D2
++D3
+ ~
+ ~
+ 0 0 9463
+-D3
++D0
+ ~
+ ~
+ 0 0 9465
+@@ -1783,15 +1783,15 @@ flowers in each corner of the room. The double-paneled doors to
+ `7view to the `&west`7, which leads to a balcony.
+ ~
+ 94 d 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9464
+-D2
++D3
+ ~
+ ~
+ 0 0 9466
+-D3
++D0
+ ~
+ ~
+ 0 0 9467
+@@ -1813,7 +1813,7 @@ S
+ `7sitting room is also painted with clouds.
+ ~
+ 94 d 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9465
+@@ -1834,7 +1834,7 @@ S
+ `7sitting room, rustling the curtains as it drifts by.
+ ~
+ 94 d 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9465
+@@ -1858,11 +1858,11 @@ S
+ `7sitting room of the `#r`3oyal `^s`6uite`7.
+ ~
+ 94 d 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9463
+-D3
++D0
+ ~
+ ~
+ 0 0 9469
+@@ -1886,11 +1886,11 @@ leads back to the parlor while the double doors to the `&west`7 would
+ `7most likely lead to the bed chamber.
+ ~
+ 94 d 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9468
+-D3
++D0
+ ~
+ ~
+ 0 0 9470
+@@ -1915,11 +1915,11 @@ S
+ `7out to the balcony.
+ ~
+ 94 d 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9471
+-D1
++D2
+ ~
+ ~
+ 0 0 9469
+@@ -1940,7 +1940,7 @@ The marble of the balustrade is a crisp `&white `7to complement the
+ `7being the foreboding `!D`1ra`!g`1on`@m`2ou`@n`2t`7 in the distance, as always.
+ ~
+ 94 d 1 10 10
+-D2
++D3
+ ~
+ ~
+ 0 0 9470
+@@ -1960,11 +1960,11 @@ to infinity. The floor here is bare, the `&white m`7a`&r`#b`7l`&e`7
+ floral gardens of the `1A`#c`3c`2e`6p`&t`7e`8d`7.
+ ~
+ 94 d 1 10 10
+-D2
++D3
+ ~
+ ~
+ 0 0 9445
+-D3
++D0
+ ~
+ door west~
+ 1 0 9473
+@@ -1985,19 +1985,19 @@ S
+ `^s`&ky`^l`6i`7g`^h`&t`6s`2 in the roof to receive the best light.`7
+ ~
+ 94 d 1 10 10
+-D0
++D1
+ ~
+ door wooden north~
+ 1 0 9480
+-D1
++D2
+ ~
+ door east~
+ 1 0 9472
+-D2
++D3
+ ~
+ door wooden south~
+ 1 0 9481
+-D3
++D0
+ ~
+ ~
+ 0 0 9474
+@@ -2017,19 +2017,19 @@ S
+ `2of the garden.`7
+ ~
+ 94 d 1 10 10
+-D0
++D1
+ ~
+ door wooden north~
+ 1 0 9478
+-D1
++D2
+ ~
+ ~
+ 0 0 9473
+-D2
++D3
+ ~
+ door wooden south~
+ 1 0 9479
+-D3
++D0
+ ~
+ ~
+ 0 0 9475
+@@ -2050,15 +2050,15 @@ S
+ `2draft rises from the `&east`2, leading back to the `&T`7ower`2.`7
+ ~
+ 94 d 1 10 10
+-D0
++D1
+ ~
+ door wooden north~
+ 1 0 9476
+-D1
++D2
+ ~
+ ~
+ 0 0 9474
+-D2
++D3
+ ~
+ door wooden south~
+ 1 0 9477
+@@ -2077,7 +2077,7 @@ ground. Two `3l`8a`3dd`8e`3r`7-`3b`8a`3ck`8e`3d `7arm chairs sit on either side
+ of the room, one next to the bed.
+ ~
+ 94 d 1 10 10
+-D2
++D3
+ ~
+ door wooden south~
+ 1 0 9475
+@@ -2096,7 +2096,7 @@ ground. Two `3l`8a`3dd`8e`3r`7-`3b`8a`3ck`8e`3d `7arm chairs sit on either side
+ of the room, one next to the bed.
+ ~
+ 94 d 1 10 10
+-D0
++D1
+ ~
+ door wooden north~
+ 1 0 9475
+@@ -2115,7 +2115,7 @@ ground. Two `3l`8a`3dd`8e`3r`7-`3b`8a`3ck`8e`3d `7arm chairs sit on either side
+ of the room, one next to the bed.
+ ~
+ 94 d 1 10 10
+-D2
++D3
+ ~
+ door wooden south~
+ 1 0 9474
+@@ -2134,7 +2134,7 @@ ground. Two `3l`8a`3dd`8e`3r`7-`3b`8a`3ck`8e`3d `7arm chairs sit on either side
+ of the room, one next to the bed.
+ ~
+ 94 d 1 10 10
+-D0
++D1
+ ~
+ door wooden north~
+ 1 0 9474
+@@ -2153,7 +2153,7 @@ ground. Two `3l`8a`3dd`8e`3r`7-`3b`8a`3ck`8e`3d `7arm chairs sit on either side
+ of the room, one next to the bed.
+ ~
+ 94 d 1 10 10
+-D2
++D3
+ ~
+ door wooden south~
+ 1 0 9473
+@@ -2172,7 +2172,7 @@ ground. Two `3l`8a`3dd`8e`3r`7-`3b`8a`3ck`8e`3d `7arm chairs sit on either side
+ of the room, one next to the bed.
+ ~
+ 94 d 1 10 10
+-D0
++D1
+ ~
+ door wooden north~
+ 1 0 9473
+@@ -2192,11 +2192,11 @@ east, anther archway leads toward the various classrooms where
+ lessons are taught.
+ ~
+ 94 d 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9445
+-D1
++D2
+ A tall archway leads to hallway with doors to several classrooms.
+ ~
+ ~
+@@ -2219,21 +2219,21 @@ south.  More doors can be seen further east along the hall,
+ while to the west, an `8archway`7 leads into a foyer.
+ ~
+ 94 d 1 10 10
+-D0
++D1
+ A solid wooden door carved with books and quills.
+ ~
+ lecture hall door~
+ 1 0 9490
+-D1
++D2
+ ~
+ ~
+ 0 0 9484
+-D2
++D3
+ A plain wooden door.
+ ~
+ study door~
+ 1 0 9491
+-D3
++D0
+ ~
+ ~
+ 0 0 9482
+@@ -2256,21 +2256,21 @@ door which matches the one to the north in every painstaking
+ detail.
+ ~
+ 94 d 1 10 10
+-D0
++D1
+ A wooden door carved with air, water, fire, earth and spirit symbols.
+ ~
+ meditation door~
+ 1 0 9488
+-D1
++D2
+ ~
+ ~
+ 0 0 9485
+-D2
++D3
+ A wooden door carved with symbols of air, water, earth, fire and spirit.
+ ~
+ one power door~
+ 1 0 9489
+-D3
++D0
+ ~
+ ~
+ 0 0 9483
+@@ -2291,17 +2291,17 @@ and to the south, a rather `8austere`7 door of dark wood is
+ unadorned.
+ ~
+ 94 d 1 10 10
+-D0
++D1
+ An intricately carved wooden door.
+ ~
+ carved door~
+ 1 0 9486
+-D2
++D3
+ A plain door of polished dark wood
+ ~
+ dark wood door~
+ 1 0 9487
+-D3
++D0
+ ~
+ ~
+ 0 0 9484
+@@ -2326,7 +2326,7 @@ tall `3candelabra`7 keep the hall adequately illuminated.  To
+ the south, a wide door of carved and polished wood leads out.
+ ~
+ 94 d 1 10 10
+-D2
++D3
+ An intricately carved door leads out
+ ~
+ carved door~
+@@ -2355,7 +2355,7 @@ provide adequate illumination, the golden stands the only
+ ornamentation in the hall, allowing for few distractions. 
+ ~
+ 94 d 1 10 10
+-D0
++D1
+ A plain door of dark wood leads out.
+ ~
+ dark wood door~
+@@ -2381,7 +2381,7 @@ a softer, warmer light.  To the north, an intricately carved
+ door leads out into the hall.
+ ~
+ 94 d 1 10 10
+-D2
++D3
+ An intricately carved door leads out.
+ ~
+ carved door~
+@@ -2407,7 +2407,7 @@ and the city beyond, offering a spectacular view of the River
+ Erinin.  To the north, an intricately carved door leads out.
+ ~
+ 94 d 1 10 10
+-D0
++D1
+ An intricately carved door leads out.
+ ~
+ carved door~
+@@ -2432,7 +2432,7 @@ on tall stands keep the room adequately illuminated, lining the
+ walls at regular intervals.
+ ~
+ 94 d 1 10 10
+-D2
++D3
+ A wooden door carved with books and quills leads out.
+ ~
+ door wooden~
+@@ -2456,7 +2456,7 @@ its own inkwell, and a tin of sand for blotting  Two arched
+ elegant drapes of `2green`7 silk bordered with `#g`3o`#ld`3e`#n`7 fringe.`7
+ ~
+ 94 d 1 10 10
+-D0
++D1
+ A plain wooden door leads out.
+ ~
+ wooden door~
+@@ -2493,15 +2493,15 @@ S
+ `@T`2h`3e `@H`2e`3d`@g`2e `2M`3a`@z`2e`7~
+ undefined~
+ 94 d 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9494
+-D2
++D3
+ ~
+ ~
+ 0 0 9492
+-D3
++D0
+ ~
+ ~
+ 0 0 9587
+@@ -2516,15 +2516,15 @@ S
+ You are in an unfinished room.
+ ~
+ 94 d 1 10 10
+-D0
++D1
+ ~
+ sealed~
+ 2 0 9497
+-D1
++D2
+ ~
+ ~
+ 0 0 9495
+-D2
++D3
+ ~
+ ~
+ 0 0 9493
+@@ -2539,11 +2539,11 @@ S
+ You are in an unfinished room.
+ ~
+ 94 d 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9496
+-D3
++D0
+ ~
+ ~
+ 0 0 9494
+@@ -2558,11 +2558,11 @@ S
+ You are in an unfinished room.
+ ~
+ 94 d 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9458
+-D3
++D0
+ ~
+ ~
+ 0 0 9495
+@@ -2605,12 +2605,12 @@ In the south wall, opposite the desk, are the heavy doors that lead back to
+ the Keeper's office.  In the east wall is another, smaller wooden door.
+ ~
+ 94 d 1 10 10
+-D1
++D2
+ A polished wooden door leading into the Amyrlin's private chambers.
+ ~
+ polishe door east~
+ 1 0 9720
+-D2
++D3
+ A pair of heavy, ornately carved doors which lead back to the Keeper's office.
+ ~
+ double door south~
+@@ -2642,16 +2642,16 @@ here save for a few paintings on the walls that depict various scenery from
+ different parts of the world.
+ ~
+ 94 d 1 10 10
+-D0
++D1
+ A pair of large, ornately carved double doors leading into the Amyrlin's study.
+ ~
+ ~
+ 1 9509 9497
+-D2
++D3
+ ~
+ ~
+ 1 9510 9450
+-D3
++D0
+ A polished wooden door leading into the Keeper's private chambers.
+ ~
+ door west~
+@@ -2681,7 +2681,7 @@ patterns in the colors of the seven Ajahs to form a spiral
+ such as that on the banner of Tar Valon.
+ ~
+ 94 d 1 10 10
+-D3
++D0
+ ~
+ ~
+ 0 0 9402
+diff --git a/world/wld/95.wld b/world/wld/95.wld
+index d77173b..b50aae8 100644
+--- a/world/wld/95.wld
++++ b/world/wld/95.wld
+@@ -12,17 +12,17 @@ intricate tapestries, portraits, and polished tables with a
+ `^s`6ta`^tu`6et`^te`7 here, or a vase of bright `@f`3l`5o`@w`3e`5r`@s`7 there.
+ ~
+ 95 d 1 10 10
+-D0
++D1
+ `3A pair of `#o`3r`#n`3a`#te`3 double doors.  Each one is `&i`7nl`&ai`7d`3 with a
+ `&s`7w`8o`7r`&d`3 made of shining `@g`2re`@en`3 stone.`7
+ ~
+ door north double ornate green~
+ 1 9508 9508
+-D1
++D2
+ ~
+ ~
+ 0 0 9501
+-D2
++D3
+ ~
+ ~
+ 0 0 9507
+@@ -46,15 +46,15 @@ intricate tapestries, portraits, and polished tables with a
+ `^s`6ta`^tu`6et`^te`7 here, or a vase of bright `@f`3l`5o`@w`3e`5r`@s`7 there.
+ ~
+ 95 cd 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9502
+-D2
++D3
+ ~
+ ~
+ 0 0 9447
+-D3
++D0
+ ~
+ ~
+ 0 0 9500
+@@ -78,19 +78,19 @@ intricate tapestries, portraits, and polished tables with a
+ `^s`6ta`^tu`6et`^te`7 here, or a vase of bright `@f`3l`5o`@w`3e`5r`@s`7 there.
+ ~
+ 95 d 1 10 10
+-D0
++D1
+ ~
+ door double north red~
+ 1 9503 9512
+-D1
++D2
+ ~
+ door double east yellow gold oak~
+ 1 9504 9516
+-D2
++D3
+ ~
+ ~
+ 0 0 9503
+-D3
++D0
+ ~
+ ~
+ 0 0 9501
+@@ -114,11 +114,11 @@ intricate tapestries, portraits, and polished tables with a
+ `^s`6ta`^tu`6et`^te`7 here, or a vase of bright `@f`3l`5o`@w`3e`5r`@s`7 there.
+ ~
+ 95 d 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9502
+-D2
++D3
+ ~
+ ~
+ 0 0 9504
+@@ -142,21 +142,21 @@ intricate tapestries, portraits, and polished tables with a
+ `^s`6ta`^tu`6et`^te`7 here, or a vase of bright `@f`3l`5o`@w`3e`5r`@s`7 there.
+ ~
+ 95 d 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9503
+-D1
++D2
+ ~
+ door double east great white~
+ 1 9507 9520
+-D2
++D3
+ `7A pair of large, ornate double doors.  They are each inlaid
+ with a set of `3scales`7 made of `8sm`7ok`8e`7y `&q`7u`8a`&rt`8z`7 and `8s`7i`&lv`7e`&r`7.
+ ~
+ door double south ornate gray~
+ 1 9506 9524
+-D3
++D0
+ ~
+ ~
+ 0 0 9505
+@@ -180,11 +180,11 @@ intricate tapestries, portraits, and polished tables with a
+ `^s`6ta`^tu`6et`^te`7 here, or a vase of bright `@f`3l`5o`@w`3e`5r`@s`7 there.
+ ~
+ 95 d 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9504
+-D3
++D0
+ ~
+ ~
+ 0 0 9506
+@@ -209,19 +209,19 @@ intricate tapestries, portraits, and polished tables with a
+ `^s`6ta`^tu`6et`^te`7 here, or a vase of bright `@f`3l`5o`@w`3e`5r`@s`7 there.
+ ~
+ 95 d 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9507
+-D1
++D2
+ ~
+ ~
+ 0 0 9505
+-D2
++D3
+ ~
+ door double south blue~
+ 1 9505 9528
+-D3
++D0
+ ~
+ door double west brown~
+ 1 9502 9532
+@@ -245,11 +245,11 @@ intricate tapestries, portraits, and polished tables with a
+ `^s`6ta`^tu`6et`^te`7 here, or a vase of bright `@f`3l`5o`@w`3e`5r`@s`7 there.
+ ~
+ 95 d 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9500
+-D2
++D3
+ ~
+ ~
+ 0 0 9506
+@@ -274,11 +274,11 @@ heavy wooden doors line the hallway, which runs north and
+ south from the skyway to the central hallway of the Tower.
+ ~
+ 95 d 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9509
+-D2
++D3
+ A pair of ornate double doors lead out of the Green Ajah Hall.
+ Each door is inlaid with a sword made of shining `@g`2re`@en`7 stone.
+ ~
+@@ -305,11 +305,11 @@ heavy wooden doors line the hallway, which runs north and
+ south from the skyway to the central hallway of the Tower.
+ ~
+ 95 d 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9510
+-D2
++D3
+ ~
+ ~
+ 0 0 9508
+@@ -334,7 +334,7 @@ heavy wooden doors line the hallway, which runs north and
+ south from the skyway to the central hallway of the Tower.
+ ~
+ 95 d 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9511
+@@ -343,7 +343,7 @@ D1
+ ~
+ door Jezz~
+ 1 8805 8810
+-D2
++D3
+ ~
+ ~
+ 0 0 9509
+@@ -368,11 +368,11 @@ of the `&T`7o`&wer`7. `3W`8oo`3d`8e`3n`7 banisters line the
+ edges of the stairwell.
+ ~
+ 95 d 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9678
+-D2
++D3
+ ~
+ ~
+ 0 0 9510
+@@ -397,11 +397,11 @@ high upon the walls providing sharp and piercing
+ `&l`#i`&ght `1down to the floors below.`0
+ ~
+ 95 d 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9513
+-D2
++D3
+ ~
+ door double south red~
+ 1 9503 9502
+@@ -422,11 +422,11 @@ high upon the walls providing sharp and piercing
+ `&l`#i`&ght `1down to the floors below.`0
+ ~
+ 95 d 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9514
+-D2
++D3
+ ~
+ ~
+ 0 0 9512
+@@ -447,11 +447,11 @@ high upon the walls providing sharp and piercing
+ `&l`#i`&ght `1down to the floors below.`0
+ ~
+ 95 d 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9515
+-D3
++D0
+ ~
+ ~
+ 0 0 9513
+@@ -471,7 +471,7 @@ of the `&T`7o`&wer`7. `3W`8oo`3d`8e`3n`7 banisters line the
+ edges of the stairwell.
+ ~
+ 95 d 1 10 10
+-D3
++D0
+ ~
+ ~
+ 0 0 9514
+@@ -496,11 +496,11 @@ the hall, and doorways lead into the private
+ chambers of `#A`3es `#S`3edai.`0
+ ~
+ 95 d 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9517
+-D3
++D0
+ ~
+ door double west yellow gold oak~
+ 1 9504 9502
+@@ -521,11 +521,11 @@ the hall, and doorways lead into the private
+ chambers of `#A`3es `#S`3edai.`0
+ ~
+ 95 d 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9518
+-D3
++D0
+ ~
+ ~
+ 0 0 9516
+@@ -551,11 +551,11 @@ A heavy wooden door carved with flowers.
+ ~
+ door~
+ 1 8834 8834
+-D1
++D2
+ ~
+ ~
+ 0 0 9519
+-D3
++D0
+ ~
+ ~
+ 0 0 9517
+@@ -575,11 +575,11 @@ of the `&T`7o`&wer`7. `3W`8oo`3d`8e`3n`7 banisters line the
+ edges of the stairwell.
+ ~
+ 95 d 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9666
+-D3
++D0
+ ~
+ ~
+ 0 0 9518
+@@ -604,11 +604,11 @@ Straight lines and `8s`7t`&a`7r`8k `7symmetry seem to
+ provide the only decoration.`0
+ ~
+ 95 d 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9521
+-D3
++D0
+ ~
+ door double great west white~
+ 1 9507 9504
+@@ -634,11 +634,11 @@ D1
+ ~
+ heavy wooden door~
+ 2 8842 8842
+-D2
++D3
+ ~
+ ~
+ 0 0 9522
+-D3
++D0
+ ~
+ ~
+ 0 0 9520
+@@ -659,11 +659,11 @@ Straight lines and `8s`7t`&a`7r`8k `7symmetry seem to
+ provide the only decoration.`0
+ ~
+ 95 d 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9521
+-D2
++D3
+ ~
+ ~
+ 0 0 9523
+@@ -683,7 +683,7 @@ of the `&T`7o`&wer`7. `3W`8oo`3d`8e`3n`7 banisters line the
+ edges of the stairwell.
+ ~
+ 95 d 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9522
+@@ -709,14 +709,14 @@ which the busts of famous Aes Sedai of the `7G`8ray
+ `7A`8jah rest.`0
+ ~
+ 95 d 1 10 10
+-D0
++D1
+ `7A pair of large, ornate double doors leading out of the `8G`7ray
+ `8A`7jah Hall.  Each door is inset with a set of `3scales`7 made of
+ `8s`7mo`8ke`7y `8q`7ua`&rt`8z`7 and `8s`7i`&lv`7e`8r`7.
+ ~
+ door north double ornate gray ~
+ 1 9506 9504
+-D2
++D3
+ ~
+ ~
+ 0 0 9525
+@@ -738,11 +738,11 @@ which the busts of famous Aes Sedai of the `7G`8ray
+ `7A`8jah rest.`0
+ ~
+ 95 d 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9524
+-D2
++D3
+ ~
+ ~
+ 0 0 9526
+@@ -764,11 +764,11 @@ which the busts of famous Aes Sedai of the `7G`8ray
+ `7A`8jah rest.`0
+ ~
+ 95 d 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9525
+-D2
++D3
+ ~
+ ~
+ 0 0 9527
+@@ -793,7 +793,7 @@ of the `&T`7o`&wer`7. `3W`8oo`3d`8e`3n`7 banisters line the
+ edges of the stairwell.
+ ~
+ 95 d 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9526
+@@ -822,11 +822,11 @@ are set high upon the wall under mauve glass,
+ giving a soft, `5p`6u`5rpl`^i`5sh `6hint to the light.`0
+ ~
+ 95 d 1 10 10
+-D0
++D1
+ ~
+ door double north blue~
+ 1 9505 9506
+-D2
++D3
+ ~
+ ~
+ 0 0 9529
+@@ -847,7 +847,7 @@ are set high upon the wall under mauve glass,
+ giving a soft, `5p`6u`5rpl`^i`5sh `6hint to the light.`0
+ ~
+ 95 d 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9528
+@@ -856,7 +856,7 @@ D2
+ ~
+ door sedai Eala~
+ 1 8807 8838
+-D3
++D0
+ ~
+ ~
+ 0 0 9530
+@@ -877,11 +877,11 @@ are set high upon the wall under mauve glass,
+ giving a soft, `5p`6u`5rpl`^i`5sh `6hint to the light.`0
+ ~
+ 95 d 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9529
+-D3
++D0
+ ~
+ ~
+ 0 0 9531
+@@ -901,7 +901,7 @@ of the `&T`7o`&wer`7. `3W`8oo`3d`8e`3n`7 banisters line the
+ edges of the stairwell.
+ ~
+ 95 d 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9530
+@@ -927,11 +927,11 @@ ruler. M`#a`3h`#o`3g`#a`3ny doors line the hall, the inner
+ chambers of `#A`3es `#S`3edai.`0
+ ~
+ 95 d 1 10 10
+-D1
++D2
+ ~
+ door double east brown~
+ 1 9502 9506
+-D3
++D0
+ ~
+ ~
+ 0 0 9533
+@@ -953,11 +953,11 @@ ruler. M`#a`3h`#o`3g`#a`3ny doors line the hall, the inner
+ chambers of `#A`3es `#S`3edai.`0
+ ~
+ 95 d 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9532
+-D3
++D0
+ ~
+ ~
+ 0 0 9534
+@@ -979,11 +979,11 @@ ruler. M`#a`3h`#o`3g`#a`3ny doors line the hall, the inner
+ chambers of `#A`3es `#S`3edai.`0
+ ~
+ 95 d 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9533
+-D3
++D0
+ ~
+ ~
+ 0 0 9535
+@@ -1003,11 +1003,11 @@ of the `&T`7o`&wer`7. `3W`8oo`3d`8e`3n`7 banisters line the
+ edges of the stairwell.
+ ~
+ 95 d 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9534
+-D3
++D0
+ ~
+ ~
+ 0 0 9641
+@@ -1035,16 +1035,16 @@ intricate tapestries, portraits, and polished tables with a
+ `^s`6ta`^tu`6et`^te`7 here, or a vase of bright `@f`3l`5o`@w`3e`5r`@s`7 there.
+ ~
+ 95 d 1 10 10
+-D0
++D1
+ `3To the north is elegant antechamber decorated in shades of `@g`2re`@en`7.
+ ~
+ ~
+ 0 0 9544
+-D1
++D2
+ ~
+ ~
+ 0 0 9537
+-D2
++D3
+ ~
+ ~
+ 0 0 9543
+@@ -1068,15 +1068,15 @@ intricate tapestries, portraits, and polished tables with a
+ `^s`6ta`^tu`6et`^te`7 here, or a vase of bright `@f`3l`5o`@w`3e`5r`@s`7 there.
+ ~
+ 95 cd 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9538
+-D2
++D3
+ ~
+ ~
+ 0 0 9448
+-D3
++D0
+ ~
+ ~
+ 0 0 9536
+@@ -1100,21 +1100,21 @@ intricate tapestries, portraits, and polished tables with a
+ `^s`6ta`^tu`6et`^te`7 here, or a vase of bright `@f`3l`5o`@w`3e`5r`@s`7 there.
+ ~
+ 95 d 1 10 10
+-D0
++D1
+ `3To the north is an elegant antechamber decorated in shades of `!r`1e`!d`3.`7
+ ~
+ ~
+ 0 0 9548
+-D1
++D2
+ `3To the east is an elegant antechamber decorated in shades of `#y`3e`#ll`3o`#w`3.
+ ~
+ undefined~
+ 0 0 9552
+-D2
++D3
+ ~
+ ~
+ 0 0 9539
+-D3
++D0
+ ~
+ ~
+ 0 0 9537
+@@ -1138,11 +1138,11 @@ intricate tapestries, portraits, and polished tables with a
+ `^s`6ta`^tu`6et`^te`7 here, or a vase of bright `@f`3l`5o`@w`3e`5r`@s`7 there.
+ ~
+ 95 d 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9538
+-D2
++D3
+ ~
+ ~
+ 0 0 9540
+@@ -1166,21 +1166,21 @@ intricate tapestries, portraits, and polished tables with a
+ `^s`6ta`^tu`6et`^te`7 here, or a vase of bright `@f`3l`5o`@w`3e`5r`@s`7 there.
+ ~
+ 95 d 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9539
+-D1
++D2
+ `3To the east is an elegant antechamber decorated in shades of `&w`7h`&i`7t`&e`3.
+ ~
+ ~
+ 0 0 9556
+-D2
++D3
+ `3To the south is an elegant antechamber decorated in shades of `8g`7ray`3.
+ ~
+ ~
+ 0 0 9560
+-D3
++D0
+ ~
+ ~
+ 0 0 9541
+@@ -1204,11 +1204,11 @@ intricate tapestries, portraits, and polished tables with a
+ `^s`6ta`^tu`6et`^te`7 here, or a vase of bright `@f`3l`5o`@w`3e`5r`@s`7 there.
+ ~
+ 95 d 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9540
+-D3
++D0
+ ~
+ ~
+ 0 0 9542
+@@ -1232,20 +1232,20 @@ intricate tapestries, portraits, and polished tables with a
+ `^s`6ta`^tu`6et`^te`7 here, or a vase of bright `@f`3l`5o`@w`3e`5r`@s`7 there.
+ ~
+ 95 d 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9543
+-D1
++D2
+ ~
+ ~
+ 0 0 9541
+-D2
++D3
+ `3To the south is an elegant antechamber decorated in shades of `*b`4lue`3.
+ ~
+ ~
+ 1 0 9564
+-D3
++D0
+ `3To the west is an elegant antechamber decorated in shades of `3b`1r`3o`1w`3n.
+ ~
+ ~
+@@ -1270,11 +1270,11 @@ intricate tapestries, portraits, and polished tables with a
+ `^s`6ta`^tu`6et`^te`7 here, or a vase of bright `@f`3l`5o`@w`3e`5r`@s`7 there.
+ ~
+ 95 d 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9536
+-D2
++D3
+ ~
+ ~
+ 0 0 9542
+@@ -1294,13 +1294,13 @@ before a large set of double doors leading into unknown
+ portions of the White Tower.
+ ~
+ 95 d 1 10 10
+-D0
++D1
+ A pair of ornate double doors lead to the Sitter offices.
+ They are each inlaid with a sword made of `@g`2re`@en`7 stone.
+ ~
+ door double green~
+ 1 9508 9545
+-D2
++D3
+ ~
+ ~
+ 0 0 9536
+@@ -1437,11 +1437,11 @@ in this room, only a large stone island in the center of
+ the room.`0
+ ~
+ 95 cd 1 10 10
+-D0
++D1
+ ~
+ undefined~
+ 0 0 9546
+-D2
++D3
+ These ornate double doors lead out into the antechamber.
+ They are each inlaid with a sword made of `@g`2re`@en`7 stone.
+ ~
+@@ -1464,11 +1464,11 @@ other treasures decorate small, ornate wooden tables
+ in each of the four corners of the room.`0 
+ ~
+ 95 d 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9547
+-D2
++D3
+ ~
+ green~
+ 1 9508 9545
+@@ -1488,7 +1488,7 @@ the personal quarters of the `2Aes Sedai`7.  There is
+ a doorway leading towards the `2Sitters' Offices`7.
+ ~
+ 95 d 1 10 10
+-D2
++D3
+ ~
+ ~
+ 0 0 9546
+@@ -1512,11 +1512,11 @@ before a large set of double doors leading into unknown
+ portions of the White Tower.
+ ~
+ 95 d 1 10 10
+-D0
++D1
+ ~
+ door red ajah~
+ 1 9503 9549
+-D2
++D3
+ ~
+ ~
+ 0 0 9538
+@@ -1655,11 +1655,11 @@ Time of Madness.  Cushioned chairs are set throughout the
+ room, each carefully placed to view a certain tapestry.`
+ ~
+ 95 cd 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9550
+-D2
++D3
+ ~
+ door red ajah~
+ 1 9503 9548
+@@ -1681,11 +1681,11 @@ placed here and there, each with the personal effects of
+ its current owner.
+ ~
+ 95 d 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9551
+-D3
++D0
+ ~
+ ~
+ 0 0 9549
+@@ -1705,7 +1705,7 @@ the personal quarters of the `1Aes Sedai`7.  There is
+ a doorway leading towards the `1Sitters' Offices`7.
+ ~
+ 95 d 1 10 10
+-D3
++D0
+ ~
+ ~
+ 0 0 9550
+@@ -1729,11 +1729,11 @@ before a large set of double doors leading into unknown
+ portions of the White Tower.
+ ~
+ 95 d 1 10 10
+-D1
++D2
+ ~
+ door yellow ajah~
+ 1 9504 9553
+-D3
++D0
+ ~
+ ~
+ 0 0 9538
+@@ -1878,11 +1878,11 @@ on tall, `#g`3i`#ld`3e`#d`3 stands are spaced at even intervals about the
+ lounge, providing warm illumination.`
+ ~
+ 95 cd 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9554
+-D3
++D0
+ ~
+ door yellow ajah~
+ 1 9504 9552
+@@ -1900,11 +1900,11 @@ of this room is to offer a work place for Sitters and
+ meeting place for the Aes Sedai of their Ajah.
+ ~
+ 95 d 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9555
+-D3
++D0
+ ~
+ ~
+ 0 0 9553
+@@ -1924,7 +1924,7 @@ the personal quarters of the `#Aes Sedai`7.  There is
+ a doorway leading towards the `#Sitters' Offices`7.
+ ~
+ 95 d 1 10 10
+-D3
++D0
+ ~
+ ~
+ 0 0 9554
+@@ -1948,11 +1948,11 @@ before a large set of double doors leading into unknown
+ portions of the White Tower.
+ ~
+ 95 d 1 10 10
+-D1
++D2
+ ~
+ door white ajah~
+ 1 9507 9557
+-D3
++D0
+ ~
+ ~
+ 0 0 9540
+@@ -2090,11 +2090,11 @@ soft white light. There is not a single shadow in this
+ chamber, nor does it feel that there is anywhere to hide.`0
+ ~
+ 95 cd 1 10 10
+-D2
++D3
+ ~
+ ~
+ 0 0 9558
+-D3
++D0
+ ~
+ door white ajah~
+ 1 9507 9556
+@@ -2113,11 +2113,11 @@ The walls are bare of tapestries, allowing the pale stone
+ of the White Tower to gleam through.
+ ~
+ 95 d 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9557
+-D2
++D3
+ ~
+ ~
+ 0 0 9559
+@@ -2141,7 +2141,7 @@ the personal quarters of the `&Aes Sedai`7.  There is
+ a doorway leading towards the `&Sitters' Offices`7.
+ ~
+ 95 d 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9558
+@@ -2165,11 +2165,11 @@ before a large set of double doors leading into unknown
+ portions of the White Tower.
+ ~
+ 95 d 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9540
+-D2
++D3
+ ~
+ door gray grey ajah~
+ 1 9506 9561
+@@ -2311,11 +2311,11 @@ thrones by Aes Sedai of the Gray Ajah.  The chamber is
+ lit by elegant candelabra at intervals along the walls.
+ ~
+ 95 cd 1 10 10
+-D0
++D1
+ ~
+ door gray grey ajah~
+ 1 9506 9560
+-D2
++D3
+ ~
+ ~
+ 0 0 9562
+@@ -2339,11 +2339,11 @@ behind it, and two more comfortable chairs before them.
+ A `1f`3i`1r`3e`1p`3l`1a`3c`1e`7 keeps the office warm in the cooler months.
+ ~
+ 95 d 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9561
+-D2
++D3
+ ~
+ ~
+ 0 0 9563
+@@ -2363,7 +2363,7 @@ the personal quarters of the `8Aes Sedai`7.  There is
+ a doorway leading towards the `8Sitters' Offices`7.
+ ~
+ 95 d 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9562
+@@ -2387,11 +2387,11 @@ before a large set of double doors leading into unknown
+ portions of the White Tower.
+ ~
+ 95 d 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9542
+-D2
++D3
+ ~
+ door blue ajah~
+ 1 9505 9565
+@@ -2529,11 +2529,11 @@ are scattered about the room, upholstered in pale blue silk.
+ `7
+ ~
+ 95 cd 1 10 10
+-D0
++D1
+ ~
+ door blue ajah~
+ 1 9505 9564
+-D3
++D0
+ ~
+ ~
+ 0 0 9566
+@@ -2559,11 +2559,11 @@ blue waves.  A fireplace along the south wall keeps the
+ office warm in the cooler months.
+ ~
+ 95 d 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9565
+-D3
++D0
+ ~
+ ~
+ 0 0 9567
+@@ -2583,7 +2583,7 @@ the personal quarters of the `6Aes Sedai`7.  There is
+ a doorway leading towards the `6Sitters' Offices`7.
+ ~
+ 95 d 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9566
+@@ -2607,11 +2607,11 @@ before a large set of double doors leading into unknown
+ portions of the White Tower.
+ ~
+ 95 d 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9542
+-D3
++D0
+ ~
+ door brown ajah~
+ 1 9502 9569
+@@ -2754,11 +2754,11 @@ fireplace along the southern wall provides warmth in the
+ colder months, and lamps on tall stands illuminate the room.`7
+ ~
+ 95 cd 1 10 10
+-D1
++D2
+ ~
+ door brown ajah~
+ 1 9502 9568
+-D3
++D0
+ ~
+ ~
+ 0 0 9570
+@@ -2780,11 +2780,11 @@ stands keep the room illuminated, and each desk has
+ several comfortable chairs around it.
+ ~
+ 95 d 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9569
+-D3
++D0
+ ~
+ ~
+ 0 0 9571
+@@ -2804,7 +2804,7 @@ the personal quarters of the `3Aes Sedai`7.  There is
+ a doorway leading towards the `3Sitters' Offices`7.
+ ~
+ 95 d 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9570
+@@ -3038,7 +3038,7 @@ S
+ You are in an unfinished room.
+ ~
+ 95 d 1 10 10
+-D1
++D2
+ ~
+ undefined~
+ 0 0 9493
+@@ -3057,7 +3057,7 @@ S
+ You are in an unfinished room.
+ ~
+ 95 d 1 10 10
+-D2
++D3
+ ~
+ ~
+ 0 0 9489
+@@ -3076,19 +3076,19 @@ S
+ You are in an unfinished room.
+ ~
+ 95 d 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9597
+-D1
++D2
+ ~
+ ~
+ 0 0 9590
+-D2
++D3
+ ~
+ ~
+ 0 0 9407
+-D3
++D0
+ ~
+ ~
+ 0 0 9596
+@@ -3103,11 +3103,11 @@ S
+ You are in an unfinished room.
+ ~
+ 95 d 1 10 10
+-D2
++D3
+ ~
+ ~
+ 0 0 9591
+-D3
++D0
+ ~
+ ~
+ 0 0 9589
+@@ -3122,15 +3122,15 @@ S
+ You are in an unfinished room.
+ ~
+ 95 d 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9590
+-D1
++D2
+ ~
+ ~
+ 0 0 9713
+-D2
++D3
+ ~
+ ~
+ 0 0 9592
+@@ -3145,11 +3145,11 @@ S
+ You are in an unfinished room.
+ ~
+ 95 d 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9591
+-D3
++D0
+ ~
+ ~
+ 0 0 9593
+@@ -3164,15 +3164,15 @@ S
+ You are in an unfinished room.
+ ~
+ 95 d 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9592
+-D2
++D3
+ ~
+ ~
+ 0 0 9725
+-D3
++D0
+ ~
+ ~
+ 0 0 9594
+@@ -3187,11 +3187,11 @@ S
+ You are in an unfinished room.
+ ~
+ 95 d 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9595
+-D1
++D2
+ ~
+ ~
+ 0 0 9593
+@@ -3206,15 +3206,15 @@ S
+ You are in an unfinished room.
+ ~
+ 95 d 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9596
+-D2
++D3
+ ~
+ ~
+ 0 0 9594
+-D3
++D0
+ ~
+ sealed west~
+ 2 0 9727
+@@ -3229,11 +3229,11 @@ S
+ You are in an unfinished room.
+ ~
+ 95 0 0 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9589
+-D2
++D3
+ ~
+ ~
+ 0 0 9595
+@@ -3248,11 +3248,11 @@ S
+ You are in an unfinished room.
+ ~
+ 95 d 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9598
+-D2
++D3
+ ~
+ ~
+ 0 0 9589
+@@ -3267,11 +3267,11 @@ S
+ You are in an unfinished room.
+ ~
+ 95 d 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9599
+-D2
++D3
+ ~
+ ~
+ 0 0 9597
+@@ -3286,15 +3286,15 @@ S
+ You are in an unfinished room.
+ ~
+ 95 d 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9702
+-D2
++D3
+ ~
+ ~
+ 0 0 9598
+-D3
++D0
+ ~
+ sealed west~
+ 2 0 9700
+diff --git a/world/wld/96.wld b/world/wld/96.wld
+index 618e533..63c2f08 100644
+--- a/world/wld/96.wld
++++ b/world/wld/96.wld
+@@ -13,7 +13,7 @@ different sizes. There are also standard issue brown
+ `3T`#o`3wer `#G`3ua`#rd `8cloaks.
+ ~
+ 96 d 1 10 10
+-D1
++D2
+ ~
+ door mahogany east~
+ 1 0 9601
+@@ -34,20 +34,20 @@ fountain from a smooth `8gr`7a`8y `7stone that is studded with
+ `&g`7l`^i`7tt`^e`6r`&i`7ng cr`&y`7s`^t`7a`&ls`7.`0
+ ~
+ 96 0 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9603
+-D1
++D2
+ ~
+ door mahogany east~
+ 1 0 9602
+-D2
++D3
+ `3A large wooden gate.`0
+ ~
+ gate wooden large~
+ 1 0 9091
+-D3
++D0
+ ~
+ door mahogany west~
+ 1 0 9600
+@@ -68,7 +68,7 @@ upwards for several levels in this same fashion. On the
+ ground floor, the door is made of thick `3m`#a`3hog`#a`3ny`8.
+ ~
+ 96 d 1 10 10
+-D3
++D0
+ ~
+ door mahogany west~
+ 1 0 9601
+@@ -89,11 +89,11 @@ fine `2l`@a`2wns `7and `2g`@a`2rdens `7of the White Tower, interspersed with
+ leatherleafs, paperbarks and elms.`0
+ ~
+ 96 0 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9604
+-D2
++D3
+ ~
+ ~
+ 0 0 9601
+@@ -114,11 +114,11 @@ fine `2l`@a`2wns `7and `2g`@a`2rdens `7of the White Tower, interspersed with
+ leatherleafs, paperbarks and elms.`0
+ ~
+ 96 0 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9410
+-D2
++D3
+ ~
+ ~
+ 0 0 9603
+@@ -140,11 +140,11 @@ The edges of the fountain provide seating for those who need it
+ while waiting to petition the White Tower.`0
+ ~
+ 96 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9645
+-D3
++D0
+ A pair of great, double doors lead into the White Tower.
+ ~
+ door great east~
+@@ -166,11 +166,11 @@ and broad. Two tall men could easily walk through the hedge
+ standing side by side.`0
+ ~
+ 96 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9607
+-D3
++D0
+ ~
+ ~
+ 0 0 9699
+@@ -194,16 +194,16 @@ with catnip. If one were to look very closely `8i`7n `2the garden,
+ who knows what might be found?
+ ~
+ 96 0 1 10 10
+-D0
++D1
+ Another hedge wall can be seen further off beyond a branching east and west.
+ ~
+ ~
+ 0 0 9687
+-D1
++D2
+ ~
+ ~
+ 0 0 9608
+-D3
++D0
+ ~
+ ~
+ 0 0 9606
+@@ -224,11 +224,11 @@ which reaches up at least forty or fifty feet into the air. Near
+ the base of the tree rests a `8d`7ee`8p s`&t`7o`8n`7e `8w`&e`8ll`2.
+ ~
+ 96 0 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9610
+-D3
++D0
+ ~
+ ~
+ 0 0 9607
+@@ -248,7 +248,7 @@ breeze. No matter the time of year, the tulip is in full bloom.
+ Beneath the tulip lies a small `3b`8r`3o`#n`3z`8e p`7l`&a`8q`7u`8e.`0
+ ~
+ 96 0 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9611
+@@ -275,11 +275,11 @@ dominate. Next to each marble pillar is a large, potted
+ `&whi`7t`&e `2orchid.
+ ~
+ 96 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9611
+-D2
++D3
+ ~
+ ~
+ 0 0 9608
+@@ -302,11 +302,11 @@ is a small circular bed with dozens of beautiful `&wh`7i`&te
+ of the oval garden. In front of the bench is a small `8p`&l`8aq`7u`&e`2. 
+ ~
+ 96 0 1 10 10
+-D2
++D3
+ ~
+ ~
+ 0 0 9609
+-D3
++D0
+ ~
+ ~
+ 0 0 9610
+@@ -347,11 +347,11 @@ towards the stables, offering an array of `5lav`%e`5nd`%e`5r
+ `3and `%l`&i`5l`7a`&c `3colored blooms. 
+ ~
+ 96 d 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9614
+-D1
++D2
+ ~
+ ~
+ 0 0 9699
+@@ -371,11 +371,11 @@ in them, though a few of the stalls are empty. A small set
+ of stairs lead `8up`7w`&ar`7d`8s`2.`0
+ ~
+ 96 d 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9616
+-D2
++D3
+ ~
+ ~
+ 0 0 9613
+@@ -427,11 +427,11 @@ either side of the stable. Most of the stalls have horses
+ in them, though a few of the stalls are empty.
+ ~
+ 96 d 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9617
+-D2
++D3
+ ~
+ ~
+ 0 0 9614
+@@ -449,15 +449,15 @@ grass and `1f`3o`1x`3t`!a`3ils `2compete for growing space. A `3p`#o`3st`1-`3and
+ `3r`#ai`3l `2fence made of `3oa`#k `2runs around the length of the pasture.
+ ~
+ 96 0 2 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9619
+-D2
++D3
+ ~
+ ~
+ 0 0 9616
+-D3
++D0
+ ~
+ ~
+ 0 0 9618
+@@ -485,11 +485,11 @@ of the `#Y`3ellow `#A`3jah`2 on hand should anyone come through
+ a gateway with injuries.`7
+ ~
+ 96 0 2 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9620
+-D1
++D2
+ ~
+ ~
+ 0 0 9617
+@@ -507,16 +507,16 @@ grass and `1f`3o`1x`3t`!a`3ils `2compete for growing space. A `3p`#o`3st`1-`3and
+ `3r`#ai`3l `2fence made of `3oa`#k `2runs around the length of the pasture.
+ ~
+ 96 0 2 10 10
+-D1
++D2
+ A delicate white skyway leading up into the Healing Halls.
+ ~
+ ~
+ 0 0 9666
+-D2
++D3
+ ~
+ ~
+ 0 0 9617
+-D3
++D0
+ ~
+ ~
+ 0 0 9620
+@@ -535,20 +535,20 @@ grass and `1f`3o`1x`3t`!a`3ils `2compete for growing space. A `3p`#o`3st`1-`3and
+ `2To the `1north `2and `1west `2are wide `7w`8r`7o`&u`8g`7h`8t`&-`8i`7r`&o`7n `2fences.`0
+ ~
+ 96 0 2 10 10
+-D0
++D1
+ `3A wide `7w`8r`7o`&u`8g`7h`8t`&-`8i`7r`&o`7n `3fence.`0
+ ~
+ fence wrought iron north~
+ 1 0 9621
+-D1
++D2
+ ~
+ ~
+ 0 0 9619
+-D2
++D3
+ ~
+ ~
+ 0 0 9618
+-D3
++D0
+ `3A wide `7w`8r`7o`&u`8g`7h`8t`&-`8i`7r`&o`7n `3fence.`0
+ ~
+ fence wrought iron west~
+@@ -574,11 +574,11 @@ D0
+ ~
+ ~
+ 0 0 -1
+-D1
++D2
+ ~
+ ~
+ 0 0 9622
+-D2
++D3
+ `3A wide `7w`8r`7o`&u`8g`7h`8t`&-`8i`7r`&o`7n `3fence.`0
+ ~
+ wrought iron fence~
+@@ -600,7 +600,7 @@ are spaced out a few spans from one another, all being
+ about set to the height of a normal man.`0
+ ~
+ 96 0 2 10 10
+-D3
++D0
+ ~
+ ~
+ 0 0 9621
+@@ -622,7 +622,7 @@ the Gaidin. There is a tall shelving unit with many
+ different types and sizes of `2dark gr`@ee`2n `8scale-mail shirts.
+ ~
+ 96 d 1 10 10
+-D2
++D3
+ ~
+ door mahogany south~
+ 1 0 9624
+@@ -643,19 +643,19 @@ fountain from a smooth `8gr`7a`8y `7stone that is studded with
+ `&g`7l`^i`7tt`^e`6r`&i`7ng cr`&y`7s`^t`7a`&ls`7.`0
+ ~
+ 96 d 1 10 10
+-D0
++D1
+ ~
+ door mahogany north~
+ 1 0 9623
+-D1
++D2
+ ~
+ ~
+ 0 0 9627
+-D2
++D3
+ ~
+ door mahogany south~
+ 1 0 9625
+-D3
++D0
+ ~
+ gate sunset~
+ 1 0 9104
+@@ -676,7 +676,7 @@ upwards for several levels in this same fashion. On the
+ ground floor, the door is made of thick `3m`#a`3hog`#a`3ny`8.
+ ~
+ 96 d 1 10 10
+-D0
++D1
+ ~
+ door mahogany north~
+ 1 0 9624
+@@ -696,11 +696,11 @@ way north and east. Off to the north, some ways off, a
+ fence and a pasture.`0
+ ~
+ 96 0 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9627
+-D1
++D2
+ `3A wide `7w`8r`7o`&u`8g`7h`8t`&-`8i`7r`&o`7n `3fence.`0
+ ~
+ wrought iron fence~
+@@ -722,11 +722,11 @@ fine `2l`@a`2wns `7and `2g`@a`2rdens `7of the White Tower, interspersed with
+ leatherleafs, paperbarks and elms.`0
+ ~
+ 96 d 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9628
+-D3
++D0
+ ~
+ ~
+ 0 0 9624
+@@ -747,11 +747,11 @@ fine `2l`@a`2wns `7and `2g`@a`2rdens `7of the White Tower, interspersed with
+ leatherleafs, paperbarks and elms.`
+ ~
+ 96 d 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9629
+-D2
++D3
+ ~
+ ~
+ 0 0 9627
+@@ -772,11 +772,11 @@ stone, but just beyond its reaches are well-tended `2l`@a`2wns `7and
+ `1f`!l`1ower `7beds. 
+ ~
+ 96 d 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9630
+-D3
++D0
+ ~
+ ~
+ 0 0 9628
+@@ -797,15 +797,15 @@ anything other than the stark whiteness of its stone, but
+ just beyond its reaches are well-tended `2l`@a`2wns `7and `1f`!l`1ower `7beds.
+ ~
+ 96 d 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9632
+-D1
++D2
+ ~
+ ~
+ 0 0 9631
+-D3
++D0
+ ~
+ ~
+ 0 0 9629
+@@ -826,11 +826,11 @@ stone, but just beyond its reaches are well-tended `2l`@a`2wns `7and
+ `1f`!l`1ower `7beds. 
+ ~
+ 96 d 1 10 10
+-D1
++D2
+ ~
+ door great east~
+ 1 0 9404
+-D3
++D0
+ ~
+ ~
+ 0 0 9630
+@@ -851,15 +851,15 @@ leads south, its white marble columns dwindling in the
+ distance. 
+ ~
+ 96 d 1 10 10
+-D0
++D1
+ ~
+ door~
+ 1 0 9633
+-D2
++D3
+ ~
+ ~
+ 0 0 9630
+-D3
++D0
+ ~
+ ~
+ 0 0 9663
+@@ -881,7 +881,7 @@ located to the north and south, and wide open archways lead to
+ the east and west.`0
+ ~
+ 96 d 1 10 10
+-D0
++D1
+ ~
+ twin door doors~
+ 1 0 9634
+@@ -889,11 +889,11 @@ D1
+ ~
+ ~
+ 0 0 -1
+-D2
++D3
+ ~
+ door~
+ 1 0 9632
+-D3
++D0
+ ~
+ ~
+ 0 0 9636
+@@ -918,11 +918,11 @@ tall as a single man. They are carved of dark wood and it
+ appears that it would take many men to push them open. 
+ ~
+ 96 d 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9661
+-D2
++D3
+ `3Huge twin doors carved from dark wood lead to the Library.`0
+ ~
+ twin door doors~
+@@ -942,7 +942,7 @@ little `8d`3u`8st `3on the lower section of the book shelves, but the
+ higher portions are q`8ui`3t`8e `3coated.
+ ~
+ 96 d 1 10 10
+-D3
++D0
+ ~
+ ~
+ 0 0 9633
+@@ -964,7 +964,7 @@ checkered with `8black `3and `&white `3tiles making the room seem even
+ bigger than it is. 
+ ~
+ 96 d 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9633
+@@ -990,15 +990,15 @@ and west there are arches leading into other sections of the
+ Library.
+ ~
+ 96 d 1 10 10
+-D0
++D1
+ ~
+ large door~
+ 1 0 9639
+-D1
++D2
+ ~
+ ~
+ 0 0 9640
+-D3
++D0
+ ~
+ ~
+ 0 0 9642
+@@ -1026,11 +1026,11 @@ candles providing light in this area. The Gr`8ea`3t H`8a`3ll lies
+ to the south, and a locked door rests to the north.`0
+ ~
+ 96 d 1 10 10
+-D0
++D1
+ ~
+ door archives~
+ 1 9502 9662
+-D2
++D3
+ ~
+ ~
+ 0 0 9636
+@@ -1054,7 +1054,7 @@ wide, open l`8e`3ct`8u`3re area that provides a great deal of room
+ for pacing. 
+ ~
+ 96 d 1 10 10
+-D2
++D3
+ ~
+ large door~
+ 1 0 9637
+@@ -1079,7 +1079,7 @@ length towards the vaulted ceilings. Long `#g`&o`#ld `3and `1m`!a`1ro`!o`1n
+ rests a small table with two chairs at either end.
+ ~
+ 96 d 1 10 10
+-D3
++D0
+ ~
+ ~
+ 0 0 9637
+@@ -1099,11 +1099,11 @@ below.  It serves to connect the `3Gr`8ea`3t L`8i`3br`8a`3ry `7to the
+ `&White Tower`7.
+ ~
+ 96 d 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9535
+-D3
++D0
+ ~
+ ~
+ 0 0 9643
+@@ -1122,7 +1122,7 @@ portions or even entire books to save the precious text in
+ them. 
+ ~
+ 96 d 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9637
+@@ -1143,7 +1143,7 @@ plants here, a mixture of `&o`#rch`&i`#ds`3, `1r`!o`1ses `3and `&l`7i`&ll`7ies `
+ about.
+ ~
+ 96 d 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9641
+@@ -1179,7 +1179,7 @@ view those important Tower events.`0
+ `7s`&i`7l`8e`&n`7t`8.`0
+ ~
+ 96 d 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9626
+@@ -1200,15 +1200,15 @@ fine `2l`@a`2wns `7and `2g`@a`2rdens `7of the White Tower, interspersed with
+ leatherleafs, paperbarks and elms.`0
+ ~
+ 96 d 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9646
+-D2
++D3
+ ~
+ ~
+ 0 0 9648
+-D3
++D0
+ ~
+ ~
+ 0 0 9605
+@@ -1233,16 +1233,16 @@ men in gray uniforms and shining armor, with white cloaks
+ emblazoned with a red Flame of Tar Valon on the back.
+ ~
+ 96 0 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9647
+-D2
++D3
+ A pair of gilded wrought-iron gates lead into the Courtyard newly constructed palace.
+ ~
+ gilded gates~
+ 1 0 9846
+-D3
++D0
+ ~
+ ~
+ 0 0 9645
+@@ -1263,11 +1263,11 @@ fountain from a smooth `8gr`7a`8y `7stone that is studded with
+ `&g`7l`^i`7tt`^e`6r`&i`7ng cr`&y`7s`^t`7a`&ls`7.`0
+ ~
+ 96 d 1 10 10
+-D1
++D2
+ ~
+ gate sunrise~
+ 1 0 9095
+-D3
++D0
+ ~
+ ~
+ 0 0 9646
+@@ -1290,7 +1290,7 @@ over this building, allowing massive amounts
+ of `#n`&a`#tur`&a`#l `&l`#i`&ght `3to filter in.`0
+ ~
+ 96 d 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9645
+@@ -1312,15 +1312,15 @@ tiled in `&p`7a`&le `7st`&o`7ne `3that seems to gleam in
+ the light.`0
+ ~
+ 96 d 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9650
+-D2
++D3
+ ~
+ ~
+ 0 0 9651
+-D3
++D0
+ ~
+ ~
+ 0 0 9648
+@@ -1344,7 +1344,7 @@ of keeping order exists, but must only be
+ comprehensible to the `#A`3es S`#e`3d`&a`3i.`0
+ ~
+ 96 d 1 10 10
+-D3
++D0
+ ~
+ ~
+ 0 0 9649
+@@ -1364,11 +1364,11 @@ are strewn about the room. A wide staircase
+ leads `8u`7p`&w`8a`&r`7d`8s`3.
+ ~
+ 96 d 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9649
+-D2
++D3
+ ~
+ ~
+ 0 0 9652
+@@ -1393,15 +1393,15 @@ columns line the room, providing support to
+ the ceilings high above.`0
+ ~
+ 96 d 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9651
+-D1
++D2
+ ~
+ ~
+ 0 0 9653
+-D3
++D0
+ ~
+ ~
+ 0 0 9654
+@@ -1422,11 +1422,11 @@ enough room for healer and patient, as well
+ as those who brought the patient.
+ ~
+ 96 d 1 10 10
+-D0
++D1
+ ~
+ door~
+ 1 0 9656
+-D3
++D0
+ ~
+ ~
+ 0 0 9652
+@@ -1461,11 +1461,11 @@ enough room for healer and patient, as well
+ as those who brought the patient.
+ ~
+ 96 d 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9655
+-D1
++D2
+ ~
+ ~
+ 0 0 9652
+@@ -1485,7 +1485,7 @@ western wall offers views of the gardens
+ beyond.
+ ~
+ 96 d 1 10 10
+-D2
++D3
+ ~
+ ~
+ 0 0 9654
+@@ -1508,7 +1508,7 @@ nothing to hide behind. Everything is open and
+ visible.`0
+ ~
+ 96 d 1 10 10
+-D2
++D3
+ ~
+ door~
+ 1 0 9653
+@@ -1529,15 +1529,15 @@ fine `2l`@a`2wns `7and `2g`@a`2rdens `7of the White Tower, interspersed with
+ leatherleafs, paperbarks and elms.`0
+ ~
+ 96 d 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9658
+-D1
++D2
+ ~
+ ~
+ 0 0 9664
+-D2
++D3
+ ~
+ ~
+ 0 0 9409
+@@ -1558,15 +1558,15 @@ fine `2l`@a`2wns `7and `2g`@a`2rdens `7of the White Tower, interspersed with
+ leatherleafs, paperbarks and elms.`0
+ ~
+ 96 d 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9659
+-D2
++D3
+ ~
+ ~
+ 0 0 9657
+-D3
++D0
+ ~
+ ~
+ 0 0 9660
+@@ -1587,11 +1587,11 @@ fountain from a smooth `8gr`7a`8y `7stone that is studded with
+ `&g`7l`^i`7tt`^e`6r`&i`7ng cr`&y`7s`^t`7a`&ls`7.`0
+ ~
+ 96 d 1 10 10
+-D0
++D1
+ ~
+ gate tarlomen~
+ 1 0 9099
+-D2
++D3
+ ~
+ ~
+ 0 0 9658
+@@ -1612,11 +1612,11 @@ fine `2l`@a`2wns `7and `2g`@a`2rdens `7of the White Tower, interspersed with
+ leatherleafs, paperbarks and elms.
+ ~
+ 96 d 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9658
+-D3
++D0
+ ~
+ ~
+ 0 0 9661
+@@ -1637,11 +1637,11 @@ fine `2l`@a`2wns `7and `2g`@a`2rdens `7of the White Tower, interspersed with
+ leatherleafs, paperbarks and elms.`0
+ ~
+ 96 d 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9660
+-D2
++D3
+ ~
+ ~
+ 0 0 9634
+@@ -1663,7 +1663,7 @@ and scrolls rest in shelves that tower ten feet high and
+ cover every available wall.`0
+ ~
+ 96 d 1 10 10
+-D2
++D3
+ ~
+ door archives~
+ 1 9502 9638
+@@ -1682,7 +1682,7 @@ Great Library. A few `3p`#e`3c`8a`3n `2trees are scattered about, but
+ otherwise this area is a sea of green.
+ ~
+ 96 d 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9632
+@@ -1702,11 +1702,11 @@ quarterstaves and practice swords, and even a few real
+ blades.`0
+ ~
+ 96 cd 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9667
+-D3
++D0
+ ~
+ ~
+ 0 0 9657
+@@ -1725,7 +1725,7 @@ covered by a `8black `3and `&white `3portico. Small `2g`@a`2rd`@e`2ns
+ is the entryway into the `3Y`#ellow `3A`#jah `3wing.
+ ~
+ 96 d 1 10 10
+-D3
++D0
+ ~
+ ~
+ 0 0 9666
+@@ -1749,11 +1749,11 @@ below.  It arches upward, from a walkway in the pastures,
+ up into the `#H`3ealing `#H`3alls`7 to the east.
+ ~
+ 96 d 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9665
+-D3
++D0
+ ~
+ ~
+ 0 0 9619
+@@ -1778,11 +1778,11 @@ portico up to the massive, `3ced`2a`3r `8doors reinforced with `&i`7ron`8
+ bolts that faces to the `&north`8.
+ ~
+ 96 d 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9668
+-D3
++D0
+ ~
+ ~
+ 0 0 9664
+@@ -1806,11 +1806,11 @@ S
+ `8branching alcove is well-lit to the `&east`8.`7
+ ~
+ 96 d 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9669
+-D2
++D3
+ ~
+ ~
+ 0 0 9667
+@@ -1835,15 +1835,15 @@ S
+ `&M`7aster at `&A`7rms`8.`7
+ ~
+ 96 d 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9670
+-D2
++D3
+ ~
+ ~
+ 0 0 9671
+-D3
++D0
+ ~
+ ~
+ 0 0 9668
+@@ -1865,7 +1865,7 @@ S
+ `8to the fact that it may have been used fairly recently.
+ ~
+ 96 d 1 10 10
+-D3
++D0
+ ~
+ ~
+ 0 0 9669
+@@ -1888,15 +1888,15 @@ S
+ `8rooms must be `&up`8 the `3s`8t`7a`&i`8rw`&e`3l`8l`8.`7
+ ~
+ 96 d 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9669
+-D1
++D2
+ ~
+ ~
+ 0 0 9672
+-D2
++D3
+ ~
+ ~
+ 0 0 9673
+@@ -1919,7 +1919,7 @@ S
+ `8the `%w`5ards`8 guarding the `&T`7ower`8 grounds...`7
+ ~
+ 96 d 1 10 10
+-D3
++D0
+ ~
+ ~
+ 0 0 9671
+@@ -1940,15 +1940,15 @@ S
+ `&west`8 must lead to the `&M`7aster at `&A`7rms`8.`7
+ ~
+ 96 d 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9671
+-D1
++D2
+ ~
+ ~
+ 0 0 9674
+-D3
++D0
+ ~
+ ~
+ 0 0 9676
+@@ -1967,7 +1967,7 @@ S
+ `8wall is a `7l`&o`8n`7gs`8w`&o`7r`8d sheathed and mounted for display.`7
+ ~
+ 96 d 1 10 10
+-D3
++D0
+ ~
+ ~
+ 0 0 9673
+@@ -2017,7 +2017,7 @@ D0
+ ~
+ ~
+ 0 0 -1
+-D1
++D2
+ ~
+ ~
+ 0 0 9673
+@@ -2045,7 +2045,7 @@ S
+ You are in an unfinished room.
+ ~
+ 96 d 1 10 10
+-D2
++D3
+ ~
+ ~
+ 0 0 9678
+@@ -2064,11 +2064,11 @@ S
+ You are in an unfinished room.
+ ~
+ 96 d 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9677
+-D2
++D3
+ ~
+ ~
+ 0 0 9511
+@@ -2190,16 +2190,16 @@ hedge archway leads out right here into an `3he`#r`3b `@g`2a`@rd`2e`@n`2
+ to the south.`7
+ ~
+ 96 a 1 10 10
+-D1
++D2
+ The narrow path continues to the east between the hedge walls.
+ ~
+ ~
+ 0 0 9688
+-D2
++D3
+ ~
+ ~
+ 0 0 9607
+-D3
++D0
+ The path continues a little way to the west.
+ ~
+ ~
+@@ -2224,12 +2224,12 @@ archway, while to the north, the path continues on into
+ deeper `8sh`7ad`8ow`7s`2.`7
+ ~
+ 96 a 1 10 10
+-D0
++D1
+ The path continues north into shadows.
+ ~
+ ~
+ 0 0 9690
+-D3
++D0
+ ~
+ ~
+ 0 0 9687
+@@ -2250,7 +2250,7 @@ basin of the birdbath, making a soothing `6trickling`2 sound of
+ water in the stillness of the `8shady`2 maze.`7
+ ~
+ 96 a 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9687
+@@ -2274,11 +2274,11 @@ into the air.  The path continues to the north, and to
+ `2the south.`7
+ ~
+ 96 a 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9691
+-D2
++D3
+ ~
+ ~
+ 0 0 9688
+@@ -2302,11 +2302,11 @@ into the air.  The path continues to the north, and to
+ the south.`7
+ ~
+ 96 a 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9692
+-D2
++D3
+ ~
+ ~
+ 0 0 9690
+@@ -2327,11 +2327,11 @@ is easy to traverse, kept well-tended and free of any odd
+ debris that might trip an unwary foot.`7
+ ~
+ 96 a 1 10 10
+-D2
++D3
+ ~
+ ~
+ 0 0 9691
+-D3
++D0
+ ~
+ ~
+ 0 0 9693
+@@ -2355,15 +2355,15 @@ ahead.  This intersection is filled with `#l`3i`&g`3h`#t`2 from above,
+ unhindered by the looming hedges.`7
+ ~
+ 96 a 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9800
+-D1
++D2
+ ~
+ ~
+ 0 0 9692
+-D3
++D0
+ ~
+ ~
+ 0 0 9694
+@@ -2384,11 +2384,11 @@ is easy to traverse, kept well-tended and free of any odd
+ debris that might trip an unwary foot.`7
+ ~
+ 96 a 1 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9693
+-D2
++D3
+ ~
+ ~
+ 0 0 9695
+@@ -2412,11 +2412,11 @@ into the air.  The path continues to the north, and to
+ the south.`7
+ ~
+ 96 a 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9694
+-D2
++D3
+ ~
+ ~
+ 0 0 9696
+@@ -2437,11 +2437,11 @@ is easy to traverse, kept well-tended and free of any odd
+ debris that might trip an unwary foot.`7
+ ~
+ 96 a 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9695
+-D1
++D2
+ ~
+ ~
+ 0 0 9697
+@@ -2462,12 +2462,12 @@ of white latticework is overgrown with fragrant `!r`1e`!d`2 and
+ and to the west.
+ ~
+ 96 a 1 10 10
+-D0
++D1
+ `2The path opens out into a lovely courtyard.`7
+ ~
+ ~
+ 0 0 9839
+-D3
++D0
+ ~
+ ~
+ 0 0 9696
+diff --git a/world/wld/97.wld b/world/wld/97.wld
+index ececd29..444639b 100644
+--- a/world/wld/97.wld
++++ b/world/wld/97.wld
+@@ -6,11 +6,11 @@ space. Arches lead south to the stairway and west to the
+ `&Novice`7 wing.
+ ~
+ 97 d 0 10 10
+-D2
++D3
+ ~
+ ~
+ 0 0 9446
+-D3
++D0
+ ~
+ ~
+ 0 0 9701
+@@ -33,19 +33,19 @@ leads back to the main Tower. Simple wooden doors are to
+ the north and south.
+ ~
+ 97 d 1 10 10
+-D0
++D1
+ ~
+ door wooden north~
+ 2 0 9708
+-D1
++D2
+ ~
+ ~
+ 0 0 9700
+-D2
++D3
+ ~
+ door wooden south~
+ 1 0 9709
+-D3
++D0
+ ~
+ ~
+ 0 0 9702
+@@ -67,19 +67,19 @@ courtyard continues to the east and west, and simple wooden
+ doors are to the north and south.
+ ~
+ 97 d 1 10 10
+-D0
++D1
+ ~
+ door wooden north~
+ 1 0 9706
+-D1
++D2
+ ~
+ ~
+ 0 0 9701
+-D2
++D3
+ ~
+ door wooden south~
+ 1 0 9707
+-D3
++D0
+ ~
+ ~
+ 0 0 9703
+@@ -101,15 +101,15 @@ courtyard continues to the east, and simple wooden doors
+ are to the north and south.
+ ~
+ 97 d 1 10 10
+-D0
++D1
+ ~
+ door wooden north~
+ 1 0 9704
+-D1
++D2
+ ~
+ ~
+ 0 0 9702
+-D2
++D3
+ ~
+ door wooden south~
+ 1 0 9705
+@@ -130,7 +130,7 @@ in the room. The floors are `&alm`7o`&st whi`7t`&e `7from the endless
+ scrubbings, and the walls are covered with `&whi`7t`&e `7plaster.`0
+ ~
+ 97 d 0 10 10
+-D2
++D3
+ ~
+ door wooden south~
+ 1 0 9703
+@@ -151,7 +151,7 @@ in the room. The floors are `&alm`7o`&st whi`7t`&e `7from the endless
+ scrubbings, and the walls are covered with `&whi`7t`&e `7plaster.`0
+ ~
+ 97 d 0 10 10
+-D0
++D1
+ ~
+ door wooden north~
+ 1 0 9703
+@@ -172,7 +172,7 @@ in the room. The floors are `&alm`7o`&st whi`7t`&e `7from the endless
+ scrubbings, and the walls are covered with `&whi`7t`&e `7plaster.`0
+ ~
+ 97 0 0 10 10
+-D2
++D3
+ ~
+ door wooden south~
+ 1 0 9702
+@@ -193,7 +193,7 @@ in the room. The floors are `&alm`7o`&st whi`7t`&e `7from the endless
+ scrubbings, and the walls are covered with `&whi`7t`&e `7plaster.`0
+ ~
+ 97 d 0 10 10
+-D0
++D1
+ ~
+ ~
+ 1 0 9702
+@@ -214,7 +214,7 @@ in the room. The floors are `&alm`7o`&st whi`7t`&e `7from the endless
+ scrubbings, and the walls are covered with `&whi`7t`&e `7plaster.`0
+ ~
+ 97 0 0 10 10
+-D2
++D3
+ ~
+ door wooden south~
+ 1 0 9701
+@@ -235,7 +235,7 @@ in the room. The floors are `&alm`7o`&st whi`7t`&e `7from the endless
+ scrubbings, and the walls are covered with `&whi`7t`&e `7plaster.`0
+ ~
+ 97 0 0 10 10
+-D0
++D1
+ ~
+ door wooden north~
+ 1 0 9701
+@@ -253,11 +253,11 @@ and paintings depicting scenes typical of the work of
+ each ajah.
+ ~
+ 97 d 0 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9446
+-D1
++D2
+ ~
+ ~
+ 0 0 9711
+@@ -275,19 +275,19 @@ here and there by tapestries and paintings depicting scenes
+ typical of the work of each ajah.
+ ~
+ 97 d 0 10 10
+-D0
++D1
+ ~
+ ~
+ 1 0 9718
+-D1
++D2
+ ~
+ ~
+ 0 0 9712
+-D2
++D3
+ ~
+ ~
+ 1 0 9717
+-D3
++D0
+ ~
+ ~
+ 0 0 9710
+@@ -305,11 +305,11 @@ one side of the door, and the other holds a basket resting
+ on a small table. The hallway continues to the west.
+ ~
+ 97 d 0 10 10
+-D0
++D1
+ ~
+ ~
+ 1 0 9713
+-D3
++D0
+ ~
+ ~
+ 0 0 9711
+@@ -337,11 +337,11 @@ with age, rests on a pedestal near the desk. No rug softens the
+ that stands in one corner.
+ ~
+ 97 d 0 10 10
+-D1
++D2
+ ~
+ ~
+ 1 0 9715
+-D2
++D3
+ ~
+ ~
+ 1 0 9712
+@@ -382,11 +382,11 @@ D0
+ ~
+ ~
+ 0 0 -1
+-D2
++D3
+ ~
+ ~
+ 1 0 9716
+-D3
++D0
+ ~
+ ~
+ 1 0 9713
+@@ -411,7 +411,7 @@ the balustrades to the side, the verdant `3fo`#li`3a`#g`3e`6 offering
+ both privacy and shade to the balcony.`7
+ ~
+ 97 0 0 10 10
+-D0
++D1
+ ~
+ ~
+ 1 0 9715
+@@ -433,7 +433,7 @@ are covered by maps, diagrams, notices, and cabinets to
+ hold supplies.`7
+ ~
+ 97 d 0 10 10
+-D0
++D1
+ ~
+ ~
+ 1 0 9711
+@@ -455,7 +455,7 @@ podium, near the back of the speaker's area, is a small
+ wooden desk and chair for the teacher's use.`7
+ ~
+ 97 d 0 10 10
+-D2
++D3
+ ~
+ ~
+ 1 0 9711
+@@ -480,7 +480,7 @@ representing one of the Seven Ajahs.  The Amyrlin Seat itself, symbol of Aes
+ Sedai strength and power, stands at the far end of the Hall.  
+ ~
+ 97 d 0 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9449
+@@ -513,11 +513,11 @@ the Amyrlin's study, while another door south leads into her private
+ bedchamber.
+ ~
+ 97 d 0 10 10
+-D2
++D3
+ ~
+ ~
+ 0 0 9721
+-D3
++D0
+ A polished wooden door leading out into the Amyrlin's study.
+ ~
+ polished door west~
+@@ -547,11 +547,11 @@ stained glass double doors lead out onto the Amyrlin's private balcony,
+ which overlooks her private garden.
+ ~
+ 97 d 0 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9720
+-D1
++D2
+ ~
+ ~
+ 0 0 9722
+@@ -574,7 +574,7 @@ doors provide illumination at night, and the scent of flowers lingers
+ here throughout the year.
+ ~
+ 97 d 0 10 10
+-D3
++D0
+ ~
+ ~
+ 0 0 9721
+@@ -589,11 +589,11 @@ S
+ You are in an unfinished room.
+ ~
+ 97 d 0 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9724
+-D1
++D2
+ ~
+ door east~
+ 0 0 9498
+@@ -608,7 +608,7 @@ S
+ You are in an unfinished room.
+ ~
+ 97 0 0 10 10
+-D2
++D3
+ ~
+ ~
+ 0 0 9723
+@@ -629,11 +629,11 @@ rests a smaller square flower bed, each with it's own
+ flowers.`0
+ ~
+ 97 0 0 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9726
+-D3
++D0
+ ~
+ ~
+ 0 0 9451
+@@ -655,7 +655,7 @@ to relay the many messages they recieve from all over the
+ continent back to the proper places in the Tower.`0
+ ~
+ 97 0 0 10 10
+-D2
++D3
+ ~
+ ~
+ 0 0 9725
+@@ -1018,7 +1018,7 @@ S
+ `8that boasts a heavy `8l`&o`7c`8k.`7
+ ~
+ 97 d 0 10 10
+-D1
++D2
+ ~
+ door wooden east~
+ 1 9502 9753
+@@ -1074,15 +1074,15 @@ S
+ `8deeper into the `3e`2a`3r`2t`3h`8.`7
+ ~
+ 97 d 0 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9756
+-D2
++D3
+ ~
+ ~
+ 0 0 9754
+-D3
++D0
+ ~
+ door wooden west~
+ 1 9602 9751
+@@ -1103,11 +1103,11 @@ S
+ `8the grain. It is l`7o`&c`8k`7e`&d`8 and will require a specific `&k`7e`8y to open.`7
+ ~
+ 97 d 0 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9753
+-D2
++D3
+ A large basement door.
+ ~
+ door large basement~
+@@ -1131,7 +1131,7 @@ S
+ `8It is l`7o`&c`8k`7e`&d`8 and will require a specific `&k`7e`8y to open.`7
+ ~
+ 97 d 0 10 10
+-D0
++D1
+ A large doorway leads down from the stables.
+ ~
+ door stable large~
+@@ -1154,15 +1154,15 @@ S
+ `8the room, heading down to the bowels of the `&T`7ower`8.`7
+ ~
+ 97 d 0 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9757
+-D1
++D2
+ ~
+ ~
+ 0 0 9760
+-D3
++D0
+ ~
+ ~
+ 0 0 9753
+@@ -1196,11 +1196,11 @@ S
+ `8the hall from the `&north`8.`7
+ ~
+ 97 d 0 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9758
+-D2
++D3
+ ~
+ ~
+ 0 0 9756
+@@ -1222,11 +1222,11 @@ S
+ `8basement.`7
+ ~
+ 97 d 0 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9759
+-D2
++D3
+ ~
+ ~
+ 0 0 9757
+@@ -1248,7 +1248,7 @@ S
+ `8that leads up to a trapdoor in the ceiling.`7
+ ~
+ 97 d 0 10 10
+-D3
++D0
+ ~
+ ~
+ 0 0 9758
+@@ -1269,11 +1269,11 @@ S
+ `8number of footprints in the recent past.`7
+ ~
+ 97 d 0 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9761
+-D3
++D0
+ ~
+ ~
+ 0 0 9756
+@@ -1292,11 +1292,11 @@ S
+ `8grit and rubble.`7
+ ~
+ 97 d 0 10 10
+-D2
++D3
+ ~
+ ~
+ 0 0 9762
+-D3
++D0
+ ~
+ ~
+ 0 0 9760
+@@ -1320,7 +1320,7 @@ S
+ `8complicated fashion, perhaps an indication of what lies above.`7
+ ~
+ 97 d 0 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9761
+@@ -1358,7 +1358,7 @@ S
+ `8terrifying view into the abyss.`7
+ ~
+ 97 d 0 10 10
+-D2
++D3
+ ~
+ ~
+ 0 0 9765
+@@ -1390,16 +1390,16 @@ S
+ `8into this room would face a `7blank`8 wall.`7
+ ~
+ 97 d 0 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9764
+-D1
++D2
+ A heavy iron door with a sturdy lock.
+ ~
+ iron door~
+ 1 9722 9767
+-D3
++D0
+ A heavy iron door with a sturdy lock.
+ ~
+ heavy door~
+@@ -1445,7 +1445,7 @@ S
+ `8an `&A`7es `&S`7edai `8would know the true value of the cache, however.`7
+ ~
+ 97 d 0 10 10
+-D1
++D2
+ A heavy iron door.
+ ~
+ iron door~
+@@ -1467,7 +1467,7 @@ S
+ `8of furniture in the room: the `7C`8hair of `7R`8emorse.`7
+ ~
+ 97 d 0 10 10
+-D3
++D0
+ A sturdy iron door.
+ ~
+ iron door~
+@@ -1490,7 +1490,7 @@ S
+ `8ever, there is a barred door to the `&south`8 made from i`&r`7o`8n.`7
+ ~
+ 97 d 0 10 10
+-D2
++D3
+ ~
+ ~
+ 0 0 9769
+@@ -1520,19 +1520,19 @@ S
+ `8each is dark with gloom.`7
+ ~
+ 97 d 0 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9768
+-D1
++D2
+ ~
+ ~
+ 0 0 9772
+-D2
++D3
+ ~
+ ~
+ 0 0 9771
+-D3
++D0
+ ~
+ ~
+ 0 0 9770
+@@ -1555,7 +1555,7 @@ S
+ `8previous 'occupants.'`7
+ ~
+ 97 d 0 10 10
+-D1
++D2
+ ~
+ ~
+ 0 0 9769
+@@ -1584,7 +1584,7 @@ S
+ `8that have been scraped into the stone.`7
+ ~
+ 97 d 0 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9769
+@@ -1606,7 +1606,7 @@ S
+ `8the only indication of a somewhat-recent occupant in this cell.`7
+ ~
+ 97 d 0 10 10
+-D3
++D0
+ ~
+ ~
+ 0 0 9769
+@@ -1632,7 +1632,7 @@ S
+ `6t`^a`&p`6es`7t`^r`6ie`&s`8 from the southlands.`7
+ ~
+ 97 d 0 10 10
+-D2
++D3
+ ~
+ ~
+ 0 0 9774
+@@ -1680,7 +1680,7 @@ S
+ `8The door to the `&north`8 is massive, better befitting a fortress.`7
+ ~
+ 97 0 0 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9773
+@@ -1714,7 +1714,7 @@ S
+ `8by the pale walls and `&white`8-tiled floor.`7
+ ~
+ 97 0 0 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9765
+diff --git a/world/wld/98.wld b/world/wld/98.wld
+index 5b72b34..dcbb56b 100644
+--- a/world/wld/98.wld
++++ b/world/wld/98.wld
+@@ -12,11 +12,11 @@ into the air.  The path continues to the north, and to
+ the south.`7
+ ~
+ 98 0 1 10 10
+-D0
++D1
+ ~
+ ~
+ 0 0 9801
+-D2
++D3
+ ~
+ ~
+ 0 0 9693
+@@ -38,19 +38,19 @@ is surrounded by pale white brick `&p`7a`&t`7h`&s`2, which lead off
+ to the north, south, east and west.`7
+ ~
+ 98 0 0 8 8
+-D0
++D1
+ ~
+ ~
+ 0 0 9802
+-D1
++D2
+ ~
+ ~
+ 0 0 9803
+-D2
++D3
+ ~
+ ~
+ 0 0 9800
+-D3
++D0
+ ~
+ ~
+ 0 0 9804
+@@ -79,7 +79,7 @@ D0
+ ~
+ ~
+ 0 0 -1
+-D2
++D3
+ ~
+ ~
+ 0 0 9801
+@@ -102,11 +102,11 @@ up the sides of the hedges, casting a fragrant scent
+ into the air.  The path continues to the east and west.`7
+ ~
+ 98 a 1 8 8
+-D1
++D2
+ ~
+ ~
+ 0 0 9822
+-D3
++D0
+ ~
+ ~
+ 0 0 9801
+@@ -129,11 +129,11 @@ up the sides of the hedges, casting a fragrant scent
+ into the air.  The path continues to the east and west.`7
+ ~
+ 98 a 1 8 8
+-D1
++D2
+ ~
+ ~
+ 0 0 9801
+-D3
++D0
+ ~
+ ~
+ 0 0 9805
+@@ -156,11 +156,11 @@ up the sides of the hedges, casting a fragrant scent
+ into the air.  The path continues to the east and west.`7
+ ~
+ 98 a 1 8 8
+-D1
++D2
+ ~
+ ~
+ 0 0 9804
+-D3
++D0
+ ~
+ ~
+ 0 0 9806
+@@ -182,11 +182,11 @@ paving stones is easy to traverse, kept well-tended and
+ free of any odd debris that might trip an `8unwary`2 foot.`7
+ ~
+ 98 0 0 8 8
+-D1
++D2
+ ~
+ ~
+ 0 0 9805
+-D2
++D3
+ ~
+ ~
+ 0 0 9807
+@@ -208,15 +208,15 @@ among the branches often.  The path branches to the
+ north, south and west here.`7
+ ~
+ 98 0 0 8 8
+-D0
++D1
+ ~
+ ~
+ 0 0 9806
+-D2
++D3
+ ~
+ ~
+ 0 0 9811
+-D3
++D0
+ ~
+ ~
+ 0 0 9808
+@@ -239,11 +239,11 @@ up the sides of the hedges, casting a fragrant scent
+ into the air.  The path continues to the east and west.`7
+ ~
+ 98 a 1 8 8
+-D1
++D2
+ ~
+ ~
+ 0 0 9807
+-D3
++D0
+ ~
+ ~
+ 0 0 9809
+@@ -265,11 +265,11 @@ Tower grounds seem even farther away.  The path of smooth white
+ any odd debris that might trip an `8unwary`2 foot.`7
+ ~
+ 98 a 1 8 8
+-D0
++D1
+ ~
+ ~
+ 0 0 9810
+-D1
++D2
+ ~
+ ~
+ 0 0 9808
+@@ -291,7 +291,7 @@ the way one came.  The bench seems a `5pleasant`2 place to
+ sit and relax for a moment.`
+ ~
+ 98 a 1 8 8
+-D2
++D3
+ ~
+ ~
+ 0 0 9809
+@@ -315,11 +315,11 @@ into the air.  The path continues to the north, and to
+ the south.`7
+ ~
+ 98 a 1 8 8
+-D0
++D1
+ ~
+ ~
+ 0 0 9807
+-D2
++D3
+ ~
+ ~
+ 0 0 9812
+@@ -342,11 +342,11 @@ smooth white `&p`7a`&vi`7n`&g s`7t`&on`7e`&s`2 are easy to traverse, kept well-
+ tended and free of any odd debris that might trip an `8unwary`2 foot.`7
+ ~
+ 98 a 1 8 8
+-D0
++D1
+ ~
+ ~
+ 0 0 9811
+-D3
++D0
+ ~
+ ~
+ 0 0 9813
+@@ -369,11 +369,11 @@ up the sides of the hedges, casting a fragrant scent
+ into the air.  The path continues to the east and west.`7
+ ~
+ 98 a 1 8 8
+-D1
++D2
+ ~
+ ~
+ 0 0 9812
+-D3
++D0
+ ~
+ ~
+ 0 0 9814
+@@ -395,11 +395,11 @@ paving stones is easy to traverse, kept well-tended and
+ free of any odd debris that might trip an `8unwary`2 foot.`7
+ ~
+ 98 0 0 8 8
+-D1
++D2
+ ~
+ ~
+ 0 0 9813
+-D2
++D3
+ ~
+ ~
+ 0 0 9815
+@@ -423,11 +423,11 @@ into the air.  The path continues to the north, and to
+ the south.`7
+ ~
+ 98 0 0 8 8
+-D0
++D1
+ ~
+ ~
+ 0 0 9814
+-D2
++D3
+ ~
+ ~
+ 0 0 9816
+@@ -449,15 +449,15 @@ and out amongst the `%p`5e`&t`7u`%n`5i`&a`7s`2, and light seems to be more
+ abundant as the path opens out here.`7
+ ~
+ 98 a 1 8 8
+-D0
++D1
+ ~
+ ~
+ 0 0 9815
+-D1
++D2
+ ~
+ ~
+ 0 0 9818
+-D2
++D3
+ ~
+ ~
+ 0 0 9817
+@@ -479,7 +479,7 @@ the way one came.  The bench seems a `5pleasant`2 place to
+ sit and relax for a moment.`7
+ ~
+ 98 0 0 8 8
+-D0
++D1
+ ~
+ ~
+ 0 0 9816
+@@ -502,11 +502,11 @@ up the sides of the hedges, casting a fragrant scent
+ into the air.  The path continues to the east and west.`7
+ ~
+ 98 a 1 8 8
+-D1
++D2
+ ~
+ ~
+ 0 0 9819
+-D3
++D0
+ ~
+ ~
+ 0 0 9816
+@@ -529,11 +529,11 @@ up the sides of the hedges, casting a fragrant scent
+ into the air.  The path continues to the east and west.`7
+ ~
+ 98 a 1 8 8
+-D1
++D2
+ ~
+ ~
+ 0 0 9820
+-D3
++D0
+ ~
+ ~
+ 0 0 9818
+@@ -554,11 +554,11 @@ see the darting form of a `!h`1u`&m`7m`@i`2n`!g`1b`&i`7r`@d`2 seeking the nectar
+ of the fragrant blossoms.`7
+ ~
+ 98 a 1 8 8
+-D2
++D3
+ ~
+ ~
+ 0 0 9821
+-D3
++D0
+ ~
+ ~
+ 0 0 9819
+@@ -580,7 +580,7 @@ the way one came.  The bench seems a `5pleasant`2 place to
+ sit and relax for a moment.`7
+ ~
+ 98 a 1 8 8
+-D0
++D1
+ ~
+ ~
+ 0 0 9820
+@@ -603,11 +603,11 @@ up the sides of the hedges, casting a fragrant scent
+ into the air.  The path continues to the east and west.`7
+ ~
+ 98 a 1 8 8
+-D1
++D2
+ ~
+ ~
+ 0 0 9823
+-D3
++D0
+ ~
+ ~
+ 0 0 9803
+@@ -628,11 +628,11 @@ see the darting form of a `!h`1u`&m`7m`@i`2n`!g`1b`&i`7r`@d`2 seeking the nectar
+ of the fragrant blossoms.`7
+ ~
+ 98 a 1 8 8
+-D2
++D3
+ ~
+ ~
+ 0 0 9824
+-D3
++D0
+ ~
+ ~
+ 0 0 9822
+@@ -652,15 +652,15 @@ is a perfectly round `@t`2o`#p`3i`@a`2r`#y `3b`@u`2s`#h`2.  The path continues t
+ the north, east and south.`7
+ ~
+ 98 a 1 8 8
+-D0
++D1
+ ~
+ ~
+ 0 0 9823
+-D1
++D2
+ ~
+ ~
+ 0 0 9825
+-D2
++D3
+ ~
+ ~
+ 0 0 9828
+@@ -683,11 +683,11 @@ up the sides of the hedges, casting a fragrant scent
+ into the air.  The path continues to the east and west.`7
+ ~
+ 98 a 1 8 8
+-D1
++D2
+ ~
+ ~
+ 0 0 9826
+-D3
++D0
+ ~
+ ~
+ 0 0 9824
+@@ -710,11 +710,11 @@ smooth white `&p`7a`&vi`7n`&g s`7t`&on`7e`&s`2 are easy to traverse, kept well-
+ tended and free of any odd debris that might trip an `8unwary`2 foot.`7
+ ~
+ 98 a 1 8 8
+-D0
++D1
+ ~
+ ~
+ 0 0 9827
+-D3
++D0
+ ~
+ ~
+ 0 0 9825
+@@ -736,7 +736,7 @@ the way one came.  The bench seems a `5pleasant`2 place to
+ sit and relax for a moment.`7
+ ~
+ 98 a 1 8 8
+-D2
++D3
+ ~
+ ~
+ 0 0 9826
+@@ -760,11 +760,11 @@ into the air.  The path continues to the north, and to
+ the south.`7
+ ~
+ 98 a 1 8 8
+-D0
++D1
+ ~
+ ~
+ 0 0 9824
+-D2
++D3
+ ~
+ ~
+ 0 0 9829
+@@ -785,11 +785,11 @@ is easy to traverse, kept well-tended and free of any odd
+ debris that might trip an unwary foot.`7
+ ~
+ 98 a 1 8 8
+-D0
++D1
+ ~
+ ~
+ 0 0 9828
+-D1
++D2
+ ~
+ ~
+ 0 0 9830
+@@ -812,11 +812,11 @@ up the sides of the hedges, casting a fragrant scent
+ into the air.  The path continues to the east and west.`7
+ ~
+ 98 a 1 8 8
+-D1
++D2
+ ~
+ ~
+ 0 0 9831
+-D3
++D0
+ ~
+ ~
+ 0 0 9829
+@@ -837,11 +837,11 @@ see the darting form of a `!h`1u`&m`7m`@i`2n`!g`1b`&i`7r`@d`2 seeking the nectar
+ of the fragrant blossoms.`7
+ ~
+ 98 a 1 8 8
+-D2
++D3
+ ~
+ ~
+ 0 0 9832
+-D3
++D0
+ ~
+ ~
+ 0 0 9830
+@@ -865,11 +865,11 @@ into the air.  The path continues to the north, and to
+ the south.`7
+ ~
+ 98 a 1 8 8
+-D0
++D1
+ ~
+ ~
+ 0 0 9831
+-D2
++D3
+ ~
+ ~
+ 0 0 9833
+@@ -896,15 +896,15 @@ the Green Ajah.  The cherry tree adds a splash of `%p`&i`5n`%k`2 at
+ the garden's center.`7
+ ~
+ 98 a 1 8 8
+-D0
++D1
+ ~
+ ~
+ 0 0 9832
+-D2
++D3
+ ~
+ ~
+ 0 0 9834
+-D3
++D0
+ ~
+ ~
+ 0 0 9835
+@@ -926,7 +926,7 @@ the way one came.  The bench seems a `5pleasant`2 place to
+ sit and relax for a moment.`7
+ ~
+ 98 a 1 8 8
+-D0
++D1
+ ~
+ ~
+ 0 0 9833
+@@ -949,11 +949,11 @@ up the sides of the hedges, casting a fragrant scent
+ into the air.  The path continues to the east and west.`7
+ ~
+ 98 a 1 8 8
+-D1
++D2
+ ~
+ ~
+ 0 0 9833
+-D3
++D0
+ ~
+ ~
+ 0 0 9836
+@@ -976,11 +976,11 @@ up the sides of the hedges, casting a fragrant scent
+ into the air.  The path continues to the east and west.`7
+ ~
+ 98 a 1 8 8
+-D1
++D2
+ ~
+ ~
+ 0 0 9835
+-D3
++D0
+ ~
+ ~
+ 0 0 9837
+@@ -1002,11 +1002,11 @@ paving stones is easy to traverse, kept well-tended and
+ free of any odd debris that might trip an `8unwary`2 foot.`7
+ ~
+ 98 a 1 8 8
+-D1
++D2
+ ~
+ ~
+ 0 0 9836
+-D2
++D3
+ ~
+ ~
+ 0 0 9838
+@@ -1028,7 +1028,7 @@ the way one came.  The bench seems a `5pleasant`2 place to
+ sit and relax for a moment.`7
+ ~
+ 98 a 1 8 8
+-D0
++D1
+ ~
+ ~
+ 0 0 9837
+@@ -1054,7 +1054,7 @@ the other almost in supplication, as if seeking some form of
+ running through a sieve, and into the basin below.`7
+ ~
+ 98 0 0 8 8
+-D2
++D3
+ ~
+ ~
+ 0 0 9697
+@@ -1079,7 +1079,7 @@ D0
+ ~
+ ~
+ 0 0 -1
+-D2
++D3
+ ~
+ ~
+ 0 0 9802
+@@ -1107,11 +1107,11 @@ palace beyond.  There are two men in dark gray `8uniforms`7 and
+ shining armor on guard to either side of the doors.`7
+ ~
+ 98 0 0 8 8
+-D0
++D1
+ ~
+ ~
+ 0 0 9868
+-D1
++D2
+ ~
+ ~
+ 0 0 9842
+@@ -1119,7 +1119,7 @@ D2
+ ~
+ ~
+ 0 0 -1
+-D3
++D0
+ ~
+ ~
+ 0 0 9855
+@@ -1140,11 +1140,11 @@ covered with creeping vines with `5fragrant`7 red and white
+ `!b`1l`&e`7e`!d`1i`&n`7g `!h`1e`&a`7r`!t`7 blossoms.
+ ~
+ 98 0 0 8 8
+-D1
++D2
+ ~
+ ~
+ 0 0 9843
+-D3
++D0
+ ~
+ ~
+ 0 0 9841
+@@ -1165,11 +1165,11 @@ covered with creeping vines with `5fragrant`7 red and white
+ `!b`1l`&e`7e`!d`1i`&n`7g `!h`1e`&a`7r`!t`7 blossoms.
+ ~
+ 98 0 0 8 8
+-D1
++D2
+ ~
+ ~
+ 0 0 9844
+-D3
++D0
+ ~
+ ~
+ 0 0 9842
+@@ -1190,15 +1190,15 @@ covered with creeping vines with `5fragrant`7 red and white
+ `!b`1l`&e`7e`!d`1i`&n`7g `!h`1e`&a`7r`!t`7 blossoms.  A path lies to the north.
+ ~
+ 98 0 0 8 8
+-D0
++D1
+ ~
+ ~
+ 0 0 9853
+-D1
++D2
+ ~
+ ~
+ 0 0 9845
+-D3
++D0
+ ~
+ ~
+ 0 0 9843
+@@ -1223,7 +1223,7 @@ D1
+ ~
+ ~
+ 0 0 -1
+-D3
++D0
+ ~
+ ~
+ 0 0 9844
+@@ -1250,12 +1250,12 @@ patrolled daily by more such guards, and seems to see
+ few visitors.
+ ~
+ 98 0 1 8 8
+-D0
++D1
+ A pair of gilded gates lead out into the grounds of the White Tower.
+ ~
+ gilded gates~
+ 1 0 9646
+-D2
++D3
+ ~
+ ~
+ 0 0 9881
+@@ -1281,11 +1281,11 @@ The hallway runs to the east and west.  To the north, a
+ stairway spirals down to the ground level of the palace.
+ ~
+ 98 0 0 8 8
+-D0
++D1
+ ~
+ ~
+ 0 0 9893
+-D1
++D2
+ ~
+ ~
+ 0 0 9851
+@@ -1293,7 +1293,7 @@ D2
+ ~
+ ~
+ 0 0 -1
+-D3
++D0
+ ~
+ ~
+ 0 0 9852
+@@ -1323,12 +1323,12 @@ corner out of the way of the bustling cooks.  The smell
+ of fresh-baked goods is almost a constant.`7
+ ~
+ 98 0 0 8 8
+-D0
++D1
+ A pair of swinging doors lead into a narrow hallway.
+ ~
+ swinging doors~
+ 1 0 9849
+-D1
++D2
+ A pair of swinging doors lead into the dining room.
+ ~
+ swinging dining doors~
+@@ -1358,15 +1358,15 @@ To the north, a pair of glass doors lead out into a garden, while to
+ the south, another pair of doors lead into the kitchen.`7 
+ ~
+ 98 0 0 8 8
+-D0
++D1
+ ~
+ glass doors~
+ 1 0 9850
+-D1
++D2
+ ~
+ ~
+ 0 0 9875
+-D2
++D3
+ A pair of swinging doors lead into the kitchen.
+ ~
+ swinging kitchen doors~
+@@ -1404,12 +1404,12 @@ D0
+ ~
+ ~
+ 0 0 -1
+-D1
++D2
+ A pair of glass doors lead into the ballroom.
+ ~
+ ballroom doors~
+ 1 0 9879
+-D2
++D3
+ A pair of glass-paned doors lead into the palace.
+ ~
+ glass doors~
+@@ -1436,11 +1436,11 @@ The hallway runs to the west and north.  Several doors
+ line the hall at intervals between the sconces.
+ ~
+ 98 0 0 8 8
+-D0
++D1
+ ~
+ ~
+ 0 0 9861
+-D1
++D2
+ A pair of ornate double doors carved with a rising sun of many rays.
+ ~
+ ornate double sun doors~
+@@ -1449,7 +1449,7 @@ D2
+ ~
+ ~
+ 0 0 -1
+-D3
++D0
+ ~
+ ~
+ 0 0 9847
+@@ -1476,15 +1476,15 @@ The hallway runs to the east and north.  Several doors
+ line the hall at intervals between the sconces.
+ ~
+ 98 0 0 8 8
+-D0
++D1
+ ~
+ ~
+ 0 0 9859
+-D1
++D2
+ ~
+ ~
+ 0 0 9847
+-D3
++D0
+ A pair of ornate double doors carved with roses and thorny vines.
+ ~
+ ornate double rose doors~
+@@ -1509,11 +1509,11 @@ D0
+ ~
+ ~
+ 0 0 -1
+-D2
++D3
+ ~
+ ~
+ 0 0 9844
+-D3
++D0
+ ~
+ ~
+ 0 0 9854
+@@ -1539,7 +1539,7 @@ out appears to be eastward toward the grounds of
+ the palace
+ ~
+ 98 0 1 8 8
+-D1
++D2
+ ~
+ ~
+ 0 0 9853
+@@ -1564,11 +1564,11 @@ covered with creeping vines with `5fragrant`7 red and white
+ `!b`1l`&e`7e`!d`1i`&n`7g `!h`1e`&a`7r`!t`7 blossoms.
+ ~
+ 98 0 0 8 8
+-D1
++D2
+ ~
+ ~
+ 0 0 9841
+-D3
++D0
+ ~
+ ~
+ 0 0 9856
+@@ -1593,11 +1593,11 @@ D0
+ ~
+ ~
+ 0 0 -1
+-D1
++D2
+ ~
+ ~
+ 0 0 9855
+-D3
++D0
+ ~
+ ~
+ 0 0 9857
+@@ -1618,15 +1618,15 @@ covered with creeping vines with `5fragrant`7 red and white
+ `!b`1l`&e`7e`!d`1i`&n`7g `!h`1e`&a`7r`!t`7 blossoms.
+ ~
+ 98 0 0 8 8
+-D0
++D1
+ ~
+ ~
+ 0 0 9866
+-D1
++D2
+ ~
+ ~
+ 0 0 9856
+-D3
++D0
+ ~
+ ~
+ 0 0 9858
+@@ -1647,7 +1647,7 @@ an `@O`2g`&i`2e`@r`7, and covered with `5f`3l`2o`1w`5e`3r`2i`1n`5g`7 vines.  To
+ a smoothly paved walk parallels the hedge wall.`7
+ ~
+ 98 c 1 8 8
+-D1
++D2
+ ~
+ ~
+ 0 0 9857
+@@ -1678,7 +1678,7 @@ The hallway runs to the north and south.  Several doors
+ line the hall at intervals between the sconces.
+ ~
+ 98 0 0 8 8
+-D0
++D1
+ ~
+ ~
+ 0 0 9860
+@@ -1686,11 +1686,11 @@ D1
+ ~
+ ~
+ 0 0 -1
+-D2
++D3
+ ~
+ ~
+ 0 0 9852
+-D3
++D0
+ A pair of ornate double doors carved with leopards.
+ ~
+ ornate double leopard doors~
+@@ -1722,11 +1722,11 @@ D0
+ ~
+ ~
+ 0 0 -1
+-D2
++D3
+ ~
+ ~
+ 0 0 9859
+-D3
++D0
+ A pair of ornate double doors carved with an avendesora tree.
+ ~
+ ornate double avendesora doors~
+@@ -1753,16 +1753,16 @@ The hallway runs to the north and south.  Several doors
+ line the hallway at intervals between the sconces.
+ ~
+ 98 0 0 8 8
+-D0
++D1
+ ~
+ ~
+ 0 0 9862
+-D1
++D2
+ An ornate pair of double doors carved with stooping hawks.
+ ~
+ ornate double hawk doors~
+ 1 0 9864
+-D2
++D3
+ ~
+ ~
+ 0 0 9851
+@@ -1793,12 +1793,12 @@ D0
+ ~
+ ~
+ 0 0 -1
+-D1
++D2
+ A plain wooden door.
+ ~
+ plain wooden door~
+ 1 0 9863
+-D2
++D3
+ ~
+ ~
+ 0 0 9861
+@@ -1825,7 +1825,7 @@ D2
+ ~
+ ~
+ 0 0 -1
+-D3
++D0
+ A plain wooden door.
+ ~
+ plain wooden door~
+@@ -1873,7 +1873,7 @@ D2
+ ~
+ ~
+ 0 0 -1
+-D3
++D0
+ A pair of ornate double doors carved with stooping hawks.
+ ~
+ ornate double hawk doors~
+@@ -1908,7 +1908,7 @@ against the other wall.  In a corner, a wash basin rests on an
+ embroidered with a `#r`3i`#si`3n`#g s`3u`#n`7 in thread-of-gold.
+ ~
+ 98 0 0 8 8
+-D3
++D0
+ A pair of ornate double doors carved with a rising sun with many rays.
+ ~
+ ornate double sun doors~
+@@ -1930,11 +1930,11 @@ circles around a small pond surrounded by a few graceful
+ the east, or to the south.
+ ~
+ 98 0 0 8 8
+-D1
++D2
+ ~
+ ~
+ 0 0 9867
+-D2
++D3
+ ~
+ ~
+ 0 0 9857
+@@ -1961,7 +1961,7 @@ or helmets worked with horns.  The walls bear several
+ other weaves gone awry.
+ ~
+ 98 c 1 8 8
+-D3
++D0
+ ~
+ ~
+ 0 0 9866
+@@ -1987,11 +1987,11 @@ lead out of the palace, while to the north lies a grand
+ hall hung with many `2t`3a`1p`5e`6s`2t`3r`1i`5e`6s`7.
+ ~
+ 98 0 0 8 8
+-D0
++D1
+ ~
+ ~
+ 0 0 9869
+-D2
++D3
+ ~
+ ~
+ 0 0 9841
+@@ -2016,11 +2016,11 @@ one were to look at each one closely, it might just be
+ possible to discern what that story is.
+ ~
+ 98 0 0 8 8
+-D0
++D1
+ ~
+ ~
+ 0 0 9870
+-D2
++D3
+ ~
+ ~
+ 0 0 9868
+@@ -2048,19 +2048,19 @@ seen.  Several doors line this corridor, each one very
+ different if one looks closely.`7
+ ~
+ 98 0 0 8 8
+-D0
++D1
+ ~
+ ~
+ 0 0 9892
+-D1
++D2
+ ~
+ ~
+ 0 0 9888
+-D2
++D3
+ ~
+ ~
+ 0 0 9869
+-D3
++D0
+ ~
+ ~
+ 0 0 9871
+@@ -2086,20 +2086,20 @@ Several `8doors`7 line this corridor, each one different
+ if one looks closely.`7
+ ~
+ 98 0 0 8 8
+-D0
++D1
+ ~
+ ~
+ 0 0 9876
+-D1
++D2
+ ~
+ ~
+ 0 0 9870
+-D2
++D3
+ A set of double doors that lead into an office.
+ ~
+ double doors~
+ 1 0 9872
+-D3
++D0
+ ~
+ carved wooden door~
+ 1 0 9874
+@@ -2132,12 +2132,12 @@ windows.  To the north, a polished `#w`3o`#od`3e`#n`7 door carved with
+ musical instruments leads back out into the hall.`7
+ ~
+ 98 0 0 8 8
+-D0
++D1
+ A pair of double doors lead out.
+ ~
+ double doors~
+ 1 0 9871
+-D2
++D3
+ A pair of glass-paned doors lead out into a peaceful garden.
+ ~
+ glass garden doors~
+@@ -2170,7 +2170,7 @@ the center, and eventually lead back to the `6glass`2 doors
+ into the music room of the palace.`7
+ ~
+ 98 0 0 8 8
+-D0
++D1
+ A pair of glass-paned doors lead back into the music room.
+ ~
+ glass doors~
+@@ -2201,11 +2201,11 @@ at evenly spaced intervals, while smaller gilded candelabra
+ are spaced along the dining table for light by which to eat.`7
+ ~
+ 98 0 0 8 8
+-D1
++D2
+ ~
+ carved wooden door~
+ 1 0 9871
+-D3
++D0
+ A pair of swinging doors lead into the kitchens.
+ ~
+ swinging doors~
+@@ -2227,16 +2227,16 @@ to the west and joins with the main corridor to the east.  To
+ the north, a pair of `8double doors`7 lead into the grand ballroom.`7
+ ~
+ 98 0 0 8 8
+-D0
++D1
+ A pair of double doors lead into the ballroom.
+ ~
+ double doors~
+ 1 0 9879
+-D1
++D2
+ ~
+ ~
+ 0 0 9876
+-D3
++D0
+ ~
+ ~
+ 0 0 9849
+@@ -2262,15 +2262,15 @@ Several `8doors`7 line this corridor, each one different
+ if one looks closely.`7
+ ~
+ 98 0 0 8 8
+-D0
++D1
+ ~
+ ~
+ 0 0 9878
+-D2
++D3
+ ~
+ ~
+ 0 0 9871
+-D3
++D0
+ ~
+ ~
+ 0 0 9875
+@@ -2304,19 +2304,19 @@ Several `8doors`7 line this corridor, each one different
+ if one looks closely.`7
+ ~
+ 98 0 0 8 8
+-D0
++D1
+ ~
+ stained glass door~
+ 1 0 9880
+-D1
++D2
+ ~
+ ~
+ 0 0 9882
+-D2
++D3
+ ~
+ ~
+ 0 0 9876
+-D3
++D0
+ ~
+ ornate double doors~
+ 1 0 9879
+@@ -2350,16 +2350,16 @@ west, a pair of `&f`7r`^o`6s`^t`7e`&d`7 glass-paned doors open out into a
+ beautiful garden.`7
+ ~
+ 98 0 0 8 8
+-D1
++D2
+ ~
+ ornate double door~
+ 1 0 9878
+-D2
++D3
+ A pair of tall, arched double doors lead out of the ballroom.
+ ~
+ double doors~
+ 1 0 9875
+-D3
++D0
+ The glass on these doors is etched with floral designs, and
+ partially frosted panes are intermingled with clear, beveled
+ glass which still allows a view of the gardens beyond.
+@@ -2399,7 +2399,7 @@ give the room a sense of `3warmth`7 and life.  To the south, a pair
+ of `@s`2t`#a`3i`^n`6e`@d`7 glass doors lead out into the hall.
+ ~
+ 98 0 0 8 8
+-D2
++D3
+ A pair of stained glass doors are done in shades of greens
+ and golds, blues and violets to represent gardens and skies.
+ They lead back out into the hall.
+@@ -2438,11 +2438,11 @@ light this vast foyer, six to each side, hanging from
+ ornate `#g`3i`#ld`3e`#d`7 buttresses.
+ ~
+ 98 0 0 8 8
+-D0
++D1
+ ~
+ ~
+ 0 0 9846
+-D2
++D3
+ ~
+ ~
+ 0 0 9882
+@@ -2468,15 +2468,15 @@ Several `8doors`7 line this corridor, each one different
+ if one looks closely.  To the north is a large foyer.`7
+ ~
+ 98 0 0 8 8
+-D0
++D1
+ ~
+ ~
+ 0 0 9881
+-D1
++D2
+ ~
+ ~
+ 0 0 9883
+-D3
++D0
+ ~
+ ~
+ 0 0 9878
+@@ -2502,20 +2502,20 @@ Several `8doors`7 line this corridor, each one different
+ if one looks closely.`7
+ ~
+ 98 0 0 8 8
+-D0
++D1
+ ~
+ stained glass door~
+ 1 0 9884
+-D1
++D2
+ A plain wooden door with a lock.
+ ~
+ plain wooden door~
+ 1 9819 9885
+-D2
++D3
+ ~
+ ~
+ 0 0 9886
+-D3
++D0
+ ~
+ ~
+ 0 0 9882
+@@ -2547,7 +2547,7 @@ decorated with exquisite figurines. A pair of `*s`^t`6a`*i`^n`6e`*d`7 glass
+ doors lead out of the room into the corridor beyond.`7
+ ~
+ 98 0 0 8 8
+-D2
++D3
+ These beautiful stained-glass doors are done in shades of blues 
+ ranging from the palest cyan to the deepest indigo, depicting
+ scenes reminiscent of ocean waves.
+@@ -2569,12 +2569,12 @@ slender towers.  Small, arched `6windows`7 offer a view of the
+ Tower grounds along the way up.
+ ~
+ 98 0 0 8 8
+-D2
++D3
+ A narrow wooden door with a lock.
+ ~
+ wooden door~
+ 1 9819 9887
+-D3
++D0
+ A plain wooden door with a lock.
+ ~
+ plain door~
+@@ -2605,15 +2605,15 @@ Several `8doors`7 line this corridor, each one different
+ if one looks closely.`7
+ ~
+ 98 0 0 8 8
+-D0
++D1
+ ~
+ ~
+ 0 0 9883
+-D1
++D2
+ ~
+ ~
+ 0 0 9887
+-D2
++D3
+ ~
+ ~
+ 0 0 9888
+@@ -2634,16 +2634,16 @@ to the east and joins with the main corridor to the west.  To
+ the north, there is a nondescript door.`7
+ ~
+ 98 0 0 8 8
+-D0
++D1
+ A plain wooden door with a lock.
+ ~
+ plain wooden door~
+ 1 9819 9885
+-D1
++D2
+ ~
+ ~
+ 0 0 9895
+-D3
++D0
+ ~
+ undefined~
+ 0 0 9886
+@@ -2669,20 +2669,20 @@ Several `8doors`7 line this corridor, each one different
+ if one looks closely.`7
+ ~
+ 98 0 0 8 8
+-D0
++D1
+ ~
+ ~
+ 0 0 9886
+-D1
++D2
+ A wooden door with intricate carvings of books and scrolls.
+ ~
+ carved wooden door~
+ 1 0 9889
+-D2
++D3
+ ~
+ double doors~
+ 1 0 9890
+-D3
++D0
+ ~
+ ~
+ 0 0 9870
+@@ -2710,12 +2710,12 @@ leading into the library, where a `3Br`7o`3wn Si`7st`3er`7 keeps record of
+ all who come here seeking the knowledge of the tomes within.`7
+ ~
+ 98 0 0 8 8
+-D1
++D2
+ A pair of glass-paned doors lead out into a peaceful garden.
+ ~
+ glass double doors~
+ 1 0 9894
+-D3
++D0
+ A pair of tall double doors carved with books and scrolls leads out into the hall.
+ ~
+ carved double doors~
+@@ -2746,11 +2746,11 @@ blend in cunningly with the windows, leading out into a
+ garden that seems to be home to an abundance of `6birds`7.
+ ~
+ 98 0 0 8 8
+-D0
++D1
+ ~
+ double doors~
+ 1 0 9888
+-D2
++D3
+ ~
+ glass double doors~
+ 1 0 9891
+@@ -2782,7 +2782,7 @@ this garden seems to be from within the palace, through
+ a pair of `^g`6l`&a`7s`^s`6 d`&o`7o`^r`6s`2 to the north.`7
+ ~
+ 98 0 1 8 8
+-D0
++D1
+ ~
+ glass double doors~
+ 1 0 9890
+@@ -2802,7 +2802,7 @@ rich `!m`1a`#h`3o`!g`1a`#n`3y`7, polished to a shine, follows the stairs
+ up.  Lamps on tall stands illuminate the way.
+ ~
+ 98 0 0 8 8
+-D2
++D3
+ ~
+ ~
+ 0 0 9870
+@@ -2827,7 +2827,7 @@ up.  Lamps on tall stands illuminate the way.  There
+ is a hallway to the south.
+ ~
+ 98 0 0 8 8
+-D2
++D3
+ ~
+ ~
+ 0 0 9847
+@@ -2866,7 +2866,7 @@ D0
+ ~
+ ~
+ 0 0 -1
+-D3
++D0
+ A pair of glass-paned double doors lead into the library.
+ ~
+ glass double doors~
+@@ -2897,7 +2897,7 @@ a plain `3wooden`7 door to the north, and a large window offers a view
+ of a garden to the south.`7
+ ~
+ 98 0 0 8 8
+-D0
++D1
+ A plain wooden door.
+ ~
+ plain wooden door~
+@@ -2906,7 +2906,7 @@ D1
+ ~
+ ~
+ 0 0 -1
+-D3
++D0
+ ~
+ ~
+ 0 0 9887
+@@ -2940,7 +2940,7 @@ a `6steamy`7 and hot room, and servants are often busy here, with
+ little time to stop and talk.`7
+ ~
+ 98 0 0 8 8
+-D2
++D3
+ A plain wooden door.
+ ~
+ plain wooden door~
+@@ -2983,7 +2983,7 @@ corner.  A small `5vanity`7 table sits against another wall, with
+ a matching cushioned chair.
+ ~
+ 98 0 0 8 8
+-D1
++D2
+ A pair of ornate double doors carved with roses and thorny vines.
+ ~
+ ornate double rose doors~
+@@ -3025,7 +3025,7 @@ and `#s`3c`#o`3n`#c`3e`#s`7 that look like `#l`3e`8o`#p`3a`8r`#d`7 paws hold can
+ illuminate the suite.
+ ~
+ 98 0 0 8 8
+-D1
++D2
+ A pair of ornate double doors carved with leopards.
+ ~
+ ornate double leopard doors~
+@@ -3062,7 +3062,7 @@ intricate `3branches`7, with `@t`2r`#e`3f`@o`2i`#l`7 leaves cupping slender
+ white candles.
+ ~
+ 98 0 0 8 8
+-D1
++D2
+ A pair of ornate double doors carved with an avendesora tree.
+ ~
+ ornate double avendesora door~

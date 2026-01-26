@@ -1,0 +1,73 @@
+aid
+protection
+balefire
+air blindness
+blindness
+hail storm
+call fire
+call frost
+storm of air
+call lightning
+slice weave
+invert weaves
+cause wounds
+chain lightning
+compulsion
+cold
+continual light
+control weather
+create airsword
+create flamesword
+create food
+create spring
+create water
+cure blind
+cure disease
+cure wounds
+detect poison
+earthquake
+enchant armor
+enchant weapon
+energy drain
+fireball
+gag
+gate
+gentle
+harm
+heal
+invisibility
+lightning
+pain
+pick lock with air
+pick lock with earth
+plague
+poison
+refresh
+remove poison
+shield source
+sleep
+strength
+project voice
+waterwalk
+weaken
+wrap
+thunderclap
+create trap
+disguise
+probe ter'angreal
+duplicate ter'angreal
+heal gentling
+heal stilling
+windstorm
+bond
+shadow meld
+still
+mask channeling
+dart of air
+club of air
+heat ground
+rolling ring
+motivation
+skimming
+saidin mend
+saidar mend

@@ -1,0 +1,245 @@
+task_log_id,task_log_task,task_log_name,task_log_description,task_log_creator,task_log_hours,task_log_date,task_log_costcode,task_log_problem,task_log_reference,task_log_related_url
+1,25,Needed: Sittable Objects,"This is a list Duren gave me of things which would have to be updated in order to complete this task.
+
+Duren:
+At a high level, we need:  
+*Two new object flags.  
+*We need two new linked lists on objects, one to store players who are sitting on an object, and another to store objects that are sitting on an object.  
+*We need to modify the 'sit' command to allow sitting 'on' something. 
+*We need to modify the 'put' command to allow putting stuff on other things.  
+*We have to modify commands like 'look', to make them display people or objects that are sitting on an object.  
+*And then we have to deal with code that expects all objects to be either in the room, or in an object in the room.  All of that code will have to be modified to now search -on- objects as well as -in- objects. ",6,0,01/28/2008 00:21:38,,0,0,NULL
+2,8,Craft code,"I went through and set up the crafting code to the best of my ability. I don't believe anymore work needs to be done on it now, we just need more EQ in.
+
+I have a list of about 30 or so pieces of EQ on my computer that I never put in because I was told EQ should be built after we finalize numbers, hit/dam, etc.
+
+So, craft code should be considered nearly complete and bug tested. :D
+",6,0,01/28/2008 05:08:04,,0,0,NULL
+3,11,Automated Quests,"Working on a fetch-and-grab quest in Tar Valon.
+
+It will require finding 12 objects and returning them to 12 mobs, with each giving clues about other mobs.",6,0,01/28/2008 05:15:20,,0,0,NULL
+4,11,Automated quests,"Working on a hide-and-seek quest in Tar Valon.
+
+It will involve one Yellow Ajah mob who will send players out to find 12 - 15 herbs.
+
+I'm not certain about what rewards should be, though.",6,0,01/28/2008 05:35:31,,0,0,NULL
+6,25,Needed: Sittable Objects,"Two new flags have been defined and added to the code for this project: chair and table.
+
+Preliminary modifications to functions do_put and perform_put now allow objects to be placed on an object flagged table.",9,1.2,02/12/2008 12:47:33,,0,0,NULL
+7,25,Needed: Sittable Objects,"A slight restructuring of this system has taken place. Chair/table objects will no longer be flagged as such - all objects of such type will now be flagged container and have one or more values set to make the object chair/table.
+
+The values are: max sit weight and max table weight.  They both have a range of 0-999999.
+
+In order to make a chair/table that isn't actually a container the max container weight is simply left at 0.
+
+Value, put object on and look at object all handle table-type objects now.",9,6,02/15/2008 08:50:33,,0,0,NULL
+8,25,Needed: Sittable Objects,"First version of chair objects.
+
+Allows players to sit, rest or sleep on objects suitable to be used as chairs.
+
+Chairs must be flagged container, have both a max weight and chair max weight set in order to be used as a chair.
+
+Only one player per chair at a time at the moment.
+
+Chairs cannot have other objects or players on top of them if a player wishes to sit on it.
+
+do_sit, do_rest, do_sleep where they concerns objects will accept an <on> arg, example: both 'sit on object'
+and 'sit object' will work the same for all three commands.
+
+The same three commands will tell the player they can't sit/rest/sleep on the object in the event that the obj
+is in the players inventory and the same object does not also exist in the room.
+
+Tweaked chair/table weight range in oedit valu menu to 0-999999 (was 0-20000).
+
+Various clean up for table code.",9,6,03/02/2008 02:06:45,,0,0,NULL
+9,25,Needed: Sittable Objects,"More cleanup for chairs/tables...
+
+Looking at an object you sit on will now show...
+
+        -sitting on top: You!
+
+Attempting to open an OPEN_TOP object that is being sat upon by someone will now tell the player someone is sittig on it
+aborting the open attempt.
+
+Attempting to get an object that has a player sitting on top of it will now fail with a message to the player telling them
+they can't get the object.
+
+do_purge now behaves correctly for chairs and tables (both purge object and purge with no args) - also works for NPCs.
+",9,3,03/03/2008 22:27:17,,0,0,NULL
+10,25,Needed: Sittable Objects,"Planning needed...
+
+zedit
+
+Custom messages for chair use (sitting in/on, resting, sleeping... etc)",9,0,03/05/2008 16:33:52,,0,0,NULL
+11,25,Needed: Sittable Objects,"Bug fixes for NPC behavior with chairs.
+
+- Sleeping mobs can now be built and used properly.
+
+- All mobs will now present both the long description and position when shown to a room (list_one_char)
+
+- Mobs sitting/resting/sleeping on objects should now present correctly to rooms.",9,3,03/06/2008 00:39:26,,0,0,NULL
+12,25,Needed: Sittable Objects,"Objects on top of other objects can now be found with the where command (no longer show as unknown location).
+
+Stand messages to room/char for players/mobs standing from a chair object are now $n rises from $p.  Old message was goofy.",9,2,03/07/2008 09:40:05,,0,0,NULL
+13,11,Automated quests,Just informing that I'm starting to work on this task. I already have a couple of ideas of where to go and hope to have a couple of quests in different open areas. Ideas are more than welcome as well as help. Thank you.,21,0,03/24/2009 22:10:04,,0,0,NULL
+14,35,Create Non-Combat EQ,"All of the non-combat equipment seems to be created.  It's just a matter of going through and proofreading and setting the cost, timers, bonuses if any, etc.",17,0,10/18/2009 18:07:07,,0,0,NULL
+15,36,EQ Proofreading/Flagging,"Started proofreading/flagging/editing the non-combat eq today.  I've gone through all of zone 36 objects, edited some of them and flagged them.  All objects in zone 35 need to be gone over still and be appropriately flagged, I believe.  I've looked at a few random ones though, and they also appear to be flagged etc. already.",17,0,10/18/2009 18:12:33,,0,0,NULL
+16,60,"1100, 1120 - 1132 Delivery Quest","Andante is working on fleshing this one out, experimenting with the best way to go about this and who/where the mobs are and ensuring that they are placed logically...",24,0,05/04/2010 12:07:42,,0,0,NULL
+17,60,"1100, 1120 - 1132 Delivery Quest","Mobile #16200  [Karna Surtey] should greet players as they enter.  Possibly a customized greeting for players carrying a package.
+Emailed 22/10/2010 09:55:36 to:
+fieryphoenix28@yahoo.com (Joanna Henson)
+",1,0,10/22/2010 09:55:00,,0,0,
+18,3,Checkform,"Characters weapons and victims weapons are currently checked.
+Emailed 25/10/2010 09:38:48 to:
+jeremy.akers@gmail.com (Jeremy Akers)
+nicodemus_mit@yahoo.com (Matt Nicodemus)
+bwilleford@gmail.com (Brook Willeford)
+SyrahD@gmail.com (Syrah Derozan)
+aten099@gmail.com (JR Silvey)
+cturner@pattern.net (Chip Turner)
+",1,0,10/25/2010 09:38:25,,0,0,
+19,60,"1100, 1120 - 1132 Delivery Quest","This mprog is completed, has been tested, let me know if anyone runs into any problems with this one.
+Emailed 12/11/2010 13:49:57 to:
+fieryphoenix28@yahoo.com (Joanna Henson)
+",24,0,11/12/2010 13:48:47,,0,0,
+20,60,"1100, 1120 - 1132 Delivery Quest","Had to change the mprog a bit to start the Light quest and World Tour.  Once both quests are implemented, mprog 1199 will have to be re-ported to the live server to reflect the change.
+Emailed 12/11/2010 14:30:10 to:
+fieryphoenix28@yahoo.com (Joanna Henson)
+",24,0,11/12/2010 14:29:03,,0,0,
+21,24,mob rememberperm command,"Instead of forgetpermall command, I modified the existing forgetperm command to accept these arguments:
+
+Syntax: mob forgetperm [victim] [data to forget]
+        mob forgetperm [victim] all  -- Forget ALL data about victim
+        mob forgetperm all [data to forget]  -- Forget data about all victims
+        mob forgetperm all all -- Forget ALL data about ALL victims
+
+Emailed 12/11/2010 21:54:37 to:
+jeremy.akers@gmail.com (Jeremy Akers)
+aten099@gmail.com (JR Silvey)
+SyrahD@gmail.com (Syrah Derozan)
+nicodemus_mit@yahoo.com (Matt Nicodemus)
+",1,0,11/12/2010 00:00:00,,0,0,
+22,77,Organize Fedit List,"fedit list is now sorted first by class, then secondary id, and finally by name.
+Emailed 28/11/2010 15:08:23 to:
+aten099@gmail.com (JR Silvey)
+bwilleford@gmail.com (Brook Willeford)
+SyrahD@gmail.com (Syrah Derozan)
+nicodemus_mit@yahoo.com (Matt Nicodemus)
+cturner@pattern.net (Chip Turner)
+",1,4,11/28/2010 15:07:11,,0,0,
+23,44,Need More Zones,"Finished zone 610, need some more zones to work on. Maybe 640 since it's adjacent? Also waiting on the decision for zone 568.
+
+The Ubermap is key is wrong for the bottom 3 zones on it - those should be plains. The zones themselves looked ok except for the color coding.
+Emailed 28/01/2013 15:16:13 to:
+fieryphoenix28@yahoo.com (Joanna Henson)
+lironah@hotmail.com (Ruth Hinkley)
+",30,3,01/28/2013 15:12:21,,0,0,
+24,103,Zone 567,"Light Forests are done, Rivers are done. I am working on descs for the Light Woods, Plains, and Hills. Should be done Wednesday/Thursday.
+Emailed 28/01/2013 22:28:42 to:
+fieryphoenix28@yahoo.com (Joanna Henson)
+Invalid email address '' for  , not sent
+lironah@hotmail.com (Ruth Hinkley)
+",31,0,01/28/2013 22:26:04,,0,0,
+25,115,Delete IC Update files,"Fixed bug that prevented deletion of Andor updates.
+Emailed 02/02/2013 10:11:11 to:
+jeremy.akers@gmail.com (Jeremy Akers)
+issajean@gmail.com (Carissa Sutherland)
+fieryphoenix28@yahoo.com (Joanna Henson)
+lordkinje@gmail.com (Winston Tarbox)
+Invalid email address '' for  , not sent
+",1,1,02/02/2013 10:10:24,,0,0,
+26,5,Forms,"We have 16 completed forms. 
+
+They are as follows:
+
+Advanced Withdrawal
+Master Withdrawal
+Withdraw
+Master Spin
+Overhead Parry to Left
+Overhead Parry to Right
+Parry to Left
+Parry to Right
+Boar Rushes Down the Mountain
+Courtier Taps his Fan
+River Undercuts the Bank
+Overhead SlashSlash from Left
+Slash from Right
+Hummingbird Kisses the Honeyrose
+Ram
+Basic Thrust
+
+
+Partially Completed:
+Leopard's Caress
+Off-Hand Jab
+
+
+Esrahd is helping me come up with the next list of forms I should start working on. Tarem is going to help me test the forms. 
+
+I am great at data entry, but I need some guidance to figure out how I can take what we have and start making it work as far as combat goes. 
+
+
+Emailed 10/02/2013 03:40:20 to:
+jeremy.akers@gmail.com (Jeremy Akers)
+Invalid email address '' for  , not sent
+nicodemus_mit@yahoo.com (Matt Nicodemus)
+SyrahD@gmail.com (Syrah Derozan)
+issajean@gmail.com (Carissa Sutherland)
+aten099@gmail.com (JR Silvey)
+cturner@pattern.net (Chip Turner)
+fanatica0@hotmail.com (Denis Skol)
+jared.h.rowe@lmco.com (Jared Rowe)
+strazz@gmail.com (Tim Tim)
+perryrs@auburn.edu (Trey Perry)
+acquiremore@gmail.com (Bowman .)
+solugon@hotmail.com (Jonathan Castello)
+author_trinity@yahoo.com (Noah Sheldon)
+daerious@gmail.com (Daerious Roycroft)
+Brailon@yahoo.com (Brailon .)
+fieryphoenix28@yahoo.com (Joanna Henson)
+goodoleboy38652@yahoo.com (Jimmy Johnson)
+maelynsedai@gmail.com (Victoria Salmon)
+seavenr@hotmail.com (Sean Volmer)
+npolivka@comcast.net (Nicole Polivka)
+lucrezia@graffiti.net (Lucrezia )
+annatyme@hotmail.com (Carey X)
+vladtepis@gmail.com (John Siefer)
+csjackso08@gmail.com (Clearblue Jackson)
+kaigenrei@hotmail.com (Matt Holmes)
+james.johnson79@gmail.com (James Johnson)
+eyepokies@hotmail.com. (Sean .)
+ja.akers@gmail.com (Josh Akers)
+lironah@hotmail.com (Ruth Hinkley)
+onewithoutfear@gmail.com (Jennifer Long)
+lordkinje@gmail.com (Winston Tarbox)
+",6,0,02/10/2013 03:36:45,,0,0,
+27,44,Ubermap,"Actually, the Ubermap is wrong, at least for zone 640.  It should be hills, because the area southeast of Caemlyn is the beginning of the Hills of Kintara.  Working on correcting this.  I've updated the names of the rooms to indicate which rooms should be changed, and cleared the old descs and replaced them with temp descs.  I will work on this zone.",17,0,02/21/2013 02:23:53,,1,0,NULL
+28,116,Angreal/Ter'Angreal,"One possible option for making ter'angreals would be objprogs, like mobprogs, but for objects again.  If we can get something like that implemented, then we can have the building department handle the making of these items, rather than bothering Duren every time we want an object that does something. :)",17,0,04/01/2013 11:58:24,,0,0,NULL
+29,125,Ajax Client,"Ajax works as a hijack to an active session - logging in directly with ajax just... doesn't work.  This really just needs to be emphasized on the website.
+Emailed 03/05/2013 12:08:25 to:
+jeremy.akers@gmail.com (Jeremy Akers)
+Invalid email address '' for  , not sent
+issajean@gmail.com (Carissa Sutherland)
+lordkinje@gmail.com (Winston Tarbox)
+fieryphoenix28@yahoo.com (Joanna Henson)
+",4,0,05/03/2013 12:07:16,,0,0,
+30,6,Test Forms,"16 Forms created for combat testform.
+Emailed 03/05/2013 12:16:59 to:
+Invalid email address '' for  , not sent
+nicodemus_mit@yahoo.com (Matt Nicodemus)
+aten099@gmail.com (JR Silvey)
+SyrahD@gmail.com (Syrah Derozan)
+",4,0,05/03/2013 12:16:18,,0,0,
+31,19,Cleanup who-list,"Is this really a necessity? In the six years since this task was created, have we come to a point where this isn't a real concern anymore so we can remove it from our list?  The who list looks fine on every client I've logged in with...
+Emailed 03/05/2013 12:24:32 to:
+jeremy.akers@gmail.com (Jeremy Akers)
+",4,0,05/03/2013 12:22:24,,0,0,
+32,124,Null Damage for Combat Weaves,"Update on this?  I thought this was done already.
+Emailed 03/05/2013 12:26:38 to:
+jeremy.akers@gmail.com (Jeremy Akers)
+fieryphoenix28@yahoo.com (Joanna Henson)
+Invalid email address '' for  , not sent
+issajean@gmail.com (Carissa Sutherland)
+lordkinje@gmail.com (Winston Tarbox)
+",4,0,05/03/2013 12:26:00,,0,0,

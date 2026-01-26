@@ -1,0 +1,771 @@
+1228:659	9	9	1063936241	1	0	TMC	
+1266:659	398	9	1063906617	1	4	TMC	
+1304:659	398	398	1063906616	1	0	TMC	
+1342:659	9	1805	1063936242	1	1	TMC	
+1532:I put in two new imm rooms in zone 1, one for Varulv (167) and one for Beonca (133).
+1533:If you could port that zone over to the main port, I'm sure they'd appreciate it.
+1543:I put in two new imm rooms in zone 1, one for Varulv (167) and one for Beonca (133).
+1544:If you could port that zone over to the main port, I'm sure they'd appreciate it.
+1556:more than just zone 0.
+1569:more than just zone 0.
+1602:|   687 | Jaenacia    |         1 |
+1712:I'm at home right now, different time zone but hard to find yoU!  log on whenever you can i been looking
+1726:I'm at home right now, different time zone but hard to find yoU!  log on whenever you can i been looking
+1817:Creating shop(s) in caemlyn to sell zone 37 and 38 equipment.
+1835:Second, if you can find a way to make the cost of items be determined in the shops you set up for zone 37/38 equipment, by their composition costs, and all the other shops by their "Value" flag costs, it would make all shops work and sell things at a reasonably appropriate price. (Players getting equipment that does nothing, if its non 37/38 battle eq, isn't an issue, as even if a player has an item created, tooled it, etc. Oediting it will still change its stats.
+1854:Creating shop(s) in caemlyn to sell zone 37 and 38 equipment.
+1872:Second, if you can find a way to make the cost of items be determined in the shops you set up for zone 37/38 equipment, by their composition costs, and all the other shops by their "Value" flag costs, it would make all shops work and sell things at a reasonably appropriate price. (Players getting equipment that does nothing, if its non 37/38 battle eq, isn't an issue, as even if a player has an item created, tooled it, etc. Oediting it will still change its stats.
+1900:Hey. I was working on equip, but I only ever got access to zone
+1901:0, so once we had that problem on the bp and zone 0 got
+2274:1626	1805	88	1070649841	1	1	Re: zone transfer	
+2278:`7Subj`6:`7 Re: zone transfer
+2287:1626	1805	1805	1070649840	1	0	Re: zone transfer	
+2291:`7Subj`6:`7 Re: zone transfer
+2321:done. Also, if someone can give me access to zone 50 (wisdoms guild
+2348:done. Also, if someone can give me access to zone 50 (wisdoms guild
+2362:It basically just reads the zone names.
+2370:Mac says that that area file uses the zone info - so to update
+2372:it just reads the zone names.
+2384:Mac says that that area file uses the zone info - so to update
+2386:it just reads the zone names.
+2401:Duren did transfer the zone stuff - I was there when he did the
+2419:Duren did transfer the zone stuff - I was there when he did the
+2518:just remember I live in a different time-zone to most people (Meldorf
+2548:just remember I live in a different time-zone to most people (Meldorf
+2578:just remember I live in a different time-zone to most people (Meldorf
+4382:I copies the world and zone files over for 134, but there's
+4396:I copies the world and zone files over for 134, but there's
+4442:520-419-6443
+4857:Maypole Dancing                    535 Walking Down the Lane              540 
+4898:Maypole Dancing                    535 Walking Down the Lane              540 
+5183:My number is 520-419-6443
+5197:My number is 520-419-6443
+6116:access to zone 37.  If it's not right, let me know.
+6129:access to zone 37.  If it's not right, let me know.
+6351:this.  Duren or I can do the zone transfer from the shell
+6368:this.  Duren or I can do the zone transfer from the shell
+6385:this.  Duren or I can do the zone transfer from the shell
+6457:I was wondering if you, or someone, could copyover changes I've made to zone 140
+6474:I was wondering if you, or someone, could copyover changes I've made to zone 140
+6668:OLC commands), set (for set <player> <zone number that you're
+6669:giving them access to>), zedit, redit, oedit, and goto.  When
+6677:I'm not sure what it takes to create a new zone - we're gonna
+6679:knows.  Right now zone 407 is the active one that Kinje and
+6683:them things like show, for zone info, and vstat and such.  But
+6698:OLC commands), set (for set <player> <zone number that you're
+6699:giving them access to>), zedit, redit, oedit, and goto.  When
+6707:I'm not sure what it takes to create a new zone - we're gonna
+6709:knows.  Right now zone 407 is the active one that Kinje and
+6713:them things like show, for zone info, and vstat and such.  But
+6993:cp wld/407.wld /../mudback/lib/world/wld
+7023:cp wld/407.wld /../mudback/lib/world/wld
+7239:(310) 541-7670
+7248:(310) 541-7670
+7936:is running the same codebase as the rest of the mud.  Can you copy over zone 504 (Eliana
+7949:is running the same codebase as the rest of the mud.  Can you copy over zone 504 (Eliana
+7962:is running the same codebase as the rest of the mud.  Can you copy over zone 504 (Eliana
+7975:is running the same codebase as the rest of the mud.  Can you copy over zone 504 (Eliana
+8099:'template' zone, copy if into multiple zones, and then
+8161:'template' zone, copy if into multiple zones, and then
+8223:'template' zone, copy if into multiple zones, and then
+8285:'template' zone, copy if into multiple zones, and then
+8347:'template' zone, copy if into multiple zones, and then
+8390:We could make a template zone of 10x10 rooms, and just
+8391:copy it into different zone numbers, then connect them
+8414:We could make a template zone of 10x10 rooms, and just
+8415:copy it into different zone numbers, then connect them
+8452:   a template zone that we'll just copy over and over again onto
+8500:   a template zone that we'll just copy over and over again onto
+8548:   a template zone that we'll just copy over and over again onto
+8596:   a template zone that we'll just copy over and over again onto
+8644:   a template zone that we'll just copy over and over again onto
+8692:   a template zone that we'll just copy over and over again onto
+8855:I spent some time working on zone estimates for the continental
+8856:map, and came up with two options for zone size.
+8895:I spent some time working on zone estimates for the continental
+8896:map, and came up with two options for zone size.
+8935:I spent some time working on zone estimates for the continental
+8936:map, and came up with two options for zone size.
+8975:I spent some time working on zone estimates for the continental
+8976:map, and came up with two options for zone size.
+9015:I spent some time working on zone estimates for the continental
+9016:map, and came up with two options for zone size.
+9055:I spent some time working on zone estimates for the continental
+9056:map, and came up with two options for zone size.
+9097:where to stick them in the show zone list, too, since
+9112:where to stick them in the show zone list, too, since
+9127:where to stick them in the show zone list, too, since
+9142:where to stick them in the show zone list, too, since
+9157:where to stick them in the show zone list, too, since
+9172:where to stick them in the show zone list, too, since
+9210:zone # 240, C1 is 241, etc.  I numbered 'em right to
+9230:zone # 240, C1 is 241, etc.  I numbered 'em right to
+9248:301, globally.  I just did row F of the .wld files in a
+9266:301, globally.  I just did row F of the .wld files in a
+9280:from zone to zone.
+9291:from zone to zone.
+9476:Somebody to go through the current list of zones (show zone)
+9507:Somebody to go through the current list of zones (show zone)
+9538:Somebody to go through the current list of zones (show zone)
+9569:Somebody to go through the current list of zones (show zone)
+9600:Somebody to go through the current list of zones (show zone)
+9631:Somebody to go through the current list of zones (show zone)
+9650:why not create an object in the zone with keywords city, (and which one)
+9652:zedit, it'll always show up.
+9665:why not create an object in the zone with keywords city, (and which one)
+9667:zedit, it'll always show up.
+9733:around those zone numbers, but everything about them is right on
+9751:around those zone numbers, but everything about them is right on
+10208:rooms in its zone that aren't part of the city, and
+10238:rooms in its zone that aren't part of the city, and
+10268:rooms in its zone that aren't part of the city, and
+10298:rooms in its zone that aren't part of the city, and
+10419:When you get a chance, create a zone for Beonca's new newbie area (use zone #2, since the zone
+10437:When you get a chance, create a zone for Beonca's new newbie area (use zone #2, since the zone
+10459:Crashes the BP and corrupts the zone you were rediting.
+10460:Has something to do with raid and redit.
+10461:Crashes when you redit a room with the 'raid' flag on.
+10462:Crashes when you redit a room with a raided desc that has
+10463:somehow gotten corrupted (when you type redit, you'll notice
+10466:Requires the reboot file to be removed and the corrupted zone
+10487:Crashes the BP and corrupts the zone you were rediting.
+10488:Has something to do with raid and redit.
+10489:Crashes when you redit a room with the 'raid' flag on.
+10490:Crashes when you redit a room with a raided desc that has
+10491:somehow gotten corrupted (when you type redit, you'll notice
+10494:Requires the reboot file to be removed and the corrupted zone
+10515:redit in any room where the raid desc is enabled, or just edit a raided
+10516:desc in redit until it crashes.  It happens pretty much no matter how you
+10517:screw with raid, but I suspect it's directly linked to a problem with redit.
+10520:shortly after.  The crash can't recover until the zone (now corrupted) is
+10529:times - sometimes it's as soon as you type redit in a corrupted room,
+10533:always either in redit or after I'd redited the room, after obvious
+10535:to the raid desc and redit repeatedly until it goes down.  It affects any
+10539:or restoring the corrupted zone, it can't recover and we just eat up
+10554:redit in any room where the raid desc is enabled, or just edit a raided
+10555:desc in redit until it crashes.  It happens pretty much no matter how you
+10556:screw with raid, but I suspect it's directly linked to a problem with redit.
+10559:shortly after.  The crash can't recover until the zone (now corrupted) is
+10568:times - sometimes it's as soon as you type redit in a corrupted room,
+10572:always either in redit or after I'd redited the room, after obvious
+10574:to the raid desc and redit repeatedly until it goes down.  It affects any
+10578:or restoring the corrupted zone, it can't recover and we just eat up
+10593:redit in any room where the raid desc is enabled, or just edit a raided
+10594:desc in redit until it crashes.  It happens pretty much no matter how you
+10595:screw with raid, but I suspect it's directly linked to a problem with redit.
+10598:shortly after.  The crash can't recover until the zone (now corrupted) is
+10607:times - sometimes it's as soon as you type redit in a corrupted room,
+10611:always either in redit or after I'd redited the room, after obvious
+10613:to the raid desc and redit repeatedly until it goes down.  It affects any
+10617:or restoring the corrupted zone, it can't recover and we just eat up
+10630:I looked at your zone, B - except for the crash Serai reported shortly
+10631:after, the zedit new command (is that what you used?) did create all
+10632:four files for the zone and it updates the index files properly.  The only
+10638:zone on the show zone list, and it saved fine.  It's not lagging now,
+10643:Syrah, I'll import zone 1 with the other 'keeper' zones once we get
+10656:I looked at your zone, B - except for the crash Serai reported shortly
+10657:after, the zedit new command (is that what you used?) did create all
+10658:four files for the zone and it updates the index files properly.  The only
+10664:zone on the show zone list, and it saved fine.  It's not lagging now,
+10669:Syrah, I'll import zone 1 with the other 'keeper' zones once we get
+10682:I looked at your zone, B - except for the crash Serai reported shortly
+10683:after, the zedit new command (is that what you used?) did create all
+10684:four files for the zone and it updates the index files properly.  The only
+10690:zone on the show zone list, and it saved fine.  It's not lagging now,
+10695:Syrah, I'll import zone 1 with the other 'keeper' zones once we get
+10708:sure that our new newbie zone gets ported over, Zone 3.
+10730:sure that our new newbie zone gets ported over, Zone 3.
+10816:4549	1805	9	1100040332	1	1	Sudo and ubermap	
+10820:`7Subj`6:`7 Sudo and ubermap
+10829:200.wld.  When we do this for real, use 200.wld as your template.
+10837:Also, don't save 'em as .wld.bak files in the final version - they'll
+10838:have to be straight .wld files.  We'll also need the accompanying
+10839:index file (see  /../builderport/lib/world/wld/index) with all
+10840:the new zone numbers added.
+10845:as the .wld files.  Also, each of those 3 file types has an
+10847:world index file except every reference of .wld is changed to
+10851:200.wld template and to get the loop working correctly, and
+10856:4549	1805	1805	1100040331	1	0	Sudo and ubermap	
+10860:`7Subj`6:`7 Sudo and ubermap
+10869:200.wld.  When we do this for real, use 200.wld as your template.
+10877:Also, don't save 'em as .wld.bak files in the final version - they'll
+10878:have to be straight .wld files.  We'll also need the accompanying
+10879:index file (see  /../builderport/lib/world/wld/index) with all
+10880:the new zone numbers added.
+10885:as the .wld files.  Also, each of those 3 file types has an
+10887:world index file except every reference of .wld is changed to
+10891:200.wld template and to get the loop working correctly, and
+10896:4549	1805	5956	1100040332	1	1	Sudo and ubermap	
+10900:`7Subj`6:`7 Sudo and ubermap
+10909:200.wld.  When we do this for real, use 200.wld as your template.
+10917:Also, don't save 'em as .wld.bak files in the final version - they'll
+10918:have to be straight .wld files.  We'll also need the accompanying
+10919:index file (see  /../builderport/lib/world/wld/index) with all
+10920:the new zone numbers added.
+10925:as the .wld files.  Also, each of those 3 file types has an
+10927:world index file except every reference of .wld is changed to
+10931:200.wld template and to get the loop working correctly, and
+10944:It should be right.  I didn't check out the new 200.wld template, so if I missed
+10946:.obj, and .mob files as well as .wld, each in their own directory.  All that
+10953:That's why it's 200.wld.bak, for example
+10964:It should be right.  I didn't check out the new 200.wld template, so if I missed
+10966:.obj, and .mob files as well as .wld, each in their own directory.  All that
+10973:That's why it's 200.wld.bak, for example
+10997:Don't worry about overwriting - the zone you mean is zone 3, not
+11000:Just leave 'em as .mob and .wld, etc.
+11025:Don't worry about overwriting - the zone you mean is zone 3, not
+11028:Just leave 'em as .mob and .wld, etc.
+11225:I haven't seen before - "Loading zone files" is the last
+11231:by 'loading zone files' if it's not referring to the index?
+11235:backups of zone 3 on the BP? I can't find them.
+11249:I haven't seen before - "Loading zone files" is the last
+11255:by 'loading zone files' if it's not referring to the index?
+11259:backups of zone 3 on the BP? I can't find them.
+11273:I haven't seen before - "Loading zone files" is the last
+11279:by 'loading zone files' if it's not referring to the index?
+11283:backups of zone 3 on the BP? I can't find them.
+11295:The BP's back up with the ubermap fully imported.  It took a fair
+11302:B, I'm real sorry, but I lost any changes you made to zone 3
+11330:zone - I'm very sorry about anything I lost.
+11353:The BP's back up with the ubermap fully imported.  It took a fair
+11360:B, I'm real sorry, but I lost any changes you made to zone 3
+11388:zone - I'm very sorry about anything I lost.
+11411:The BP's back up with the ubermap fully imported.  It took a fair
+11418:B, I'm real sorry, but I lost any changes you made to zone 3
+11446:zone - I'm very sorry about anything I lost.
+11492:Faris wants to build on the ubermap with us.
+11508:Faris wants to build on the ubermap with us.
+11589:connected right.  Almost the entire zone is a total loss.  The keeper
+11591:over a whole zone of totally mislinked and corrupted garbage, can
+11593:I want to junk zone 131, but if you want to keep those 5 rooms we can
+11594:append them to an empty spot in another Cairhien zone or something.
+11606:connected right.  Almost the entire zone is a total loss.  The keeper
+11608:over a whole zone of totally mislinked and corrupted garbage, can
+11610:I want to junk zone 131, but if you want to keep those 5 rooms we can
+11611:append them to an empty spot in another Cairhien zone or something.
+11762:Hey, I work at Majestic Realms my name on there is Hellem so if u come on I can show you the zone I'm working on. here's the host and port: host:64.232.251.170 port:8888
+11771:Hey, I work at Majestic Realms my name on there is Hellem so if u come on I can show you the zone I'm working on. here's the host and port: host:64.232.251.170 port:8888
+11906:working on the ubermap (which is totally in now).
+11919:working on the ubermap (which is totally in now).
+12021:Also Note that MP# stands for 'main port' number. Ie: the number of the zone on this port.
+12049:Also Note that MP# stands for 'main port' number. Ie: the number of the zone on this port.
+12077:Also Note that MP# stands for 'main port' number. Ie: the number of the zone on this port.
+12105:Also Note that MP# stands for 'main port' number. Ie: the number of the zone on this port.
+12274:the preliminary list.  I have assigned new zone numbers so that everything is in
+12296:the preliminary list.  I have assigned new zone numbers so that everything is in
+12318:the preliminary list.  I have assigned new zone numbers so that everything is in
+12340:the preliminary list.  I have assigned new zone numbers so that everything is in
+12365:separate from the 'save zone internally?' question you answered
+12366:when quitting redit, btw - you have to do this every so often too,
+12370:like '640 needs saving'.  To save zone 640, type 'redit save 640'.
+12381:I've got the mud running under mini mode now, but I had to remove zone 51 from
+12382:all the index files - I'm clueless as to why we can't boot with that zone, but it
+12395:I've got the mud running under mini mode now, but I had to remove zone 51 from
+12396:all the index files - I'm clueless as to why we can't boot with that zone, but it
+12477:Also, regarding your zones - I told you I can't renumber 2 digit zone
+12503:Also, regarding your zones - I told you I can't renumber 2 digit zone
+12529:Also, regarding your zones - I told you I can't renumber 2 digit zone
+12547:I'll get the zone numbers reassigned.  I forgot about that when I did
+12558:I'll get the zone numbers reassigned.  I forgot about that when I did
+12704:just finished the last of the zone 639 descriptions, and
+12707:the zone to mark things better - like wagon ruts, for example.
+12710:I've added a quick navigation system on the ubermap so you can
+12713:the city zone, in a room labeled 'Ethereal Caemlyn'.  If you
+12728:ubermap, so the scale remains correct. :> What do you guys
+12747:just finished the last of the zone 639 descriptions, and
+12750:the zone to mark things better - like wagon ruts, for example.
+12753:I've added a quick navigation system on the ubermap so you can
+12756:the city zone, in a room labeled 'Ethereal Caemlyn'.  If you
+12771:ubermap, so the scale remains correct. :> What do you guys
+12790:just finished the last of the zone 639 descriptions, and
+12793:the zone to mark things better - like wagon ruts, for example.
+12796:I've added a quick navigation system on the ubermap so you can
+12799:the city zone, in a room labeled 'Ethereal Caemlyn'.  If you
+12814:ubermap, so the scale remains correct. :> What do you guys
+12833:just finished the last of the zone 639 descriptions, and
+12836:the zone to mark things better - like wagon ruts, for example.
+12839:I've added a quick navigation system on the ubermap so you can
+12842:the city zone, in a room labeled 'Ethereal Caemlyn'.  If you
+12857:ubermap, so the scale remains correct. :> What do you guys
+12876:just finished the last of the zone 639 descriptions, and
+12879:the zone to mark things better - like wagon ruts, for example.
+12882:I've added a quick navigation system on the ubermap so you can
+12885:the city zone, in a room labeled 'Ethereal Caemlyn'.  If you
+12900:ubermap, so the scale remains correct. :> What do you guys
+12919:just finished the last of the zone 639 descriptions, and
+12922:the zone to mark things better - like wagon ruts, for example.
+12925:I've added a quick navigation system on the ubermap so you can
+12928:the city zone, in a room labeled 'Ethereal Caemlyn'.  If you
+12943:ubermap, so the scale remains correct. :> What do you guys
+12962:just finished the last of the zone 639 descriptions, and
+12965:the zone to mark things better - like wagon ruts, for example.
+12968:I've added a quick navigation system on the ubermap so you can
+12971:the city zone, in a room labeled 'Ethereal Caemlyn'.  If you
+12986:ubermap, so the scale remains correct. :> What do you guys
+13005:just finished the last of the zone 639 descriptions, and
+13008:the zone to mark things better - like wagon ruts, for example.
+13011:I've added a quick navigation system on the ubermap so you can
+13014:the city zone, in a room labeled 'Ethereal Caemlyn'.  If you
+13029:ubermap, so the scale remains correct. :> What do you guys
+13048:just finished the last of the zone 639 descriptions, and
+13051:the zone to mark things better - like wagon ruts, for example.
+13054:I've added a quick navigation system on the ubermap so you can
+13057:the city zone, in a room labeled 'Ethereal Caemlyn'.  If you
+13072:ubermap, so the scale remains correct. :> What do you guys
+13091:just finished the last of the zone 639 descriptions, and
+13094:the zone to mark things better - like wagon ruts, for example.
+13097:I've added a quick navigation system on the ubermap so you can
+13100:the city zone, in a room labeled 'Ethereal Caemlyn'.  If you
+13115:ubermap, so the scale remains correct. :> What do you guys
+13134:just finished the last of the zone 639 descriptions, and
+13137:the zone to mark things better - like wagon ruts, for example.
+13140:I've added a quick navigation system on the ubermap so you can
+13143:the city zone, in a room labeled 'Ethereal Caemlyn'.  If you
+13158:ubermap, so the scale remains correct. :> What do you guys
+13177:just finished the last of the zone 639 descriptions, and
+13180:the zone to mark things better - like wagon ruts, for example.
+13183:I've added a quick navigation system on the ubermap so you can
+13186:the city zone, in a room labeled 'Ethereal Caemlyn'.  If you
+13201:ubermap, so the scale remains correct. :> What do you guys
+13220:just finished the last of the zone 639 descriptions, and
+13223:the zone to mark things better - like wagon ruts, for example.
+13226:I've added a quick navigation system on the ubermap so you can
+13229:the city zone, in a room labeled 'Ethereal Caemlyn'.  If you
+13244:ubermap, so the scale remains correct. :> What do you guys
+13263:just finished the last of the zone 639 descriptions, and
+13266:the zone to mark things better - like wagon ruts, for example.
+13269:I've added a quick navigation system on the ubermap so you can
+13272:the city zone, in a room labeled 'Ethereal Caemlyn'.  If you
+13287:ubermap, so the scale remains correct. :> What do you guys
+13306:just finished the last of the zone 639 descriptions, and
+13309:the zone to mark things better - like wagon ruts, for example.
+13312:I've added a quick navigation system on the ubermap so you can
+13315:the city zone, in a room labeled 'Ethereal Caemlyn'.  If you
+13330:ubermap, so the scale remains correct. :> What do you guys
+13349:just finished the last of the zone 639 descriptions, and
+13352:the zone to mark things better - like wagon ruts, for example.
+13355:I've added a quick navigation system on the ubermap so you can
+13358:the city zone, in a room labeled 'Ethereal Caemlyn'.  If you
+13373:ubermap, so the scale remains correct. :> What do you guys
+13392:just finished the last of the zone 639 descriptions, and
+13395:the zone to mark things better - like wagon ruts, for example.
+13398:I've added a quick navigation system on the ubermap so you can
+13401:the city zone, in a room labeled 'Ethereal Caemlyn'.  If you
+13416:ubermap, so the scale remains correct. :> What do you guys
+13435:just finished the last of the zone 639 descriptions, and
+13438:the zone to mark things better - like wagon ruts, for example.
+13441:I've added a quick navigation system on the ubermap so you can
+13444:the city zone, in a room labeled 'Ethereal Caemlyn'.  If you
+13459:ubermap, so the scale remains correct. :> What do you guys
+13478:just finished the last of the zone 639 descriptions, and
+13481:the zone to mark things better - like wagon ruts, for example.
+13484:I've added a quick navigation system on the ubermap so you can
+13487:the city zone, in a room labeled 'Ethereal Caemlyn'.  If you
+13502:ubermap, so the scale remains correct. :> What do you guys
+13521:just finished the last of the zone 639 descriptions, and
+13524:the zone to mark things better - like wagon ruts, for example.
+13527:I've added a quick navigation system on the ubermap so you can
+13530:the city zone, in a room labeled 'Ethereal Caemlyn'.  If you
+13545:ubermap, so the scale remains correct. :> What do you guys
+13564:just finished the last of the zone 639 descriptions, and
+13567:the zone to mark things better - like wagon ruts, for example.
+13570:I've added a quick navigation system on the ubermap so you can
+13573:the city zone, in a room labeled 'Ethereal Caemlyn'.  If you
+13588:ubermap, so the scale remains correct. :> What do you guys
+13607:just finished the last of the zone 639 descriptions, and
+13610:the zone to mark things better - like wagon ruts, for example.
+13613:I've added a quick navigation system on the ubermap so you can
+13616:the city zone, in a room labeled 'Ethereal Caemlyn'.  If you
+13631:ubermap, so the scale remains correct. :> What do you guys
+13650:just finished the last of the zone 639 descriptions, and
+13653:the zone to mark things better - like wagon ruts, for example.
+13656:I've added a quick navigation system on the ubermap so you can
+13659:the city zone, in a room labeled 'Ethereal Caemlyn'.  If you
+13674:ubermap, so the scale remains correct. :> What do you guys
+13693:just finished the last of the zone 639 descriptions, and
+13696:the zone to mark things better - like wagon ruts, for example.
+13699:I've added a quick navigation system on the ubermap so you can
+13702:the city zone, in a room labeled 'Ethereal Caemlyn'.  If you
+13717:ubermap, so the scale remains correct. :> What do you guys
+13736:just finished the last of the zone 639 descriptions, and
+13739:the zone to mark things better - like wagon ruts, for example.
+13742:I've added a quick navigation system on the ubermap so you can
+13745:the city zone, in a room labeled 'Ethereal Caemlyn'.  If you
+13760:ubermap, so the scale remains correct. :> What do you guys
+13779:just finished the last of the zone 639 descriptions, and
+13782:the zone to mark things better - like wagon ruts, for example.
+13785:I've added a quick navigation system on the ubermap so you can
+13788:the city zone, in a room labeled 'Ethereal Caemlyn'.  If you
+13803:ubermap, so the scale remains correct. :> What do you guys
+13889:4984	1805	1805	1105670732	1	0	TV zone	
+13893:`7Subj`6:`7 TV zone
+13910:4985	215	215	1105670882	1	0	TV zone	
+13914:`7Subj`6:`7 TV zone
+13923:4985	215	1805	1105670883	1	1	TV zone	
+13927:`7Subj`6:`7 TV zone
+13960:going to insert it where it belongs on the ubermap.  They can continue
+13980:the ubermap.
+13995:going to insert it where it belongs on the ubermap.  They can continue
+14015:the ubermap.
+14030:going to insert it where it belongs on the ubermap.  They can continue
+14050:the ubermap.
+14065:going to insert it where it belongs on the ubermap.  They can continue
+14085:the ubermap.
+14100:going to insert it where it belongs on the ubermap.  They can continue
+14120:the ubermap.
+14124:5121	1805	155	1106936504	1	1	BP zone	
+14128:`7Subj`6:`7 BP zone
+14131:happen to remember the zone number(s)? I can port it over to the BP soon
+14139:get the ubermap finished - only other major hurdle is helping Syrah finish
+14145:5121	1805	1805	1106936503	1	0	BP zone	
+14149:`7Subj`6:`7 BP zone
+14152:happen to remember the zone number(s)? I can port it over to the BP soon
+14160:get the ubermap finished - only other major hurdle is helping Syrah finish
+14416:overflow can go into the third zone.  Did you not want to do that?
+14435:Well, you said you wanted the third zone to be for the inns, 
+14456:Well, you said you wanted the third zone to be for the inns, 
+14615:starters - they've all worked on the ubermap - and maybe
+14619:I constructed all of zone 90 and 91 (all numbered rooms on
+14622:the bridges, which connect to the ubermap.  I also redid
+14626:the ubermap where the towns would go (see the website:)
+14926:built in OLC.  It was in zone 8, but zone 8 no longer seems to exist, and I
+14927:can't find this object in any other zones.  Did we wipe out some zone files
+14928:with the ubermap?  Do we have backups?
+14939:built in OLC.  It was in zone 8, but zone 8 no longer seems to exist, and I
+14940:can't find this object in any other zones.  Did we wipe out some zone files
+14941:with the ubermap?  Do we have backups?
+14955:object file we dun lost. :p Near as I can tell, it's in zone 9, not 8, of
+14956:the old pre-ubermap files.  Do you guys just want the text so you can
+14957:make a new book or do we need to port in that zone?
+14971:object file we dun lost. :p Near as I can tell, it's in zone 9, not 8, of
+14972:the old pre-ubermap files.  Do you guys just want the text so you can
+14973:make a new book or do we need to port in that zone?
+14987:object file we dun lost. :p Near as I can tell, it's in zone 9, not 8, of
+14988:the old pre-ubermap files.  Do you guys just want the text so you can
+14989:make a new book or do we need to port in that zone?
+15003:object file we dun lost. :p Near as I can tell, it's in zone 9, not 8, of
+15004:the old pre-ubermap files.  Do you guys just want the text so you can
+15005:make a new book or do we need to port in that zone?
+15041:1) Port zone one from the BP over here.  Boris needs his Imm room (and Varulv and I need our voodoo doll)
+15062:1) Port zone one from the BP over here.  Boris needs his Imm room (and Varulv and I need our voodoo doll)
+15123:Syrah, far as the importing zone 1 goes - I can't until valgrind
+15153:Syrah, far as the importing zone 1 goes - I can't until valgrind
+15183:Syrah, far as the importing zone 1 goes - I can't until valgrind
+15247:5381	1805	1477	1109797799	1	1	Re: zone 1	
+15251:`7Subj`6:`7 Re: zone 1
+15258:5381	1805	1805	1109797798	1	0	Re: zone 1	
+15262:`7Subj`6:`7 Re: zone 1
+15276:I work for AEG now. My number at the office is 909-390-544 
+16794:PvP is also fun. I like the tension of walking in some forest and never knowing when some idiot 23887 levels higher will attack and destroy you. Woo! :p They are also making Battlegrounds for (probably) the next patch, which is like a purely PvP zone with capture the flag, etc events that can land you bonuses and special eq and the such.
+16810:PvP is also fun. I like the tension of walking in some forest and never knowing when some idiot 23887 levels higher will attack and destroy you. Woo! :p They are also making Battlegrounds for (probably) the next patch, which is like a purely PvP zone with capture the flag, etc events that can land you bonuses and special eq and the such.
+16901:from there.  The ubermap is moving along pretty fast now and
+16926:from there.  The ubermap is moving along pretty fast now and
+16941:countrysides now (Leara is doing the zone around TV,
+16942:Vivianne is doing the zone around Cairhien).  Also, Rasequin
+16967:countrysides now (Leara is doing the zone around TV,
+16968:Vivianne is doing the zone around Cairhien).  Also, Rasequin
+17049:been working on the Tar Valon zone already - thanks :>
+17077:been working on the Tar Valon zone already - thanks :>
+17105:been working on the Tar Valon zone already - thanks :>
+17127:not 46875 like it should be on the ubermap.
+17141:not 46875 like it should be on the ubermap.
+17205:the room in your zone is the river, and the other zone is where
+17207:need to give you authorization to edit the bridge zone, too.
+17214:to cruise through the zone to error check.
+17234:the room in your zone is the river, and the other zone is where
+17236:need to give you authorization to edit the bridge zone, too.
+17243:to cruise through the zone to error check.
+17293:Oh, and when you get done the zone I owe you the
+17309:Oh, and when you get done the zone I owe you the
+17417:BP is loading the MM2 world, not the ubermap.
+17420: onto the BP to find the ubermap gone :p Fortunately, it's
+17430:BP is loading the MM2 world, not the ubermap.
+17433: onto the BP to find the ubermap gone :p Fortunately, it's
+17448:get the ubermap online as well, and I'll be logging on to spam-
+17495:get the ubermap online as well, and I'll be logging on to spam-
+17542:get the ubermap online as well, and I'll be logging on to spam-
+17589:get the ubermap online as well, and I'll be logging on to spam-
+17636:get the ubermap online as well, and I'll be logging on to spam-
+17683:get the ubermap online as well, and I'll be logging on to spam-
+17730:get the ubermap online as well, and I'll be logging on to spam-
+17777:get the ubermap online as well, and I'll be logging on to spam-
+17824:get the ubermap online as well, and I'll be logging on to spam-
+17871:get the ubermap online as well, and I'll be logging on to spam-
+17918:get the ubermap online as well, and I'll be logging on to spam-
+17965:get the ubermap online as well, and I'll be logging on to spam-
+18012:get the ubermap online as well, and I'll be logging on to spam-
+18059:get the ubermap online as well, and I'll be logging on to spam-
+18106:get the ubermap online as well, and I'll be logging on to spam-
+18153:get the ubermap online as well, and I'll be logging on to spam-
+18200:get the ubermap online as well, and I'll be logging on to spam-
+18247:get the ubermap online as well, and I'll be logging on to spam-
+18294:get the ubermap online as well, and I'll be logging on to spam-
+18341:get the ubermap online as well, and I'll be logging on to spam-
+18388:get the ubermap online as well, and I'll be logging on to spam-
+18435:get the ubermap online as well, and I'll be logging on to spam-
+18482:get the ubermap online as well, and I'll be logging on to spam-
+18529:get the ubermap online as well, and I'll be logging on to spam-
+18576:get the ubermap online as well, and I'll be logging on to spam-
+18623:get the ubermap online as well, and I'll be logging on to spam-
+18670:get the ubermap online as well, and I'll be logging on to spam-
+18717:get the ubermap online as well, and I'll be logging on to spam-
+18922:soon as I can find someone to port the zone over here from the BP.
+18935:soon as I can find someone to port the zone over here from the BP.
+18954:PS it won't be on this port until Nico copies the zone from the BP. :P
+19601:to zedit? I want to be able to identify each zone as a
+19623:to zedit? I want to be able to identify each zone as a
+19644:(00:44:35) FryGuy8093: if we associate each zone with a country, then any RP done in that zone contributes to that country's econ, and the players get paid by the IC amount proportional to their economy.  as it's currently set up, players are just all going to choose the richest country as their own at creation, otherwise
+19650:is you don't need to mess with zone files.  Disadvantage is country vnum's need to be contiguious.
+19660:(00:44:35) FryGuy8093: if we associate each zone with a country, then any RP done in that zone contributes to that country's econ, and the players get paid by the IC amount proportional to their economy.  as it's currently set up, players are just all going to choose the richest country as their own at creation, otherwise
+19666:is you don't need to mess with zone files.  Disadvantage is country vnum's need to be contiguious.
+19678:gaps in the vnums.  Gonna have to edit the zone files themselves, I guess.
+19690:gaps in the vnums.  Gonna have to edit the zone files themselves, I guess.
+19828:I added Rafar's alt (Ruselon) to the BP.  He's doing zone 638 (Aringill).
+19837:I added Rafar's alt (Ruselon) to the BP.  He's doing zone 638 (Aringill).
+20114:I am working on finishing zone 468 on the BP and I have
+20229:I finished zone 609.  Gimme another! :>
+20237:I finished zone 609.  Gimme another! :>
+20246:over the files (rooms and zone) for Zones 160 and 191.
+20262:over the files (rooms and zone) for Zones 160 and 191.
+20572:I think we could do the Tower in one zone, maybe the grounds
+20593:I think we could do the Tower in one zone, maybe the grounds
+20614:I think we could do the Tower in one zone, maybe the grounds
+20635:I think we could do the Tower in one zone, maybe the grounds
+21857:Just do objects, zone, mobs and rooms for all of them, since it
+21878:Just do objects, zone, mobs and rooms for all of them, since it
+21942:Alindrelle Gate is in zone 90, which I can't access. I made the large wooden gate
+21954:Alindrelle Gate is in zone 90, which I can't access. I made the large wooden gate
+22085:And also, I can't figure out how to see empty rooms in a zone. 
+22102:And also, I can't figure out how to see empty rooms in a zone. 
+22201:It would really look alot nicer if you updated the zone
+22205:the zone.
+22224:7851	5942	521	1172963402	1	1	"Lesson" for Lierna and Lila	
+22484:541.653.7185
+22492:541.653.7185
+23267:Since Nico's no longer around to port stuff over, I need zone 96 of the Builder Port
+23278:Since Nico's no longer around to port stuff over, I need zone 96 of the Builder Port
+23289:I finished the Library, in zone 96. You can port it over whenever you have
+23301:would you set Sadren so she can redit in zone 97?
+23304:8266	521	521	1181007327	1	0	Re rooms	
+23314:zone, I can even put them in for you!
+23318:8266	521	4204	1181096038	1	1	Fwd: Re rooms	
+23328:zone, I can even put them in for you!
+23332:8266	521	8242	1181096038	1	1	Fwd: Re rooms	
+23342:zone, I can even put them in for you!
+23381:put those objects in zone 95. I have all of the Ajah keys,
+23400:put those objects in zone 95. I have all of the Ajah keys,
+23419:put those objects in zone 95. I have all of the Ajah keys,
+23473:before my next zone import, but it should be in soon. :D
+23657:a clean zone and use it just for objects, or should I use
+23683:a clean zone and use it just for objects, or should I use
+23707:They are all in zone 37 I think, that's all the new stuff.  So
+23723:They are all in zone 37 I think, that's all the new stuff.  So
+23737:I am writing to request a copy of a zone that I built some time ago. 
+23738:The zone was 102 - that used tobe the zone number, as far as I can recall.
+23740:Please let me know if it might be possible to e-mail me the world (.wld) and zone (.zon) files for this area.
+23754:I am writing to request a copy of a zone that I built some time ago. 
+23755:The zone was 102 - that used tobe the zone number, as far as I can recall.
+23757:Please let me know if it might be possible to e-mail me the world (.wld) and zone (.zon) files for this area.
+23769:Can you check the archives of the old areas and see if there is a zone 102?  The original
+23777:Can you check the archives of the old areas and see if there is a zone 102?  The original
+23786:exists, could you email the room and the zone files to me?  I'd appreciate it.
+23797:exists, could you email the room and the zone files to me?  I'd appreciate it.
+23841:zone 36. 
+23866:zone 36. 
+23891:zone 36. 
+23916:zone 36. 
+24118:anyway to check and see where this zone went? I don't see
+24120:also, but I can't find that zone either, or Ethrea's Fal
+24315:Hey, Sadren and Balinor said he'd been set up to build, but didn't have a zone.
+24316:I went ahead and allocated zone 98 as the warder zone, since apparently that's
+24325:Hey, Sadren and Balinor said he'd been set up to build, but didn't have a zone.
+24326:I went ahead and allocated zone 98 as the warder zone, since apparently that's
+24337:I threw together a quick plaza description because I updated the zone,
+24345:year was it b uilt in, what zone, or was it part of the Tower? Any
+24346:idea at all? Because I have access to the old zone files, and I can
+24362:I threw together a quick plaza description because I updated the zone,
+24370:year was it b uilt in, what zone, or was it part of the Tower? Any
+24371:idea at all? Because I have access to the old zone files, and I can
+25178:purge        qskills      raid         redit        refresh      release      
+25189:wiznet       yanksticky   zedit        zreset       _            
+25211:purge        qskills      raid         redit        refresh      release      
+25222:wiznet       yanksticky   zedit        zreset       _            
+25297:(The Ajah Wings)  9500 - 9599 (This is a big zone)
+25313:(The Ajah Wings)  9500 - 9599 (This is a big zone)
+25329:(The Ajah Wings)  9500 - 9599 (This is a big zone)
+25345:(The Ajah Wings)  9500 - 9599 (This is a big zone)
+25358:I was trying to name a new zone, and I looked online for the
+25359:command (zedit new <zone>)
+25364:Would you mind creating zone 4? Name is Sadren's Zone,
+25377:I was trying to name a new zone, and I looked online for the
+25378:command (zedit new <zone>)
+25383:Would you mind creating zone 4? Name is Sadren's Zone,
+25394:The zone has been created.
+25402:The zone has been created.
+25413:Perhaps by zone, or something?
+25431:Perhaps by zone, or something?
+25447:I also made it so you can type:  mpedit list [zone] and see only the programs in that
+25448:zones range of vnums (Note that this command works regardless of whether a zone with
+25470:I also made it so you can type:  mpedit list [zone] and see only the programs in that
+25471:zones range of vnums (Note that this command works regardless of whether a zone with
+25528:SYSERR {modify.c:687 (string_write)}: [ *work_str and *str were both null.  Creating a new *work_str ]
+25530:I kept seeing this while Ileana was in redit.
+25539:SYSERR {modify.c:687 (string_write)}: [ *work_str and *str were both null.  Creating a new *work_str ]
+25541:I kept seeing this while Ileana was in redit.
+25610:the second program to finish (Even if it's in another room or zone).
+25680:the second program to finish (Even if it's in another room or zone).
+25713:set his olc to zone 59.
+25721:set his olc to zone 59.
+25730:What zone do I put Aes Sedai rooms in?
+25749:What zone do I put Aes Sedai rooms in?
+25770:the newbie zone.. I intend to make an actual zone, but
+25773:Before I do that, I want to fix the zone we have now. Just
+25804:the newbie zone.. I intend to make an actual zone, but
+25807:Before I do that, I want to fix the zone we have now. Just
+25920:8. Redit save <zone>
+25921:9. Zedit save <zone>
+25922:10. Zreset <zone>
+25944:8. Redit save <zone>
+25945:9. Zedit save <zone>
+25946:10. Zreset <zone>
+26067:zone 3.
+26070:EQ. If you already made them, could you copy them to this zone?
+26083:zone 3.
+26086:EQ. If you already made them, could you copy them to this zone?
+26103:in zone 132, but I couldn't find any. Everything seems connected
+26119:in zone 132, but I couldn't find any. Everything seems connected
+26292:I am creating a newbie zone that will be full of history and
+26321:I am creating a newbie zone that will be full of history and
+26352:I am redoing the newbie zone, and noticed that the BotRH has no
+26371:I am redoing the newbie zone, and noticed that the BotRH has no
+26388:I am working on the newbie zone and I wanted to update the
+26404:I am working on the newbie zone and I wanted to update the
+26420:It's room 44, in zone 0.
+26444:It's room 44, in zone 0.
+26549: a bunch in zone 3.. why not use those? But I know we could use
+26552: If you decided to make any more book objects, throw them in zone
+26595: a bunch in zone 3.. why not use those? But I know we could use
+26598: If you decided to make any more book objects, throw them in zone
+26662:UPDATE `Tyme`.`Builder_Info` SET `zone` = '3',
+26668:`area_name` = 'Newbie Zone' WHERE `Builder_Info`.`zone` =9 AND `Builder_Info`.`start_vnum` =0 AND `Builder_Info`.`end_vnum` =99 LIMIT 1
+26682:UPDATE `Tyme`.`Builder_Info` SET `zone` = '3',
+26688:`area_name` = 'Newbie Zone' WHERE `Builder_Info`.`zone` =9 AND `Builder_Info`.`start_vnum` =0 AND `Builder_Info`.`end_vnum` =99 LIMIT 1
+27227:9365	8528	8219	1213990485	1	1	Your last zone	
+27231:`7Subj`6:`7 Your last zone
+27240:Duren told me that you finished a zone.. he wasn't certain
+27242:didn't see any mudmail pertaining to an entire zone, just
+27249:area. I have several things in the ubermap I'd like to see
+27257:9365	8528	8528	1213990484	1	0	Your last zone	
+27261:`7Subj`6:`7 Your last zone
+27270:Duren told me that you finished a zone.. he wasn't certain
+27272:didn't see any mudmail pertaining to an entire zone, just
+27279:area. I have several things in the ubermap I'd like to see
+27451:Anyways, thanks bunches Brailon, and I will work on grading zone 537 now. 
+27481:Anyways, thanks bunches Brailon, and I will work on grading zone 537 now. 
+27511:Anyways, thanks bunches Brailon, and I will work on grading zone 537 now. 
+27541:Anyways, thanks bunches Brailon, and I will work on grading zone 537 now. 
+27556:I gave you access to redit in zones 638, and 608. 
+27560:Forest' 'Forest' "Farmland' 'Road' I will give you 30 Qps per 100 room zone.
+27562:so it will be easier to build without looking at the ubermap
+27565:I also gave you redit access to 132 and 133, so if you find any
+27584:I gave you access to redit in zones 638, and 608. 
+27588:Forest' 'Forest' "Farmland' 'Road' I will give you 30 Qps per 100 room zone.
+27590:so it will be easier to build without looking at the ubermap
+27593:I also gave you redit access to 132 and 133, so if you find any
+27612:I gave you access to redit in zones 638, and 608. 
+27616:Forest' 'Forest' "Farmland' 'Road' I will give you 30 Qps per 100 room zone.
+27618:so it will be easier to build without looking at the ubermap
+27621:I also gave you redit access to 132 and 133, so if you find any
+27640:values for zone 35. I went through and checked them,
+27664:values for zone 35. I went through and checked them,
+28640:The responsive is automatic, "Everyone calls me Pat."  Then she gives Cam a mock, stern glare with her hands on her hips, "Almost everyone."  The next few moments are spent going through the same questions and mild disbelief in his project, the lass appearing somewhat distracted at times, suggesting her thoughts are elsewhere.  She also continues to send glances towards the waiting room- reasonable enough for someone who is typically kept busy with those seeking aid.  When the last of her questions is answered she pauses, looking at Cam while thinking for what is a strangely long period before her original, beaming smile returns, "Very well.  I probably do not have time to do much, but I have someone who works with me who might.  Wait here and I will see."  Without much waiting for any reply she whisks off in a rustle of skirts to the other door from the hospice and is gone for a few minutes during which some sounds of conversation and creaking that might indicate someone walking are barely heard.  The door opens abruptly as Pat breezes back in, smile firmly in place and back in an apparent comfort zone, "There is still the matter of coin, but my assistant is willing to give you the names of what we use and the general purpose of each if that suits you Master?"  Her manner is quick and efficient, seeming ready to usher him into the other room on the instant.
+28648:The responsive is automatic, "Everyone calls me Pat."  Then she gives Cam a mock, stern glare with her hands on her hips, "Almost everyone."  The next few moments are spent going through the same questions and mild disbelief in his project, the lass appearing somewhat distracted at times, suggesting her thoughts are elsewhere.  She also continues to send glances towards the waiting room- reasonable enough for someone who is typically kept busy with those seeking aid.  When the last of her questions is answered she pauses, looking at Cam while thinking for what is a strangely long period before her original, beaming smile returns, "Very well.  I probably do not have time to do much, but I have someone who works with me who might.  Wait here and I will see."  Without much waiting for any reply she whisks off in a rustle of skirts to the other door from the hospice and is gone for a few minutes during which some sounds of conversation and creaking that might indicate someone walking are barely heard.  The door opens abruptly as Pat breezes back in, smile firmly in place and back in an apparent comfort zone, "There is still the matter of coin, but my assistant is willing to give you the names of what we use and the general purpose of each if that suits you Master?"  Her manner is quick and efficient, seeming ready to usher him into the other room on the instant.
+29174:Azanon/Sevristh is interested in helping finish the ubermap.  I want to get him 
+29194:Azanon/Sevristh is interested in helping finish the ubermap.  I want to get him 
+29298:You're all set up in zone 11, which is vnums 1100 through 1199.
+29313:You're all set up in zone 11, which is vnums 1100 through 1199.
+29391:any zone you want.  If you do get permission errors, just grant yourself
+29392:access to the zone using the 'olc' command:
+29394:olc grant <player> <zone> <type> <level>
+29397:You can also grant other builders zone access as needed.
+29408:any zone you want.  If you do get permission errors, just grant yourself
+29409:access to the zone using the 'olc' command:
+29411:olc grant <player> <zone> <type> <level>
+29414:You can also grant other builders zone access as needed.
+29454:Just type zedit in the room you want the mob to automatically load
+29461:your mobs don't show.  If the zone is copied over or the mud crashes,
+29462:your mobs will not remain unless you edit the zone as explained
+29463:above.  Then they will automatically reload when the zone resets.
+29478:Just type zedit in the room you want the mob to automatically load
+29485:your mobs don't show.  If the zone is copied over or the mud crashes,
+29486:your mobs will not remain unless you edit the zone as explained
+29487:above.  Then they will automatically reload when the zone resets.
+29500:Sorry, but I worked out the time zone information incorrectly in my last mail. I'll be available on Friday August 14th from 8:00 am to 2:00 pm EST. Thanks!
+29508:Sorry, but I worked out the time zone information incorrectly in my last mail. I'll be available on Friday August 14th from 8:00 am to 2:00 pm EST. Thanks!
+29538:I'm working from home this week.  So pretty much anytime works for me.  I'm in central time zone.  Just log on and send me a tell anytime.
+29550:I'm working from home this week.  So pretty much anytime works for me.  I'm in central time zone.  Just log on and send me a tell anytime.
+29563:ubermap a bit. Assigning names, room-types, etc. and then starting to
+29574:any insight in the ubermap as to which is which? Right now I could
+29596:ubermap a bit. Assigning names, room-types, etc. and then starting to
+29607:any insight in the ubermap as to which is which? Right now I could
+29629:ubermap a bit. Assigning names, room-types, etc. and then starting to
+29640:any insight in the ubermap as to which is which? Right now I could
+29853:Hey everyone! Just letting you know that I finished a small three room zone
+29876:Hey everyone! Just letting you know that I finished a small three room zone
+29899:Hey everyone! Just letting you know that I finished a small three room zone
+29922:Hey everyone! Just letting you know that I finished a small three room zone
+30136:leave all the stuff about the new code, and the ubermap and stuff alone.  But
+30154:leave all the stuff about the new code, and the ubermap and stuff alone.  But
+30170:I've checked and re-checked this zone, and I am certain that whatever is wrong with
+30182:I've checked and re-checked this zone, and I am certain that whatever is wrong with
+30247:I noticed that all of the objects in zone 35 have values (under option C in oedit),
+30256:I set the weights/costs of all the objects in zone 35 to what makes sense to me, as a
+30281:I noticed that all of the objects in zone 35 have values (under option C in oedit),
+30290:I set the weights/costs of all the objects in zone 35 to what makes sense to me, as a
+30552:I think zone 569 is done as far as rooms and objects, but it could use some
+30565:I think zone 569 is done as far as rooms and objects, but it could use some
+30581:That place would be great for quests!  570 is a zone that I have been
+30600:That place would be great for quests!  570 is a zone that I have been
+30957:I left off on the object editing at zone 37.  I'll do what I can some more on
+30978:I left off on the object editing at zone 37.  I'll do what I can some more on
+30995:I'd need to create a new zone for this.  I don't want to use the Player
+30997:godly enough to make a new zone.  So, was wondering if you could grant me that
+31015:I'd need to create a new zone for this.  I don't want to use the Player
+31017:godly enough to make a new zone.  So, was wondering if you could grant me that
+31056:belongs near Jangai pass, then we need to finish zone 567 and link it in there
+31074:belongs near Jangai pass, then we need to finish zone 567 and link it in there
+31088:We now have a zone for the guild Tower.  It's Zone 40.
+31437:done proofreading zone 94. couple of questions I need
+31449:done proofreading zone 94. couple of questions I need
+31618:zone 96 next.
+31629:zone 96 next.
+31637:I fixed a door in zone 91 at room 9104.  Anazail informed me
+31638:that it's your zone, but I was hoping that just fixing a door
+31655:I fixed a door in zone 91 at room 9104.  Anazail informed me
+31656:that it's your zone, but I was hoping that just fixing a door
+31965: I went and looked at zone 88. Looks like its just the Green and Blue halls/bedrooms. Are there other ajah rooms? One of my Yellows asked about hers. And are there any on the warder side? Esrahd asked about his TG room. 
+31979: I went and looked at zone 88. Looks like its just the Green and Blue halls/bedrooms. Are there other ajah rooms? One of my Yellows asked about hers. And are there any on the warder side? Esrahd asked about his TG room. 
+31993: I went and looked at zone 88. Looks like its just the Green and Blue halls/bedrooms. Are there other ajah rooms? One of my Yellows asked about hers. And are there any on the warder side? Esrahd asked about his TG room. 
+32122:entire south-eastern part of zone 640 for the occasion, since it should be
+32145:entire south-eastern part of zone 640 for the occasion, since it should be
+32168:entire south-eastern part of zone 640 for the occasion, since it should be
+32191:entire south-eastern part of zone 640 for the occasion, since it should be
+32214:entire south-eastern part of zone 640 for the occasion, since it should be
+32273:in zones that have been taken out of the game like zone 88 was.  Will need to ask Duren.
+32286:in zones that have been taken out of the game like zone 88 was.  Will need to ask Duren.
+33071:on the builder port.  They were not in zone 88 either, which had Sedai rooms. 
+33072:Is it possible that there was yet another zone being used for Tower rooms?  If
+33089:on the builder port.  They were not in zone 88 either, which had Sedai rooms. 
+33090:Is it possible that there was yet another zone being used for Tower rooms?  If
+33107:in zone 0 so now they are all on the main port and they weren't ready to be
+33132:in zone 0 so now they are all on the main port and they weren't ready to be
+33267:After that, it will be linked up with the old Two Rivers zone, Baerlon,
+33294:After that, it will be linked up with the old Two Rivers zone, Baerlon,
+33552:http://i1.kym-cdn.com/photos/images/original/000/269/530/4b2.gif
+33560:http://i1.kym-cdn.com/photos/images/original/000/269/530/4b2.gif
+34338:So, if you want to build it, I can set up a zone for you to build it in,
+34343:Tell me how many rooms you think you will need, and I'll get a zone set up
+34364:So, if you want to build it, I can set up a zone for you to build it in,
+34369:Tell me how many rooms you think you will need, and I'll get a zone set up
+34617:Or, you could get Duren or Anazail to just copyover zone 670 again.  It should fix.
+34628:Or, you could get Duren or Anazail to just copyover zone 670 again.  It should fix.

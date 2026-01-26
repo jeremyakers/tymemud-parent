@@ -1,0 +1,16 @@
+# anchor caemlyn=(298.3, 176.66) cairhien=(397.02, 92.472) zone_w=49.360 zone_h=49.360
+# row_fit best_score=994.589 best_zone_w=29.616 guess_score=215.749 row_origin_540=(288.181,73.962)
+# grid_origin x_origin=-333.755 y_origin=-340.662 top_left_zone=925 cols=26 rows=20
+# search_mode=anchor radius_zones=6.000 max_workers=32
+# metrics_all(tolerant) precision=0.9877 recall=1.0000 f1=0.9938 hits=80 missing=0 extras=1 cell_tolerance=1
+# metrics_strict precision=0.5556 recall=0.6000 f1=0.5769 hits=45 missing=30 extras=36
+# expected_source=v1_tsv:/home/jeremy/cursor/tymemud/docs/ubermap/v2/extracts/v1_ubermap_road_river_cells.tsv
+zone	feature	v1_count	extracted_count	missing	extra
+537	river	19	17	18,19,25,27,35,55,74	29,34,38,44,46
+537	road	15	19	20,31,38,42,63,86,95,96	40,46,49,51,54,55,64,74,75,84,85,94
+538	river	5	4	2,11	0
+538	road	3	5	9,19	8,18,28,39
+539	river	17	20	5,15,26,36,47,66,76	3,14,24,35,45,57,58,67,77,87
+539	road	9	8	22,41,50	11,30
+540	river	0	0		
+540	road	7	8	77	49,96

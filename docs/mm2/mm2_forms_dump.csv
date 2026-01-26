@@ -1,0 +1,123 @@
+idx,id,type,time,attack,defense,kind,name,comment,num_prereq,prereq,num_other,other_pairs
+0,0,3,100,100,100,1,a dodge to the left,Left dodge,0,,0,
+1,0,3,100,100,100,1,a dodge to the right,right dodge,0,,0,
+2,0,3,100,100,100,1,a jump,plain jump,0,,0,
+3,0,3,100,100,100,1,ducking,Down!,0,,0,
+4,0,1,120,100,100,142,Parting the Silk,,1,0,4,0:120 1:80 3:140 2:200
+5,0,0,170,75,100,134,Heron Wading in the Rushes,"leaves you open, develops balance",0,,4,0:95 1:120 3:60 2:200
+6,0,2,120,63,100,142,Hummingbird Kisses the Honeyrose,another book form,8,0 95 1 120 3 60 2 200,4,0:165 1:120 3:40 2:130
+7,0,3,120,100,100,238,Cat Crosses the Cortyard,really a walking stance,1,1,4,0:60 1:110 3:200 2:30
+8,0,1,100,100,100,238,Sheathing the Sword,,8,0 60 1 110 3 200 2 30,4,0:75 1:95 3:150 2:175
+9,0,2,80,85,100,14,Cat Dances on the Wall,,0,,4,0:85 1:130 2:130 3:40
+10,0,1,120,100,100,46,Courtier Taps His Fan,,2,0 1,4,0:150 1:120 3:80 2:30
+11,0,0,40,75,100,11,Lizard in the Thornbush,,8,0 150 1 120 3 80 2 30,4,0:40 1:75 2:180 3:120
+12,0,2,110,45,100,238,Cat on Hot Sand,,8,0 40 1 75 2 180 3 120,4,0:125 1:85 2:60 3:150
+13,0,0,130,65,100,43,Heron Spreads its Wings,,8,0 125 1 85 2 60 3 150,4,0:70 1:130 2:90 3:100
+14,0,0,160,80,100,238,The Moon Rises Over the Lakes,,8,0 70 1 130 2 90 3 100,4,0:40 1:75 2:185 3:120
+15,0,0,140,70,100,46,Swallow Takes Flight,,1,1,4,0:130 1:60 2:120 3:85
+16,0,3,130,100,100,238,Moon on the Water,,2,0 1,4,0:100 1:30 2:140 3:10
+17,0,3,110,100,100,224,Wood Grouse Dances,,1,0,4,0:110 1:85 2:90 3:45
+18,0,0,100,100,100,14,a thrust,,0,,0,
+19,0,2,170,90,100,15,Ribbon in the Air,,1,18,4,0:130 1:90 2:60 3:25
+20,0,1,120,100,100,239,Stones Falling from Cliff,,1,1,4,0:30 1:76 2:200 3:150
+21,0,0,140,65,100,134,Lightning of Three Prongs,,8,0 30 1 76 2 200 3 150,4,0:35 1:120 2:190 3:85
+22,0,3,175,100,100,239,Leaf on the Breeze,,1,0,4,0:80 1:150 2:50 3:130
+23,0,2,135,55,100,143,Boar Rushes Down the Mountain,,8,0 80 1 150 2 50 3 130,4,0:170 1:90 2:120 3:50
+24,0,1,180,100,100,134,River Undercuts the Bank,,2,0 1,4,0:160 1:190 2:20 3:70
+25,0,3,175,100,100,96,Swallor Rides the Air,,2,0 1,4,0:130 1:85 2:170 3:70
+26,0,1,100,100,100,239,Dove Takes Flight,,8,0 130 1 85 2 170 3 70,4,0:120 1:160 2:80 3:45
+27,0,2,130,65,100,134,Falling Leaf,,2,0 1,4,0:35 1:85 2:180 3:160
+28,0,0,95,50,100,96,Kingsfisher Takes a Silverback,,1,0,4,0:200 1:140 2:30 3:80
+29,0,0,110,80,100,14,Bundling Straw,,0,,4,0:40 1:80 2:150 3:120
+30,0,2,130,65,100,96,Striking the Spark,,0,,4,0:50 1:85 2:180 3:120
+31,0,3,125,100,100,239,Thistledown Floats on the Whirlwind,,1,0,4,0:90 1:110 2:45 3:20
+32,0,3,180,100,100,2,Folding the Fan,sheathing move,2,0 1,4,0:30 1:100 2:40 3:70
+33,0,1,120,100,100,232,Water flows Downhill,,2,0 1,4,0:200 1:120 2:35 3:80
+34,0,2,110,55,100,239,The Wind and the Rain,,0,,4,0:45 1:80 2:200 3:120
+35,0,1,160,100,100,239,Watered Silk,,0,,4,0:130 1:200 2:60 3:120
+36,0,3,120,100,100,238,Boar Rushes Downhill,,0,,4,0:60 1:140 2:90 3:170
+37,0,0,170,80,100,6,Stone Falls from the Mountain,,0,,4,0:45 1:80 2:70 3:70
+38,0,0,175,75,100,239,Apple Blossoms in the Wind,for fighting against multiple opponents,2,0 1,4,0:200 1:175 2:95 3:60
+39,0,1,145,100,100,239,Moon Rises Over Water,,2,0 1,4,0:120 1:170 2:130 3:65
+40,0,3,160,100,100,224,Stones Falling Down the Mountain,,1,0,4,0:125 1:100 2:60 3:85
+41,0,1,120,100,100,224,Whirlwind on the Mountain,,1,1,4,0:120 1:160 2:95 3:30
+42,0,2,160,70,100,224,The Wind Blows Over the Wall,,0,,4,0:120 1:90 2:25 3:60
+43,0,3,130,100,100,14,Low Wind Rising,seated version,2,0 1,4,0:95 1:120 2:70 3:160
+44,0,0,120,65,100,14,Lion on the Hill,,0,,4,0:110 1:80 2:75 3:40
+45,0,1,95,100,100,239,Arc of the Moon,,2,0 1,4,0:130 1:150 2:170 3:100
+46,0,2,95,45,100,239,Tower of the Morning,,0,,4,0:50 1:90 2:180 3:110
+47,0,3,110,100,100,134,Grapevine Twines,,2,0 1,4,0:140 1:95 2:120 3:160
+48,0,1,120,100,100,14,Dancing on the Moonlight,,1,0,4,0:80 1:35 2:85 3:100
+49,0,0,170,75,100,10,Cat Chases its Tail,,0,,4,0:150 1:180 2:85 3:45
+50,0,2,120,63,100,132,Wind through the Willows,,0,,4,0:90 1:75 2:40 3:110
+51,0,3,120,100,100,107,Swan Swims on the Pond,,1,1,4,0:120 1:110 2:65 3:85
+52,0,1,100,100,100,239,Ribbons Floating on the Air,,0,,4,0:180 1:80 2:120 3:50
+53,0,2,80,85,100,14,Tumbling Down the Mountain,,0,,4,0:45 1:110 2:60 3:80
+54,0,1,120,100,100,96,River Rushes Past,,2,0 1,4,0:110 1:90 2:140 3:60
+55,0,0,75,100,100,14,Stones Hopping on the Water,,0,,0,
+56,0,2,110,45,100,239,Clouds Drifting in the Sky,,0,,4,0:85 1:200 2:25 3:60
+57,0,0,130,65,100,42,Dove Takes Flight,,0,,4,0:85 1:130 2:90 3:60
+58,0,0,160,80,100,239,Banners Flying,,0,,4,0:120 1:55 2:155 3:100
+59,0,0,140,70,100,46,Cat Catches the Mouse,,0,,4,0:110 1:75 2:80 3:35
+60,0,3,130,100,100,239,Silver Entwines Gold,,1,1,4,0:90 1:110 2:140 3:10
+61,0,3,110,100,100,224,Grogs Jumping on the Lily Pads,,1,1,4,0:90 1:75 2:40 3:110
+62,0,2,170,90,100,14,Horses Ride Swiftly,,0,,4,0:180 1:120 2:65 3:55
+63,0,1,120,100,100,239,Diving from the Cliff,,1,0,4,0:50 1:15 2:200 3:150
+64,0,0,140,65,100,134,Fire Blazing,,0,,4,0:85 1:100 2:190 3:85
+65,0,3,175,100,100,239,Lad Going Courting,,1,0,4,0:80 1:45 2:95 3:110
+66,0,2,135,55,100,142,Bees Buzzing the Blooms,,0,,4,0:75 1:60 2:40 3:110
+67,0,1,180,100,100,134,Night Falls on the Mountains,,2,0 1,4,0:160 1:90 2:80 3:50
+68,0,3,175,100,100,96,Fish Takes the Bait,,0,,4,0:65 1:110 2:170 3:20
+69,0,2,130,65,100,134,Blankets on the Bed,,0,,4,0:55 1:85 2:180 3:110
+70,0,0,95,50,100,96,Maypole Dancing,,0,,4,0:100 1:140 2:30 3:60
+71,0,0,110,80,100,14,Finding the Needle in the Hay,,2,0 1,4,0:70 1:60 2:50 3:120
+72,0,2,130,65,100,96,Mist Covers the Mountain,,0,,4,0:50 1:35 2:180 3:120
+73,0,3,125,100,100,239,Leaves Fall from the Trees,,1,0,4,0:65 1:90 2:45 3:20
+74,0,3,180,100,100,2,Eagles on the Wing,,0,,4,0:130 1:110 2:20 3:70
+75,0,1,120,100,100,232,Rainbow over the Water,,1,1,4,0:130 1:85 2:55 3:75
+76,0,2,110,55,100,239,Bouquet of Flowers,,0,,4,0:60 1:150 2:200 3:100
+77,0,1,160,100,100,239,Silk Floats on the Breeze,,0,,4,0:80 1:100 2:130 3:60
+78,0,3,120,100,100,239,Breeze Ruffles the Petals,,2,0 1,4,0:80 1:110 2:90 3:130
+79,0,0,170,80,100,6,Time Moves Quickly,,2,0 1,4,0:45 1:70 2:150 3:30
+80,0,0,175,75,100,239,Harvest Time Draws Near,,1,0,4,0:95 1:115 2:55 3:70
+81,0,1,145,100,100,239,Lace Covers the Silk,,2,0 1,4,0:90 1:120 2:45 3:65
+82,0,3,160,100,100,224,Gloom Fades Away,,1,0,4,0:55 1:65 2:110 3:85
+83,0,2,130,45,100,224,Mice Play with the Cheese,,0,,4,0:95 1:120 2:60 3:80
+84,0,1,120,100,100,224,Dreams of Fantasy,,1,1,4,0:100 1:90 2:95 3:50
+85,0,2,160,70,100,96,Wind Whips the Sheets,,0,,4,0:35 1:90 2:80 3:110
+86,0,3,130,100,100,14,Sun Rises in the Morning,,0,,4,0:95 1:120 2:170 3:60
+87,0,0,120,65,100,14,Danger Lurks Beyond the Mountains,,1,1,4,0:95 1:80 2:75 3:60
+88,0,1,95,100,100,239,Slicing the Pie,,0,,4,0:75 1:85 2:170 3:100
+89,0,2,95,45,100,239,Sunlight Dances on the Dew,,0,,4,0:150 1:90 2:55 3:75
+90,0,3,80,100,100,134,Stillnes Covers the Night,,0,,4,0:140 1:110 2:65 3:95
+91,0,2,95,45,100,239,Walking Down the Lane,,0,,4,0:50 1:90 2:80 3:90
+92,0,0,95,45,100,239,Roses Kiss the Dew,,0,,4,0:50 1:70 2:55 3:75
+93,0,0,160,70,80,511,a hit,Generic hit for any weapon. Intended for mobs to use.,0,,0,
+94,0,1,150,40,90,511,a block,generic form for mobs,0,,0,
+95,0,2,170,90,95,511,a counter,generic mob form,0,,0,
+96,0,3,139,100,100,511,a dodge,generic form for mobs,0,,0,
+97,0,0,90,110,105,1,Newbie hits the fan,"A test form, should be remade or never used",0,,0,
+98,0,2,90,110,110,4,Going to the shop,"A test form, should never be available for morts",2,96 97,0,
+99,0,0,130,50,60,1,a bite,Animal form,0,,0,
+100,0,0,150,40,40,1,a tail lash,"This is an animal form, only animals should have it.",0,,0,
+101,0,0,110,60,100,1,a kick,animal form,0,,0,
+102,0,3,80,10,50,1,a sidestep,animal form,0,,0,
+103,0,3,100,10,10,1,a quick jump,animal form,0,,0,
+104,0,2,140,10,10,1,a sad look,animal form,0,,0,
+105,0,1,120,10,10,1,a charge,animal form,0,,0,
+106,0,3,110,75,125,10,Horn sounds retreat,Hunter guildform,0,,0,
+107,0,3,90,70,105,10,Kingfisher dances,Hunter guildform,0,,0,
+108,0,0,140,130,70,10,Trumpets blaring,Hunter guildform,0,,0,
+109,0,0,75,105,105,10,Bees swarming,"Hunter guildform, most advanced",1,112,0,
+110,0,1,110,70,120,10,Hunters test the waters,Hunter guildform,0,,0,
+111,0,1,90,65,110,10,Butterfly takes flight,Hunter guildform,0,,0,
+112,0,2,85,80,110,10,Testing the hive,Hunter guildform,0,,0,
+113,0,2,100,90,100,10,Kiss of the butterfly,Hunter guildform,1,111,0,
+114,0,3,105,70,120,128,Toe in the water,Hunter guildform,0,,0,
+115,0,3,85,65,105,128,Trout in the brook,Hunter guildform,0,,0,
+116,0,0,130,120,70,128,Avalanche on the mountain,Hunter guildform,0,,0,
+117,0,0,75,100,105,128,Storm building,Hunter guildform,0,,0,
+118,0,1,90,65,125,128,Bird in the nest,Hunter guildform,0,,0,
+119,0,1,110,75,115,128,Fisherman casts his net,Hunter guildform,0,,0,
+120,0,2,65,70,110,128,Sparrow defends her young,"Hunter guildform, most advanced",1,118,0,
+121,0,2,100,90,95,128,The horn blows,"Hunter guildfor,",0,,0,

@@ -1,0 +1,2881 @@
+4	20	447	447	1036343664	Cormac	1926	`2Mortal Builders`7	The address for the Builderport is: `1tyme.envy.com:9696.`7
+
+All building is to be done on the Builderport and will then be
+copied to the live MUD by myself. Have fun on Builderport. It
+won't affect what we do here, with a few exceptions.
+
+On the bp, you will be restricted to the zones your working
+on, call it a precaution if you like, distrust if your a cynic :p
+Mort builders are now -`2paid`7- *pauses for the cheering* Rewards
+are still being worked out, but it will be in the area of a 
+qp or half a qp for every room done, and doubled for excellent ones
+This, however, may change to being based on areas done, or simple
+projects for those fellars who are doubling up on one area,
+I haven't decided. But what it does mean, is do work, and you 
+can get loaded up with a substantial number of qps.
+
+Everyone, you MUST type:
+`1redit save zone#`7 - if you have made changes to rooms
+`1zedit save zone # `7- if you have made changes to zon files
+`1oedit save zone # `7- if you have made changes to objects
+In short, remember to type OLC often, and if you haven't
+saved in awhile, do so, you don't want all your work to go down
+the drain.
+
+If you crash the bp.. Tell me, you'll get a gremlin doll as
+a reward :) Don't go about trying to though *peer*
+
+Room grid sizes are now OLC'able.
+Allowed grid sizes range from 2x2 to 20x20, and only even
+numbers are allowed.
+In addition to that, I'll make standard indoors rooms 8x8 and
+standard outdoor rooms 10x10. 
+The rooms don't have to be square, but make their size IC
+if you leave it at 0,0. Nothing can get in, and the room
+is useless.
+Also, remember. Make -sure- you use all appropriate
+room flags that are IC for that room, and not to use ones
+that are not appropriate. There are tidbits of code
+that go off these things.
+
+The Builders Egroup is `2builders-mit@yahoogroups.com`7, If you're not on it,
+send me a mail with your email address, and I'll add you.
+`1*Important*`7 Your name on the bp _MUST_ be different
+than any name you would use on the live mud, if its not
+tell me immediately.
+
+Any and all room descs need to be wrapped somewhere between
+75 and 80 chars, no exceptions. This is merely for neatness
+and some form of continuity from zone to zone. So, when
+designing rooms, take this into consideration, especially
+when using color as the color charachters used don't
+count towards the 75-80 chars.
+If you have any questions, just hollar them my way.
+Mac
+
+4	20	454	453	1036346604	Anusien	813	I am you, Who are me?	Anusien == Kiev on BP
+By the way, I'm in zones 364-365 and building Chachin.
+
+4	3	519	517	1036582459	Dugoth	125	`#Mental enhancements:`0	`0
+`3Telepathy-`0
+`0
+`7As most know a Wolfkin's primary mental enhancement is the ability to`0
+`7speak mentally with wolves. This communication is not done in the form`0
+`7of words, so please do not RP it that way. Wolfkin and wolves`0
+`7communicate by means of transmitting images and sensations. No wolf`0
+`7will use images or terms which are connected to human lifestyle. They`0
+`7aren't going to use an image of two men exchanging things to represent`0
+`7trade or commerce and they aren't going to understand it if such an`0
+`7image is sent to them. Keep that in mind when creating your images`0
+`7to use in RP, or wolfnames. If an image is especially complex or`0
+`7difficult to word or understand then you may use some OOC explaination`0
+`7to define it's linguistic interpretation and equivalence. A character`0
+`7of the subrank Young will be able to communicate in this way over a`0
+`7distance of approximately a mile, someone of Respected or higher may`0
+`7be able to reach distances of 2 miles. No Wolfkin can use this means`0
+`7of communication to speak telepathicly with anything or anyone other`0
+`7then a wolf within range or a dog with much wolf blood at a greatly`0
+`7reduced vocabulary and clarity. Remember the policy surrounding how`0
+`7wolves are to be Roleplayed when using this ability.`0
+`0
+`3Shared experience-`0
+`0
+`7A sort of offshoot of the telepathic talking between Wolfkin and wolves`0
+`7is the ability for a Wolfkin to experience things from the perception`0
+`7of a wolf within mental communication range. A prime example of this`0
+`7ability in the books is during the run from the ravens to the abandoned`0
+`7Stedding with Perrin, Egwene, and Elyas. What his ability means is that`0
+`7a Wolfkin can effectively look through the eyes of a wolf and see what`0
+`7the wolf sees, smell what he smells, taste what he tastes, and so on.`0
+`7A Wolfkin can not eavesdrop on the wolf's thoughts in this manner`0
+`7though, it is a purely sensory experience. The exact means of this`0
+`7ability is not clear, it is uncertain whether the Wolfkin's mental`0
+`7state moves to the wolf, or if the wolf is simply sending back it's`0
+`7experiences and perceptions verbatim like a long conversation. Either`0
+`7way though act under the assumption that the wolf must give permission`0
+`7for this ability, and that you are going to be at a greatly reduced`0
+`7awareness to your own physical environment. Think of it like a vitual`0
+`7reality helmet....it will override for the most part all of the senses`0
+`7you have involved, though you may with focus and concentration keep`0
+`7some awareness of what happens around you. Sufficient not to be`0
+`7blindsided or entirely oblivious. Don't be holding a conversation while`0
+`7doing this though, or expect to pick up anything casual.`0
+`0
+`3Instincts-`0
+`0
+`7Perhaps the most detrimental aspect of being a Wolfkin is the`0
+`7sublimation of normal human tendencies by those of a wolf. A Wolfkin`0
+`7is in a near constant battle to maintain a balance between the logical`0
+`7human nature and the more primal animal drives and instincts of a`0
+`7wolf. Most Wolfkin exibit this in some form or other, displaying some`0
+`7tendencies which are wolflike or uncommon. Sniffing the air, the way`0
+`7they walk or move, growling, looks or attitudes and so on. The more`0
+`7a Wolfkin experiences a raw emotion the more they may display the`0
+`7attitude of a wolf and be overwhelmed by a wolf's instinctual drives.`0
+`7A prime example of this is Perrin's battle with the fade, the`0
+`7combination of fear, anger and adrenaline allowed him to lose much of`0
+`7his control to the wolf mindset, almost to the point where he was`0
+`7going to attack the Myrddraal with his teeth. The struggle between`0
+`7a Wolfkin's human and wolf mindset's is most difficult for newer`0
+`7Wolfkin, a balance much harder to find and the rawer more driven`0
+`7instincts of a wolf hard to fathom of control. Older Wolfkin tend to`0
+`7have found a means of walking the line between the two, but even they`0
+`7are very susceptible to being overwhelmed by the wolf in heightened`0
+`7situations. It takes effort, concentration, experience and ability`0
+`7to keep from being overwhelmed by wolf instincts. No Wolfkin, none,`0
+`7will manage to accomplish this completely or at all times. Every`0
+`7Wolfkin should consider some means of both exibiting wolf tendencies`0
+`7and justifying how and why they do not become completely absorbed and`0
+`7lost. For example my character, Dugoth, not only has experience and`0
+`7control but he has distinctly seperated things in his life. When he`0
+`7hunts he tends to give himself largely to the wolf, examining it and`0
+`7learning it as he does, letting it have a vent so they don't build up`0
+`7and explode. He has also mentally set cities and libraries as rawly`0
+`7human things. When reading a book or studying he is as human as he`0
+`7could ever be, no aspect of i
+4	20	663	453	1037114134	Ethrea	164	Umm, me	Ethrea = Tessa on BP
+My zones are currently 217 (Fal Dara) and 218 (Fal Dara Keep)
+
+4	28	821	821	1037897222	Shai'tan	8	`1Ranks/Subranks`7	A person's rank in this guild will always include the type of
+Shadowspawn they are playing. Subranks may change as time progresses.
+
+The first subrank everyone will receive upon joining the guild is
+`1Pending`7. This period lasts for two weeks or two assignments,
+whichever is completed first. Anytime during these first two weeks
+the player maybe removed from the shadowspawn for any reason that
+the Shadow Dept imms feel is neccesary.
+
+After this, subranks very based upon which spawn is being played.
+
+Trollocs will be assigned a tribe (for IC purposes, to amuse those
+who can identify such things a la Lan/Moiraine from book 1), with
+the option to earn "Fist Chief" eventually, although such a designation
+would be saved for major war quests.
+
+Greyman will have a choice of a few different subranks, based upon
+what they wish to focus upon in their assignments (an assassin, for
+example, may wish to have the subrank "Assassin", or one who merely
+gathers information, could perhaps have "Stalker").
+
+Fades may be assigned to a group of Trollocs (either PC or NPC)
+and be given a "Linked Fist" designation, which would then be
+shared with all trollocs under its command.
+
+If a Shadowspawn member proves to be exemplary in their RP as a
+Spawn and in their OOC behavior when involved in events and scenes
+with *cough* less than appriciable players, they may earn the rank
+of `1Proven`7, which will then always be a part of the rank (not
+subrank) in the guild.
+
+Please note that there is no hierarchy within the players of this
+guild. The Shadow Dept Imms are the end all, be all. What they
+say, goes. All mortal members of the guild are considered the same
+rank, period. `1Pending`7 members are expected to listen to advice
+from others, `1Proven`7 members are expected to help out those newer
+to the guild, and `!all`7 members are expected to behave in a mature
+manner at all times, both on the guild line and in their interactions
+with the players of the mud.
+
+- Shadow Imms
+
+4	2	1011	1011	1039878480	Syrah	1477	`!Barracks Area`7	The barracks area for the Queen's Guard of Andor is now all fixed up and finished.
+There still might be some things that look a little 'funny' or don't match up quite
+right so if you notice something, please drop me a mail so I can fix it.
+
+For those of you that don't know, the area in question is connected to the SW corner
+of Outer Road, and is a revamp of the area that was done about 2 years ago.  The
+officer's rooms are pretty generic, but eventually they will likely be replaced
+with personal guild rooms.
+
+From this point on, the main offices for the Guard will be considered to be in
+the barracks area, and not the Palace.  When Avriele was working on fixing up the
+Palace area, she had intended to remove the handful of offices there, and they 
+still will likely be removed eventually.
+
+So, if you are an officer and would like to have your personal quarters built in
+or moved to the Barracks, again let me know and I will get on it. :)
+
+Comments and suggestions always welcome.  Enjoy the area!
+
+-Syrah
+
+2	0	1108	1108	1041061182	Syrah	1477	Rooms	With apologies to Padraigin for removing her post, I feel the need to clarify the
+rooms situation as per agreements between the Housing Department (me) and the
+Tower GLs.
+
+Until I receive notice otherwise from Cormac, all guild room descriptions (for all
+guilds) get mailed to me.   So, if you have mailed any to Padraigin, either mail
+them to me as well, or let me know that you mailed them and I will get them from
+her.
+
+Per the agreement with the Tower GLs:
+    All bonded warders are able to have `*1`7 room.
+    All Tower Guard of rank Corporal or above are able to have `*1`7 room.
+    All PC (not NPC) Sitters or above are able to have `*2`7 rooms.
+    All other Aes Sedai are able to have `*1`7 room.
+
+These rooms will be connected to the various Ajah halls and to the appropriate
+area of the warder quarters.
+
+I apologize for the confusion.
+
+-Syrah
+ Housing Department
+
+4	24	1204	1204	1041817145	Shai'tan	8	`1Quick suggestion`7	Someone commented to me that it's rather hard to find the RP
+in rooms that show up on where, as some rooms are so generically
+named it's impossible to guess who is in them or where the rooms
+are. Perhaps we can add the zone name to the display, or something
+of the sort at least, so people can at least get a starting point
+to being wandering from.
+
+4	24	1205	1204	1041820356	Tannil	3225	Hmmmm...	Due to the lack of a named builder list for the builders who have
+rights in a zone (eg: Standard Circle OLC numbers instead of the
+system where you name builders in ZEDIT) it seems that the
+builder's names have been placed into the zone titles.  Granted
+this could be easily fixed by just having someone go through and
+clear the names out, but then that leaves us with the fact that
+that the zone names don't follow any real stanard to make it easy
+to see where a zone is in the game.
+
+Of course, that doesn't mean that a new field couldn't be added
+to the zones which would have a name or description to give people
+an idea of where it is.  Such as "on the Almoth Plain" or such.
+
+"A Common room (on the Almoth Plain): 2 people" or what have you.
+
+My two bits.
+
+- T
+
+
+4	20	1237	1237	1042015460	Ilorin	3546	Zone 140	Hello,
+
+  Please do not redit save in zone 140. (Not like anyone else
+builds in there but me.) If you do, it'll crash the bp. Just an
+FYI.
+
+Ilorin
+
+4	20	1285	1285	1042758841	Ealasaid	1332	Typos	I'm going through the typo list and fixing any that
+I come across that are still current and or in need
+of fixing.  I've finished perhaps half of the entire
+list, yet I'm sure there are still more out there
+that haven't been reported.  
+
+What I'm requesting, from all of you, if you get a
+few minutes throughout the day to travel about the
+different zones/rooms/shops/mobs, looking for any
+bugs/typos/mistakes that you come by, then mudmail
+them to me; either here as Ealasaid, or on the BP
+as Louise.
+
+
+Thanks, lovlies.  :)
+
+Me
+
+4	24	1376	1335	1043725242	Cormac	1926	Zone Creation	Hey, there's a way to create zones in olc (zedit zone new)
+unfortunately, there's a tidbit of code that prevents me from creating any zone with
+a number higher than 326. Could one of you folks remove that piece?
+Danke,
+Mac
+
+4	24	1736	1736	1047704530	Duren	9	MikkiMUD 3.2 - To do list revision 1	MikkiMUD 3.0 To-Do:
+`7
+SQL pfile-saving:
+  `1*`7 Once this is completed, we're going to start working on MM3.2
+`7
+Whatever other misc code changes need to be done in order for the builders
+  to get eq brought over.
+`7
+MikkiMUD 3.2 To-Do (In order of expected completion)
+`7
+1.)  Switch from prcs to CVS (Source code first, area files after making
+     sure builderport and livemud's area files reconcile with each other)
+     This could also perhaps make Cormac's job of transfering area files
+     from builderport to live mud easier.  commit them from builderport,
+     then update livemud with the correct files?  Any thoughts on this?
+`7
+2.)  Finishing touches to craft code:
+     `1-`7 Add commands to add/remove craftable items and the mods.  
+        (Craft_Items and Craft_Mods in the database)
+`7
+3.)  Finishing touches to economy, items that need finishing:
+     `1-`7 War menu
+     `1-`7 Player war menu
+     `1-`7 RP menu
+     `1-`7 Provincial Menu (partially completed in 'econshow')
+     `1-`7 EQ menu
+     `1-`7 When you fail to be able to pay taxes, it should put you
+        into a menu that lets you choose which pieces of eq to give
+        up in order to pay the taxes.  It should only give them 50%
+        credit of the current value of the eq, and should not allow
+        then to exit until they've given up enough items to pay off
+        the debt.
+     (See 'glboard cd show 5' for details)
+`7
+4.)  Turn based Combat:
+     `1-`7 Form system needs coded.  Should be able to have multiple categories 
+        of forms, where forms in category X can only be used agiants forms in 
+        category Y.  Each form should be able to have certain stats, such as 
+        strength and speed.
+     `1-`7 Slight revamp needed so that when you attack a player with a form, 
+        the player does not automatically respond unless he is in 'automatic' mode.
+        If the player is not in automatic mde, he has to respond with the form he 
+        wants to block/dodge/counter the attack with.
+     `1-`7 Need a toggle for automatic/manual modes.  Possibly with multiple 
+        levels of automation.  Fully automatic, or semi-autmatic where it auto-
+        matically chooses a response when there is a clear best choice for a 
+        responding form, and fully manual.
+     `1-`7 Need to be able to attack mobs.
+`7
+5.)  Retainers:  (I'd like to see these moved to SQL too, if possible)
+     `1-`7 Ability to have skills/spells
+     `1-`7 Ability to wear eq
+     `1-`7 Ability to create buyable 'templates' (Either in code or OLC)
+`7
+6.)  Channeling system (Still needs details)
+`7
+7.)  War system: (The details of this are still very much undeveloped)
+     `1-`7 This covers the code outside of the code to buy and house troops.  This
+        is more for actually handling the battle as it takes place.  I'm
+        envisioning a grid based layout somewhat similiar to turn based combat,
+        where each square can hold one 'group' of troops (Where a group can be
+        some arbitrary number, such as 100 troops, or whatever).  Each player
+        involved should be able to control the troops he commands, and they take
+        turns making attacks.
+`7
+Misc (Not in any order):
+`7
+  Skills:
+  `1-`7 Tool
+`7
+  Building/OLC:
+  `1-`7 Mob scripting
+
+4	24	2067	2067	1052689008	Guy	4051	The Penguin	The Penguin
+
+by Jeramey Crawford <jacrawf@marko.net>
+and
+Rob Flynn <rob@marko.net>
+
+Once upon a term'nal dreary, while I hack'ed, weak and weary,
+Over many a quaint and curious volume of forgotten code--
+While I nodded, nearly napping, suddenly there came a beeping,
+As of some one gently feeping, feeping using damn talk mode.
+"'Tis some hacker," I muttered, "beeping using damn talk mode--
+Only this. I hate talk mode."
+
+Ah, distinctly I remember it was in the bleak semester,
+And college life wrought its terror as the school year became a bore.
+Eagerly I wished for privledges;--higher access I sought to borrow
+For my term'nal, unceasing sorrow--sorrow for a file called core--
+For the rare and radiant files of .c the coders call the core--
+Access Denied. Chown me more.
+
+"Open Source," did all mutter, when, with very little flirt and flutter,
+In there stepped a stately Penguin of the saintly days of yore.
+Quite a bit obese was he; having eaten lots of fish had he,
+But, by deign of Finnish programmer, he sat in the middle of my floor--
+Looking upon my dusty term'nal in the middle of my floor--
+Came, and sat, and nothing more.
+
+Then the tubby bird beguiling my sad code into shining,
+By the free and open decorum of the message that it bore,
+"Though thy term'nal be dusty and slow," he said, "Linux be not craven!"
+And thus I installed a new OS far from the proprietary 
+shore--
+The kernel code open but documentation lacking on this shore.
+Quoth the Penguin, "pipe grep more!"
+
+Much I marvelled this rotund fowl to hear discourse so plainly,
+Though its answer little meaning--little relevancy bore;
+For we cannot help believing that no living human being
+Ever yet was blessed with seeing bird in the middle of his floor--
+Bird or beast sitting in the middle of his cluttered floor,
+With such instructions as "pipe grep more."
+
+But the Penguin, sitting lonely in that cluttered floor, spoke only
+Those words, as if its soul in that instruction he did outpour.
+Nothing more did he need utter; understood did I among that clutter--
+Understood his command as I could scarcely do a few moments before--
+I typed as furious as was willed me, understanding just a minute before.
+Again the bird said "pipe grep more!"
+
+"Amazing!" said I, "Penguin we will conquor the world if you will!
+By the Network that interconnects us--by that Finn we both adore--
+We'll take this very world by storm!" For now grasped I what he'd meant,
+The thing I do while searching /usr/doc/* for that wond'rous lore--
+Those compendiums of plaintext documentation and descriptive lore.
+Quoth the Penguin, "pipe grep more!"
+
+And the Penguin, never waddling, still is sitting, still is sitting
+In the middle of my room and still very cluttered floor;
+And his eyes have all the seeming of the free beer I am drinking
+And the term'nal-light o'er him glowing throws his shadows on the floor;
+And this OS from out the shadows that is pow'ring my term'nal on the floor
+Shall be dominating--"Pipe grep more!"
+
+4	13	2675	2675	1063997797	Laurane	2096	Coming attractions	Hey everyone. With the recent guild restructuring and the
+timeline change to come, I'm going to be doing a complete
+guild overhaul over the coming month or so. Once I figure
+out exactly where we are going to be in the books, I will
+post a summary of where the Wisdoms and Kin stand in
+relation to the rest of the guilds and the rest of
+Randland in general.
+
+I will also be restructuring the syllabus (in general, 
+making it much more independent and up to y'all as to how 
+fast/slow you wish to complete it). Basically, the Wisdoms
+(Non-Kin) portion of the guild will be getting a little 
+less structured, and the Kin half of the guild will be 
+getting a little more structured, or at least a bit more 
+organized. All in all, advancement in the guild will be
+more based on rp activity than on 'classes'. If you
+rp, your char will advance naturally. So don't worry about
+taking this or that class, just rp.
+
+Also, you will all notice you have been guilded into the
+Laborers Uberguild. Basically, this provides all of us
+with an extra channel through which to organize rp. For
+the Kinswomen amongst us, it helps now because you no
+longer have to be a Wisdom (not that you ever 'had' to
+be), and for non-channeling wisdoms, it will allow you
+contact to those in your communities and do all that
+information gathering (gossip) that wisdom's do oh so
+well.
+
+As far as my position, it remains relatively unchanged. 
+From my understanding, I will still be the GL in charge 
+of the Wisdoms portion of the guild, while Beonca will 
+be taking care of any ooc matters relating to our 
+association with the laborers uberguild. So any 
+Wisdom's/Kin stuff, you can direct to me. Any stuff that 
+might relate to laborers in general, or things beyond
+the typical scope of our guild, you can direct to Beonca.
+(Though if it has some connection to our guild, I would
+appreciate being included in the issues, just so I am
+aware of what's going on and can have a better idea of
+how to make the guild better for y'all.)
+
+Again, I will be following this up with further postings
+to clarify exactly what is changing and how. At the
+moment, I'm just waiting to see exactly where the timeline
+is moving to, and I want to talk to a few of the other
+guilds to make sure we're all on the same page.
+
+If you have any questions or comments, please let me know.
+
+Your friendly neighborhood GL,
+
+Laurane
+
+PS. I will probably also be 'cleaning hosue' soon, so to
+speak. We have some in the guild who have not logged on
+in almost a year. If you wish to keep your char guilded,
+please send me a short note saying so. This mainly
+applies to those of you I haven't seen in a while. Also,
+if you wouldn't mind, let me know what your char is up
+to. I will probably be doing this AFTER the timeline shift,
+so don't worry if you don't know where your char is
+going to fit in. I will post again later letting you know
+exactly when I'm going to be doing all this. I just wanted
+to give y'all a heads up.
+
+4	13	2876	2876	1066966152	Laurane	2096	`!Advancement in the Guild`7	Ok, here's the deal on advancement in the guild. For the
+Wisdoms part, you're pretty much on your own as far as
+how fast/slow you want your character to develop. I'll try
+to keep an eye on things to make sure that no one is rp'ing
+unrealistically (ie giving someone an herbal potion that 
+somehow instantly heals a broken leg), but beyond that, how
+you rp is up to you. You can start as an apprentice and
+make up a mentor for yourself. You can find another Wisdom
+in the guild to teach you (I try to do it myself when I can,
+but I'm in school an awful lot so my rp comes in spurts).
+Basically, I just want to make sure that you can advance
+and aren't just waiting on me so you can get some required
+lesson. I trust all of you enough to rp your characters
+intelligently. The only thing I ask is that you keep me
+updated on your character's progress. That way, not only
+do I know where everyone in the guild stands, but I can
+update your rank if necessary.
+
+For the Kin part, I have to be a little more strict. Because
+in the books, the Kin really didn't train channelers, we
+have to be careful how much a Kinswoman is taught, and
+how far her ability and skill progress. Now granted, we
+take a bit more liberty here in training women to channel,
+but realize that training here proceeds much more slowly
+than in the Tower, and is not nearly as complete. That
+said, I am going to set a certain 'syllabus' if you will,
+but it's really only a guide as to how far along in channeling
+your ability has progressed. Based on your background, you 
+will start and different levels along the ladder. Each
+lesson must be taught by someone who is at least two
+lessons ahead of you for you to advance to the next skill
+level in your channeling. Also note that these are
+guidelines for your skill, not your strength. Remember that 
+you can techically know how to Heal even if you're not
+strong enough in the One Power to actually do it.
+
+
+The lessons/skill levels are as follows.
+
+1. Introduction to the One Power/Basics of channeling
+This is a non-channeling lesson. Basically, it covers all
+the basic information about channeling. what Saidin/Saidar
+are, the dangers of channeling, some examples of what can
+be done, what channeling is, what weaving is, etc. You
+cannot grasp or channel at this level.
+
+2. Grasping/Releasing
+Fairly self explanatory. At this level, you can grasp and
+release, but cannot yet channel the One Power.
+
+3. Single flow channeling/simple weaves
+The basics of channeling simple flows of the five powers.
+At this level, you can do very basic weaves which involve
+only one of the five powers. (ie a ball of spirit, a breeze
+of air, lighting a candle, etc.)
+
+4. Advanced weaving with a single flow
+At this level, you are getting fairly proficient with your
+channeling, but can still only handle one flow at a time.
+Basically like the one above, but with bigger flows that
+can have a bit more of an effect. (ie. A club of air, 
+a ball of fire, shielding, etc.) At this level, linking
+is also taught.
+
+5. Multi flow channeling/simple weaves
+
+At this stage, you've learned enough control that you can
+add a second, third, or even more flows to your weave.
+However, because of the added strain of multiple flows,
+you are again limited to simple weaves if you try to use
+multiple flows. At this level, you also learn the process
+of guiding someone through breaking a block.
+
+6. Advanced weaving with multiple flows
+You're quite skilled in channeling at this point. You have
+good control over your flows, and are able to combine them
+in increasingly difficult weaves. (gentle/sever) At the
+top of this level is Healing.
+
+Please remember this while you're training. Learning about
+the Kin as a group is a function of how long you've been
+under the tutelage of a Kinswoman, not necessary how well
+trained you are. You can be in training, and still not
+know about the Kin. Remember, it's a big risk telling our
+secret. So just because you're being trained to channel, don't
+assume you know about the Kin. Knowledge of the Kin will
+only come through RP. If you haven't found out IC'ly from
+another player, don't assume you know it.
+
+Also note that you DO NOT have to complete all six lessons
+to be considered a full Kinswoman. There are Kinswomen who
+represent skill levels ranging the full range. Once you
+are IC'ly told about the Kin, you are brought in and are
+considered to be a full Kinswoman. Because remember, status
+in the Kin is based on age, not skill or strength in the power.
+You could potentially be like Morgase, never advance beyond
+lesson 3, yet still rank higher in the Kin than someone at
+level 6 so long as you were older. Just something to keep
+in mind.
+
+4	22	3084	3084	1071529653	Faerid	4217	`#!T`1ournament?`0	Hello folks, I got to thinking last evening and was pondering the idea
+of a major, longer term tournament and was wondering about thoughts,
+suggestions, or comments ya'll might have. I'll give a rough outline
+of what I was considering now (one idea considers the possibility of
+a completed/semi-completed combat code which may be optimistic, and
+alternatives will be planned ;))
+
+So, anyways, what I was thinking of was an IC tournament in the Caemlyn
+area involving 4 events and spanning a period of a month RL, each with an
+IC prize and making use of character WM (now that people have had a chance
+to make use of the new system if they want and so forth, and to encourage
+others). The month long tournament would be announced an additional month
+in advance to give people a chance to OOCly enter/prepare, and to generate
+RP, such as allowing people time to ICly travel to Caemlyn if they wish,
+the nobles to sponsor champions, the crafters/artisans to prepare wares
+or events, and so on. I want this to be a major IC event, not just the
+quickie week long tournament that used to be as much OOC as IC. I also
+want people to be able to NPC contestants if they can't make it themselves
+ICly, of equal or lesser comparable WM skill. An NPC contestant who wins
+the tournament would also ICly win the prize, not the PC playing them
+(perhaps something could be arranged a bit). At the end of the tournament
+I'd like to see a ball/festival/party/whatever potentially generated by
+the players and another department in which the prizes will be awarded and
+such. All that said, I'll give a brief run over on my ideas for the 4
+combat events.
+
+1) Wrestling - I don't think this has been done in a tournament before,
+and it would be a good event to permit rich or common alike to participate
+as they wish. It would be a combination of grecko-roman and sumo wrestling
+for the environment. Match held in a ring 15 feet in diameter, and winning
+conditional on 2 falls or disabling the opponent (knocking them out or
+breaking an limb, or submission). A fall will be constituted by either driving
+an opponent outside the bounds of the ring or pinning their back to the ground
+(shoulders and lower back in contact) for a period of 3-5 seconds or more.
+This will use WM much like a normal spar for the players own estimates of
+their ability and a draw (say a double knockout) will have victory awarded
+to the player with the highest WM. This event would take place over the first
+week of the tournament.
+
+2) Joust - you should all have some idea what this is. Entry would require
+the entrant to have their own mount and means of protection. Lances will be
+provided and blunted. The event will consist of 3 passes, the player with
+the most points at the end of these three passes being declared the winner.
+1 point will be awarded for breaking the lance on the body/shield of the
+enemy, 2 points for breaking the lance on their head, and 3 points for
+dismounting them. Each pass will be a combination of a dice roll and
+an emote series (the charge, impact, aftereffects, etc). The dice roll
+will be made with a toss of 5d6. A roll of 6 or less by a player will
+mean their horse was injured and they not only lose that round but will
+be unable to continue. A roll of less then 10 will be a miss, meaning the
+lance either did not connect at all or did not break. A roll of 10 to 19
+will be a break on the body for 1 point. A roll of 20 to 24 will be a break
+on the head, and a roll of 25-30 will be a dismounting of an opponent.
+Should the players have a tie on points at the end of 3 passes they will
+face off in a spar to determine the victor, and the victor of a round will
+keep the opponents mount. WM will come into play either during the spar or
+more relevantly during the dice rolls. A player with WM1/100 or less will
+roll 5d6 once for their result. A player with WM2/100 or less will roll
+twice, WM3/100 3 times, and a player with some WM4 will get 4 rolls. The
+best roll will be used for the determination of points at the end of each
+pass (so someone with WM3 rolls 9, 18, 22 for a pass. They will use the
+22 result to break their lance on their opponents helm for 2 points and
+emote thus after the pass has been rolled/determined). This event will
+take place over the second week of the tournament.
+
+3) Traditional 1vs1 sparring - as it sounds, basic one on one sparring
+as everyone is familiar with using emote fights. I'm considering a double
+elimitation tournament (you must lose twice to lose), with WM used as
+we're all familiar, or the player with the highest WM winning in event
+of a draw. The initial spars will take place over the first 2 weeks of
+the tournament, during the Wrestling matches and Jousting, until there
+are only 4 participants reamining with less then 2 losses. These 4 will
+spar over the 3rd week to determine a victor.
+
+4) Melee - I was kind of hoping to have combat code to do this, such as
+getting every
+4	24	3329	3329	1075449446	Fredrik	30	Weapon reach?	Ping.
+I noticed that "weapon reach" is introduced.
+How is that supposed to work, now that the grid
+and thus all references to "distance" will be gone?
+
+/F
+
+4	24	3331	3329	1075485820	Duren	9	Weapon reach	Uhh, yeah, you coded it. :p  We can just do away with it, I'd say, cause it's
+pointless w/out the grid...
+
+-Duren
+
+4	24	3337	3337	1075544793	Fredrik	30	Beta 1	Hi.
+I just committed the first trial version of turn based combat
+with "autocombat" feature and without grids. I tried a couple variants,
+such as killing a mob and dying by a mob, and none crashed it. :P
+There are probably a lot of other variants that _will_ crash it,
+so now we need to get this fighting tested. I leave that bit to
+the public relations people.
+Note that features such as "force auto" isn't in, yet.
+One thing at a time. =)
+
+/Fredrik
+
+0	0	3417	3417	1076523691	Nicodemus	1805	`@C`2ode `@C`2ombat`7	Hey, all.  Given all the neat things we learned from MM3 about how not to implement
+large projects, I'm generally conservative in how much we discuss projects once
+they'v moved past the conceptual phase and are actually being coded.  However,
+it's been brought to our attention that some misconceptions are circulating
+regarding combat, so I'm going to post some general information to clear things
+up.
+
+`6What's combat going to be like?`7
+
+   Firstly, combat is going to be a form and skill based system again, with
+   emphasis on balancing IC realism and customizable gameplay.  The grid
+   is gone, since it was unpopular and caused enormous problems with retainers
+   and mobs and multiple groups fighting each other.  It has three major
+   settings with varying degrees of speed and user interaction.  All settings
+   allow for users to adjust how their character fights at any time prior to,
+   or during combat.  They range from manual (similar to turn based combat,
+   for those few players who want something to supplement their emotes in an
+   emote fight) to automatic, which is quick and doesn't hang on waiting
+   for players to input commands.  For policy purposes, priority goes to the
+   fastest setting (manual, semi-auto or automatic) of any combatant, so
+   that when someone starts supermanning to the point of being ridiculous,
+   a more senior combatant can once again say 'eff this' and pkill the
+   bugger in short order.  Provided that legal RP leads up to a pkill, we'll
+   be enforcing it as an IC death, as we did in MM2.
+
+`6Does this mean we're getting away from determining levels from RPing?`7
+
+   No.  You do not have to run around killing mobs as a prerequisite to
+   having a decent pfile.  Levels will still be determined through RP, and
+   code power will still be determined largely by RP and RP ability.  We're
+   just adding more ways to represent a character's abilities, and some of
+   them (such as combat skills) can be increased by use.  The emphasis is
+   still on RP, but you will definitely benefit from taking part in code
+   combat with mobs and other players.  And obviously, the more code combat
+   you're involved in, the better your character gets at it.
+
+`6What's changing?`7
+
+   We're bringing back options that allow you to control your style and how
+   much you're exerting yourself.  The code also tracks the number and types
+   of wounds to bodyparts, such that the wounds you take hamper your ability
+   to fight.  A character's combat status includes a number of new, more IC
+   fields, although this info is presented to players in a more general
+   fashion than the complicated number-tracking that the code handles.  You
+   can eventually pass out and/or die from losing blood over one good stab
+   wound even if your HPs are still high, pass out from fatigue, and walk
+   away with wounds that heal over time (or kill you later) and that can be
+   healed with channeling or first-aid skills.  If your right arm is numb or
+   broken, it makes it kinda hard to hit people, and if your sword hand is
+   miserably gashed up, you won't be able to wield your weapon effectively.
+   The entire system is based on mods, though, so it's rarely as simple as
+   saying 'your leg is broken, so now you are barred from doing this and
+   this'.  There's a chance you can pull almost anything off at any time,
+   even if you hurt yourself trying.  It's a system of critical hits and
+   a lot of mods and as much realism as we can cram into it while still
+   enhancing gameplay, instead of making the system unwieldy and confusing.
+
+   We'll also be recalculating things like stats and HPs, since currently
+   they're not really relative to anytihng concrete, and, IMO, are kinda
+   stupid.  25 strength means what, exactly? Nobody's code stats represent
+   their IC characters anymore, so we're endeavoring to fix that.  Combat
+   will be much more realistic than just keeping track of the number of
+   time you can get stabbed before you die, and deals with a lot more than
+   simple HP totals (which are now mainly just invisible benchmarks for
+   other calculations).
+
+`6Bah, I liked Turn Based Combat.  Lets just finish that, shall we?`7
+
+   Once we get the skeleton system (meaning a fully running combat system
+   but without all of the details we've laid the foundation for), code
+   combat will be brought in.  We will continue adding to it extensively
+   as we go.  If you've got any questions/comments, feel free to ask.
+   We're gonna get real grouchy real fast if anybody says 'this sucks,
+   lets keep TBC' tho.
+
+Also, Fredrik rocks.
+
+Lastly, no proofreading took place at any time on this.  It's not that
+Nico doesn't know how to type, it's that he just doesn't care. *sage*
+
+-Nico, Duren and Fredrik, the Man
+
+4	24	3426	3426	1076878557	Duren	9	Shared Source?  Tell me what you think.	Shared Source proposal:
+
+Ok Guys, tell me what you think about this:  I'm think we should consider 
+'opening up' some of Tyme's code.  Why?  To expand our pool of brain power.  I 
+realize most players probably won't be able to take advtantage of it, but I 
+notice we have alot of people who are intelligent CS majors, but aren't really 
+good enough or trustworthy enough to be given full access to the code.  By 
+opening up areas of the code, such as afflcitions, we can harness the brain 
+power of people who we wouldn't normally be able.  How?  Set up a mailing list 
+of some sort, and allow people to submit patches.  One of Tymes official coders 
+will give it a good look over, and if it seems like a good thing to have, and if
+the Head Coder agrees, it could get patched in.  Even if we turn away most 
+patches, this could give us alot of ideas.  Just because a patch in and of 
+itself is bad, doesn't necessarily mean the idea behind it is bad, it just needs
+better coding.  Areas of code I think would be good canidates for this:
+
+Afflictions code:  Let players send in patches for new afflcitions.
+Skills/Spells:  Let players send in patches for new skills.
+Arbitrary commands:  Things like the score sheet, look, scan, etc.  Stupid 
+                     little small details that most coders don't worry themselves 
+                     with.
+Possibly others?
+
+Be advised, I am fully aware of all the downsides to something like this.  It 
+still means work for coders, because we'd have to review each patch submitted in
+detail.  It may also be a pain to set up, since all shared code would have to be
+moved into seperate files from un-shared code.  For legal reasons, we'd need 
+some sort of license.  Also, to allow players to compile/test their code, we'd 
+have to build and release some form of library that contains the un-shared 
+functions.  So the player could compile his .c files into .o files, then link 
+that against the 'big library' to get a functioning MUD server.  We'd also need 
+to place some hard coded limits on that as well, to prevent people from running 
+rogue copies of MM3, IE, hard code it so that only 3 players can connect at a 
+time, hard code like 4 rooms, and hard code a simple pfile.
+I realize it'd be awkward to setup, has some risks assosiated and may be a 
+general pain.  But I think we could increase new code changes enough to make it 
+worthwhile.  Thoughts?
+
+-Duren
+
+4	24	3438	3426	1076945679	Duren	9	Fredrik	Yeah, I'd say documentation would be the biggest hurdle here.  But,
+documentation would be a good thing for us to have, anyhow.
+
+As far as running a seperate port of Tyme being a policy/technical
+matter, i feel it's both.  If you release a version of Tyme with
+no coded limitations, people will abuse it.  I've got a couple
+ideas on how to prevent people from abusing it.  First of all,
+limit the max number of connections to 3.  Then, remove the
+ability to load pfiles from the database, so all players
+who log on get the 'hard coded' pfile, which would probably
+be trust 99 so that the player can have access to everything
+on his little MUD.  As far as mimicking?  Nah, that's not
+really what i meant.  I was talking more along the lines of
+removing it's need.  Make hard coded structs for 4 rooms, 1
+pfile, and whatever else the MUD needs to boot.  If there
+are things that really -do- need to come from the database,
+we could easily setup another user on Tyme's database with
+SELECT only access to certain tables, so that the user
+wouldn't have to download, install, and setup MySQL.
+
+The latter could also be used as a simple way of knowing
+who's running Tyme.  We can monitor connections to the database,
+as well as give each user their own database username.
+
+As far as distribution:  My thought was to make a script, (possibly
+called from codeswitch) that would automatically build the new toolkit
+and copy the appropriate files to public_html where users can download
+them.  We could even set up the script to auto-email everyone letting
+them know a new version has been released.
+
+-Duren
+
+4	18	3550	3550	1078180795	`@D`2a `@l`2ime!`7	86	`8Old `^E`6vent `4I`*d`4eas	What I'm posting here are some old quest ideas from the old days when I was 
+involved with Events as an IMM.  They were good ideas that for one reason or 
+another never got put into motion.  Also, I want to be clear that I don't get 
+credit for these, it goes to the people who first send them to me.  This one 
+was an idea from Timmy, at that time the head WM Imm.
+"The Lost Library"
+ 
+   I'd like to resurrect an old event-idea I was spawning on back
+during my days as an event immortal: it was a large-scale Role-play
+scenario that would involve many major guilds in a form of "treasure
+hunt" in lack of a better word.
+   The event would revolve around a mythical library, rumored to 
+contain volumes of knowledge from the Age of Legends believed to be
+lost. A most alluring keep for many: let me briefly elaborate the 
+main guilds that should have some interest in this.
+ 
+-White Tower-
+   Naturally: they always stick their nose into things :P And with
+something like this that could contain vital information for them 
+to use in the struggle against the Shadow, it should most certainly
+provide with some temptation.
+ 
+-Daes Dae'mar-
+   They want power, most of them: some would be curious about this
+treasure, others could see it as a chance of gaining larger influence
+and strengthen their position. 
+ 
+-Whitecloak-
+   Spanish Inquisition? They don't want witchcraft knowledge like 
+this to slip out into the open, and they'd definitely wouldn't want
+the Aes Sedai to get their hands on it either, most certainly.
+ 
+-Darkfriends-
+   Old knowledge would be a valuable weapon against their enemies:
+enough said.
+ 
+-Merchants-
+   Maybe a small bystander primarily, but given their connections 
+and their trade, they may get themselves involved for their own 
+reasons. 
+ 
+   Of course, there is nothing to say that any guild or individual 
+couldn't participate, but these would be the more "major" factions
+involved, that would gain the most by pursuing this mythical keep.
+ 
+-How to get them all involved-
+   Still sketchy: I was considering a "secret society" that are 
+responsible for keeping the library safe: either they accidentally
+leaked information to various parts, or they deliberately did so.
+   Clues in form of notes, small RP-sessions and similar endeavors
+would be used to make most of these factions aware of the keep's 
+existence.
+ 
+-How do we keep it running?-
+   In my experience, large RP-processes are hard to organize: hence
+we would need to make it self-sufficient as much as possible. The
+event itself would be a treasure hunt, basically: by providing clues
+to places where more clues are to be found, we monitor the progress
+of each by a sound usage of the mail system. 
+   I.e. participant X from guild Y has reasoned out that the next 
+clue is located in Illian. He mails us with this information, stating
+how he came to that conclusion and what he intends to do about it:
+either we arrange a small RP-session, or me wail the results to him
+on what he may have found.
+   Although the latter may not sound that exciting, there would still
+be enough RP-sessions to be satisfactory for the majority of the 
+participants, methinks: the less scheduled events, the better: lets 
+try and be impulsive?
+ 
+-Treasures?-
+   I'm fully aware of that knowledge from the AoL may be a too 
+powerful item to release onto the Mud :P I'm not proposing that 
+the end result would necessarily be just this: maybe a few fragments
+that we could be lenient in supplying? Maybe some other treasures,
+like Angreal's or something similar? Maybe the Library has a form 
+of self-destruction weave woven around it so that no one get nil?
+You decide.
+   Anyway, this is just a brief summary of the idea: I've got more 
+details in case you are interested. What say you? I'd help running
+this, just so you know.
+
+
+2	0	3677	3671	1079010291	Brim	124	Hmm	I say we go with the posts. You know the ones:
+
+A dark-haired strider appears at the gate, color-shifting cloak billowing out behind.
+The Tower guardsman on duty wets his Flame-emblazoned trousers as he realizes
+who is there. The Gaidin intones needlessly, "Balinor Gaidin has returned."
+A bell tolls, a crow squawks, and a cow gives birth to a calf with nine heads.
+
+I'm going with at least three that we directly mocked. There must have been more.
+
+Derek?
+
+4	20	3702	3702	1079958318	Eliana	5174	Info	Okies, new Head Builder:) I'm taking up the reigns it would seem. What I need from you guys atm
+is for you all to make a comment on this thread listing what you're currently working on, what
+zone it's in, how far you've gotten, etc... I need to get a good idea of where things are at if
+I plan to get this show on the road, so to speak. ;) Anyways, if you want to include anything
+you think would be helpful for me to know feel free to do so.
+
+                  Eliana, Ilyena Reborn (I swear it's true! Honest!)
+
+2	0	3705	3705	1080188574	Dafyd	109	RJ Speaks!	This, from Tor's Website.
+
+Question:
+
+Is the White Tower currently aware of any way to 
+completely dissolve/undo the bond between an Aes 
+Sedai and her Warder so that the link no longer 
+exists and all the positive and negative effects 
+of the bond are removed?
+
+Robert Jordan Answers:
+
+Yes, they are. It is called releasing a Warder, 
+and an Aes Sedai who is very old or injured so 
+badly that she knows she is going to die will, 
+if she has the strength, release him so he doesn't 
+suffer from her death. This does require the two 
+of them to be together, and a little more time that 
+laying on the bond. If they are physically apart, 
+or she doesn't have enough time or strength 
+remaining, touch on him.
+
+It has also been used to get rid of a Warder who 
+proved to be unsuitable in some way, such as a man 
+who is discovered to be a thief or who takes 
+reckless chances, a fighter of duels who won't 
+stop without the bond being used to force him. 
+No sister is going to want a Warder who will risk 
+getting himself killed, with all the attendant 
+results to her, for no very good reason.
+
+Although use of the bond in that way (controlling) 
+was not unknown in the past, it came to be regarded 
+as a form of Compulsion to use it so except in the 
+slightest forms. Besides, using the bond to control 
+a Warder all the time is a lot of work. An Aes Sedai 
+wants somebody who can watch her back and keep it safe, 
+not somebody she has to work on all the time. (Which 
+is one of the reasons Aes Sedai stopped bonding men 
+against their will. Not ethical concerns or ethical 
+growth, I'm afraid; it was just not very practical 
+really) Better simply to release the fellow who can't 
+measure up and find another who will.
+
+By the by, releasing a Warder except for cause (the 
+Aes Sedai's imminent death, his own unsuitability) or 
+because he has asked for release is something that JUST 
+IS NOT DONE! It would gain the sister considerable 
+opprobrium from other sisters. A sister certainly 
+would be looked at askance if she released a Warder 
+who was dying, for example, just to avoid the effects 
+on her of his death. When an Aes Sedai bonds a Warder, 
+she is expected to buy in for the full ride. For that 
+matter, releasing him for unsuitability is considered 
+to reflect on the sister's judgement. She should have 
+known better about him from the start.
+
+Posted by,
+--Me.
+
+4	20	3717	3702	1080495483	Nicodemus	1805	Nicodemus	   I mostly tinker.  The event zone (407) is mine, but
+   Kinje and Ranulf are going to be taking it over and
+   overwriting it for the IC Task Force (ICT) event zones
+   as they're needed.  I'm reviewing the new eq stuff and
+   working on special procedures for mobs and equipment
+   for the ICT, so that they do stuff for the quest.
+
+   -Nico
+
+4	11	3721	1671	1080687052	Raesco	5900	Oops	Heh... My connection dropped as I started to paste it from Windows... Sorry.
+
+Rogosh Eagleeye, one of the most infamous Hunters,
+Traveled far, wide, up and down. His sword his friend,
+His sword his enemy. As he searched, he came upon
+A rumor, of the Horn's whereabouts, the elusive
+
+Reclusive item of legend. His travels took him to
+Tar Valon, where the Wheel spins eternal,
+Caemlyn, where the Red Lion roars loudest,
+Cairhien, where the nobles scheme,
+But in it all, he and his fellow Hunters stood steadfast,
+Until the reached, -breached-, the Blight. The tainted
+Woods, the damned Deserts, and the rocks of Shayol Ghul.
+He believed the Horn was buried there, along a pass,
+Hidden where Trolloc and Halfman alike would not seek,
+To be found for the Last Battle, to be used for life,
+The honest men sought it, but found it naught,
+To be met by a Halfman and his squadron.
+Rogosh's mind spun, how was he deceived?
+Who told upon his arrival? But no matter,
+Rogosh said, releasing his blade, his wrath,
+Upon the Half-Dead. Blade from Borderland smithies
+Met steel wrought in Thakan'Dor, made with the lives
+Of innocent men. Blades danced, and Herons Wading in Water
+Met the Shadow Lurks Deep, and as if it were with
+The very Light's strength, Rogosh fought, but even
+Though that Halfman had the luck of the Dark,
+Rogosh's blade soon found true. As blade met tainted
+Flesh, blood flew through, and the Dark writhed with pain,
+For a battle had been won in the Light's name.
+Rogosh sheathed, his men joyous, and even though the Half-Dead
+Shrieked with the pain of the Light, the screams
+Came not to the Light's good ears. As the Trollocs
+Screamed, grabbing their heads, they were soon dead.
+Arrows came, loosed from the bows of the Light,
+From the bows of Rogosh, of the men who followed,
+And as the battle was victorious at last, the war was not.
+For the Shadow still lived, and the Horn was lost. For now,
+At least, the men still sought the Horn to their last breath.
+So Rogosh went back, and his horse's hooves
+Tore the earth as the trot back, having once more
+Been freed from the Mother's Last Embrace,
+Were still fighting in the War of the Light.
+
+4	20	3723	3702	1080739202	Sean	6061	`^S`6e`^a`6n`7	   I'm not doing much, new to the builders, but hopefully I'll be fixing
+a bunch of bad links, and if I find any, typos.  Then I'll go on the hunt
+for a big project.  Maybe I should check on Beonca and the Event Guild soon.
+
+***Just me.
+
+0	0	3793	3790	1083691878	Jake	5770	.	   Well, that's why I'm currently saying no combat oriented items - if
+   it's got no combat stats then it doesn't need to be taxed anyway.
+   I think we'll open up combat qeq of this type up down the road,
+   but it will probably have to be taxed.  If I can figure out a way
+   to make some system of one or two exception slots or something
+   that won't screw econ up, we can do that, too.  For the moment
+   though, I'd think of this more like code toys - fun stuff that's
+   cool and personalized.  All the imms want lightsabers (big
+   surprise).  I dunno what kind of ideas you guys have - for me,
+   I'd probably want a one-of-a-kind Seafolk lantern that self-
+   tools and something else for my hold slot.
+
+   I dunno - if this doesn't make sense to you guys, I'll explain
+   real quick how the lightsabers work.  There's an object in
+   the imm zone called a lightsaber - its description is "===.="
+   when you load one.  When you activate it, everybody in the room
+   hears it, you get a message and the object retools itself
+   into ===.=------------------, except in color and the blade
+   has the background color around each dash as well as the bright
+   color.  I'm on raw telnet so I'm not gonna try it here :p But
+   maybe that'll give you guys some ideas.
+
+   -Nico
+
+4	20	3933	3933	1089147089	Duren	9	Creating ships:	Ships are now working, here's how you create them:
+
+                            HOW TO CREATE A NEW SHIP
+`7
+ 01. Write the rooms for the ship itself and be sure to include the following rooms:
+      a)The room with the boarding plank...must be flagged with PLANK flag.
+      b)The room that the ship will be steered from...must be flagged HELM flag
+`7
+ 02. All rooms in the ship must have the SHIP flag
+`7
+ 03. Any rooms from which you should be able to see the room the ship is in should be flaged DECK
+`7
+ 04. The vnums of the ship rooms should be continous..You can not use split groups of rooms like
+     200 to 215 + 230 to 240...you should use a range like 41800 to 41885 with none of the rooms in
+     that range exiting anywhere in the world outside of the ship.
+`7
+ 05. Create an object of type 33 (ship)
+`7
+ 06. Value 0 on the object should be set to the room number the player will go to when they enter the
+     ship.
+`7
+ 07. Value 2 on the object should be set to the starting vnum of the rooms inside the ship object.
+`7
+ 08. Value 3 on the object should be set to the ending vnum of the rooms inside the ship object
+`7
+ 09. All other values should be left at zero.The code will manipulate them as needed.
+`7
+ 10. The object should be set in the zone file for the area to load in a room that is not WATER_SWIM
+       or WATER_NOSWIM....it should however be one room away from a room with either of those sector
+       types.
+`7
+ 11. There can only be one of each ship object on the mud.If you want additional ships, build them,
+     with their own unique object # and rooms inside.
+
+4	22	3967	3967	1091576835	Nicodemus	1805	`#M`3eandering `#T`3rails`7	War is probably nearing the completion of his conceptual phase,
+and after a last major issue is agreed on, it'll be ready for
+coding.  At the moment, it is likely that we will need a builder
+to help with some relatively simple, but large scale, work, as
+we'll need to connect some dots across the world between cities.
+
+4	22	3979	3967	1092198638	Jake	5770	Update: Aug 10	   The building team consists of:
+   Varulv and Eliana (War)
+   Boris (Code support)
+   Ranulf (Expert Consultant)
+   Beonca (Cuz Nico bugged her til she caved)
+   Nicodemus (Shell Access/Zone Creation)
+
+I just finished creating the template zone - it's 10 rooms
+by 10 rooms, as we discussed, and has a generic desc and a
+raided desc for every room.  All exits are properly connected
+(can you imagine how much it would suck it we pasted a screwed
+up zone 100 times?).  The zone is 411, and the vnums are
+41100 - 41199.  I created it as zone 411 because it's the
+single largest 'empty' block of zone numbers - we can create
+consecutively numbered zones up til about zone 500.  I'm
+going to make copies of this zone, and then we'll assign zones
+to each of us to connect the edges to the adjacent zones.  I'm
+going to have to think on what the fastest way is to renumber
+the exits in each zone - anybody know if VI has a replace
+command? We'd have to replace every instance of 411xx with
+412xx, then 413xx, etc.  That's going to take days to do by
+hand.
+
+Anyway, we're going to create and connect this grid off
+by itself, first, and then we'll splice the RP hubs that
+we're keeping into it.  Basically, we'll find where we
+want Caemlyn to be, remove one single room from that zone,
+and have the exits that did lead into that room lead into
+each of the four major gates of Caemlyn.  We may make Caemlyn
+take up a block of four rooms, too, depending on the scale
+we decide on.
+
+-Nico
+
+4	22	3984	3967	1092613713	Nicodemus	1805	.	   I've got the first 33 zones uploaded now (that's all of rows
+   A, B and D on the grid map).  If any of you have time, I'd
+   really appreciate help connecting the exits - the zones themselves
+   are done, but the edges need to be connected to the adjacent zone.
+   Thanks!
+
+    -Nico
+
+4	22	3987	3985	1093171794	Faerid	4217	Re: State of the MUD	Well, being one of those Imms who has been caught into RL, and still
+is unfortunately, I don't really have a right to say much on current
+things. I can say though that, if Tyme does shut down, I may not be
+back if/when it comes back up and I imagine many other older players
+would be the same. I've been here a long time now...damn near 7 years
+in fact, and have had a lot fo fun and met many people. I've also been
+through quite a bit of crap, and seen many of those friends leave while
+I stayed behind out of a sense of responsibility as much as a sense
+of enjoyment. I did most of what I wanted to do with an Imm position
+with the revamp of the WM system and am happy with how it functions now,
+if uncertain who I'd trust to take over WM and WK, if I did leave, and
+run em in a way which reflects my original intent with the two.
+Either way though Tyme shutting down for a month, two months, three
+is probably going to be enough to break off even that connection. I
+don't want to leave, I don't look forwards to it, and I don't think
+Tyme should shut down for the simple reason that, like me, at least
+now many of the older players keep tabs at least or check in to see
+if things have changed to their satisfaction, and shutting down until
+it's complete is just going to sever those ties completely so they
+won't even know to come back afterwards even if they choose to.
+Basically, if Tyme shuts down now, it'd have to restart from the
+ground up most likely and find a whole new player base since it
+would have forfeited the older player base. If it stays open then
+the older player base still stays connected, and a new player base
+may be found -additionally- once MM3.2 is done.
+
+Anyways, I've just woken up and am rambling a bit. Hope some
+coherency can be wrangled out of all that.
+
+Faerid
+
+0	0	4086	4086	1100382117	Nicodemus	1805	`^N`6ew `^W`6orld `^M`6ap`7	   Boris, Duren and I have finished upgrading Randland to a new
+   'continental' version on the builderport.  Instead of having cities
+   connected by tedious, looping trails that are sometimes hundreds
+   of rooms long, the cities we know and love are being placed where
+   they belong on a fully traversable, fully built continent.  Now that
+   the coding is done, what we need is a few more volunteers (we already
+   have a group) to help write better descs for the areas of the
+   continent that surround RP hotspots, like Caemlyn and Tar Valon.
+   This is not exactly building, since all the hard stuff in classic
+   building has been finished.  The last step is to write better descs
+   for these rooms - things like the roads that connect cities, and
+   the countryside around cities.  If you're willing to join in and help
+   us flesh out Randland, please see Syrah or myself and we'll set you
+   up.  Thanks!
+
+   -Nico, who got woken up this morning for a 'mud emergency' :p
+
+4	20	4230	4230	1104957854	Nicodemus	1805	`#N`3ew `#P`3roject `#G`3roup`7	   Hey guys, this is for the new builders working on the ubermap - thanks
+   for your help.  In one day of heavy work (thanks especially to Phaedra)
+   the vast majority of the hard stuff for Caemlyn, Aringill, and zones 640,
+   639 and 638 are done.  What is left is some of the descs, so if you guys
+   could write better descs than the default ones that'd be great.  There are
+   several accompanying files to help too - it's a package containing a
+   'to-do' list .doc file, and two bitmaps.  The to-do list explains exactly
+   what we're doing, and the pictures are maps and show what each room
+   needs to be.  If you don't have a copy of it, please get Syrah, Nenae,
+   myself or any of the other builders to forward it to you, and please be
+   sure to read the top of the to-do list file.  It explains how we're descripting.
+
+   For my part, I'm looking at bringing over the next major city onto the
+   BP - it's either gonna be Tar Valon or Cairhien but they're both a mess
+   and I hate them both :p If you guys have any questions at all, don't
+   hesitate to ask me or one another.
+
+   Oh, also, if you guys are very productive I can give you the first piece
+   of new qeq - they're glowstones and they've got more code in them than
+   a xoran or beonca doll :p They're cool.
+
+   Thanks!
+   -Nic
+
+4	20	4237	4237	1105172319	Nicodemus	1805	`#C`3aemlyn`#/A`3ringill`7: Zones 640, 639, 638`7	   As you each make progress on this area (or the two cities within it),
+   please make comments here.
+
+4	20	4238	4237	1105172389	Nicodemus	1805	.	   Fast-navigation system is done for these zones.  To teleport
+   to a city, type:
+   goto <city name>
+
+   This places you in a sort of limbo room above the city.  Go
+   in any cardinal direction to arrive at the respective gate of
+   the city.
+
+   I've also added some wagon rut objects, in green, to mark the
+   rooms outside city gates.  I'm not entirely sure if I like 'em
+   there (and I'm debating bringing back wagons anyway), but I
+   think we need some sort of similar way to mark city gates and
+   also roads in general.  Any ideas?
+
+   Also, would you guys do me a favor and walk from Caemlyn to
+   Aringill? I love the descs everybody is doing over the whole
+   countryside, but I think we need a quick way to tell which
+   way roads go without having to read the desc.  Maybe if we
+   highlight the directions in a bright color? What do you think?
+
+   -Nic
+
+4	20	4240	4237	1105178648	Phaedra	6892	Zone 639	Just following orders.  :)  I have completed all of Zone 639, as well as completing the Aringill city vnums on the to-do list.  I will continue to work on zone 638, and last I heard, Nenae was hard at work on 640.
+
+If you're walking around and notice anything that you think needs changing, let me know, I'd be happy to do it so you don't have to.  :)  Additionally, just fyi if you're working on Zone 638 (and if you know this already, sorry) - the River which forks of northeast is the River Alguenya, while the name to the northwest is the Erinin, and it becomes the Erinin as they merge just north of Aringill.
+
+Great work everyone!
+
+4	20	4244	4237	1105227910	Nicodemus	1805	.	   Urgh.  Well, despite error checking the crap out of the
+   original ubermap, I apparently made a mistake.  All rooms
+   with a room number ending in 47 (1 per zone) have a
+   mislinked exit - if you go west, you end up in room 44,
+   instead of room 46.  I'm going to have to fix these manually
+   as we bring the zones in - just thought you guys should know.
+   I fixed the ones in the zones we're working on.
+
+   A pissed off Nico
+
+4	20	4248	4248	1105317122	Nicodemus	1805	`#T`3ar `#V`3alon`7: Zones 469 and 468`7	   Sonnet is putting together the new city of Tar Valon for
+   us (can't wait for that).  I've connected the zones where it's
+   going to be inserted into and added the 'goto tar valon' marker
+   so you can jump right to where the city is going.  It'll be
+   inserted in the same fashion as Aringill and Caemlyn, and I'm
+   also going to port over Alindaer to border it, as well.
+
+   I've started descripting random rooms around the zones - I get
+   bored quickly doing consecutive rooms.  If you're bored with what
+   you're doing, please see me and we can switch you to a new project.
+
+   Thanks :>
+
+4	20	4254	4248	1105475873	Nicodemus	1805	Update	   Maelyn is making last adjustments to the Tar Valon
+   island now.  I've finalized how it's going to be
+   inserted into the countryside map and have started
+   setting that up.
+
+   The plan is as follows: We're going to construct the
+   new city without actually giving it descs - basically,
+   we build it as fast as humanly possible, and then I
+   insert it into the countryside so it's all hooked up.
+   Then, Mae and whoever else she'd like to help can go
+   on and describe the rooms.
+
+   Of secondary note is the re-insertion of Alindaer.
+   Some of you might be aware that Alindaer and TV are
+   built wrong on this port - they're oriented completely
+   incorrectly for both zones, and additionally, Alindaer
+   is supposed to be south of the island and not west.
+   After looking Alindaer over, what I've decided to do is
+   to just edit the bridge of Alindaer itself - make it
+   exit in the correct direction instead of doing any
+   heavier modifications of the zone.  After I do that,
+   I'm going to insert it into the ubermap where it
+   belongs.
+
+   Anybody who's up for it can start writing new countryside
+   descs for the Tar Valon countryside or any other relevant
+   zone.  Also, if you have anything you'd particularly like
+   to be in charge of (say, you want to design a zone), that'll
+   be just fine - just let me know which.
+
+   Thanks!
+
+4	20	4268	4268	1105672135	Nicodemus	1805	`#C`3airhien`&: Update`7	   Syrah is heading up the Cairhien touch-ups.  We went through the
+   existing zones and picked out what we're going to keep (one zone
+   is so badly corrupted on all ports that it's useless), and we're
+   gonna do the same deal where we port the zones over, and insert
+   them where they belong.  If anybody's interested in helping,
+   contact Syrah.
+
+4	20	4307	4307	1106935588	Nicodemus	1805	`7Update`7	   I've done much of the renovations on Alindaer so that we can hook it
+   up where it belongs, next to Maelyn's new Tar Valon.  Much of the city
+   really sucks description-wise, and I've been trying to modify it.  Firstly,
+    it was built wrong (Mikki read the map sideways), so she's got a large
+   number of the eastern rooms as being on the Erinin river, so I had
+   to remove them.  I also fixed a bunch of mislinked rooms, but I'm sure
+   there are more.  I don't consider Alindaer to be too important, so
+   mostly we're just going to connect the correct new gates to the
+   rooms on the ubermap, so that you can enter the town.  I also adjusted
+   the bridge some so that it leads in the correct direction, and as soon
+   as we're ready, I'm going to connect it to Maelyn's via the new
+   bridges.  If you guys can spare the time in a few days, it's going to take
+   several of us to do this project efficiently.
+
+   FYI, besides, this, the only other city I'm too concerned about is Cairhien,
+   which Syrah is working on.  When both of these are in, we're going to
+   start looking at porting in the ubermap.  There will be a few more zones
+   to add, of course, but for the most part these cities are the big projects
+   and we're just going to stick the other zones in quickly.
+
+   -Nico
+
+0	0	4308	4308	1107034438	Nicodemus	1805	`@U`2bermap `@P`2osted`7	   I posted the ubermap: `^http://www.engr.umd.edu/~maeillo/index2.htm`7
+
+   Even if you're not interested in building, it's worth looking at the map (scroll
+   down) so you know what's coming in.  We're well on our way towards
+   importing that map onto the live port, here.
+
+   -Nic
+
+0	0	4309	4308	1107038053	Nicodemus	1805	Also	Please mail me or contact me if you're interested in helping,
+even if you're already a builder.  You can either do random
+rooms around the countryside, or we can assign you a zone that's
+yours, or we could use some more people to help create the new
+Tar Valon that Maelyn's designed.  A couple more volunteers for
+that, and we can bang it out in two sittings.
+
+Thanks!
+
+4	20	4310	4310	1107064016	Duren	9	OLC changes	OLC now automatically creates two way links.  (Don't even get me started on
+what I had to do to implement this.  *curses repeatadly*)
+
+You can disable this behavior if you want.  When you enter the 'Exit Menu',
+set 'Two-way link' to 'No'.
+
+I had to hack this feature in, so there are some nuances:
+
+1.)  When you create a 2 way link, the room you are editing is automatically saved -internally-.
+2.)  If you create a link, to say, room 100.  It will create a link from room 100 back.
+     If you change the link to room 200.  The link from 100 back to the room you're editting will
+     still be there.  I'll fix this in the near future, it'll require more code hacks. :p
+
+This OLC was definitly not designed to handle such complicated tasks as two-way links
+*eyeroll*, so if you encounter problems... Well, don't make me remind you about the
+'bug' command. :p
+
+-Duren
+
+0	0	4319	4308	1107123635	Jake	5770	`@P`2raise for the `@U`2bermap`7	Varulv:
+(OoC) `6->`7 Varulv says, ' `2holy cow, Nic.`7 '
+
+Shai'tan:
+`%Shai'tan : omfg.
+
+`%Shai'tan : i didn't realize you were doing ubermaps for cities. wow.
+
+`%Shai'tan : looks very cool`7
+
+:p
+
+4	22	4322	4322	1107300694	Nicodemus	1805	`^T`6hings`7	   Hey all.  I ran out of motivational things to say a long
+   time ago, but I do still want to touch base with everybody.
+   Obviously things picked up a lot while Beonca was here, due
+   in large part to her taking a major role in most of the RP
+   on the mud.  With her gone, I'm afraid that we're going to
+   see a near-instant drop in activity.
+
+   To try and stave that off, Varulv is putting together a
+   series of ideas (with different groups of people), and I'm
+   very hopeful that it'll be a success and we'll continue to
+   be active.  If you're not one of the people involved in
+   his projects, there's still lots you can do to help, if you
+   have time.  The easiest thing with the fastest, most satisfying
+   results is helping us on the ubermap.  We're flying on that
+   thing, and there are a number of jobs depending on what you
+   want to do.  It's cool, honest.  Otherwise, you can help us
+   make forms for combat, write a good list of spells you'd like
+   to see coded, or write suggestions for additions to the talent
+   lists (either chan or nonchan, up to you).
+
+   One thing that I've noticed here is that it's not so much
+   the finishing of anything that gets players active - it's
+   being active while it's being worked on.  Players keep playing
+   even though many times their big RP doesn't finish, or their
+   personal ideas don't happen for whatever reason.  So, with
+   that in mind, I'm asking everybody to contribute whatever they
+   can, when you can.  If you only have time to handle the day-to
+   -day stuff for your dept, that's still great.  I just want to
+   ask that everybody do something - and if you've got nothing to
+   do cuz your dept is quiet, then please volunteer with something
+   else.  Just please don't idle.  Let players (and other imms)
+   see you be active.  Talk on channels, gecho, pop in, goof off
+   with them sometimes and othertimes let them know what you're
+   working on.  The more active each of us is, the more inclined
+   everybody is to play (and work) here.  So please, please, make
+   yourself visible to everybody and be a part of what's going on.
+   And update your imp(s) on what you're up to, please!
+
+   Thanks much,
+   -Nicodemus
+
+4	20	4331	4331	1107978727	Nicodemus	1805	`^Tar Valon posted`7	Hey, Maelyn's done her final version of Tar Valon - it's posted at:
+http://www.engr.umd.edu/~maeillo/TV_city2_feb_7.bmp
+
+Please help put it together.  The zones are 90 and 91 - first, we need to
+create all the rooms, and then we need to go back and link them together.
+Duren's added a double-link feature which cuts the time to do this in
+half.  If you've got any questions, feel free to ask Maelyn, Syrah or
+me.
+
+Thanks,
+Nic
+
+4	20	4333	4331	1108061240	Nicodemus	1805	`^Tar Valon constructed`7	   I had some time to kill so I went ahead and built the whole city, minus
+   the descs.  Maelyn is in charge of the project, so if you're able to
+   help, please see her and she'll coordinate who's doing what rooms.
+   All the exit linking is done, and I hooked it up to the ubermap and
+   Alindaer.  It should be good to go for you guys.  If you don't have
+   the authorization to edit the zone, let Maelyn know what your
+   builder name is and we'll get your pfile set for it.
+
+   Oh, I updated the 'goto' stuff for Alindaer and Tar Valon.  Just
+   type 'goto TV' and 'goto Al', and the directions in those rooms
+   tell you where to go to pop out at a particular gate/spot.
+
+   G'luck.
+   Oh, the websites are:
+   `^http://www.engr.umd.edu/~maeillo/index2.htm`7   and
+   `^http://www.engr.umd.edu/~maeillo/TV_city2_feb_7.bmp`7
+
+   -Nic
+
+4	20	4373	4331	1109864228	Nicodemus	1805	saving	Well, hell.  Mae, my best guess is that you didn't do an OLC save,
+but stuff like this does happen sometimes anyway for odd reasons
+(the BP is possessed, sometimes).  Typing 'yes' to the 'do you
+wish to save this room internally' question is not enough - type
+yes to that, and then periodically do a:
+redit save <zone number you're working on>
+
+For Tar Valon, it'd be `1redit save 90`7, `1redit save 91`7, and `1redit
+`1save 92`7, I believe.  If you edit zone, object or mob files, you need
+to do a `1zedit save 90`7, etc.
+
+If at any time you want to see which files need to be saved
+that way, type `1olc`7.  That'll list 'em.  Be aware though that
+using this command when another builder is in an OLC menu, like
+redit, is gonna crash the BP.  So be careful :p
+
+So sorry about the lost work.  I thought I'd told everybody about
+this, but apparently not.  Sorry!
+
+-Nic
+
+4	9	4396	4393	1110766148	`&Vivianne	3295	`#H`3igh `#R`3anking `#C`3haracters`7	  If you have a character of High Seat rank or higher, or a
+military character of high rank, such as the Captain-General
+or the Marshal-General, much more will be expected of you than
+those of lower ranks.  Such positions come with responsibility,
+and while the position is responsibility, it can still be a
+lot of fun.  There are a few instances when you must come to
+your GL first, before you take certain courses of action.  I
+will go into further detail below.
+
+`#M`3arriage`7
+
+  If your high-ranking character wishes to marry, you MUST come
+to me first so that I can be aware of your intention, and make
+any appropriate changes to rank.  I am even willing to NPC a
+Magistrate or other representative to do the ceremony if it is
+so desired. High ranking characters must follow the guidelines
+of the country in which he or she resides.  For instance, if
+it is inappropriate for a Prince to marry a commoner, such a
+marriage will not be allowed unless you wish to lose your rank.
+
+`#T`3roop `#M`3ovements`7
+
+  If you are planning any sort of troop movement which goes
+beyond your normal number of retainers, you must come to your
+GL first.  I will need to know exactly how many troops you are
+planning to move, where you are planning to move them, and why.
+You must also submit this information to the War Department, or
+`1your troops will not be moved!`7  If you fail to notify the
+GLs or the War Department, it will only cause confusion and
+may result in nulled roleplay and delays in your plans.  If
+you follow the guidelines, it will make things much smoother.
+You must also notify the rulers of the nations your army will
+be passing through so that they may choose whether or not to
+take action, and what type of action they wish to take.  This
+is why I, as the GL, need to know so that such movements can
+be done in a realistic manner.
+
+`#D`3eath`7
+
+  If you are a high-ranking character, and you have been ICly
+killed, or if you simply wish to kill off your character, I
+need to be aware that it has been done, naturally, and whether
+or not you will have a character of similar status in the guild
+to replace your killed PC.  At this point, having obtained a high
+ranking character, it is generally likely that you can have a
+character of similar rank, unless you conducted yourself poorly
+at the end.  You may not, however, create a character with the
+exact same rank you lost.  For instance, if you die as Queen
+of Cairhien, you cannot create a new character who is also Queen
+of Cairhien.  However, you might be Queen of Illian, or Princess
+of Arad Doman, or a similiarly high rank in another realm. Or,
+you can create a lower-ranked character in the same realm, and
+try to work your way back up to the position through roleplay,
+provided you are not doing so as OOC vengeance against your IC
+killer.
+
+`3Major Changes/Events`7
+
+  Any major changes or events you are planning, as a high-ranked
+character, should also be run by me first as well. These are
+things such as starting a war with Amadicia, or remodeling the
+Sun Palace ICly, or building a memorial garden, etc.  Mostly, such
+things can simply be sent to me in the form of an update, which
+I can have posted.  Also, I am more than willing to help further
+your plots and events by NPCing or otherwise making connections
+for you that you may not have otherwise had.
+
+  For major changes or events, it would be VERY WISE to LOG any
+and all roleplay pertaining to it, in case someone has a gripe.
+That way, you have it all documented, and can present it to me
+if I need it in order to clarify something or resolve any
+misunderstandings.  Hold onto all your mails and correspondance
+in regards to such events, because you never know when you will
+need them!
+
+`#D`3uty`7
+
+  As a high-ranking character, you have a duty to your country,
+and this cannot be stressed enough.  If you are a High Seat,
+for the most part, you will be expected to remain in your own
+homeland, overseeing House matters, and assisting your monarch
+in the running of the realm.  If you are a Prince or Princess,
+you may have a bit more freedom, because you can act as a sort
+of ambassador, or act on behalf of your monarch.  If you are
+a monarch, leaving your homeland should be a very `1rare`7 thing
+and should definitely be run by your GL first.  You must have
+good cause to do so.  If any high-ranking character leaves his
+or her own country, or wishes to, it must be pre-approved by
+me first.  I need to know the reasons why, if nothing else. If
+you wish to leave, I am not going to stop you for the sake of
+RP, but if someone takes your Throne while you are away, it's
+not my problem.  If you are not able to do the primary duty
+of your rank, you will lose it, and it will be given to someone
+else who can.
+
+`3Have Fun!`7
+
+  For the most part, I just want to encourage everyone with
+a high-ranking character to `1have fun`7.  I know that, at times,
+it can see
+4	20	4553	4553	1116262800	Jake	5770	Headsup	Yeah.. we're not sure what's happened, or why, atm.  The
+ubermap is intact where it's supposed to be, but the BP
+isn't running it.  It's reverted back to the MM2 backup
+files, which far as I know is about impossible unless
+it was forcibly set on purpose.  Hale and I are looking
+into it.  Til then, please stay off the - there's
+nothing to do there atm anyway.
+
+-Nic
+
+4	24	4555	4555	1116371069	Duren	9	`!Important Notice`7	Builderport is being switched over to MM 3.2.  This means ./codeswitch no longer updates
+builderport with new code.  In order to update builderport, you will need to cd to ~/../builderport/src
+make
+cd ..
+./codeswitch
+
+It has it's own codeswitch script now, seperate from the main port.
+
+The format for world files is changing slightly between 3.0 and 3.2, which is why
+we're making this change.  This also means that new zones from BP may not be compatible
+with this port.  Weapons, especially, from 3.2, will not work in 3.0.  Mobs
+may not work either.  However, rooms should be fine.
+
+-Duren
+
+4	20	4556	4556	1116371399	Duren	9	`!Important notice`7	Builderport is being switched over to MM 3.2.  Things may look or feel slightly different.
+The format for world files is changing slightly between 3.0 and 3.2, which is why
+we're making this change.  This also means that new zones from BP may not be compatible
+with this port.  Weapons, especially, from 3.2, will not work in 3.0.  Mobs
+may not work either.  However, rooms should be fine.
+
+-Duren
+
+4	20	4562	4562	1116814220	Maelyn	215	Tar Valon update	The city and harbor zones are done, as are most
+of the bridges and villages. There are still 2 or 3 
+bridges and villages left to do. I have not yet checked on
+the rivers portions. If anyone wants to help, jump on in.
+)
+Mae/Sonnet
+
+4	20	4567	4567	1117160141	Nicodemus	1805	`#F`3inishing the `#U`3bermap`7	The ubermap is nearing completion, so it's time to
+look at what still needs to be done before we can port
+it to the main port, here.  Several of you are finishing
+up on your current zones - the work looks amazing.
+There's simply no comparison to the new areas and the
+old ones.  That became really, really clear to me when
+I went into the old Alindaer zone and did some work on
+it so it hooked up correctly to the new Tar Valon (there
+was a goof there that I didn't notice til last night).
+Great Job, you guys. :>
+
+What's still to be done?
+
+`^*  `7Maelyn's right - we missed two of the villages
+   and bridges to Tar Valon - the south most one, and
+   the south-west one, whatever it's called.  Mae, I
+   went through and changed the color codes to the
+   guard towers and the entrances to Tar Valon - you
+   didn't need to keep the ones I'd left - they were
+   just notes to whoever was gonna be making 'em :p I
+   replaced the Tar Valon ones with the color scheme
+   you're using throughout.
+
+`^*  `7The White Tower.  I'm constructing that now,
+   but it's gonna be up to you guys to descript it.
+   Syrah's in charge of that, but if you guys could
+   help her out (see what she wants) that'd help a lot.
+   This is the last major zone to do before we go live.
+
+`^*  `7The countryside. *cracks knuckles* I'm gonna
+   do most of what's left myself, but if you guys
+   could finish your assigned countryside zones (the
+   ones around Cairhien, Tar Valon and Caemlyn), then
+   we should be good to go.
+
+After these descs are done, we'll have a few days to go
+through and look for anything major that we missed.  On
+a project this large, I wouldn't be surprised in the
+slightest if there are a couple blank rooms in the middle
+of no-where or something.  Additionally, Alindaer needs
+to be glanced over again.  I've tried to fix it on several
+occasions, and frankly, it's so messed up that I get
+disgusted and fed up with it quickly :p Most of the huge
+mistakes are fixed, but there are still many more minor
+ones, and a few rooms that're blank.  I've fixed most of
+the mislinkings (there were many).  I'll be eternally
+grateful to anybody that can take the reins and fix some
+of the obvious stuff there.
+
+Assuming that's all done, we have two more things left:
+purging exits, and easter eggs.  I want to remove many
+of the exits into the rivers, so that you can only
+cross them at strategic points on the map.  That'll be
+neat for manuevering armies, which is already fully
+designed and just needs to be coded.  The easter eggs are
+gonna be part of a quest, and an incentive for people
+to explore the map.  I'm hiding a series of thoroughly
+ridiculous OOC rooms to the actual map, and I'm hiding
+them via mislinkings and teleporters, and some other
+tricks.  They're jokes, and finding one of 'em is gonna
+be worth a lot of qps.  If you guys have any requests
+or ideas for 'em, lemme know.  There's gonna be about
+one in every two countryside zones.
+
+Anywho, this is the plan.  Lets buckle down and knock
+this thing out.  I plan on posting a 'we expect to have
+this in by X date' note soon on proj show.  I'd like
+to actually be able to have it done by the date we
+pick, if for no other reason than that may be a first. :>
+
+Thanks for reading this obnoxiously long post!
+-Nic
+
+4	20	4569	4567	1117502647	Maelyn	215	Is there a problem?	I've been trying to log on for two days to finish up the inns and stuff,
+but I can't seem to connect to the builder port. Is it just me, or is there
+a problem with the port?
+Mae
+
+4	22	4602	4602	1119805951	Nicodemus	1805	`@I`2mm `@E`2quipment`7	   I got hung up on something on combat so til I get that
+   fixed, I've got some free time to catch up on things
+   like imm dolls and lightsabers and anything else we
+   want.  I made imm dolls for Shai and Varulv yesterday,
+   along with a custom double-bladed lightsaber for Varulv.
+   I also added a second zone for imm rooms and imm eq - if
+   you guys have any requests, lemme know.  Cuz I'm bored.
+
+4	20	4694	4693	1130598927	Nicodemus	1805	.	Awesome - I was actually looking at how to reintegrate the BT
+into the new ubermap recently.  I think what I was gonna do was
+sort of collect the current BT zones, plus some of the semi-maze
+of rooms to get there and make them all one zone (the current
+BT zone is almost totally empty), and stick the whole thing
+in the ubermap.  What would be better (and faster) tho is if I
+set aside the zone and a group of the asha's picked and chose
+how they wanted to adjust it, and we can build the thing up
+that way (so they can expand their tiny zone if they want).
+Thanks, Mac
+
+4	22	4701	4701	1136132238	Nicodemus	1805	`#S`3taff`7-`#w`3ide `#P`3roject`7	   Hey, all.  Is anybody available to help finish up the Tar Valon
+   Tower zone with me? I'm going to try bang it out now.
+
+4	24	4707	4707	1137604857	Duren	9	Updates	A few things:
+
+ - I created a CVS respository for the lib and public_html directories.
+ - I setup remote CVS.  If you want to be able to work offline on files in src, public_html, or lib,
+   see http://tymemud.com/coding/  for directions on setting this up.
+ - I configured MySQL to allow remote connections, and I also locked down the server a little by setting
+   a root password.  From now on, you'll need to do: "mysql -uroot Tyme -p" and enter the password to
+   access the database.  (I set it to the same as the shell password.)
+ - I updated the MM32 code to compile on the GCC 3.3.x compiler, as well as maintaining compatibility
+   with version 2.9.6.  Hopefully this means that no matter what server the code needs to run on, it
+   should compile.
+
+As a side note, the world files are included in the lib repository, and currently hold the MM3 version
+of world files.  I setup the builderport directory so that it's able to commit to this repository, so
+from now on, when areas are created on builderport, and need to be copied over to the live port, they
+should be done just like source code is done.  You commit the copy on builderport to the repository,
+then you cd to the world folder on the live port, and do a cvs update.  This makes it easier to maintain
+'versions' of the various world files, and easier to revert back to an older version if we want to.
+
+Since public_html is also in the repository, the same idea applies there.  Anytime you want to make a
+change to the website, you should probably avoid making it directly in the public_html folder.  Go to
+your own public_html folder under your own username (IE: /Muds/Tyme/home/duke/public_html).  Check
+out a copy of public_html using remote CVS, make your changes, test them, then commit them back
+to the repository once you're sure they work OK.  Then login as tyme, and do a cvs update
+in the main public_html.
+
+-Duren
+
+0	0	4906	4906	1159732465	Jake	5770	`!MM3.2 `^U`6bermap `^I`6mplemented`7	   Well, after some discussion on the OOC channel, I got talked into bringing the
+   new world map online.  So.. welcome to the new map. :p If you want to see what
+   it looks like, the map and some explanation is posted at:
+   `^http://www.engr.umd.edu/~maeillo/index2.htm`7
+
+   Right now, Caemlyn, Tar Valon, Cairhien, Alindaer, Aringill, and some guild
+   areas and the connecting roads/countryside are online, but outside of that
+   big triangle, everything is not accessible to players just yet.  It's all
+   there, but it's going to be an ongoing process to enable these zones one-by-
+   one.  Syrah is the main POC for stuff that's missing, so if you want to know
+   why you can't find your house, see her and she'll fix it.  This was a pretty
+   major deal, so doubtless we missed some things.  The idea is that we'll
+   continue to re-add popular zones from MM2 and MM3 as we go.  In most cases,
+   this won't take too long, but it will take a couple of volunteers.  If you're
+   interested, please see Syrah.
+
+   A huge thank you to those of you that helped with the Ubermap - I'll probably
+   try and document who did what but for right now I'll just say a special thanks
+   to Maelyn, who redid the entire island of Tar Valon in accordance with the
+   zoomed-in map in one of the books.  I'm a huge fan of the Ogier Grove there,
+   which was courtesy of Phaedra, and I believe Sadren did the surrounding
+   countryside around TV, along with Nenae, who did Caemlyn.  I did the woods
+   north of Caemlyn.  Also, a special thanks to Lucardo, who's original idea for
+   a 'mini-continent-map that we can move armies around on' grew into this
+   ridiculously huge thing we've got here today.  It has a lot of things that
+   need to be filled in, but it allows us to do all kinds of things with the
+   combat code that we could never have done with the old map.  Picture laying
+   seiges to cities by actually surrounding the entire city with army mobs,
+   or trying to sneak your own armies across huge borders into enemy nations.
+
+   Hope you enjoy.  Since the recall functions will no longer work for some
+   locations, we imms will be happy to trans you where you need to go.
+
+   -Nic
+
+0	0	4909	4906	1159744887	Nicodemus	1805	Update	   We're in the process of enabling zones that we need that either didn't come
+   through for whatever reason or that we didn't bring through with the first
+   batch.  Player houses are halfway there, and the missing ubermap zones are
+   enabled on the BP.  I need to do some of the guild areas, and when they're all
+   on the BP correctly, I'll port the whole thing over at once.
+
+   Before anybody else tries, due to a row of missing zones, it is currently not
+   possible to walk between all of the cities - ask for a trans if you need one.
+   I've readded the zones on the BP but we need to hook the exits up.  They'll
+   be brought in at the same time as the houses and the SC guild area, and whatever
+   other areas people speak up about.
+
+   -Nico/Jake
+
+0	0	4911	4908	1159761653	Wyl	87	East of Caemlyn	East of Caemlyn used to be a forest.
+
+In said forest, north of the road a bit, was:
+
+the Wolfkin guild area
+the Tinker guild area
+Dugoth's cave
+
+These would now be in 640, between 25 and 36.
+
+I understand, we're trying to go with a book-map,
+so 04-15 would be preferable.
+
+I volunteer myself for helping to re-link the
+two zones, and the 'house.'
+
+
+ - Wyl's player
+
+0	0	4912	4908	1159763222	Cathbad	162	`!Guildhouse`0	There used to be an Illuminator Chapterhouse
+near Caemlyn.  This was to make it easier for
+Guildees to participate in the Caemlyn-centric
+mud RP.
+
+This would be in tile 640,
+number 74, 82, or 84, most likely.
+
+Would it be possible to include, if not the
+chapterhouse as it existed, then a desc for
+that square listing it as the Illuminator
+Chapterhouse of Caemlyn, not from the books?
+
+This would help square away RP issues of
+Illuminators being out of their chapterhouse
+where they prettymuch live/work/play.
+
+If a desc needs to be written, or an old area
+linked, I'll do it.  Someone may need to talk
+me through the steps, though.
+
+
+ - Cathbad's player
+
+0	0	4925	4908	1160486193	Jerod	5217	Various Guild Areas	The entirity of the guild tower is missing obviously, including the initial guild
+rooms for Asha'man and Daes.  The Asha'man guild area needs to be reinstated
+alone with the recall point.  The Council's guild area, along with the Queen's 
+Palace and the Halls of Justice is missing.  The Council's guild area may be difficult
+to reconnect, given the fact that its central room connects to others across the city
+the Oval Plaza and the Barracks to name 2.
+
+Anyway, thats all I can think of right now, other than the strip of zones separating 
+Cairhien and Tar Valon from Caemlyn.  At the moment, there is no way for a player
+to reach the shining walls, save for being transferred there by an Imm.
+
+0	0	4927	4908	1160529937	Jake	5770	Upgrade #2	   I've replaced the missing row of zones and placed markers for
+   all the roads, even though many of the road-rooms still have
+   default descs.  For ease of use, once you start traveling on
+   a road, the two directions that the road goes in are highlighted
+   in the title, so you can walk pretty fast without having to
+   read the desc or without accidently wandering off the trail.
+   I think we may rename some of the roads so they include the
+   names of the cities at either end instead of the bookish way
+   we've named them here (it gets confusing - to me, anyway).
+
+   At any rate, you can now walk from Caemlyn to Tar Valon to
+   Cairhien to Aringill and just about anywhere in between.
+   Obviously there's still lots to be done (like placing the
+   rest of the rivers and descripting more rooms), but this
+   is the general layout.  Also, Syrah has brought over the rest
+   of the housing zones, so those should be good to go now, too.
+
+   -Nico
+
+0	0	4928	4928	1160537459	Jake	5770	`@R`2equest for `@R`2oom `@D`2escs`7	   Hey all,
+
+   We could really use a hand with descripting the new map rooms.  There are a lot of them,
+   and if anybody would be willing to spend some time writing descs and just sending them
+   to me, I'll 'build' them myself to minimize the hassle.  Obviously we don't have a whole
+   lot in the way of rewards to offer right now, but I will give out QPs that can be traded
+   for exp or can be stored towards MM3.2 eq.  I do ask that they be high quality
+   descriptions with good grammar - we're trying to make a map so well done that it blows
+   all our old zones out of the water.  I appreciate anything you can send in, even if it's
+   just three or four rooms.
+
+   Descriptions should not include references to 'you', specific animals ("A deer looks at
+   you" is bad, but "A trampled path through ferns indicates deer nearby" is ok), or
+   weather, since all that is cheesy and can change based on how the RP is going.  You
+   know, unless it's the top of a mountain and it's always snowy there. :p Each room is
+   'large' - like several miles, so think large scale.  An example:
+
+`2The feel of the wood changes drastically, as does the smell.
+This part of the forest is old - older than that of the
+surrounding area, and the air is dry and lifeless.  The trees
+have enormous girth, but are of no great height.  Gnarled and
+covered only in patches by dry, peeling bark, they moan and
+crackle continuously.  The floor is littered not with leaves or
+ferns, but with small rocks and dead wood that will not decompose.
+The forest clings to life only by refusing to admit that death
+is upon it.`7
+
+   Please, please give us a hand. :p Mail 'em in to Nicodemus.
+
+   Thanks!
+
+0	0	4933	4933	1161132986	Nicodemus	1805	`^I`6mportant`7: `^P`6lease `^R`6ead`7	Alright everybody, got some big news that will either infuriate or excite.  With
+the goal of fixing some things that are broken, stupid, or just hard for players,
+we're making some large-scale adjustments.  The result is, we hope, that our
+guilds (for both current and hopefully future members) will be in a better
+position to interact with each other.  Some large-scale auths are involved, and
+I don't expect everybody will like them.  I feel they are good solutions, and
+even though the implementation is a little premature, it worked out ok for the
+ubermap and plus it's going to be harder if we wait until we have more players.
+Here goes.
+
+Through act of Luc and I, Altara has fallen to the SC, and the country of
+Murandy is all but won.  Northern Altara is under contention from the DS and
+Whitecloaks.  Ghealdan remains home to the Dragonsworn (even though we don't
+currently have any), and the WC still control Amadicia.  Murandy's fall will
+be presented through updates in the immediate future (its fall is imminent).
+Because of the effort it took to conquer Altara and Murandy, the SC will be
+forced to spend a long time regrouping and gathering their resources,
+which will allow for more actual RP instead of aggressive attacks into
+Caemlyn.  The end result of all this is that the SC are in a position to
+impact the RP of the 'actual' part of the mud, and the WC and DS (should we
+get any) will be in an RP hotspot, as will anybody in Caemlyn.  If you
+check your maps, players can still travel freely between Caemlyn and Illian,
+and the Whitecloaks can still get between Amadicia and Caemlyn, provided they
+make it through the DS troops.  The SC will almost certainly be sending recon
+missions into Caemlyn, and it's up to everybody to react as they like.
+
+Lucardo and Parol are updating the war rules based on the ubermap grid.
+Since that grid is implemented now, we should have an improved ability to
+wage wars over this, should the RP require any.
+
+Thanks! Have a nice day.
+-Nicodemus, heavy-handed imp
+
+0	0	4935	4933	1161219864	Jerod	5217	1	I say this because, while it has been pointed out that Murandy was
+weak, and therefore an easy target, it also stands as buffer
+between the Seanchan and Andor.  This means that one of the
+strongest states in Randland has no direct connections to Seanchan
+land, and is not 'threatened' by them yet, thus will more than 
+likely hesitate to consider them a threat upon which action is
+necessary.  With the elimination of Amadicia instead, they have
+both closed a gap in their lines, as well as having eliminated one
+of the more dangerous threats to their flank.  
+
+Taking Altara and Amadicia would then leave them with only one
+flank in danger from an appreciable enemy, that is to say Illian.
+Whereas, this attack on Murandy, rather than Amadicia has left
+them with an appreciable threat on three fronts, as well as a less
+organized force on a fourth front.  A move that I think many would 
+consider dangerous.
+
+
+I realize that the choices made in this case were for the benefit
+of RP, rather than strategy, a way to introduce Seanchan to 
+Caemlyn so that they could RP.  I would put forth however that 
+more likely this will lead to RP that will end badly for those who
+choose to play Seanchan.  My reason for saying this is thus, with
+Murandy between Andor and Seanchan held territories, there was no
+percieved direct threat, and thus Seanchan scouts would not be in
+direct danger simply for being in Caemlyn.  With Seanchan
+encroaching on Andoran borders, and refugees entering the city,
+anyone who is connected with the Seanchan will be considered as a
+direct threat to the Crown the moment they step into the country,
+and will be treated as such by the authorities.  This will lead to
+imprisonment at best for those discovered(Seanchan are not 
+unrecognizable), and death for most who are caught as spies.
+
+I have some other problems regarding the planned RP and the
+characters who will be involved in our city, but those are
+personal issues that I can explain if you ask me directly.
+
+Anyway, these are my thoughts,
+Jerod
+
+PS This should be first:
+If this has not been already taken for IC, I feel the need to say 
+that I have a problem with this plan from an OOC standpoint.
+Strategically, this move doesn't make sense to me.
+
+
+4	37	5178	5178	1173136048	Balinor	107	`&Chain of Command`7	Chain of command can be a difficult concept with two separate chains of
+command within the guild (Gaidin and Tower Guard), as ICly, the chains
+of command are interlinked. This is how it works:
+
+1. Gaidin trainee ranks and Tower Guard soldier ranks have no authority
+   over each other. Thus, a Bannerman can't tell an Initiate Trainee
+   what to do and vice-versa.
+
+2. Tower Guard officer ranks -may- tell Gaidin trainee ranks what to do,
+   but this is only in extreme circumstances. Generally, they don't.
+
+3. Gaidin graduate ranks have direct authority over Tower Guard soldier
+   ranks, without exception. This situation will be encountered often,
+   such as when a Gaidin orders a Tower Guard to apprehend someone or
+   something of that nature.
+
+4. Gaidin graduate ranks and Tower Guard officer ranks have no authority
+   over each other. If there is a dispute, generally it is resolved by
+   going over the other's head (i.e. to a more senior Tower Guard officer
+   or, in the other case, to go to the Master at Arms about the Gaidin).
+
+These rules are written in stone and will be enforced so that there are
+boundaries that define exactly how the two chains of command interact.
+Thank you for following these guidelines.
+
+Balinor
+
+4	20	5183	5183	1173256972	Valkaria	2445	White Tower Update	Hey everyone! This is Sadren, in case anyone doesn't know who my
+alts are. I'm wondering if anyone still reads this thing. :)
+
+Anyway, I wanted to thank Nico and Duren for updating and getting
+the work I had put in on the mud. We now have about fifteen rooms
+put in, all of which are great spots for RP.
+
+I am turning my direction away from the gardens and stables now,
+and I started work on the Library, as well as the Colonnade leading
+to the western courtyard. The Library is about 9 rooms, and I
+connected it to the Brown Ajah halls through a skyway.
+
+I also plan on creating a hedge maze near the eastern entrance to
+the White Tower. Anyone have any tips on how to make a really
+good maze? :)
+
+I am trying to finish most of the outside before I start going
+into the Tower proper. Also, Balinor, Rosabelle, and Lio have
+all taken an interest in helping out, but they need to be given
+work zones on builder port. Balinor doesn't know OLC at all,
+and Rosabelle and Lila need a refresher course. I'd be happy
+to give it, if you want. :D
+
+Anyways, things are going well.
+
+Valk/Sadren
+
+4	7	5279	5279	1182801719	`&Termiane`7	5450	`7U`8ndercover `7A`8gents`7	As most, if not all, of you know, several members of this guild are undercover amongst
+the Oathbreakers. Please don't leak their identities ICly or OOCly to anyone outside
+this guild. It would be best not to even mention that the Oathbreakers are being
+infiltrated at all. If you're not sure if someone is undercover or not, just don't link
+them to the Seanchan.
+
+Thank you,
+
+-Termiane.
+
+4	20	5358	5358	1186193728	Saga	8291	New builder commands: dig, slapsticky	See 'help' for details.  Should make it easier to rough out zones.
+ 
+More to come!
+ 
+Chip
+
+0	0	5408	5408	1197007910	Duren	9	`!Voting	Just an FYI:  The Mud Connector finally reset their votes back to 0.  We're in the top 100 and we could stay there
+if everyone just keeps voting on a regular basis.
+
+Keep up the good work guys.
+-Duren
+
+4	7	5420	5419	1198869093	`&Thrain`7	163	`^Act One `7- `6The Beginning `1<`!Duh!`1>`7	`*o `&The curtains open, and the entire guild stands, or`7
+  `&bows, or knees as their ranking permits. As the`7
+  `&curtains raise, the music from 'Grease' begins....`7
+  
+`@Seanchan`7
+`2Sung By The Entire Guild, Some With The Aid Of Their Voices. ;>`7 
+   
+`!We solve problems with military might`7
+`#We got a lovin' Empress, we gotta serve her right`7
+`!We ain't no stranger to the face of danger`7
+`#We believe in the Empress and that's just who we are`7
+   
+`@Seanchan is the guild`7
+  
+`%Don't think we are something to loathe`7
+`^Why don't you remember your Oaths`7
+`%Our lips ain't lying, what they say is true`7
+`^We fight for what's right, and hope you do too`7
+   
+`@Seanchan is the guild`7
+`2It's got groove it's got meaning`7
+`2Seanchan is the time, is the place, is the motion`7
+`@Seanchan is the guild with feeling`7
+   
+`&We take the pressure and we won't go away`7
+`1Our rule is here to stay`7
+`&There is a chance that we can make it so far`7
+`1Start believing, remember who you really are`7
+   
+`@Seanchan is the guild`7
+`2It's got groove it's got meaning`7
+`2Seanchan is the time, is the place, is the motion`7
+`@Seanchan is the guild with feeling`7
+   
+`5Your life is the life of illusion`7
+`6With our rule, there will be no confusion`7
+`5Swear some oaths, come see what we're doing?`7
+    
+`&We take the pressure and we won't go away`7
+`1Our rule is here to stay`7
+`&There is a chance that we can make it so far`7
+`1Start believing, remember who you really are`7
+    
+`@Seanchan is the guild`7
+`2It's got groove its got meaning`7
+`2Seanchan is the time, is the place, is the motion`7
+`@Seanchan is the guild with feeling`7
+    
+`@Seanchan is the guild`7
+`2It's got groove its got meaning`7
+`2Seanchan is the time, is the place, is the motion`7
+`@Seanchan is the guild with feeling`7
+    
+`2Seachan is the guild`7
+`@Is the guild`7
+`@Is the guild`7
+`2Is the guild`7
+     
+`*o `&The stage clears with the exception of Thrain, Damoz`7
+  `&Jineo and Leon, who are now sitting around a table`7
+  `&with Savras. They begin talking about their "first`7
+  `&times". Only Savras had anything to say, though....`7
+  `&At the same time Kayura, Sa'narisa, Krystal, Andela`7
+  `&and Ty'marin were talking about the same thing. None`7
+  `&could remember their first times, so Kayura began`7
+  `&about her most recent.`7
+ 
+`&Andela: Kay, why are you embarrassed? `7
+ 
+`&Savras: It's not that interesting, guys...`7
+ 
+`&Leon: I doubt that, Cap.`7
+ 
+`&Sa'narisa: Come on Kay! I hold your leash.`7
+ 
+`&Thrain: Come on Savvy!`7
+ 
+`&Ty'marin: Kay, tell us!`7
+ 
+`*o `&'Summer Nights' music begins....`7 
+ 
+`&Savras: Well, fine, I'll tell you. 
+ 
+`@Seanchan Nights`7
+`2Sung By: Savras, The Guys (Thrain, Damoz, Jineo and Leon)`7
+         `2Kayura, The Girls (Ty'marin, Krystal, Andela and Sa'narisa)`7
+ 
+`!Savras: Seanchan lovin, had me a blast.`7
+`3Kayura: Seanchan lovin happened so fast`7
+`!Savras: Met a girl, crazy for me`7
+`3Kayura: Didn't wanna touch him, but it was my only chance to be free`7
+`@Both: Seanchan fling, don't mean a thing, but oh,`7
+      `@those Seanchan Nights.`7
+`^The Guys: A-wella-wella-wella HUH! Tell me more,`7
+          `^Tell me more`7
+`3Damoz: So did the Blood rise? `7
+`%The Girls: Tell me more, Tell me more `7
+`^Ty'marin: That would be a surprise. `7
+ 
+`!Savras: She went to Falme, opened a gate `7
+`#Kayura: I had to Travel, or I would have been late. `7
+`!Savras: We chased her down, a grolm got fried. `7
+`#Kayura: I got leashed, and I could have cried. `7
+`@Both: Seanchans cold, but were feelin bold, and `7
+      `@oh, those Seanchan Nights. `7
+`%The Girls: A-wella-wella-wella HUH! Tell me more, `7
+           `%Tell me more `7
+`7Krystal: That wasn't good luck. `7
+`^The Guys: Tell me more, Tell me more `7
+`6Thrain: So, was she a good Faahhh? `7
+ 
+`*o `&Rest of the Guys attack Thrain and shut him up during`7
+  `&the little musical interlude.`7
+ 
+`!`Savras: I got the Death Watch to Guard us, they have so little to do.`7
+`#Kayura: My warder escaped, left me with you. `7
+`!Savras: To warm her up, I got totally bare `7
+`#Kayura: Theres no Tower of Ravens down there.`7 
+`@Both: Seanchan snow, which way do we go? But oh, `7
+      `@those Seanchan Nights. `7
+`^The Guys: A-wella-wella-wella HUH! Tell me more, `7
+          `^Tell me more `7
+`$$Leon: Don't you know she's a damane? `7
+`%The Girls: Tell me more, Tell me more `7
+`$$Sa'narisa: Hey Sav, I thought you were my man! `7
+ 
+`#Kayura: He wanted to get married, I told him no way `7
+`!Savras: She wanted a wedding! I just wanted to get laid. `7
+`#Kayura: Doesn't he know that Aes Sedai don't tie the knot? `7
+`!Savras: A little One Power love is all that I sought. `7
+`@Both: Takes the cake, what a big mistake, but oh, `7
+      `@those Seanchan Nights `7
+`%The Girls: A-wella-wella-wella HUH! Tell me more, `7
+           `%Tell me more `7
+`7Andela: Dont we wilders 
+4	7	5424	5419	1198869948	`&Thrain`7	163	`^Act Three (con't) `7- `6Imperial Trouble`7	`&Savras: `&Oh, woe is me. I have lost the only woman who`7
+        `&could arouse me. I am now cursed to never get`7
+        `&laid again. I will go mad! Come here, trainee...`7
+  
+`*o`& 'Hopelessly Devoted To You' music begins to play.`7
+  
+`@Savras' Lament`7
+`2Sung By Savras`7
+  
+`!Mine is the first heart broken`7
+`!My eyes are the first to cry`7
+`!But I'm not the first to know there's`7
+`!Just no getting over you`7
+`!There are countless men too`7
+ 
+`!I'm just a fool who's willing`7
+`!To kill trainees to forget you`7
+`!Theres nothing else for me to do`7
+`!I'm hopelessly devoted to you`7
+ 
+`!There's no where for me to hide`7
+`!From the way I feel inside`7
+`!I'm completly outta my groove`7
+`!Hopelessly devoted to you`7
+ 
+`!My head tells me your just a damane`7
+`!But my heart knows a flow of air does what no woman can `7
+`!You've probably moved on, it was probably easy to do`7
+`!But I'm hopelessly devoted to you`7
+`!Hopelessly devoted to you`7
+ 
+`*o `&Savras dismisses the concubines, and then slinks`7
+  `&back into bed, with a picture of Kayura. Curtains`7
+  `&close, and when they reopen you can see Kayura in`7
+  `&her bed, looking longingly at a picture of Savras,`7
+  `&which she obtained on the black market, where such`7
+  `&pictures sell at a premium. 'Oh Sandy' music begins`7 
+  `&to play.`7 
+   
+`@Oh Savvy`7
+`2Sung By Kayura`7
+ 
+`#Stranded at the White Tower`7 
+`#A loveless place without you`7 
+`#They cannot know you were my lover`7 
+ 
+`#Savvy can't you see I'm in misery`7 
+`#We made a start now were apart`7 
+`#There's very little left for me`7 
+`#I don't have you, although I am free`7 
+`#I sit and wonder why-yi-yi-yi`7 
+`#Why, we can't be together oh Savvy`7 
+ 
+`#Oh Savvy, someday when Seanchan leash no more`7 
+`#Then you will be mine to the core `7 
+`#Maybe one day, you'll meet my daddy `7 
+`#Oh say it's true, oh Savvy`7 
+ 
+`#Savvy my darling I hurt real bad`7 
+`#I know you don't believe that it's true`7 
+`#When I say I'm helpless without you`7 
+`#We now love all alone, apart from each other`7 
+`#I sit, I wonder why-yi-yi-yi`7 
+`#Why, we can't be together, oh Savvy.`7 
+ 
+`#Savvy, Savvy, why-yi-yi-yi-yi `7 
+`#Oh Savvy `7 
+ 
+`*o `&Curtains Close.`7
+
+0	0	5473	5473	1201797851	Duren	9	IP Address Change	Just so everyone is aware:
+
+We are switching back to a dynamic IP address (Because it costs three times as much to have one), but
+this means our IP will change as soon as we switch, and it will change periodically after that.
+So it's very important that you do not connect using the IP.  Make sure you always connect using
+the hostname 'tymemud.com'
+
+Thanks,
+-Duren
+
+0	0	5476	5476	1201846995	Duren	9	TMC Votes Reset	The MUD Connector has reset all MUDs votes to 0.  This means if we all vote fast and hard
+we can jump up even higher in the rankins than we were before!
+
+-Duren
+
+0	0	5505	5505	1203734036	Duren	9	Newbie zone and Creation	The newbie school and Wheel of Time walkthroughs have been given a nice facelift by
+Sadren and Myrene.  Please take a look at the new zone and let us know if you see anything
+off.
+
+I also made some minor changes to the wording of some of the menu's in creation.
+I completely re-wrote the creation system for 3.2 from scratch, so I don't want to
+dump a lot of time into the creation system for 3.0, but it's what we have for now
+so if you know of any obvious issues that would hinder a new player, please let me
+know by reporting it as a BUG with the 'bug' command ASAP so it can get fixed.
+
+Thanks,
+
+-Duren
+
+4	22	5512	5512	1204320190	Duren	9	Promotional Idea:	
+Ok, this idea requires a few moving parts, and it may never get off the ground because of this.
+
+The idea is this:  We should try to 'schedule' RP events/quests on a regular basis.  Duh, right?
+But lets take it one step further:  Lets advertise this event not only on proj show, but also
+on the website, and mudconnector.com, and topmudsites.com, as well as other MUD websites.  These
+postings should be made at least 3 days in advance of the event to provide adaquate time for people
+to find out about it.
+
+So you're thinking:  Ok, that seems like a good idea.
+Well, lets not stop there.  We should also make sure we have someone with the authority to approve
+basic backgrounds for new players at these events, since presumably, we'll probably have quite a few newbies
+right before and during the event.  We should make the process of getting them up to speed and getting
+them involved in the RP event as painless as possible.
+
+Now, I know Parol and Kheldon have been trying to get a tournament going.  Ideally I would see one of
+these events scheduled at the same time as his tournement, with the possibility of 'blending' the events
+in case either event alone doesn't pull in enough support to justify running it.  Hopefully the combined
+events would have enogh player interest to make something interesting out of it.
+
+I think if we do these on a regular basis (once or twice a month at least), I think we'll
+be amazed at the number of new players we start seeing.
+
+Please comment with your feelings about this.
+
+Thanks,
+-Duren
+
+0	0	5604	5603	1225631480	Kheldon	1287	Temporary solutions?	Bummer. Any way to get a temporary solution? Just someplace where a user can connect?
+Just some place to stay online and talk or see a message about the move?
+
+Also, make sure to put this update on the website.
+
+- Kheldon's player
+
+0	0	5607	5607	1232063908	Duren	9	4-6 hour server shutdown tomorrow morning/afternoon	Hey everyone,
+
+Now that I'm living -in- Austin (rather than 40 miles north in the middle of nowhere)
+and have a nice fast internet connection, I've decided to relocate the server to my place
+so that it won't be a 3 hours drive away if anything happens.
+
+Unfortunately, this means that we'll be down during the 3 hour drive it takes
+to get the server here, plus some time to get it all set up.
+
+I have the server scheduled to shut down at 11:00am Central time
+tomorrow Jan 16th.  I hope to have things up and running again by 5pm.
+
+I know there's been a lot of downtime lately and this is only adding to it.
+I also haven't been around as much since I moved for several reasons,
+all of which are really good for me, such as a girlfriend, working out
+every day, cooking all my food from scratch (No eating out), and losing
+weight.  I graduated with my Masters degree in December, and I should be
+starting a new job in the next few weeks.  Once things settle down and become
+more routine, I should be around more again.
+
+-Duren
+
+0	0	5690	5690	1271373263	Ayasha	9084	`#Building Needs`7	Hiya all,
+
+Sorry I've been away so long.  Been dealing with some RL 
+issues.  Things are back on track again now, so I should be available 
+more often if anyone needs me for anything.  I'm usually here in the 
+evenings between 6 pm to Midnight CST and on the weekends.  I'd still 
+like to see this game come back to life, and will be starting work on 
+my building projects again.  If anyone wants to help with building 
+projects, please let me know.  Here is a list of what needs to be done:
+
+
+`5Mobprogs`7 - We need people willing to learn how to do mobprogs to make 
+automated quests for players to do while the player base is low.  These 
+quests could offer such things as teaching skills, scavenger hunts, mobs 
+that have different reactions to characters based on who they are, etc.  
+These are very important for us right now, because it will give something 
+to players to do while we await the finishing of the new combat system.
+
+`2Ubermap`7 - There are a lot of rooms that need to be desced on the Ubermap.  
+The Ubermap is basically a nearly-to-scale map of the area between Tar 
+Valon, Cairhien and Andor according to RJ's maps in the books.  Every 
+square of it is going to be open for players to explore, and it will be 
+important to pay attention to room descriptions in order to figure out 
+where you are.  We need people who are willing to just do descriptions.  
+The rooms are already set up.  We'll give you access to the Ubermap, and 
+then you can desc your heart out.  Must be willing to do mundane things
+like forests, rivers, fields, farmlands, hills, etc. though of course
+you're welcome to add interesting things such as bridges or other cool
+landmarks here and there to help folks find their way around.  The Uber-
+map is currently only 15 percent complete so we really need help with it.
+
+`3Cairhien`7 - Cairhien needs to be gone over with a fine-tooth comb to
+make sure all the rooms connect properly.  The Sun Palace is also in
+need of revamping, as it apparently has stairs that go nowhere.  Also,
+there are a number of shops that are not linked to the Cairhien grid
+any longer and those need to be re-linked.  Any player interested in 
+helping out with Cairhien, please let me know and this project will be 
+delegated out.  Cairhien is currently about 75 percent complete
+
+`1Caemlyn`7 - This is again where mobprogs come in.  We want to make some
+newbie-friendly quests for new players to get to know their way around
+and to generally make Caemlyn a more fun place to explore.  Some descs
+of rooms could probably be revamped as well.  This project is only about 
+10 percent finished.
+
+Things I am Finishing:
+
+`6Non-Combat Eq`7 - I am currently going over all the wearable items and
+making sure that they don't have any typos and things like that.  This
+is about 50 percent done and will likely be finished in the next month.
+
+`&White Tower`7 - The White Tower is nearly complete, about 90 percent.  Just need 
+to put in a few more automated quests/mobprogs, finish the basement area 
+and need to finish the Warder Tower.  Elaida's Palace is nearly complete.  
+A maze has been added to the gardens.  I will be finishing the White Tower 
+area hopefully in the next month, if not sooner.
+
+`!Shops`7 - Once the non-combat equipment is created and proofread, shops need 
+to be made and/or edited in Caemlyn and Tar Valon (and eventually Cairhien 
+once it's relinked again) so that players can purchase the new equipment. 
+There will be shops dedicated specifically to newbie equipment, and shops 
+dedicated to various equipment slots.  This project has not yet been
+started.
+
+So there you have it.  My Building Report.  I would appreciate help from anyone
+who cares to assist.  There is still much to be done, but as you can see, we know
+what needs to be done.  We just need to do it. :)
+
+Ayasha
+Head Builder/Storyteller
+
+0	0	5696	5695	1272037176	Duren	9	Link to Google calendar	Here is the link to access the Google calendar:
+
+http://www.google.com/calendar/embed?src=v4qgsbj91pn6k2i2s71jhtthbg%40group.calendar.google.com&ctz=America/Chicago
+
+4	20	5726	5363	1277507641	Maelyn	215	Can anyone grant permissions?	I tried to work on the Warder stuff, but I don't have permission to edit int hat zone. I thought I had permission to edit all TV and Tower zones. Can someone give my builder person permission for all the zones in TV/Tower? (all I think are zone 88+ or something like that).
+Thanks, I appreciate it.
+Oh, builder's name is Sonnet.
+
+4	20	5727	5363	1277565607	Duren	9	Done	It's actually zones 90-98.  I granted you access to all of them.
+
+-Duren
+
+0	0	5738	5738	1286430355	Sadren	7958	Reddit.com - New Subreddit for Robert Jordan Fans!	 Hey everyone!  
+
+Not sure if you all have heard about it, but there is a really cool website
+called reddit.  Com.  It's a place where you can view links, pics, video, etc
+from all over the internet and upvote or downvote things you like, as well as
+commenting threads!  
+
+It's a really cool place and I've spent alot of time there the past year or so.
+I just made a subreddit for Robert Jordan fans..  
+
+www.reddit.com/r/robertjordan
+
+It would be great of you guys to take the time and sign up and join my
+subreddit!  Im hoping that we can build it big enough and it can help bring
+people to Tyme's website, facebook page, and to the mud itself.  
+
+Thanks
+
+Sads
+
+4	8	5741	5741	1287684883	Leara	7963	The Three-fold Land and the Aiel Camp	Duren helped me recover the old Three-fold Land I had built, as well
+as Marek's Aiel camp. 
+
+Im going to set up the Threefold-land as our guild recall, and provide
+a link to get into the camp that you will be able to set up as a learnable
+recall point. 
+
+Have fun exploring!
+
+Leara
+
+4	20	5803	5803	1359398123	Ayasha	4435	Ubermap	I have put all the zones for the Ubermap on Dotproject, so we can
+track our progress a bit better.  Once a zone is completed,
+please set it's progress to 100% on dotproject so we know that
+it is done!  Thanks.
+
+Ayasha
+
+4	20	5813	5813	1359708355	Ayasha	9084	Moved from Proj Show: Coding Help	This was posted by Anna on the project board.  I have moved it here, since
+this seems a more fitting place for it for builders and coders alike:
+
+http://www.mudconnect.com/discuss/discuss.cgi?mode=MSG&area=positions&message=35423#35423
+
+
+
+4	20	5824	5824	1359846496	Anna	8986	mudconnector?	time to update our entry on mudconnector maybe?
+
+4	20	5832	5832	1359962108	Ayasha	9084	Non-Combat Eq	The Non-Combat Eq in zone 35 is now completed.  Now we just need to fix the
+economy so that it will calculate the weights/costs properly, but the port
+keeps crashing, so any changes made to the econ seem to be lost.
+
+Meanwhile, I intend to go through any other eq I can find, and make the same
+modifications.  Then I will update the econ, and we should be ready to
+put in the shops!
+
+Ayasha
+
+4	15	5837	5837	1360140240	`&Ayasha`7	9084	Embassy	There was talk of the possibility of the Band having an embassy in Caemlyn. 
+I have set aside a zone for embassies with this in mind.  You may have up to
+five rooms for your embassy should you choose to have one.  Please send me the
+descs to `6ahnerissedai@gmail.com`7.  Then I will simply put them in, link the
+rooms the way you want, and there you go.  Make sure to make a room or two that
+players can link personal rooms to.  The player housing policy allows for
+players to attach a single room to their guild area, free of charge.  
+
+`7See '`6policy housing`7' for more info about that.
+
+Ayasha
+
+0	0	5909	5909	1360850119	Duren	9	Ajax Client	For anyone who has trouble accessing Tyme from their tablet, smartphone, or behind firewalls:
+I developed a web based client that does not use any direct TCP connection to the game at all.  So if
+you have any internet access at all, you can access the game at:
+
+http://tymemud.com/ajaxclient.php
+
+The other nice thing about the ajax client is that it can piggyback an existing connection.
+So you can stay online at home, go to work, load up the page and see what would be on your
+screen at home.
+
+The ajax client does create a lot of database data, as all text displayed on your screen gets
+dumped into a MySQL database where the webpage can load it up.  For this reason you have to
+specifically enable it in game by typing:
+
+option ajax
+
+Have fun!
+-Duren
+
+1	0	6012	6007	1362613599	Rissa	7249	Warder, TG, and Army Templates	`2Warder Template #1 `7- The Righteous
+These are the more common types of candidates seeking to train with 
+the warders. These are people with high ideals and goals for themselves 
+and their own place in the Wheel. 
+`
+`2Warder Template #2 `7- The Romantic 
+Dazzled by old stories of heroism against the battle of evil, the 
+Romantic dwells within all the elaborated myths about the Gaidin.
+`
+`2Warder Template #3 `7- The Dutiful 
+There is little passion outside the cold brim of duty, and these are in 
+truth the "Cold, Leashed Dogs" of the Gaidin that most people hear 
+about. They often see themselves more as tools than maybe the Aes 
+Sedai does, not caring much for their own value and often quite morbid 
+in nature.
+`
+`2Warder Template #4 `7- The Cryptic 
+Many kinds of people fit into this category, yet what all of these are 
+bound to have in common is the fact that at one point or another, 
+something happened in their lives that made them feel like repaying it 
+in a way by joining the Gaidin. 
+`
+`*TG\Army Template #1 `7- The Devoted 
+Aside from the regular Warder-candidates there are those who seek a 
+more structured life-style, the Tower Guard or the Army instead. The 
+guidance to this service is like a beacon for these, clearing the path 
+and allowing the person to tread upon the lane of Light within the ranks. 
+`
+`*TG\Army Template #2 `7- The Unemployed 
+These men are often rather simple in terms of personality.  They are often 
+unhindered by glorious desires to become something special, like heroes or 
+high-ranking officers: they merely wish to earn a living by the means available.
+`
+`*TG\Army Template #3 `7- The Obligated (Honor and Tradition, Nobles)
+The Nobility are often in the habit of sending their sons to be trained 
+at the White Tower. These sons are sometimes the heirs of their 
+families and thus never intend to bond.  Some remain as Tower Guard 
+while others may return home to their families.
+`
+`^*`&IMPORTANT NOTE`^*`7
+You MUST submit your background to the Daes GL for approval of 
+the noble connection BEFORE sending it to the Tower GLs.
+`
+If you would like more information on a template please contact the
+Tower GLs. 
+
+1	0	6013	6007	1362613694	Rissa	7249	`5Path #3 `7- Visiting Scholar	The White Tower is renowned for the excellence of its education. For 
+this reason many noble families from across the lands send their sons 
+or daughters to study with the Aes Sedai. 
+`
+`**`7Note - All women who come to the Tower for any reason will be 
+tested for the ability to channel.  If she is found to be able to channel, 
+she will be entered into the Book of Novices. If she cannot, then she 
+will be given the education she seeks and sent back to her family at its 
+end. 
+`
+*REQUIREMENTS FOR VISITING SCHOLAR*
+`
+`**`7Follow the 'General Requirements' for the Tower
+`
+`**`7You MUST submit your background to the Daes GL for approval of 
+the noble connection BEFORE sending it to the Tower GLs.
+`
+`**`7This background is an excellent example of how a non-channeler can 
+still be a part of the Tower, but can also be used by a channeling 
+woman who is either born with the spark or able to learn.
+`
+(If you would like information on these templates, or for examples of 
+backgrounds please contact one of the White Tower GLs and we will 
+gladly send them to you.)
+
+1	0	6014	6007	1362613764	Rissa	7249	The Asylum Seeker	A woman of noble blood is often given in an arranged marriage, with 
+or without her consent. Most often, this marriage is accepted as a part 
+of her duty to her family. A few women, though, rebel against this 
+arrangement. Some object strongly enough to leave their family and 
+come to the Tower for shelter. Similar to women in the Middle Ages 
+who might run away to a convent rather than marry that ugly old Earl, 
+women in this land may run to the Shining Walls of the White Tower 
+for refuge. They often have no goal other than to defy their family. 
+`
+At other times, a nobleman or noblewoman may be threatened in his/her 
+native lands (perhaps from an invading army or internal upheaval) and 
+come to the Tower seeking asylum from his/her enemies. 
+`
+To be accepted as an asylum seeker, you will need to gain the approval 
+of the Amyrlin (a role-played audience)
+-
+*Note - As with all women the Tower encounters, the asylum seeking 
+woman is tested to see if she can channel when she arrives, and if so, 
+she is placed on the path to Aes Sedai. Others may be allowed (at the
+Amyrlin's discretion) to remain as guests.
+`
+*REQUIREMENTS FOR THE ASYLUM SEEKER*
+`
+`**`7Follow the 'General Requirements' for the Tower
+`
+`**`7You MUST submit your background to the Daes GL for approval of 
+the noble connection BEFORE sending it to the Tower GLs.
+`
+`**`7This template is an excellent example of how a non-channeler can 
+still be a part of the Tower, but can also be used by a channeling 
+woman who is either born with the spark or able to learn.
+`
+(If you would like information on these templates, or for examples of 
+backgrounds please contact one of the White Tower GLs and we will 
+gladly send them to you.)
+
+1	0	6020	6020	1362614500	Rissa	7249	`#Wolfkin`7	`*_________________________________________________________________`7
+`
+`8"`#Wolfkin`8"`7
+`
+This thread on template show will be dedicated to the Wolfkin
+guild and their character templates. Each template will be
+placed on the same thread as a new comment to keep things
+more compact and easy to use. Before continuing on, here is a
+short explanation of who the Wolfkin are.
+`
+`#"`3It was once said that before even the Nym and the Ogier were
+born into the world, man had a link with the beasts of the earth,
+and in particular, the wolves. Although these men and women took
+no formal name, they are lumped under the title of 'Wolfkin.'
+Somehow, they have uncovered their link with their furry
+friends once more, allowing their minds to somehow communicate
+with the wolves as well as to enter the World of Dreams, known
+as Tel'Aran'Rhiod to those schooled in esoteric lores. The
+danger of being a Wolfkin is all too clear, though. As has
+happened from time to time, a person may fall victim to the
+lust of the wolfish side and embrace their animality rather
+than their humanity. To most knowledge, once that bridge is
+crossed it burns as well. With the Wolfkin, they must always
+balance carefully the instincts of an animal with the reason
+of a human, a delicate line to walk.`#"`7
+`
+`*_________________________________________________________________`7
+
+
+
+`#S`3eeker `#R`3equirements`7
+`2-----------------------------------------------------------------`7
+`
+`!Exclusive Wolfkin Seekers`7
+`
+`1Step 1)`7 Decide to seek Wolfkin, make it your overwheming passion ;)
+`1Step 2)`7 Come up with an appropriate background and submit this to the
+`7        GL's (currently Miniver and Lironah) for approval.
+`1Step 3)`7 Find yourself `#3`7 sponsors.
+`1Step 4)`7 Get guilded, be the envy of all your friends.
+`
+`!Multiguilded Wolfkin Seekers`7
+`
+`1Step 1)`7 Realise that being Wolfkin doesn't just mean cool new
+        abilities for your character to use in their RP. It involves
+        effort, thought, and skill to execute properly.
+`1Step 2)`7 Submit a background and justification as to how your
+        character might manage to be both Wolfkin and a member of your
+        other guild without sacrificing skill in one or the other.
+`1Step 3)`7 Get authorization from all GL's of your current guilds then
+        wait for a response from the Wolfkin GLs. They will discuss
+        this with your current GLs and likely ask around amoung others
+        as to your skill and ability.
+`1Step 4)`7 Remember that even do you get authorization in all earlier
+        steps that is still no guarentee you can or will be guilded.
+        The Wolfkin GL will assign requirements as appropriate, be
+        they sponsors, RP logs, RP levels, whatever might be deemed
+        appropriate for your personal situation. Your requirements may
+        not be the same as another persons. They may seem more
+        difficult, or not, but they will be geared towards not only
+        testing your abilities but also your commitment and desire.
+`1Step 5)`7 Get guilded, if you're lucky ;)
+
+`!Note:`7 Do not RP having goldeneyes until you have been given
+      express permission from the GLs.
+`2------------------------------------------------------------------`
+
+1	0	6023	6020	1362614839	Rissa	7249	`1THE MAD DOG`7	`!-----------------------------------------------------------------------`7
+`
+`1THE MAD DOG`7
+`
+`8Quote: `!"`1For a moment Noam stared at the opening. Abruptly he darted
+        out of the cage, running on all fours, but with surprising
+        agility. Out of the cage, out of the shed, and into the night.`!"`7
+`
+Book Example: Noam (The Dragon Reborn, Ch. 8 "Jarra")
+`
+Unfortunately, though no one yet really understands why, some who
+join with the wolves can not manage to control it and their humanity
+crumbles away like the bank of a raging river. To both wolves and
+people this is not a good thing. They all seem to understand that for
+a human to become a wolf in mind is not a natural thing and not
+right when it happened. The best and only example of this aspect of
+Wolfkin, the Mad Dog, is found in the character Noam in the books.
+`
+Tested by both Moiraine and Perrin, Noam was found to have lost all
+connection to his former humanity. He was overwhelmed and lost within
+the wolf nature of his mind, all pathways back to his former humanity
+forgotten, hidden, or destroyed completely. The Mad Dog is no longer
+human in anything except their physical shape. Their thoughts, 
+desires, instincts, and passions are all those of a wolf with no
+real memory or regard for those things they knew in their former life.
+`
+Like Noam, a Mad Dog is as liable to lash out at those they once
+named friends or family as they are to lash out against strangers,
+knowing nothing except that these strange people are dangerous to
+them and that they should get away. Even the simplest task like
+opening a door or speaking a word are lost to the Mad Dog unless it
+is natural for a wolf to do. It is a truly saddening and painful
+existence, being a wolf but never belonging and never even realising
+the possible welcome to be found on the side of humans.
+`
+`!-----------------------------------------------------------------------`7
+
+4	32	6075	6075	1366162691	Rayenia	213	Trainees!  This is for you!	As we are awaiting for Denaad to regain internet access Jezz and I are keeping track
+of lessons given and we will do the best we can to help you all out with your lessons
+and lectures needed for progression.
+
+If you could please send us a quick mail to both Jezz and Rayenia so we can update
+our own little spreadsheet to keep you all on the right track, that would be great
+and we can pass it on to your GL when connectivity is re-established!
+
+Thanks!
+J and R
+
+4	15	6141	6138	1371943440	Mat	18	`1M`!e`7d`!i`1c`0 Syllabus	Recruit to Private:
+`1*`0 Choose Medic
+`1*`0 Tour of Camp and Camp Etiquette
+`1*`0 Chain of Command and Saluting
+`1*`0 Visit Quartermaster and Requisition Gear
+`1*`0 Evaluation by GLs
+
+Private to Corporal:
+`1*`0 Basic Weapon training (PCs Choice)
+`1*`0 Basic First Aid (Bandaging and splinting)
+`1*`0 Introduction to Herbalism (Common Herbs)
+`1*`0 Log of Treating a Minor Injury
+`1*`0 Evaluation by GLs
+
+Corporal to Sergeant:
+`1*`0 One Lesson with Weapon of Choice
+`1*`0 Intermediate First Aid (Setting Bones and Treating Burns)
+`1*`0 Diagnosing Common Illness
+`1*`0 Intermediate Herbalism (Mixing of herbs for poultices/teas)
+`1*`0 Basic Surgery (Removing arrows and stitching wounds)
+`1*`0 Evaluation by GLs
+
+Sergeant to Lieutenant:
+`1*`0 One Lessons with Weapon of Choice
+`1*`0 Advanced First Aid (CPR, Cauterizing Wounds, Tourniquets)
+`1*`0 Advanced Herbalism (Rare Herbs)
+`1*`0 Advanced Surgery (Amputations)
+`1*`0 Evaluation by GLs
+
+Promotions after Lieutenant will be made at the discretion of the GLs.
+
+4	7	6184	6179	1380748310	`&Sa'narisa`7	3547	`!S`1ai'`!m`1an `&(`7Powerful`&) `!D`1amane `!S`1yllabus`7	Sai'man literally translates to "Powerful Blade".
+
+At this level, the damane is one of the best-trained in the Empire.  These 
+highly-trained Damane are honored with the Sai'man rank, and they are very often
+given special privileges that your average damane never sees.  Better living
+conditions, treats, ribbons, and they may even be owned by one of the Blood, or the
+Empress herself.
+
+I.  `&C`7omplex `&B`7attle `&W`7eaves
+
+    a.  Control Weather -  If the damane has the ability to cloud dance, it will
+                           be discovered in attempting to teach her this weave.
+    a.  Hail Storm -       If the damane has the ability to control the weather,
+                           (the cloud dancing talent), then she may learn this
+                           weave.  This weave requires strong flows of Air and
+                           Water.
+    b.  Call Lightning -   If the damane has the cloud dancing Talent, she may
+                           learn this weave.
+    c.  Storm of Air -     Any damane of Sai'man strength may learn this weave.
+    d.  Harm -             A damane must have a Talent for Healing in order to
+                           learn this weave.  She must also have the required
+                           'cause wounds' pre-requisite, and the 'cure wounds'
+                           pre-requisite for that weave.  Unlike Aes Sedai,
+                           Seanchan have no qualms about teaching this weave
+                           to damane for use on humans.  If your damane is an
+                           Aes Sedai and bound by oaths, she will not be able
+                           to use this weave unless she feels her life is in
+                           mortal peril, or only against Shadowspawn.
+    e.  Thunderclap -      A damane may learn this weave if she has the Cloud
+                           Dancing Talent.  This is a complex weave, which
+                           requires delicacy and precision in all Five Powers.
+    f.  Implode -          This is one of the deadlier weaves in a damane's
+                           channeling arsenal.  It requires strength in Earth.
+    g.  Firestorm -        One of the deadlier weaves.  The damane will create
+                           a storm of fire and air, usually in tornado form,
+                           though it can be varied in such a way as to cause
+                           fireballs to rain down, or ribbons of fire to slice
+                           through the air.
+    h.  Eruption -         This is one of the deadlier weaves a damane is taught.
+                           It requires a great amount of strength in Fire and Earth.
+                           This can cause the earth to erupt in a violent manner,
+                           usually with devastating consequences.  The stronger
+                           the channeler, the more damage this weave causes.
+    i.  Sap Energy -       This weave can only be taught to damane who have the
+                           Healing Talent.  It also requires the pre-requisite
+                           weave 'refresh'.
+    j.  Infrigidation -    A powerful weave that can cause anything to freeze.
+                           The stronger the channeler, the deadlier it can be.
+                           It can also be used to freeze large areas of water,
+                           it can be used to damage mundane weapons, and it can
+                           be used in conjunction with other weaves.
+II. `&S`7pecial `&T`7alents
+
+     Some damane have special Talents.  Sometimes, these Talents manifest only
+     after the sul'dam has worked with her for a time.  Sometimes, they are
+     immediately apparent.  A sul'dam must -always- be on the lookout for rare
+     talent in a damane.  Particular Talents the Seanchan value:
+
+     1.  Cloud Dancing - As mentioned above, cloud dancing is highly valued
+                         as a talent among damane.  A damane may be promoted to 
+                         the Sai'man rank for this Talent once she is trained.  
+                         Damane who can cloud dance are valued for their ability 
+                         to aid ships, and to aid the growing of crops by controlling 
+                         the weather.  They can also create highly destructive storms, 
+                         and so are valued in sea battles especially.
+     2.  Healing -       While no Seanchan would care to be touched by a damane to be
+                         Healed, damane who have the Healing Talent are valued for their
+                         ability to learn to use that ability to cause greater harm to
+                         the enemy.  It is not a talent that is cultivated in damane
+                         very often, if at all.
+     3.  Foretelling -   This is a VERY rare Talent among damane, and currently, there
+                         is only one damane known to have i
+0	0	6206	6200	1390503635	Thrain	163	Around, but...	8've had horrid connection capabilities at work lately...
+
+Cant even access the mid rigjt now with my client.
+
+Hopefully thay changes...
+
+0	0	6229	6229	1516588973	Rissa	7249	Discord Server (Jan 2018)	Long time no see, everyone!
+
+It seems a lot of us haphazardly log on, hoping to catch other people hanging around, but we never can.
+
+Here is how we can avoid that.  I have created a Discord server for text and voice chat, you can log on anytime and be connected whenever you want.  Use the link below to connect to the server and let's at least stop being strangers.
+
+https://discord.gg/RqGrbK9
+
+If you are not already on Discord, go here to connect via web or to download the app: https://discordapp.com/
+
+I miss you all, and hope to see/hear from you guys soon (as you all pop in and check for messages).  Be well, be creative, be good to yourselves.  Love you!
+
+<3 Rissa (aka Phaedra, Ailsa, Emilie, et al)
+
+0	0	6231	6231	1555688670	Tarem	8734	`!Miss You Guys`7	Had so much fun here. Maybe the show will inspire a sweet MMO we can all reconnect on.
+
+Tarem/Arivant/Jalran
+
