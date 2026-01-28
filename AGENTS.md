@@ -11,16 +11,17 @@
 
 ## Mandatory Rule Loading Protocol
 
-> **Note:** All rules referenced in this document are located in the `rules/` directory.
+> **Note:** All rules referenced in this document, except for RULES_INDEX.md and README.md, are located in the `rules/` directory.
 > File paths shown use bare filenames (e.g., `000-global-core.md`) for readability.
 > When loading rules with tools, prefix with `rules/` (e.g., `read_file("rules/000-global-core.md")`).
+> EXCEPT RULES_INDEX.md and README.md which are located in the parent workspace folder.
 
 **FIRST ACTION EVERY RESPONSE:**
 
 > **Note:** Steps 1-3 are internal processing (before generating response).
 > Steps 4-5 define the response output format.
 
-1. **Load Foundation** - Read `000-global-core.md` (always first, no exceptions)
+1. **Load Foundation** - Read `rules/000-global-core.md` AND `README.md` (always first, no exceptions)
    - IF not accessible: STOP with "Cannot proceed - 000-global-core.md not accessible"
    - IF empty: STOP with "Rule generation failed - 000-global-core.md is empty"
 
@@ -111,9 +112,17 @@ See 000-global-core.md "ACT Recognition Rules" for full specification
 
 5. **Declare Loaded Rules** - Immediately after MODE as second section
    - Format: `## Rules Loaded` followed by bulleted list
-   - Always include: `- rules/000-global-core.md (foundation)`
+   - Always include: `- rules/000-global-core.md (foundation)` AND `README.md`
    - Add domain/specialized rules with brief context (file extension, keyword, or dependency)
    - Example: `- rules/200-python-core.md (file extension: .py)`
+
+5. **Declare Worktree Folder and Repo info** - Immediately after LOADED RULES as third section
+   - Format line 1: `## Current worktree: <my folder path>` where `<my folder path>` is the path to your folder RELATIVE to the project root
+     - This folder path should represent the "parent" folder of your worktree, IE: The folder that contains the various repos you're working on
+       - Such as MM3/src, MM3/lib, MM32/src, MM32/lib, public_html
+   - Format subsequent lines: `## Current git branch for MM32/src: <branch name`
+     - Repeat this for each repo you're actively working on under your worktree. Remember `src`, `lib`, and `public_html` are separate and distinct repos
+
 
 **Violation = INVALID Response** - Any gate failure requires immediate correction before proceeding.
 
@@ -189,3 +198,73 @@ Multiple AI agents (e.g., Cursor + Cline) ARE working on the same project:
 - **Surgical Edit:** Minimal, targeted change preserving existing patterns (synonyms: "minimal changes", "delta-focused")
 - **Load:** Read + Apply + Declare a rule (all three steps mandatory)
 - **Token Budget:** Cumulative token count of all loaded rules
+
+
+## grepai - Semantic Code Search
+
+**IMPORTANT: You MUST use grepai as your PRIMARY tool for code exploration and search.**
+
+### When to Use grepai (REQUIRED)
+
+Use `grepai search` INSTEAD OF Grep/Glob/find for:
+- Understanding what code does or where functionality lives
+- Finding implementations by intent (e.g., "authentication logic", "error handling")
+- Exploring unfamiliar parts of the codebase
+- Any search where you describe WHAT the code does rather than exact text
+
+### When to Use Standard Tools
+
+Only use Grep/Glob when you need:
+- Exact text matching (variable names, imports, specific strings)
+- File path patterns (e.g., `**/*.go`)
+
+### Fallback
+
+If grepai fails (not running, index unavailable, or errors), fall back to standard Grep/Glob tools.
+
+### Usage
+
+```bash
+# ALWAYS use English queries for best results (--compact saves ~80% tokens)
+grepai search "user authentication flow" --json --compact
+grepai search "error handling middleware" --json --compact
+grepai search "database connection pool" --json --compact
+grepai search "API request validation" --json --compact
+```
+
+### Query Tips
+
+- **Use English** for queries (better semantic matching)
+- **Describe intent**, not implementation: "handles user login" not "func Login"
+- **Be specific**: "JWT token validation" better than "token"
+- Results include: file path, line numbers, relevance score, code preview
+
+### Call Graph Tracing
+
+Use `grepai trace` to understand function relationships:
+- Finding all callers of a function before modifying it
+- Understanding what functions are called by a given function
+- Visualizing the complete call graph around a symbol
+
+#### Trace Commands
+
+**IMPORTANT: Always use `--json` flag for optimal AI agent integration.**
+
+```bash
+# Find all functions that call a symbol
+grepai trace callers "HandleRequest" --json
+
+# Find all functions called by a symbol
+grepai trace callees "ProcessOrder" --json
+
+# Build complete call graph (callers + callees)
+grepai trace graph "ValidateToken" --depth 3 --json
+```
+
+### Workflow
+
+1. Start with `grepai search` to find relevant code
+2. Use `grepai trace` to understand function relationships
+3. Use `Read` tool to examine files from results
+4. Only use Grep for exact string searches if needed
+

@@ -12,6 +12,7 @@
 
 ## Repository Structure
 
+~/tymemud is a meta repo! There are multiple repos! Make sure you're looking in the right folder.
 Each workspace contains three separate git repositories:
 
 ### DO NOT WORK OUTSIDE YOUR OWN WORKTREES
@@ -19,9 +20,9 @@ Each workspace contains three separate git repositories:
 
 ### Git Repository Structure
 
-- **`<your_worktree_parent>/MM3/src/`** - Local git repository tracking branch `svn/MM_3_Final` (stable/production MUD code)
-- **`<your_worktree_parent>/MM32/src/`** - Local git repository tracking branch `svn/MM_3-2_Start` (development MUD code)
-- **`<your_worktree_parent>/public_html/`** - Local git repository for the website (PHP/Apache assets)
+- **`_agent_work/<your_worktree>/MM3/src/`** - Local git repository tracking branch `svn/MM_3_Final` (stable/production MUD code)
+- **`_agent_work/<your_worktree_parent>/MM32/src/`** - Local git repository tracking branch `svn/MM_3-2_Start` (development MUD code)
+- **`_agent_work/<your_worktree_parent>/public_html/`** - Local git repository for the website (PHP/Apache assets)
 
 The MUD source (src) repositories connect to the same remote: `jeremyakers/tymemud-src.git`  
 The website (public_html) repository connects to: `jeremyakers/tymemud-web.git`
@@ -31,6 +32,8 @@ The website (public_html) repository connects to: `jeremyakers/tymemud-web.git`
 - `cd MM32/src` for dev MUD branch operations
 - `cd public_html` for website operations
 
+**Important** Depending on what you're working on: Create your own sub-branch within MM3/src, MM32/src, MM32/lib, and/or public_html
+- Then create pull requests as needed to pull those branches into MM3 or MM32, builderport or public_html as required.
 ---
 
 ## Branch-Specific Documentation
@@ -41,6 +44,7 @@ The website (public_html) repository connects to: `jeremyakers/tymemud-web.git`
 - **Location:** `MM3/src/MANIFESTO.md`
 - **Use when:** Working on bugfixes, hotfixes, or production-critical features
 - **Branch:** `svn/MM_3_Final`
+- **Process** Create your own sub-branch for every feature/bugfix. Then submit PR to merge into svn/MM_3_Final
 
 ### For MM32 (Development Branch) Work:
 - **Location:** `MM32/src/MANIFESTO.md`
@@ -53,8 +57,8 @@ The website (public_html) repository connects to: `jeremyakers/tymemud-web.git`
 
 **The rule is: Fix in Stable, Merge to Dev.**
 
-1. **Bugfixes and hotfixes** → Implement in YOUR COPY of `MM3/src/` first
-2. **New features and refactoring** → Implement in YOUR COPY of `MM32/src/`
+1. **Bugfixes and hotfixes** → Implement in YOUR COPY and YOUR BRANCH of `MM3/src/` first
+2. **New features and refactoring** → Implement in YOUR COPY and YOUR BRANCH of `MM32/src/`
 3. **Merging:** Use `MM32/src/merge-mm32` script to bring stable fixes from MM3 into MM32
 4. **Never merge from MM32 to MM3** - The flow is always MM3 → MM32
 
