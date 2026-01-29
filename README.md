@@ -112,12 +112,19 @@ This is intentional so builders can safely validate world/command table changes 
    - **Do not** use Markdown link syntax (`[text](path)`) for local files; plain inline paths are what Cursor auto-links reliably.
 
 7. **ALWAYS TRACK changes, task status, important context, TODOs, etc in durable files (Not in chat).**
+   - Create / Save FULL plan details for any plan you create under `docs/plans` - NEVER simply describe a plan in chat to the user!
+     - Use "todo" tracking tools such as "todowrite" and "todoread" tools to build and track TODO progress
    - Chat's only retain limited context and as you work, context is lost
    - Always follow the "memory bank" rules in RULES_INDEX.md
    - Always track details on changes you make in CHANGELOG.md
    - Put the *details* of your changes in the changelog and then *summarize* to chat. Do not use the user chat interface to provide lengthy detailed explanations of changes.
    - When writing to memory bank, changelogs, etc: Always identify yourself as to which agent you are making the change or adding the memory bank entry
-   -- This ensures each agent knows what other agents are changing
+     - This ensures each agent knows what other agents are changing
+   - In Summary: 
+     - PLAN: Document what you plan to do, TODOs that need to be created and specific tasks that need to be done, etc
+       - Use "todowrite" and "todoread" tools to track TODO progress
+     - memory-bank: Document current status: Current status of plan execution
+     - CHANGELOG: What I have changed
 
 ---
 

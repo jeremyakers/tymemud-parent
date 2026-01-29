@@ -104,3 +104,22 @@ Do not assume internal helper names. Example:
 - `MM32/src/oedit.c:oedit_disp_extradesc_menu`:
   - Format expects a trailing reset-color `%s` for both keyword and description lines.
   - Call site must include `..., keyword_value, nrm, ... description_value, nrm, ...` or output is undefined behavior (stack read past provided args).
+
+## BuilderPort Protocol v1 (World Building)
+
+The engine's status port (BuilderPort) is the canonical authority for world data and `.wld` generation.
+
+**Key Decisions:**
+- **Handshake:** `HELLO <token> <proto_version>` is required before any world-mutating commands.
+- **Authentication:** Token loaded from `lib/etc/builderport.token`; never hardcoded in source.
+- **Transactions:** Mutating operations must occur within `TX_BEGIN` ... `TX_COMMIT` / `TX_ABORT` blocks.
+- **Standardized Responses:**
+  - `OK` or `OK <data>`
+  - `ERROR <code> <msg_b64>`
+  - Bulk data: `OK` -> `DATA <type> ...` -> `END`
+- **Mutators:**
+  - `room_full`: Destructive replace of core fields (clears exits/extras).
+  - `room_patch`: Field-level updates (`NAME`, `DESC`, `SECTOR`, `FLAGS`, `WIDTH`, `HEIGHT`, `SPECFUNC`, `EXTRADESC`).
+  - `link` / `unlink`: Support `BIDIR` (default) and `ONEWAY` modes.
+- **Validation:** `validate` checks for non-existent targets and accidental one-way links.
+- **Export:** `export` performs authoritative serialization to disk only after validation.

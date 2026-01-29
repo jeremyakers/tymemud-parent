@@ -57,12 +57,11 @@
 ## Recent Accomplishments (older details archived)
 - See `memory-bank/archive/2026-01.md`
 
-## 2026-01-16: Web world editor engine API (MM32/src + public_html)
-- **Worktree:** `_agent_work/wld_editor_api_agent/`
-- **Server integration:** status port now serves `wld_list`, `wld_load`, `wld_save_begin` (engine-backed).
-- **Web API:** `public_html/wld_editor_api.php` now proxies to status port on builderport `9696` (+1).
-- **Client:** sector types now load from engine to avoid drift.
-- **Validation:** `boot_gate.sh` PASS on port `9696` (worktree build).
+## 2026-01-28: BuilderPort Protocol v1 Implementation (`wld_editor_api_agent`)
+- **Plan Created:** `docs/plans/builder_port_v1_implementation.md`
+- **Engine Implementation:** Completed handshake, transactions, structured data, and mutators in `statusport.c`.
+- **Web Migration:** Updated `wld_editor_api.php` to v1 protocol; added gitignored `wld_editor_config.php`.
+- **Status:** Phase 1 & 2 Completed. Ready for Phase 3 (Validation & Cleanup).
 
 ## Known Issues
 

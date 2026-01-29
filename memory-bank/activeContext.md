@@ -42,8 +42,7 @@ Key invariants:
 This file is treated as **project-level active context** shared across agents
 (not per-agent session notes).
 
-**Cross-project note (Web world editor):** Engine-backed web editor API work is
-in `_agent_work/wld_editor_api_agent/` using builderport `9696` (status `9697`).
+**Cross-project note (Web world editor):** `wld_editor_api_agent` is implementing BuilderPort protocol v1 (handshake, transactions, structured data) as defined in `docs/plans/builder_port_v1_implementation.md`. Current builderport `9696` (status `9697`).
 
 **Key Invariants / Non-Negotiables:**
 
