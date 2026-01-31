@@ -28,15 +28,15 @@ async def list_tools() -> list[Tool]:
                 "properties": {
                     "host": {
                         "type": "string",
-                        "description": "BuilderPort host address (e.g., 127.0.0.1)",
+                        "description": "MUD server host address (e.g., 127.0.0.1)",
                     },
                     "port": {
                         "type": "integer",
-                        "description": "BuilderPort status port (e.g., 9697)",
+                        "description": "MUD server status port (e.g., 9697)",
                     },
                     "token": {
                         "type": "string",
-                        "description": "Authentication token for BuilderPort",
+                        "description": "Authentication token for MUD server",
                     },
                     "vnum": {
                         "type": "integer",
@@ -54,15 +54,15 @@ async def list_tools() -> list[Tool]:
                 "properties": {
                     "host": {
                         "type": "string",
-                        "description": "BuilderPort host address (e.g., 127.0.0.1)",
+                        "description": "MUD server host address (e.g., 127.0.0.1)",
                     },
                     "port": {
                         "type": "integer",
-                        "description": "BuilderPort status port (e.g., 9697)",
+                        "description": "MUD server status port (e.g., 9697)",
                     },
                     "token": {
                         "type": "string",
-                        "description": "Authentication token for BuilderPort",
+                        "description": "Authentication token for MUD server",
                     },
                 },
                 "required": ["host", "port", "token"],
@@ -76,15 +76,15 @@ async def list_tools() -> list[Tool]:
                 "properties": {
                     "host": {
                         "type": "string",
-                        "description": "BuilderPort host address (e.g., 127.0.0.1)",
+                        "description": "MUD server host address (e.g., 127.0.0.1)",
                     },
                     "port": {
                         "type": "integer",
-                        "description": "BuilderPort status port (e.g., 9697)",
+                        "description": "MUD server status port (e.g., 9697)",
                     },
                     "token": {
                         "type": "string",
-                        "description": "Authentication token for BuilderPort",
+                        "description": "Authentication token for MUD server",
                     },
                     "vnum": {"type": "integer", "description": "Room vnum to update"},
                     "zone": {
@@ -127,15 +127,15 @@ async def list_tools() -> list[Tool]:
                 "properties": {
                     "host": {
                         "type": "string",
-                        "description": "BuilderPort host address (e.g., 127.0.0.1)",
+                        "description": "MUD server host address (e.g., 127.0.0.1)",
                     },
                     "port": {
                         "type": "integer",
-                        "description": "BuilderPort status port (e.g., 9697)",
+                        "description": "MUD server status port (e.g., 9697)",
                     },
                     "token": {
                         "type": "string",
-                        "description": "Authentication token for BuilderPort",
+                        "description": "Authentication token for MUD server",
                     },
                     "vnum": {"type": "integer", "description": "Room vnum"},
                     "zone": {"type": "integer", "description": "Zone number"},
@@ -173,15 +173,15 @@ async def list_tools() -> list[Tool]:
                 "properties": {
                     "host": {
                         "type": "string",
-                        "description": "BuilderPort host address (e.g., 127.0.0.1)",
+                        "description": "MUD server host address (e.g., 127.0.0.1)",
                     },
                     "port": {
                         "type": "integer",
-                        "description": "BuilderPort status port (e.g., 9697)",
+                        "description": "MUD server status port (e.g., 9697)",
                     },
                     "token": {
                         "type": "string",
-                        "description": "Authentication token for BuilderPort",
+                        "description": "Authentication token for MUD server",
                     },
                     "from_vnum": {"type": "integer", "description": "Source room vnum"},
                     "direction": {
@@ -242,15 +242,15 @@ async def list_tools() -> list[Tool]:
                 "properties": {
                     "host": {
                         "type": "string",
-                        "description": "BuilderPort host address (e.g., 127.0.0.1)",
+                        "description": "MUD server host address (e.g., 127.0.0.1)",
                     },
                     "port": {
                         "type": "integer",
-                        "description": "BuilderPort status port (e.g., 9697)",
+                        "description": "MUD server status port (e.g., 9697)",
                     },
                     "token": {
                         "type": "string",
-                        "description": "Authentication token for BuilderPort",
+                        "description": "Authentication token for MUD server",
                     },
                     "zone": {
                         "type": "integer",
@@ -268,15 +268,15 @@ async def list_tools() -> list[Tool]:
                 "properties": {
                     "host": {
                         "type": "string",
-                        "description": "BuilderPort host address (e.g., 127.0.0.1)",
+                        "description": "MUD server host address (e.g., 127.0.0.1)",
                     },
                     "port": {
                         "type": "integer",
-                        "description": "BuilderPort status port (e.g., 9697)",
+                        "description": "MUD server status port (e.g., 9697)",
                     },
                     "token": {
                         "type": "string",
-                        "description": "Authentication token for BuilderPort",
+                        "description": "Authentication token for MUD server",
                     },
                     "zone": {"type": "integer", "description": "Zone number to export"},
                 },
