@@ -1,17 +1,10 @@
 {
   "$schema": "https://opencode.ai/config.json",
   "mcp": {
-    "servers": {
-      "tymemud-builder": {
-        "type": "local",
-        "name": "TymeMUD Builder Gateway",
-        "description": "MCP gateway for TymeMUD world building via BuilderPort protocol v1",
-        "command": ["python3", "-m", "llm_gateway.server"],
-        "environment": {
-          "PYTHONPATH": "."
-        },
-        "enabled": true
-      }
+    "tymemud-builder": {
+      "type": "local",
+      "command": ["./scripts/llm-gateway.sh"],
+      "enabled": true
     }
   }
 }
