@@ -1,0 +1,180 @@
+    <pre>
+Channeling System:
+--------------------------------------------------------------------------------
+Currently the channeling system is still in it's design phases, mostly watching for the
+outcome of the combat code so that the two systems work hand in hand.
+
+That said, let me go into what I have working in my brain so far.
+
+The first initial idea was rather complex and never fully worked out so I've scrapped that
+taking some elements and moving it more to what is to follow. The basic idea is to let
+channeling be a little more open as well as use the talents chosen in creation to make each
+character unique rather than the way it was in MM2 where all channelers, once reaching a 
+certain level were roughly the same.
+
+I am trying to model the channeling system to be more like the books were, though adding a
+little bit more rules to it so that it works in a mudding enviroment. The ideas so far is
+changing the ways channeling is taught/learned by the players. That said the spells would not
+be treated as skills as it was in MM2. Rather they will be learned by watching a player actually
+channel and then practicing it on your own. Let me break that down for you though:
+
+<i>Disclaimer: I use the terms cast spell and weave rather interchangibly. Yes I realize that there
+is no casting or "spells" as it were in the wheel of time but I've been playing D&D and varying muds
+for many years so it just kind of comes naturally.</i>
+
+
+  .:: Teaching/Learning:
+  ======================
+  
+    - Learn from watching other people weave.
+    -----------------------------------------
+    
+      o When you are in the room with someone who is weaving there will be an automatic 
+        chance for you to learn the weave that you see before you. This will rely on several 
+	factors.
+	
+	1. A command similar to teach that will let the game know that you are actively trying
+	   to learn from a target person. i.e. watch &#60name&#62  The person who you are 
+	   watching would also have a similar command that would tell the game that they are 
+	   trying to teach you that weave as well. This would in a sense have them slow down 
+	   and go through it so that in the end the spell can be learned.
+	   
+	2. A random chance to learn depending on the flow finesse talents you chose at creation.
+	   A spell, which I will explain further down would have several components, i.e. an order
+	   of importance on the flows, so that if you have finesse in the main flow component of
+	   a weave you would have a better chance to learn that weave just by seeing it.
+	   
+	3. When you first learn a weave in this manner it will be at a level that will not let you
+	   cast it. The thought process behind this is letting weaves be at different levels.
+	   
+	   .: Weaves at Different Levels you say? :.
+	   
+	      :: The first level you would learn a weave at would be a level that you know the 
+	         flows, how they form together, and basically how to weave it, just that you wouldn't 
+		 be able to weave it such that it gave an affect. (i.e. the Aiel Wise Ones knowing how 
+		 to gate but not able to make it happen).
+		 
+              :: As you practice the weave, which the amount of time it will take will vary depending
+	         on a complexity level set upon that weave (explained later as well) you will be able
+		 to do more with that weave. It should take very little time to go from learning how
+		 to weave the weave to being able to actually weave it. That is of course unless you
+		 do not meet the minimum requirements to weave it. You will however also be working
+		 on your knowledge of the weave which at a certain point will let you be able to teach
+		 it. This means that even though you cannot cast the weave you will be able to teach it.
+	
+	      :: You will also be able to go above the minimum requirements to cast the spell so that
+	         in the end you can make a weave a little more potent than another person as well as
+		 learn it at a higher level to perhaps defend against it better.
+
+    - Practicing
+    ------------
+
+      o Practicing weaves hasn't been given much thought as far as the game play of it will go. It
+        will basically consist of you weaving the weave and in essence practicing it (duh?). I'm also
+	thinking along the lines of using the earlier mentioned tools like watch and the 
+	"yet-to-be-named" command for teaching, perhaps mentor, that will allow you to practice under 
+	someone's supervision and learn it faster. This would basically be like the two of you weaving 
+	it together.
+
+    - Factors for learning
+    ----------------------
+     
+      o Finesse in flows will increase/decrease learning time.
+      o Complexity of the weave.
+      o Strength level.
+        - If you do not have the strength to cast the weave it will take you a little longer to learn
+	  it because you are not actually ever casting it, but just trying to mimic the pattern of the
+	  flows. As such it will take you longer to know when you have it right.
+	- Likewise if you are stronger than need be it will increase the time it takes, though all of
+	  this is of course factored together.
+      o Endurance.
+        - It will cost some endurance points to be able to learn a weave, depending on the size of the
+	  weave and it's complexity so if your endurance is low it will take longer because you will
+	  have to wait and let it heal back up.
+  
+  .:: Spell Factors:
+  ==================
+  
+    - Complexity
+    ------------
+      
+      o Basically how difficult it will be to weave the weave. Is it lighting a candle? Or is it healing
+        someone after they've been stilled.
+
+    - Flow Cost
+    -----------
+
+      o This will be set up in a multi level set up.
+        - level 1: How far apart each flow will be. Like +1 +2 +0 +1 +1
+	- level 2: The minimum cost to learn the spell. 4 5 0 4 4
+	- level 3: The maximum level of flows the spell can be weaved at. 10 11 0 10 10
+	- level 4: The level of flows to weave the spell. 8 9 0 8 8
+    
+      o You will be able to vary the level you can perform the weave at.
+        - for teaching purposes you can weave it lower than the required amount costing 
+	  less endurance in the end.
+	- for attacking you can throw out a weave at full strength for maximum damage in 
+          a last ditch effort.
+	- could weave the weave at it's minimal level to show someone how little you 
+	  think of them
+	- for some weaves this may determine the actual outcome of the spell. i.e. 
+	  channeling pure fire you could light a candle at it's minimal level, or perhaps 
+	  engulf a room in flame at your full strength.
+
+  .:: Weaving:
+  ============
+
+    - Still deciding on this. Partially this will have to deal with the combat system. Also 
+      it needs to be made as simple as possible. There are alot of factors moving into flows 
+      and such.
+
+  .:: Channeling Talents:
+  =======================
+
+    - Adding more talents
+    ---------------------
+      o These talents would not come at the cost of the player, but basically work on the 
+        choices the player makes for their strengths, weaknesses, finesse, and ineptitude in 
+	flows. Depending on those choices it would unlike different groups of spells.
+
+      o There would also be generic groups of weaves that would allow people who do not take 
+        any variances in their skills to still have access to these things.
+
+      o This would more than likely come with a wipe of the current finesse/strength/weakness/inept 
+        settings to give people a fresh start. It would also remove the healing and cloud dancing 
+	talents as these would fallen into the above categories.
+
+      o Some weaves would fall into various categories, An example perhaps would be fireball. (this 
+        is just an example as it would more than likely fall into the category of generic weaves, 
+	but it is a useful example in this manner.) So the fireball would require both fire and air 
+	to take it. Having strength fire and at least a regular air (not weakness) you would have 
+	access to the spell. Likewise if you had strength air and a regular fire rating you would 
+	still have access to the spell. Similar	ratings for finesse could be put on some weaves, 
+	like healing where it is more your ability to use the flows rather than your ability to pummel 
+	someone with them.
+
+  .:: Combat:
+  ===========
+ 
+    - Waiting largely upon the combat system as this will be the determining factor in how channeling 
+      will work in combat.
+
+A few of the frequently asked questions:
+----------------------------------------
+1. When will this be finished?
+   As soon as possible. Like I stated earlier it is somewhat dependent on the fighting system which
+   I am sure will need to wait on this. In essence Tannil and I will have to work together to make them
+   both work. If the design however is finished and meets the approval of the implementors it will then
+   move on to development where I will try to get the ground work in place as well as the non-combat
+   part of channeling working so that channeling will be available to some extent.
+
+2. What style will the combat for channeling take?
+   It will be a turn-based style fighting. Why? Because that is the style the combat system is in and
+   because of that both systems will need to be the same ;&#62
+
+You know, I haven't really paid attention to the questions because I hadn't decided to code this before.
+Now I am jumping in face first so if you have questions please direct them to me, Guy, via mudmail and
+I will gladly post them and the answers here (if they are asked frequently enough).
+
+-Guy
+    </pre>

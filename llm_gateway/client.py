@@ -67,15 +67,30 @@ class BuilderPortClient:
         """Connect and perform HELLO handshake."""
         self.reader, self.writer = await asyncio.open_connection(self.host, self.port)
 
+        # Read and skip initial greeting lines (banner may come before HELLO response)
+        # The server sends: empty line, then banner, then waits for hello
+        # Read lines until we've seen the banner (max 5 lines to prevent infinite loop)
+        for _ in range(5):
+            greeting = await self._read_line()
+            # If we see the banner, we're done reading greetings
+            if "MikkiMUD" in greeting or "status port" in greeting.lower():
+                break
+            # If we got a non-empty, non-banner line, it might be the HELLO response
+            # (some server versions might respond differently)
+            if greeting and not (
+                "MikkiMUD" in greeting or "status port" in greeting.lower()
+            ):
+                break
+
         # Send HELLO
         await self._send(f"hello {self.token} 1")
 
-        # Read response (might be greeting first)
-        response = await self._read_line()
-
-        # Skip greeting if present
-        if "MikkiMUD" in response or "status port" in response.lower():
+        # Read response (skip empty lines that server may send)
+        response = ""
+        for _ in range(3):
             response = await self._read_line()
+            if response:
+                break
 
         if not response.startswith("OK"):
             raise BuilderPortError(401, f"Authentication failed: {response}")
@@ -159,8 +174,13 @@ class BuilderPortClient:
         """List all zones."""
         await self._send("wld_list")
 
-        # Read OK
-        response = await self._read_line()
+        # Read OK (skip empty lines that server may send)
+        response = ""
+        for _ in range(3):
+            response = await self._read_line()
+            if response:
+                break
+
         if not response.startswith("OK"):
             return []
 
@@ -206,7 +226,13 @@ class TransactionContext:
         zone_str = ",".join(str(z) for z in self.zones)
         await self.client._send(f"tx_begin ZONES {zone_str}")
 
-        response = await self.client._read_line()
+        # Read response (skip empty lines)
+        response = ""
+        for _ in range(3):
+            response = await self.client._read_line()
+            if response:
+                break
+
         if not response.startswith("OK"):
             code, msg = self.client._parse_error(response)
             raise BuilderPortError(code, self.client.decode_text(msg))
@@ -226,8 +252,13 @@ class TransactionContext:
             # Error - abort
             await self.client._send("tx_abort")
 
-        # Read response
-        response = await self.client._read_line()
+        # Read response (skip empty lines)
+        response = ""
+        for _ in range(3):
+            response = await self.client._read_line()
+            if response:
+                break
+
         if not response.startswith("OK"):
             code, msg = self.client._parse_error(response)
             raise BuilderPortError(code, self.client.decode_text(msg))

@@ -1,0 +1,47 @@
+/* Function to calculate a characters OFA - Trey Perry 2/4/08 */
+float calculate_OFA(CHAR_DATA *ch)
+{
+   float OFA, ch_level = GET_LEVEL(ch), wmcalc = 0;
+   float statsum = ( GET_STR(ch) + GET_DEX(ch) + GET_CON(ch) );
+
+   if (GET_SKILL(ch, SKILL_WM1)  <= 1000 && GET_SKILL(ch, SKILL_WM2) < 1)
+   {
+      wmcalc = (100 + ((float)GET_SKILL(ch, SKILL_WM1) / 10.0)) * 0.3;
+   }
+   else if (GET_SKILL(ch, SKILL_WM1) == 1000 && GET_SKILL(ch, SKILL_WM2) <= 1000 && GET_SKILL(ch, SKILL_WM3) < 1)
+   {
+      wmcalc = (200 + ((float)GET_SKILL(ch, SKILL_WM2) / 10.0)) *  0.3;
+   }
+   else if (GET_SKILL(ch, SKILL_WM2) == 1000 && GET_SKILL(ch, SKILL_WM3) <= 1000 && GET_SKILL(ch, SKILL_WM4) < 1)
+   {
+      wmcalc = (300 + ((float)GET_SKILL(ch, SKILL_WM3) / 10.0)) * 0.3;
+   }
+   else if (GET_SKILL(ch, SKILL_WM4) > 1)
+   {
+      wmcalc = (400 + ((float)GET_SKILL(ch, SKILL_WM4) / 10.0)) * 0.3;
+   }
+
+   if (!GET_SKILL(ch, TALENT_ACTIVE_CHANNELER))
+   {
+      OFA = ((statsum) + (wmcalc));
+   }
+   else if (GET_SKILL(ch, TALENT_ACTIVE_CHANNELER))
+   {
+      if (statsum > 30)
+      {
+        OFA = ((statsum) + (wmcalc));
+      }
+      else if (statsum <= 30 && GET_LEVEL(ch) >= 43)
+      {
+        OFA = 14 + ((ch_level - 42.0) / 8.0) + (statsum) + (wmcalc);
+      }
+      else
+      {
+        OFA = (ch_level / 3.0) + (statsum) + (wmcalc);
+      }
+
+   }
+
+
+   return OFA;
+}

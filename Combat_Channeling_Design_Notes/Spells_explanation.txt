@@ -1,0 +1,17 @@
+This is the simple list of spells.  You can all access it for reference.  A couple points about this list:
+
+Flows of 99 - This means that the spell is effectively removed for one reason or another.  No PC will have a spell with flows of 99.
+
+Spell Levels - Usable spells are ranked by their level from 1-7.  Spell levels higher than 7 are not usable by PCs.
+
+Talent Preconditions - Any spell with a talent precondition can be learned and used like any other spell, but ONLY by those people who have the prerequisite talent, chosen at chargen.
+
+Spell Preconditions - The few spell preconditions listed are just to make a sensible progression out of learning.  It doesn't make sense to learn 'chain lightning' if you don't know 'lightning', for example.
+
+Flow requirements - Though IN GENERAL this can be used as a handy guide for what flows go into which weaves, some of them will be different in practice than their flow requirements indicate on this spell sheet.  Healing spells are the best example: AM will use all five flows for healing weaves, while AS will typically only use three - but the minimum requirement for those weaves still includes all five flows.  Keep in mind almost none of these flow requirements have anything like unobtainable numbers, as most average or even weak channelers can do many of the weaves here despite their low overall flowstrengths (see Policy OCS for details).  I will follow this up with a basic weave construction primer just so we can all be on the same page about what we're all doing here.
+
+Basically, even though *actual* channeling is a long way off, I want to get to the point where code/IC are once more appropriately linked at least insofar as one's spell list is both earned and "usable" in character.
+
+Let me know if you have any questions.
+
+-Rissa

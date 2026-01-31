@@ -1,0 +1,963 @@
+The attacker will always be called Bob.  Jake is the defender. 
+Please note, I include anything changing the status of either character as an
+affect here,
+even things like being set to 'on ground' or removing a weapon.
+
+Stance Options:
+
+  "aggressiveness"
+
+    This stance option is just like in MM2, where you picked how reckless and
+offensively your character
+    was fighting.  Options are defensive, normal, aggressive, and reckless. 
+The higher the setting,
+    the more chance you have to go 'next' each turn.  This data is used in
+the function "get_next_attacker".
+
+    Defensive:
+        You never attack (mod of 0).
+        Normal cost per turn (mod of 1).
+    Normal:
+        Normal chance to attack (mod of 1).
+        Normal cost per turn (mod of 1).
+    Aggressive:
+        Increased chance to attack (mod of 1.3).
+        Increased cost per turn (mod of 1.5).
+        Decreased chance to defend (mod of .8).
+    Reckless:
+        Increased chance to attack (mod of 1.7).
+        Increased cost per turn (mod of 1.8).
+        Decreased chance to defend (mod of .4).       
+
+    Each attack form will include different text descriptions for the normal,
+aggressive and reckless
+    versions of the same attack.  An example:
+   
+    Form: Descending Slash (see form sheets)
+
+        Normal: Bob steps towards Jake and brings his sword down in a smooth
+motion towards Jake's head.
+        Aggressive: Bob steps towards Jake and slashes downwards towards
+Jake's head!
+        Reckless: Bob leaps towards Jake, raises his weapon high and attempts
+to cleave Jake's head in half!
+
+
+  "follow-through"
+
+    This stance option sets one of the damage mods.  As we noted in an
+earlier conversation, just
+    because a player is fighting quickly doesn't mean he is fighting to deal
+substantial wounds - he
+    could be haulting his blade just before touching the other person, such
+as in a practice match.  The
+    options are [practice, normal, extreme].  This data is used in the damage
+calculation equation and
+    in "get_next_attacker".
+
+    Practice:
+        Damage is reduced to nearly zero (random chance of doing a couple hps
+damage).
+        Normal chance to attack (mod of 1).
+    Normal:
+        Damage is normal (mod of 1).
+        Normal chance to attack (mod of 1).
+    Extreme:
+        Damage is maximum (mod of 1.6).
+        Decreased chance to attack (mod of.8).
+
+Functions:
+
+  "get_next_attacker"
+
+    "get_next_attacker" determines whose turn it is to attack.  It calculates
+an integer number for
+    each legal combatant, and the highest value (with some random chance)
+goes next.  If the player
+    suffered a 'stumble/recover' failure (see Critical Failure section under
+Structures for Attack
+    Form) or a 'fall' failure, the player has lost his turn and may not
+attack this turn.
+
+    value = 100 * [endurance/max_endurance] * [blood/max_blood] * [hp/max_hp]
+* [encumb mod - maybe
+    (4*strength)/(5+get_worn_weight+get_wield_weight)] * [aggressiveness mod]
+* [follow-through mod] *
+    [WM mod] * [affect mods for later: include bonus for being a Warder,
+Death Watch Guard, Aiel,
+    Shadowspawn, players purchasing a 'intimidation qskill'.  -mod for
+players that are stunned or
+    scared.]
+
+    We should note that for players that are channeling, encumb wouldn't play
+any part in modififying
+    their chance to weave an attack.  Any idea how to account for that? I
+guess this isn't that big of
+    a deal - what do you think?
+
+    Include some random chance of going to the #2 person in the lineup.
+
+   
+  "is_a_hit"
+   
+    "is_a_hit" should check to see if this combat turn should be carried out
+normally, or if it
+    should be terminated early.  This might include all checks (that haven't
+already been carried
+    out) to make sure Bob can use the command he's trying to.  It makes sure
+the chosen form can
+    hit the bodypart (is it legal according to the form structure? does the
+person even have that
+    bodypart or has it already been chopped off? It includes outright
+critical failures entirely
+    due to the attacker's lack of skill and random chance.
+
+    "is_a_hit" returns a 1 if the attack is legal (bodypart is present and
+Bob can hit it).  It
+    returns a 0 if, for any reason, there is no need for the rest of the
+combat functions to
+    be executed, because Bob has already failed to hit Jake.  If it returns a
+zero because of
+    a critical failure, then "get_critical_failure" is called.
+
+
+  "get_critical_failure"
+         
+    "get_critical_failure" should examine the structure of the attack form
+being used, and
+    pick one of the critical failure scenarios given for that particular form
+(held in its
+    structure).  It passes the info there to "resolve_turn".
+
+
+  "resolve turn"
+   
+    "resolve turn" outputs the last text that each PC sees, applies any
+affects and calls any other
+    functions necessary to end the combat turn.  It should call the functions
+that calculate
+    damage, apply loss of hitpoints, etc.  It should also take care of
+affects, including
+    being calling losing your weapon (if disarmed) and getting knocked over. 
+It should also note
+    when a bodypart has received enough damage to break it or cut it off - if
+it's a critical
+    bodypart, the player dies.  The player has a chance to pass out depending
+on how much blood
+    he's lost, and should get a message to that effect when he's lost a lot
+and the chance is
+    high.  Refer to struct bodypart for different fields.  I don't see a
+reason to include these
+    text descriptions in the attack form structure - rather, if a bodypart is
+broken, we just
+    say "Your <bodypart> breaks under the impact of that last blow!" or
+something.  It should
+    check for whether the weapon type deals poison or tainted blade damage,
+or is a flame sword
+    or something similar - if it deals a burn, it should output a line of
+generic text saying
+    "Bob's attack sears your <bodypart>!".  See the section on additional
+fields for objects.
+
+  "is_aim_ok"
+
+    "is_aim_ok" checks to see if the bodypart being aimed for will be hit,
+provided Jake's defense
+    fails.  It returns a 1 if the aim is ok, else returns 0 and calls the
+function "get_new_body-
+    part" to determine what bodypart it /does/ hit (provided Jake fails to
+defend). 
+   
+***************fill in equation later, ignore below.
+
+    temp value = raw value - 100.  If temp value is negative, temp value = 1.
+
+    value = temp value * [endurance/max_endurance] * [blood/max_blood] *
+[hp/max_hp] * [encumb mod - maybe
+    (4*strength)/(5+get_worn_weight+get_wield_weight)] * [aggressiveness mod]
+* [follow-through mod] *
+    [WM mod] * [affect mods for later: include bonus for being a Warder,
+Death Watch Guard, Aiel,
+    Shadowspawn, players purchasing a 'intimidation qskill'.  -mod for
+players that are stunned or
+    scared.]
+
+  "get_new_bodypart"
+
+    "get_new_bodypart" decides what bodypart the attack does hit, since
+"is_aim_ok" determined
+    that Bob missed what he was aiming for, but will still hit something
+provided Jake fails
+    to defend properly.  Refer to 'Miss Chart' for the bodypart data.
+
+
+  "calculate_attacker_value"
+
+    "calculate_attacker_value" takes the raw number for Bob's attack form and
+mods it based on
+    an equation I'll put in later.  Result is compared to result from
+"calculate_defender_value"
+    and the higher number is the victor.
+
+
+  "calculate_defender_value"
+
+    "calculate_defender_value" takes Jake's raw number for his defensive form
+and mods it.
+    The result is compared to the result from "calculate_attacker_value". 
+Higher number wins.
+
+  "is_critical_failure"
+
+    "is_critical_failure is similar to "is_a_hit", and does the checks for
+Jake's defense.  I'll
+    add to this when I put in the structure for defense forms.
+
+
+Structure for Attack Forms
+
+  "form_type"
+   
+    All attacks are divided by the direction of the weapon (fist, blade,
+pole, sai, whatever).
+    Consequently, there are nine types, and all attacks may be classified as
+only one specific type.
+   
+    "<-" Slash from right to left.
+    "->" Slash from left to right.
+    "V" Downward vertical slash.
+    "^" Ascending vertical slash.
+    "O" Thrust.
+    "DR" Descending rightward slash (diagonal).
+    "DL" Descending leftward slash (diagonal).
+    "AR" Ascending rightward slash (diagonal).
+    "AL" Ascending leftward slash (diagonal).
+
+    Fancier forms where the blade moves in several directions are classified
+by the final direction.
+    "Nicodemus dips his blade low as he steps under your swing and counters
+with a vertically ascending
+    strike towards your head!" (see counter section under Critical Failures).
+
+
+  "stance"
+
+    This determines what position Bob has to be in to be able to use this
+form.  There are three
+    stances.  'Ground' is for forms used when Bob has been knocked down (yes,
+there are attacks
+    you can execute from the ground - some of the cooler ones :P). 
+'Standing' is for most turns,
+    when the combatants are fighting normally.  'Rest' is for when a player
+is standing there and
+    is 'jumped', so to speak.  Bob is presumed not to have a weapon wielded
+IC.  See 'awareness'
+    section.  Obviously a player isn't going to attack unless he's already
+wielded his weapon,
+    but this is included for 'counters' - if Jake gets a chance to counter
+because Bob critically
+    failed his initial attack, then he'll have to choose from the 'rest'
+forms.
+
+    0: Rest
+    1: Standing/Normal
+    2: Ground
+
+
+  "name"
+
+    Name of the form.  Thrust, lunge, whatever.  These are surpringly hard to
+come up with. :p
+
+
+  "weapon_type"
+
+    Obviously you can't use a sword form if you're wielding a pole.  Weapons
+include sword, dagger/knife,
+    axe, ashangrei, staff/pole, spear, axe, whip, and mace.  While I don't
+expect to code forms for all
+    the weapons we can think of, it's easy enough to denote numbers for them
+now, should we decide to
+    get to them sometime down the road.  This should also check for right
+wield, left wield, dual wield
+    (two weapons) and two handed weapons.  Realistically, we only need to
+code single wield swords for
+    starters, since that's what almost everybody uses.  Daggers next, then
+staffs. 
+
+
+  "attack_type"
+
+    This is directly attributed to the type of weapon, and if you can think
+of a way to include it
+    just based on weapon type, then we don't even need this field.  I think
+we should eliminate the
+    'piercing/crushing/slashing' option and have the weapon and the type of
+form decide that.  A sword
+    will always be slashing for all forms except type "O", in which case it
+is piercing.  A fist and a
+    pole will always be crushing damage.  If this field indicates crushing
+damage, then it can stun
+    you - but if it's slash or pierce damage, then it won't.
+
+
+  "acceptable_bodyparts"
+
+    Each bodypart should default to 'acceptable', but should be able to be
+deselected.  This is for
+    some specialized forms, such as a flat-hand to the face designed to break
+your nose, or a move
+    designed to break your arm or your leg.  Each bodypart should have a '1'
+for acceptable, and a
+    '0' if unacceptable. 
+
+
+  "auto-affects"
+
+    This is for any affects that occur regardless of whether the attack is
+successful or not.  Bob
+    could jump in the air, feet forward, and try and knock Jake down with the
+impact of his boots.
+    If successful, Jake is set to 'on ground', but either way, Bob is set to
+'on ground'.
+
+    0: Set Bob on ground
+    1: Remove Bob's weapon to ground
+    2: etc?
+
+
+  "successful-affects"
+   
+    This is for affects that are carried out if the form is successful, such
+as blindness, getting
+    knocked down, Bob losing his weapon (such as throwing a knife) or Jake
+losing his weapon (such
+    as in a disarm).  Some forms (especially unarmed ones) are designed
+specifically to break
+    limbs, so if they're successful, the limb should be set to broken.
+
+    0: No affects
+    1: Blind
+    2: Set Broken
+    3: Remove Bob's weapon to ground
+    4: Remove Bob's weapon to Jake's inventory
+    5: Remove Jake's weapon to ground
+    6: Remove Jake's weapon to Bob's inventory
+    7: Set Bob on ground
+
+ 
+  "Area_is_allowed"
+
+    I thought we could treat this similarly to how the bitvectors identify
+the type of room you're
+    in.  For instance, some forms could only work in rooms denoted as a ship,
+or in cities.  That
+    way the text descriptions could be more colorful - people could be
+described as using their
+    surroundings to their advantage, though this would be most useful under
+Defense Forms ("Rasridim
+    sidesteps quickly and puts the mainmast between you - your blade cuts
+into the wood, but you
+    yank it out quickly.")
+
+
+  "teachable"
+
+    If a PC has the form, can he teach it to another PC?
+
+
+  "learnable"
+
+    If a PC is defending against a PC or a mob with this form, can he learn
+it just from defending
+    against it in combat?
+
+
+  "is_standard"
+
+    This is for quick-setting of players with forms for their WM level.  If
+it is a standard form,
+    then setting them with the right tier of WM would give them the proper
+tier of all forms of
+    this type.  If the form is not standard, i.e. exotic (like something a
+grolm or a shadowspawn
+    would do), then it would not be set.  This was more of an idea, and not a
+huge deal.  Maybe
+    you could just put the field in the structure for now and we'll do the
+supporting code later?
+
+  "aggressiveness: normal init text"
+
+    This is the first line of text that PCs see when Bob's aggressive stance
+is normal.
+   
+    "Bob sweeps his weapon left in a short, smooth stroke aimed at your
+<bodypart>"
+
+  "aggressiveness: aggressive init text"
+
+    This is the first line of text that PCs see when Bob's stance is
+aggressive.
+
+    "Bob drives forward towards you quickly, sweeping his sword leftward in
+an attempt to slash at
+    your <bodypart>."
+
+  "aggressiveness: reckless init text"
+
+    Bob's stance is reckless.
+
+    "Bob wheels about and slashes violently leftward, bringing his sword
+around himself as he
+    corkscrews recklessly but with enormous power."
+
+  "minor wound"
+
+    This is the description of what happens when Bob succeeds in his attack,
+and deals only
+    minor damage.  Recall the bodypart structure.
+
+    "Bob's slash cuts Jake's <bodypart>."
+
+  "substantial wound"
+
+    This is the description for a substantial wound dealt by this attack.
+    "Bob slashes Jake's <bodypart> - it starts bleeding badly."
+
+  "gashed wound"
+
+    "Jake's arm sprays blood as Bob deals him an awful gash!"
+ 
+  "Critical Failures"
+
+    There are multiple types of critical failures, arranged by their affects.
+A single attack
+    form may have several ways it can critically fail, of the same type -
+there could be two
+    or three different text descriptions for how he drops his weapon, for
+example.
+
+    There are five major types of critical failures that I can think of. 
+
+    'penalty-free' failures include things like "Bob almost loses his grip on
+his sword -
+    he backs off quickly to recover his grip." Whoever gets to go next is
+chosen normally - neither
+    Bob nor Jake suffers a mod because of this critical failure.  It simply
+means that Bob
+    doesn't hit Jake entirely because Bob messed up on his own. 
+
+    'loss-of-weapon' failures include situations like "Bob's weapon slips
+from his hands!
+    The sword flies off to one side, landing harmlessly on the ground and
+leaving Bob
+    unarmed." Any failures included of this type would remove the weapon and
+load it
+    onto the ground.
+
+    'stumble/recover' failures include all situations where Bob fails to
+properly
+    execute the attack, and even though he doesn't suffer any direct ill
+affects like dropping
+    his weapon or falling, he loses his chance to attack again.
+
+    'fall' failures include situations which result in Bob ending up on the
+ground.  Obviously
+    he loses his chance to attack this turn, as with 'stumble/recover'
+failures.  Any fall
+    failures automatically put Bob on the ground, same as if he had failed to
+bash and
+    fallen down in MM2.
+
+    'counters' are not actually failures, but I think it makes a lot of sense
+to include
+    them here.  The attack is assumed to fail outright, and Jake
+automatically attacks back.
+    The text is written such that it looks to the PCs like Bob tried to
+attack, Jake stopped
+    him and launched his own counter-attack.  An example:
+
+    Bob raises his weapon high and lunges forward! (standard description for
+this attack)
+    "is_a_hit" returns a 0, and calls "get_critical_failure", which selects a
+counter.
+    Jake sees an opportunity as Bob raises his weapon too high! (this is
+stored under critical failures
+        for this particular attack)
+    There is a greatly decreased chance to block a counter, but all the steps
+for the turn
+        are calculated beginning with "is_a_hit" all over again, with Jake as
+the attacker. 
+        Combat is resolved with the text messages stored in Jake's attack
+form structure.
+        "Jake runs Bob through in a smooth, pronated stroke!"
+
+    End of example.
+   
+    In this way, critical failures could result in the appearance of both
+players going back
+    and forth for several turns, countering each other until one of them has
+"is_a_hit" return
+    something a 1, in which case the defender has a chance to defend at a
+greatly decreased
+    chance of success, and then the turn is ended (even though it really
+consisted of several
+    incomplete turns).  I can do a lot with this by adding multiple
+descriptions of
+    counters for each form.
+
+Attack forms
+
+<insert attack forms here>
+
+Defense Forms
+
+<insert defense forms here>
+
+Miss Chart
+
+<insert excel spreadsheet here>
+
+Cascade Damage Chart
+
+<insert excel spreadsheet here>
+
+Object fields:
+
+  "special_damage"
+
+    This should be a numerical value where the number is associated with the
+type of additional
+    affect if the attack is successful.  Most of these don't need to do
+anything now - lets just
+    reserve numbers so we can add the code later.  I guess some weapons could
+be more than one,
+    so we should just be able to add numbers to this field, the same as you
+might stack things like
+    '!steal' and '!donate' to an object.
+
+    0: Normal weapon
+    1: Fade blade
+    2: Power-forged weapon
+    3: Poisoned (HP reduction)
+    4: Poisoned (Large HP reduction)
+    5: Poisoned (!channeling - we'll do this later, for now just reserve a
+number)
+    6: Poisoned (more channeling reduction - again, just leave a number)
+    7: Poisoned (Endurance reduction)
+    8: Poisoned (Knock unconscious)
+    9: Burn Damage
+      10: Cold Damage
+      11: Numb Damage
+      12: Reserved for imm weapons
+      13: Reserved for imm weapons
+The attacker will always be called Bob.  Jake is the defender. 
+Please note, I include anything changing the status of either character as an affect here,
+even things like being set to 'on ground' or removing a weapon.
+
+Stance Options:
+
+  "aggressiveness"
+
+    This stance option is just like in MM2, where you picked how reckless and offensively your character
+    was fighting.  Options are defensive, normal, aggressive, and reckless.  The higher the setting,
+    the more chance you have to go 'next' each turn.  This data is used in the function "get_next_attacker".
+
+    Defensive:
+        You never attack (mod of 0).
+        Normal cost per turn (mod of 1).
+    Normal:
+        Normal chance to attack (mod of 1).
+        Normal cost per turn (mod of 1).
+    Aggressive:
+        Increased chance to attack (mod of 1.3).
+        Increased cost per turn (mod of 1.5).
+        Decreased chance to defend (mod of .8).
+    Reckless:
+        Increased chance to attack (mod of 1.7).
+        Increased cost per turn (mod of 1.8).
+        Decreased chance to defend (mod of .4).           
+
+    Each attack form will include different text descriptions for the normal, aggressive and reckless
+    versions of the same attack.  An example:
+   
+    Form: Descending Slash (see form sheets)
+
+        Normal: Bob steps towards Jake and brings his sword down in a smooth motion towards Jake's head.
+        Aggressive: Bob steps towards Jake and slashes downwards towards Jake's head!
+        Reckless: Bob leaps towards Jake, raises his weapon high and attempts to cleave Jake's head in half!
+
+
+  "follow-through"
+
+    This stance option sets one of the damage mods.  As we noted in an earlier conversation, just
+    because a player is fighting quickly doesn't mean he is fighting to deal substantial wounds - he
+    could be haulting his blade just before touching the other person, such as in a practice match.  The
+    options are [practice, normal, extreme].  This data is used in the damage calculation equation and
+    in "get_next_attacker".
+
+    Practice:
+        Damage is reduced to nearly zero (random chance of doing a couple hps damage).
+        Normal chance to attack (mod of 1).
+    Normal:
+        Damage is normal (mod of 1).
+        Normal chance to attack (mod of 1).
+    Extreme:
+        Damage is maximum (mod of 1.6).
+        Decreased chance to attack (mod of.8).
+
+Functions:
+
+  "get_next_attacker"
+
+    "get_next_attacker" determines whose turn it is to attack.  It calculates an integer number for
+    each legal combatant, and the highest value (with some random chance) goes next.  If the player
+    suffered a 'stumble/recover' failure (see Critical Failure section under Structures for Attack
+    Form) or a 'fall' failure, the player has lost his turn and may not attack this turn.
+
+    value = 100 * [endurance/max_endurance] * [blood/max_blood] * [hp/max_hp] * [encumb mod - maybe
+    (4*strength)/(5+get_worn_weight+get_wield_weight)] * [aggressiveness mod] * [follow-through mod] *
+    [WM mod] * [affect mods for later: include bonus for being a Warder, Death Watch Guard, Aiel,
+    Shadowspawn, players purchasing a 'intimidation qskill'.  -mod for players that are stunned or
+    scared.]
+
+    We should note that for players that are channeling, encumb wouldn't play any part in modififying
+    their chance to weave an attack.  Any idea how to account for that? I guess this isn't that big of
+    a deal - what do you think?
+
+    Include some random chance of going to the #2 person in the lineup.
+
+   
+  "is_a_hit"
+   
+    "is_a_hit" should check to see if this combat turn should be carried out normally, or if it
+    should be terminated early.  This might include all checks (that haven't already been carried
+    out) to make sure Bob can use the command he's trying to.  It makes sure the chosen form can
+    hit the bodypart (is it legal according to the form structure? does the person even have that
+    bodypart or has it already been chopped off? It includes outright critical failures entirely
+    due to the attacker's lack of skill and random chance.
+
+    "is_a_hit" returns a 1 if the attack is legal (bodypart is present and Bob can hit it).  It
+    returns a 0 if, for any reason, there is no need for the rest of the combat functions to
+    be executed, because Bob has already failed to hit Jake.  If it returns a zero because of
+    a critical failure, then "get_critical_failure" is called.
+
+
+  "get_critical_failure"
+         
+    "get_critical_failure" should examine the structure of the attack form being used, and
+    pick one of the critical failure scenarios given for that particular form (held in its
+    structure).  It passes the info there to "resolve_turn".
+
+
+  "resolve turn"
+   
+    "resolve turn" outputs the last text that each PC sees, applies any affects and calls any other
+    functions necessary to end the combat turn.  It should call the functions that calculate
+    damage, apply loss of hitpoints, etc.  It should also take care of affects, including
+    being calling losing your weapon (if disarmed) and getting knocked over.  It should also note
+    when a bodypart has received enough damage to break it or cut it off - if it's a critical
+    bodypart, the player dies.  The player has a chance to pass out depending on how much blood
+    he's lost, and should get a message to that effect when he's lost a lot and the chance is
+    high.  Refer to struct bodypart for different fields.  I don't see a reason to include these
+    text descriptions in the attack form structure - rather, if a bodypart is broken, we just
+    say "Your <bodypart> breaks under the impact of that last blow!" or something.  It should
+    check for whether the weapon type deals poison or tainted blade damage, or is a flame sword
+    or something similar - if it deals a burn, it should output a line of generic text saying
+    "Bob's attack sears your <bodypart>!".  See the section on additional fields for objects.
+
+  "is_aim_ok"
+
+    "is_aim_ok" checks to see if the bodypart being aimed for will be hit, provided Jake's defense
+    fails.  It returns a 1 if the aim is ok, else returns 0 and calls the function "get_new_body-
+    part" to determine what bodypart it /does/ hit (provided Jake fails to defend). 
+   
+***************fill in equation later, ignore below.
+
+    temp value = raw value - 100.  If temp value is negative, temp value = 1.
+
+    value = temp value * [endurance/max_endurance] * [blood/max_blood] * [hp/max_hp] * [encumb mod - maybe
+    (4*strength)/(5+get_worn_weight+get_wield_weight)] * [aggressiveness mod] * [follow-through mod] *
+    [WM mod] * [affect mods for later: include bonus for being a Warder, Death Watch Guard, Aiel,
+    Shadowspawn, players purchasing a 'intimidation qskill'.  -mod for players that are stunned or
+    scared.]
+
+  "get_new_bodypart"
+
+    "get_new_bodypart" decides what bodypart the attack does hit, since "is_aim_ok" determined
+    that Bob missed what he was aiming for, but will still hit something provided Jake fails
+    to defend properly.  Refer to 'Miss Chart' for the bodypart data.
+
+
+  "calculate_attacker_value"
+
+    "calculate_attacker_value" takes the raw number for Bob's attack form and mods it based on
+    an equation I'll put in later.  Result is compared to result from "calculate_defender_value"
+    and the higher number is the victor.
+
+
+  "calculate_defender_value"
+
+    "calculate_defender_value" takes Jake's raw number for his defensive form and mods it.
+    The result is compared to the result from "calculate_attacker_value".  Higher number wins.
+
+  "is_critical_failure"
+
+    "is_critical_failure is similar to "is_a_hit", and does the checks for Jake's defense.  I'll
+    add to this when I put in the structure for defense forms.
+
+
+Structure for Attack Forms
+
+  "form_type"
+   
+    All attacks are divided by the direction of the weapon (fist, blade, pole, sai, whatever).
+    Consequently, there are nine types, and all attacks may be classified as only one specific type.
+   
+    "<-" Slash from right to left.
+    "->" Slash from left to right.
+    "V" Downward vertical slash.
+    "^" Ascending vertical slash.
+    "O" Thrust.
+    "DR" Descending rightward slash (diagonal).
+    "DL" Descending leftward slash (diagonal).
+    "AR" Ascending rightward slash (diagonal).
+    "AL" Ascending leftward slash (diagonal).
+
+    Fancier forms where the blade moves in several directions are classified by the final direction.
+    "Nicodemus dips his blade low as he steps under your swing and counters with a vertically ascending
+    strike towards your head!" (see counter section under Critical Failures).
+
+
+  "stance"
+
+    This determines what position Bob has to be in to be able to use this form.  There are three
+    stances.  'Ground' is for forms used when Bob has been knocked down (yes, there are attacks
+    you can execute from the ground - some of the cooler ones :P).  'Standing' is for most turns,
+    when the combatants are fighting normally.  'Rest' is for when a player is standing there and
+    is 'jumped', so to speak.  Bob is presumed not to have a weapon wielded IC.  See 'awareness'
+    section.  Obviously a player isn't going to attack unless he's already wielded his weapon,
+    but this is included for 'counters' - if Jake gets a chance to counter because Bob critically
+    failed his initial attack, then he'll have to choose from the 'rest' forms.
+
+    0: Rest
+    1: Standing/Normal
+    2: Ground
+
+
+  "name"
+
+    Name of the form.  Thrust, lunge, whatever.  These are surpringly hard to come up with. :p
+
+
+  "weapon_type"
+
+    Obviously you can't use a sword form if you're wielding a pole.  Weapons include sword, dagger/knife,
+    axe, ashangrei, staff/pole, spear, axe, whip, and mace.  While I don't expect to code forms for all
+    the weapons we can think of, it's easy enough to denote numbers for them now, should we decide to
+    get to them sometime down the road.  This should also check for right wield, left wield, dual wield
+    (two weapons) and two handed weapons.  Realistically, we only need to code single wield swords for
+    starters, since that's what almost everybody uses.  Daggers next, then staffs. 
+
+
+  "attack_type"
+
+    This is directly attributed to the type of weapon, and if you can think of a way to include it
+    just based on weapon type, then we don't even need this field.  I think we should eliminate the
+    'piercing/crushing/slashing' option and have the weapon and the type of form decide that.  A sword
+    will always be slashing for all forms except type "O", in which case it is piercing.  A fist and a
+    pole will always be crushing damage.  If this field indicates crushing damage, then it can stun
+    you - but if it's slash or pierce damage, then it won't.
+
+
+  "acceptable_bodyparts"
+
+    Each bodypart should default to 'acceptable', but should be able to be deselected.  This is for
+    some specialized forms, such as a flat-hand to the face designed to break your nose, or a move
+    designed to break your arm or your leg.  Each bodypart should have a '1' for acceptable, and a
+    '0' if unacceptable. 
+
+
+  "auto-affects"
+
+    This is for any affects that occur regardless of whether the attack is successful or not.  Bob
+    could jump in the air, feet forward, and try and knock Jake down with the impact of his boots.
+    If successful, Jake is set to 'on ground', but either way, Bob is set to 'on ground'.
+
+    0: Set Bob on ground
+    1: Remove Bob's weapon to ground
+    2: etc?
+
+
+  "successful-affects"
+   
+    This is for affects that are carried out if the form is successful, such as blindness, getting
+    knocked down, Bob losing his weapon (such as throwing a knife) or Jake losing his weapon (such
+    as in a disarm).  Some forms (especially unarmed ones) are designed specifically to break
+    limbs, so if they're successful, the limb should be set to broken.
+
+    0: No affects
+    1: Blind
+    2: Set Broken
+    3: Remove Bob's weapon to ground
+    4: Remove Bob's weapon to Jake's inventory
+    5: Remove Jake's weapon to ground
+    6: Remove Jake's weapon to Bob's inventory
+    7: Set Bob on ground
+
+ 
+  "Area_is_allowed"
+
+    I thought we could treat this similarly to how the bitvectors identify the type of room you're
+    in.  For instance, some forms could only work in rooms denoted as a ship, or in cities.  That
+    way the text descriptions could be more colorful - people could be described as using their
+    surroundings to their advantage, though this would be most useful under Defense Forms ("Rasridim
+    sidesteps quickly and puts the mainmast between you - your blade cuts into the wood, but you
+    yank it out quickly.")
+
+
+  "teachable"
+
+    If a PC has the form, can he teach it to another PC?
+
+
+  "learnable"
+
+    If a PC is defending against a PC or a mob with this form, can he learn it just from defending
+    against it in combat?
+
+
+  "is_standard"
+
+    This is for quick-setting of players with forms for their WM level.  If it is a standard form,
+    then setting them with the right tier of WM would give them the proper tier of all forms of
+    this type.  If the form is not standard, i.e. exotic (like something a grolm or a shadowspawn
+    would do), then it would not be set.  This was more of an idea, and not a huge deal.  Maybe
+    you could just put the field in the structure for now and we'll do the supporting code later?
+
+  "aggressiveness: normal init text"
+
+    This is the first line of text that PCs see when Bob's aggressive stance is normal.
+   
+    "Bob sweeps his weapon left in a short, smooth stroke aimed at your <bodypart>"
+
+  "aggressiveness: aggressive init text"
+
+    This is the first line of text that PCs see when Bob's stance is aggressive.
+
+    "Bob drives forward towards you quickly, sweeping his sword leftward in an attempt to slash at
+    your <bodypart>."
+
+  "aggressiveness: reckless init text"
+
+    Bob's stance is reckless.
+
+    "Bob wheels about and slashes violently leftward, bringing his sword around himself as he
+    corkscrews recklessly but with enormous power."
+
+  "minor wound"
+
+    This is the description of what happens when Bob succeeds in his attack, and deals only
+    minor damage.  Recall the bodypart structure.
+
+    "Bob's slash cuts Jake's <bodypart>."
+
+  "substantial wound"
+
+    This is the description for a substantial wound dealt by this attack.
+    "Bob slashes Jake's <bodypart> - it starts bleeding badly."
+
+  "gashed wound"
+
+    "Jake's arm sprays blood as Bob deals him an awful gash!"
+ 
+  "Critical Failures"
+
+    There are multiple types of critical failures, arranged by their affects.  A single attack
+    form may have several ways it can critically fail, of the same type - there could be two
+    or three different text descriptions for how he drops his weapon, for example.
+
+    There are five major types of critical failures that I can think of. 
+
+    'penalty-free' failures include things like "Bob almost loses his grip on his sword -
+    he backs off quickly to recover his grip." Whoever gets to go next is chosen normally - neither
+    Bob nor Jake suffers a mod because of this critical failure.  It simply means that Bob
+    doesn't hit Jake entirely because Bob messed up on his own. 
+
+    'loss-of-weapon' failures include situations like "Bob's weapon slips from his hands!
+    The sword flies off to one side, landing harmlessly on the ground and leaving Bob
+    unarmed." Any failures included of this type would remove the weapon and load it
+    onto the ground.
+
+    'stumble/recover' failures include all situations where Bob fails to properly
+    execute the attack, and even though he doesn't suffer any direct ill affects like dropping
+    his weapon or falling, he loses his chance to attack again.
+
+    'fall' failures include situations which result in Bob ending up on the ground.  Obviously
+    he loses his chance to attack this turn, as with 'stumble/recover' failures.  Any fall
+    failures automatically put Bob on the ground, same as if he had failed to bash and
+    fallen down in MM2.
+
+    'counters' are not actually failures, but I think it makes a lot of sense to include
+    them here.  The attack is assumed to fail outright, and Jake automatically attacks back.
+    The text is written such that it looks to the PCs like Bob tried to attack, Jake stopped
+    him and launched his own counter-attack.  An example:
+
+    Bob raises his weapon high and lunges forward! (standard description for this attack)
+    "is_a_hit" returns a 0, and calls "get_critical_failure", which selects a counter.
+    Jake sees an opportunity as Bob raises his weapon too high! (this is stored under critical failures
+        for this particular attack)
+    There is a greatly decreased chance to block a counter, but all the steps for the turn
+        are calculated beginning with "is_a_hit" all over again, with Jake as the attacker. 
+        Combat is resolved with the text messages stored in Jake's attack form structure.
+        "Jake runs Bob through in a smooth, pronated stroke!"
+
+    End of example.
+   
+    In this way, critical failures could result in the appearance of both players going back
+    and forth for several turns, countering each other until one of them has "is_a_hit" return
+    something a 1, in which case the defender has a chance to defend at a greatly decreased
+    chance of success, and then the turn is ended (even though it really consisted of several
+    incomplete turns).  I can do a lot with this by adding multiple descriptions of
+    counters for each form.
+
+Attack forms
+
+<insert attack forms here>
+
+Defense Forms
+
+<insert defense forms here>
+
+Miss Chart
+
+<insert excel spreadsheet here>
+
+Cascade Damage Chart
+
+<insert excel spreadsheet here>
+
+Object fields:
+
+  "special_damage"
+
+    This should be a numerical value where the number is associated with the type of additional
+    affect if the attack is successful.  Most of these don't need to do anything now - lets just
+    reserve numbers so we can add the code later.  I guess some weapons could be more than one,
+    so we should just be able to add numbers to this field, the same as you might stack things like
+    '!steal' and '!donate' to an object.
+
+    0: Normal weapon
+    1: Fade blade
+    2: Power-forged weapon
+    3: Poisoned (HP reduction)
+    4: Poisoned (Large HP reduction)
+    5: Poisoned (!channeling - we'll do this later, for now just reserve a number)
+    6: Poisoned (more channeling reduction - again, just leave a number)
+    7: Poisoned (Endurance reduction)
+    8: Poisoned (Knock unconscious)
+    9: Burn Damage
+      10: Cold Damage
+      11: Numb Damage
+      12: Reserved for imm weapons
+      13: Reserved for imm weapons

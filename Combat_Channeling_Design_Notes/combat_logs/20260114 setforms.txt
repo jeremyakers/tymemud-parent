@@ -1,0 +1,48 @@
+setform kinje 'Moon Rises Over Water' 400
+setform kinje 'Night Falls on the Mountains' 400
+setform kinje 'Parting the Silk' 400
+setform kinje 'a counter' 400
+setform kinje 'Bees Buzzing the Blooms' 400
+setform kinje 'Ribbon in the Air' 400
+setform kinje 'a quick jump' 400
+setform kinje 'Leaf on the Breeze' 400
+setform kinje 'Toe in the water' 400
+setform kinje 'Overhead Slash' 400
+setform kinje 'Slash From Right' 400
+setform kinje 'Slash From Left' 400
+setform kinje 'a bite' 400
+setform kinje 'a kick' 400
+setform kinje 'Off-Hand Jab' 400
+setform kinje 'Cat Catches the Mouse' 400
+setform kinje 'Lion on the Hill' 400
+setform kinje 'Storm building' 400
+
+setform ailsa 'Moon Rises Over Water' 400
+setform ailsa 'Night Falls on the Mountains' 400
+setform ailsa 'Parting the Silk' 400
+setform ailsa 'a counter' 400
+setform ailsa 'Bees Buzzing the Blooms' 400
+setform ailsa 'Ribbon in the Air' 400
+setform ailsa 'a quick jump' 400
+setform ailsa 'Leaf on the Breeze' 400
+setform ailsa 'Toe in the water' 400
+setform ailsa 'Overhead Slash' 400
+setform ailsa 'Slash From Right' 400
+setform ailsa 'Slash From Left' 400
+setform ailsa 'a bite' 400
+setform ailsa 'a kick' 400
+setform ailsa 'Off-Hand Jab' 400
+setform ailsa 'Cat Catches the Mouse' 400
+setform ailsa 'Lion on the Hill' 400
+setform ailsa 'Storm building' 400
+setform ailsa 'a quick jump' 400
+setform ailsa 'a sidestep' 400
+setform ailsa 'Boar Rushes Downhill' 400
+setform ailsa 'Breeze Ruffles the Petals' 400
+setform ailsa 'Cat Crosses the Cortyard' 400
+setform ailsa 'ducking' 400
+setform ailsa 'Eagles on the Wing' 400
+setform ailsa 'Fish Takes the Bait' 400
+setform ailsa 'Folding the Fan' 400
+setform ailsa 'Gloom Fades Away' 400
+setform ailsa 'Grapevine Twines' 400

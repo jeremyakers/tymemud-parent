@@ -1,0 +1,93 @@
+      <pre>
+Frequently Asked Questions for Code Combat for A Moment in Tyme MUD
+-------------------------------------------------------------------
+
+1) When will code combat be done?
+
+  Currently code combat is my "main focus" development wise, and will be so
+  until it is completed, or something happens to me.
+
+  However, once the code combat system is complete that doesn't mean that
+  combat will be available right away.  There are other factors involved
+  such as making sure that the mobs and objects and equipment are ready as
+  well.
+
+2) What style of combat will Tyme have?
+
+  Turn Based with options for 'automatic' and 'semi-automatic'.
+
+3) Why Turn Based combat?
+
+  It offers more advantages and no drawbacks compared to the standard mode
+  of combat in CircleMUD based muds.
+
+  Each player can toggle how "automated" they'll want the combat to be. They
+  can either proceed in fully manual mode, semi-automatic, and fully automatic.
+
+  In addition the Turn Based engine will give the user more control over the
+  outcome of the combat so it isn't just a matter of "He with the most skills
+  wins."
+  
+4) What do the different modes mean?
+
+  "Fully Manual" - Every turn all choices will be made by the player.  
+  The computer will make no moves for the player.  The player may choose not be
+  as specific as he's allowed.  In this case, the code would automatically
+  decide what the missing peices should be.  This mode will be designed
+  specifically to supplement roleplay emote based combat.  Essentially, every
+  emote can be accompanied by a turn decision.  Instead of relying on the
+  player you are targeting to decide whether he will take your hit (and
+  where he'll take it) you'll instead tell the code what you want to do,
+  where you're aiming, etc, and it will decide based on dozens of stats
+  whether the blow will land and where and how much damage it will do.  This
+  kind of fairness added to emote combat should make it more enjoyable for
+  everyone by preventing players from 'supermanning', or refusing to take
+  blows from players who are clearly more advanced than them.
+
+  "Semi-Automatic Mode" - Your defense is automatically chosen, but you will
+  be prompted when it's your turn to attack to choose your move.  This mode
+  will speed up the flow of combat quite a bit while still giving players a
+  very large say in how the combat will flow each turn.
+
+  "Fully Automatic" - This mode will look and feel very much like the old
+  non turn based combat system.  All you have to do is specify a target and
+  let the code do the rest.
+
+5) How will it be decided who goes when?
+
+  An initiative roll will occur for each round of combat.
+
+6) How will you attack your opponent?
+
+  Once in combat you can attack and defend using combat Forms.  Each Form in
+  the game has approximately 30 different stats and supports specialized code
+  procedures for 'special cases' that can't be accounted for in the stats.
+
+  To attack with the form you would do someting like:
+
+    &lt;form class&gt; [&lt;form&gt;] &lt;player&gt; &lt;body location&gt;
+
+  like:
+
+    slash 'overhead slash' Cormac head
+
+  To attack Cormac with the form "Overhead Slash".  To defend he might do:
+
+    parry 'parry to left' &lt;attacker&gt;
+
+  To defend with "Parry to left"
+
+7) How is the damage assessed?
+
+  Through a formula dealing with several factors taking in all facets of the
+  characters, including encumberance.
+
+8) How much more has yet to be completed before Combat will be ready?
+
+  As of January 2008, we are standing at about 75% completed.
+
+9) Do you need any help?
+
+  Yes!  We need volunteers to help write forms and build equipment.  If you want to help out,
+  contact someone on staff.
+      </pre>

@@ -1,0 +1,49 @@
+Hey, all.  It's come to our attention that some players have misconceptions
+and questions about what's going on with combat, so I'm gonna post a rough
+update.
+
+Firstly, yes, we're bringing combat back.  No, you do not have to run around
+killing mobs as a prerequisite to having a decent pfile.  Levels will still be
+determined through RP, and code power will still be impacted largely by RP
+and RP ability.  We're just adding more ways to represent a character's
+abilities, and some of them (such as combat skills) can be increased by using them in
+code combat.  Pkilling will remain the same as it was in MM2, such that a
+legal pkill as the result of RP will result in the death of the victim.
+
+Once we get the skeleton system (meaning a fully running combat system but
+without all of the details we've laid the foundation for), it will be brought
+in.  We will continue adding to it extensively as we go. 
+
+The aim of this system is to balance gameplay with a more realistic IC way
+viewing combat on a mud.  We've gotten rid of the grid system, since it was
+unpopular and caused enormous problems with retainers and mobs and multiple groups
+fighting each other.  Combat has three major settings that allow users to
+manually input commands as much or as little as they want.  For policy purposes,
+priority goes to the fastest setting (manual, semi-auto or automatic) of any
+combatant, so that when somebody starts supermanning to the point of being
+ridiculous, a more senior combatant can once again say 'eff this' and pkill the
+bugger in short order.  On the other extreme, if you want to supplement your
+emote fight with manual commands, you can do that, too.
+
+We're bringing back options that allow you to control your style and how much
+you're exerting yourself, at any point during (or before) combat.  The code
+also tracks the number and types of wounds to bodyparts, such that the wounds
+you take hamper your ability to fight.  A character's combat status includes a
+number of new, more IC fields, although this info is presented to players in a
+more general fashion than the complicated number tracking that the code
+handles.  You can eventually pass out and/or die from losing blood over one good
+stab wound even if your HPs are still high, pass out from fatigue, and walk away
+with wounds that heal over time (or kill you later) and can be healed with
+channeling or first-aid skills.
+
+We'll also be recalculating things like stats and HPs, since currently
+they're not really relative to anything concrete, and, IMO, are kinda stupid.  25
+strength means what, exactly? Nobody's code stats represent their IC characters
+anymore, so we're endeavoring to fix that.  Combat will be much more realistic
+than just keeping track of the number of times you can get stabbed before you
+die, and deals with a lot more than simple HP totals (which are now just
+benchmarks for other calculations).
+
+Yeah, anyway, blah blah.  If you've got any questions, feel free to ask.  If
+you have any complaints like 'I want to keep turn based combat as it is',
+seriously, get off my mud.
