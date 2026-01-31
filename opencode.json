@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "tymemud-builder": {
+      "name": "TymeMUD Builder Gateway",
+      "command": "python3",
+      "args": ["-m", "llm_gateway.server"],
+      "cwd": "llm_gateway",
+      "description": "MCP gateway for TymeMUD world building via BuilderPort protocol v1",
+      "env": {
+        "PYTHONPATH": "."
+      }
+    }
+  }
+}

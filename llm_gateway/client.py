@@ -30,19 +30,38 @@ class BuilderPortClient:
 
     def _load_token(self) -> str:
         """Load token from lib/etc/builderport.token."""
-        # Try multiple locations
-        token_paths = [
-            Path("_agent_work/wld_editor_api_agent/MM32/lib/etc/builderport.token"),
-            Path("MM32/lib/etc/builderport.token"),
-            Path("../MM32/lib/etc/builderport.token"),
-            Path("lib/etc/builderport.token"),
+        # Try multiple locations from various working directories
+        possible_roots = [
+            Path.cwd(),
+            Path(__file__).parent.parent,  # Parent of llm_gateway
+            Path(__file__).parent.parent.parent,  # Grandparent
+            Path.home() / "tymemud",
+            Path("/home/jeremy/tymemud"),
         ]
 
-        for path in token_paths:
-            if path.exists():
-                return path.read_text().strip()
+        token_paths = [
+            "_agent_work/wld_editor_api_agent/MM32/lib/etc/builderport.token",
+            "MM32/lib/etc/builderport.token",
+            "lib/etc/builderport.token",
+        ]
 
-        raise RuntimeError("Could not find builderport.token in any known location")
+        for root in possible_roots:
+            for subpath in token_paths:
+                path = root / subpath
+                if path.exists():
+                    return path.read_text().strip()
+
+        # Also try env var
+        import os
+
+        if "BUILDERPORT_TOKEN" in os.environ:
+            return os.environ["BUILDERPORT_TOKEN"]
+
+        raise RuntimeError(
+            "Could not find builderport.token. "
+            "Searched in various locations relative to working directory. "
+            "Set BUILDERPORT_TOKEN env var as fallback."
+        )
 
     async def connect(self) -> None:
         """Connect and perform HELLO handshake."""
@@ -51,10 +70,15 @@ class BuilderPortClient:
         # Send HELLO
         await self._send(f"hello {self.token} 1")
 
-        # Read response
+        # Read response (might be greeting first)
         response = await self._read_line()
+
+        # Skip greeting if present
+        if "MikkiMUD" in response or "status port" in response.lower():
+            response = await self._read_line()
+
         if not response.startswith("OK"):
-            raise BuilderPortError(401, "Authentication failed")
+            raise BuilderPortError(401, f"Authentication failed: {response}")
 
         self.authed = True
 
@@ -164,7 +188,7 @@ class BuilderPortClient:
             return int(parts[1]), parts[2]
         return 500, "Unknown error"
 
-    async def transaction(self, zones: List[int]):
+    def transaction(self, zones: List[int]):
         """Context manager for transactions."""
         return TransactionContext(self, zones)
 
