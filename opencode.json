@@ -4,7 +4,11 @@
     "tymemud-builder": {
       "type": "local",
       "command": ["./scripts/llm-gateway.sh"],
-      "enabled": true
+      "enabled": true,
+      "environment": {
+        "BUILDERPORT_HOST": "127.0.0.1",
+        "BUILDERPORT_PORT": "9697"
+      }
     }
   }
 }

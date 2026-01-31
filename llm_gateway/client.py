@@ -28,6 +28,12 @@ class BuilderPortClient:
         self.writer: Optional[asyncio.StreamWriter] = None
         self.authed = False
 
+        # Allow environment variable overrides
+        import os
+
+        self.host = os.environ.get("BUILDERPORT_HOST", self.host)
+        self.port = int(os.environ.get("BUILDERPORT_PORT", self.port))
+
     def _load_token(self) -> str:
         """Load token from lib/etc/builderport.token."""
         possible_roots = [
