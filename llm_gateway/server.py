@@ -2,8 +2,6 @@
 
 import asyncio
 import sys
-from typing import AsyncIterator
-from contextlib import asynccontextmanager
 from mcp.server import Server
 from mcp.types import TextContent, Tool
 from mcp.server.stdio import stdio_server
@@ -14,38 +12,8 @@ except ImportError:
     from client import BuilderPortClient, BuilderPortError
 
 
-class GatewayContext:
-    """Context for the MCP server containing the BuilderPort client."""
-
-    def __init__(self):
-        self.client: BuilderPortClient = BuilderPortClient()
-        self._connected = False
-
-    async def ensure_connected(self):
-        """Connect if not already connected."""
-        if not self._connected:
-            await self.client.connect()
-            self._connected = True
-
-    async def disconnect(self):
-        """Disconnect client."""
-        if self._connected:
-            await self.client.disconnect()
-            self._connected = False
-
-
-@asynccontextmanager
-async def app_lifespan(server: Server) -> AsyncIterator[GatewayContext]:
-    """Manage application lifecycle."""
-    context = GatewayContext()
-    try:
-        yield context
-    finally:
-        await context.disconnect()
-
-
 # Create the MCP server
-app = Server("tymemud-gateway", lifespan=app_lifespan)
+app = Server("tymemud-gateway")
 
 
 @app.list_tools()
@@ -58,18 +26,47 @@ async def list_tools() -> list[Tool]:
             inputSchema={
                 "type": "object",
                 "properties": {
+                    "host": {
+                        "type": "string",
+                        "description": "BuilderPort host address (e.g., 127.0.0.1)",
+                    },
+                    "port": {
+                        "type": "integer",
+                        "description": "BuilderPort status port (e.g., 9697)",
+                    },
+                    "token": {
+                        "type": "string",
+                        "description": "Authentication token for BuilderPort",
+                    },
                     "vnum": {
                         "type": "integer",
                         "description": "Virtual room number (vnum) to read",
-                    }
+                    },
                 },
-                "required": ["vnum"],
+                "required": ["host", "port", "token", "vnum"],
             },
         ),
         Tool(
             name="list_zones",
             description="List all available zones in the MUD world",
-            inputSchema={"type": "object", "properties": {}},
+            inputSchema={
+                "type": "object",
+                "properties": {
+                    "host": {
+                        "type": "string",
+                        "description": "BuilderPort host address (e.g., 127.0.0.1)",
+                    },
+                    "port": {
+                        "type": "integer",
+                        "description": "BuilderPort status port (e.g., 9697)",
+                    },
+                    "token": {
+                        "type": "string",
+                        "description": "Authentication token for BuilderPort",
+                    },
+                },
+                "required": ["host", "port", "token"],
+            },
         ),
         Tool(
             name="update_room",
@@ -77,6 +74,18 @@ async def list_tools() -> list[Tool]:
             inputSchema={
                 "type": "object",
                 "properties": {
+                    "host": {
+                        "type": "string",
+                        "description": "BuilderPort host address (e.g., 127.0.0.1)",
+                    },
+                    "port": {
+                        "type": "integer",
+                        "description": "BuilderPort status port (e.g., 9697)",
+                    },
+                    "token": {
+                        "type": "string",
+                        "description": "Authentication token for BuilderPort",
+                    },
                     "vnum": {"type": "integer", "description": "Room vnum to update"},
                     "zone": {
                         "type": "integer",
@@ -107,7 +116,7 @@ async def list_tools() -> list[Tool]:
                         "description": "Room height (optional)",
                     },
                 },
-                "required": ["vnum", "zone"],
+                "required": ["host", "port", "token", "vnum", "zone"],
             },
         ),
         Tool(
@@ -116,6 +125,18 @@ async def list_tools() -> list[Tool]:
             inputSchema={
                 "type": "object",
                 "properties": {
+                    "host": {
+                        "type": "string",
+                        "description": "BuilderPort host address (e.g., 127.0.0.1)",
+                    },
+                    "port": {
+                        "type": "integer",
+                        "description": "BuilderPort status port (e.g., 9697)",
+                    },
+                    "token": {
+                        "type": "string",
+                        "description": "Authentication token for BuilderPort",
+                    },
                     "vnum": {"type": "integer", "description": "Room vnum"},
                     "zone": {"type": "integer", "description": "Zone number"},
                     "sector": {
@@ -141,7 +162,7 @@ async def list_tools() -> list[Tool]:
                     "name": {"type": "string", "description": "Room name"},
                     "desc": {"type": "string", "description": "Room description"},
                 },
-                "required": ["vnum", "zone", "name", "desc"],
+                "required": ["host", "port", "token", "vnum", "zone", "name", "desc"],
             },
         ),
         Tool(
@@ -150,6 +171,18 @@ async def list_tools() -> list[Tool]:
             inputSchema={
                 "type": "object",
                 "properties": {
+                    "host": {
+                        "type": "string",
+                        "description": "BuilderPort host address (e.g., 127.0.0.1)",
+                    },
+                    "port": {
+                        "type": "integer",
+                        "description": "BuilderPort status port (e.g., 9697)",
+                    },
+                    "token": {
+                        "type": "string",
+                        "description": "Authentication token for BuilderPort",
+                    },
                     "from_vnum": {"type": "integer", "description": "Source room vnum"},
                     "direction": {
                         "type": "integer",
@@ -190,7 +223,15 @@ async def list_tools() -> list[Tool]:
                         "default": "BIDIR",
                     },
                 },
-                "required": ["from_vnum", "direction", "to_vnum", "zone"],
+                "required": [
+                    "host",
+                    "port",
+                    "token",
+                    "from_vnum",
+                    "direction",
+                    "to_vnum",
+                    "zone",
+                ],
             },
         ),
         Tool(
@@ -199,12 +240,24 @@ async def list_tools() -> list[Tool]:
             inputSchema={
                 "type": "object",
                 "properties": {
+                    "host": {
+                        "type": "string",
+                        "description": "BuilderPort host address (e.g., 127.0.0.1)",
+                    },
+                    "port": {
+                        "type": "integer",
+                        "description": "BuilderPort status port (e.g., 9697)",
+                    },
+                    "token": {
+                        "type": "string",
+                        "description": "Authentication token for BuilderPort",
+                    },
                     "zone": {
                         "type": "integer",
                         "description": "Zone number to validate",
-                    }
+                    },
                 },
-                "required": ["zone"],
+                "required": ["host", "port", "token", "zone"],
             },
         ),
         Tool(
@@ -213,103 +266,227 @@ async def list_tools() -> list[Tool]:
             inputSchema={
                 "type": "object",
                 "properties": {
-                    "zone": {"type": "integer", "description": "Zone number to export"}
+                    "host": {
+                        "type": "string",
+                        "description": "BuilderPort host address (e.g., 127.0.0.1)",
+                    },
+                    "port": {
+                        "type": "integer",
+                        "description": "BuilderPort status port (e.g., 9697)",
+                    },
+                    "token": {
+                        "type": "string",
+                        "description": "Authentication token for BuilderPort",
+                    },
+                    "zone": {"type": "integer", "description": "Zone number to export"},
                 },
-                "required": ["zone"],
+                "required": ["host", "port", "token", "zone"],
             },
         ),
     ]
 
 
+async def _create_client(arguments: dict) -> BuilderPortClient:
+    """Create a fresh BuilderPortClient from tool arguments."""
+    host = arguments["host"]
+    port = arguments["port"]
+    token = arguments["token"]
+    return BuilderPortClient(host=host, port=port, token=token)
+
+
 @app.call_tool()
 async def call_tool(name: str, arguments: dict) -> list[TextContent]:
     """Handle tool calls from the LLM."""
-    ctx = app.request_context.lifespan_context
 
     try:
         if name == "read_room":
-            await ctx.ensure_connected()
-            room = await ctx.client.get_room(arguments["vnum"])
-            return [TextContent(type="text", text=str(room))]
+            client = await _create_client(arguments)
+            await client.connect()
+            try:
+                room = await client.get_room(arguments["vnum"])
+                if room is None:
+                    return [
+                        TextContent(
+                            type="text", text=f"Room {arguments['vnum']} not found"
+                        )
+                    ]
+
+                # Format comprehensive room data
+                lines = [
+                    f"Room {room['vnum']}: {room['name']}",
+                    f"Zone: {room['zone']}, Sector: {room['sector']}, Size: {room['width']}x{room['height']}",
+                    f"Flags: {room['flags']}",
+                    f"Special Function: {room['special_function'] or 'None'}",
+                    "",
+                    "Description:",
+                    room["description"] if room["description"] else "(no description)",
+                    "",
+                ]
+
+                # Format exits
+                if room["exits"]:
+                    lines.append("Exits:")
+                    for exit in room["exits"]:
+                        lines.append(
+                            f"  {exit['direction_name']} -> Room {exit['to_vnum']}"
+                        )
+                        if exit["description"]:
+                            lines.append(f"    Desc: {exit['description']}")
+                        if exit["keywords"]:
+                            lines.append(f"    Keywords: {exit['keywords']}")
+                        if exit["key"] != -1:
+                            lines.append(f"    Key required: Object {exit['key']}")
+                        if exit["flags"] != 0:
+                            lines.append(f"    Flags: {exit['flags']}")
+                else:
+                    lines.append("Exits: None")
+
+                # Format extra descriptions
+                if room["extra_descriptions"]:
+                    lines.extend(["", "Extra Descriptions:"])
+                    for ed in room["extra_descriptions"]:
+                        lines.append(f"  Keywords: {ed['keywords']}")
+                        lines.append(f"  {ed['description']}")
+
+                return [TextContent(type="text", text="\n".join(lines))]
+            finally:
+                await client.disconnect()
 
         elif name == "list_zones":
-            await ctx.ensure_connected()
-            zones = await ctx.client.list_zones()
-            return [TextContent(type="text", text=str(zones))]
+            client = await _create_client(arguments)
+            await client.connect()
+            try:
+                data = await client.list_zones()
+
+                # Format comprehensive zones data
+                lines = []
+
+                # Zones list
+                lines.append(f"=== ZONES ({data['count']}) ===")
+                for zone in data["zones"]:
+                    lines.append(f"  Zone {zone['vnum']}: {zone['name']}")
+
+                # Sector types
+                if data["sector_types"]:
+                    lines.extend(["", "=== SECTOR TYPES ==="])
+                    for sector in data["sector_types"]:
+                        lines.append(f"  {sector['id']}: {sector['name']}")
+
+                # Room flags
+                if data["room_flags"]:
+                    lines.extend(["", "=== ROOM FLAGS ==="])
+                    for i, flag in enumerate(data["room_flags"]):
+                        lines.append(f"  Bit {i}: {flag}")
+
+                # Special functions
+                if data["special_functions"]:
+                    lines.extend(["", "=== SPECIAL FUNCTIONS ==="])
+                    for func in data["special_functions"]:
+                        lines.append(f"  {func}")
+
+                return [TextContent(type="text", text="\n".join(lines))]
+            finally:
+                await client.disconnect()
 
         elif name == "update_room":
-            await ctx.ensure_connected()
-            vnum = arguments["vnum"]
-            zone = arguments["zone"]
+            client = await _create_client(arguments)
+            await client.connect()
+            try:
+                vnum = arguments["vnum"]
+                zone = arguments["zone"]
 
-            # Extract optional fields
-            fields = {}
-            for key in ["name", "desc", "sector", "flags", "width", "height"]:
-                if key in arguments:
-                    fields[key] = arguments[key]
+                # Extract optional fields
+                fields = {}
+                for key in ["name", "desc", "sector", "flags", "width", "height"]:
+                    if key in arguments:
+                        fields[key] = arguments[key]
 
-            async with ctx.client.transaction([zone]) as tx:
-                await tx.room_patch(vnum, **fields)
+                async with client.transaction([zone]) as tx:
+                    await tx.room_patch(vnum, **fields)
 
-            return [TextContent(type="text", text=f"Room {vnum} updated successfully")]
+                return [
+                    TextContent(type="text", text=f"Room {vnum} updated successfully")
+                ]
+            finally:
+                await client.disconnect()
 
         elif name == "create_room":
-            await ctx.ensure_connected()
-            vnum = arguments["vnum"]
-            zone = arguments["zone"]
-            sector = arguments.get("sector", 0)
-            width = arguments.get("width", 10)
-            height = arguments.get("height", 10)
-            flags = arguments.get("flags", 0)
-            name = arguments["name"]
-            desc = arguments["desc"]
+            client = await _create_client(arguments)
+            await client.connect()
+            try:
+                vnum = arguments["vnum"]
+                zone = arguments["zone"]
+                sector = arguments.get("sector", 0)
+                width = arguments.get("width", 10)
+                height = arguments.get("height", 10)
+                flags = arguments.get("flags", 0)
+                name = arguments["name"]
+                desc = arguments["desc"]
 
-            async with ctx.client.transaction([zone]) as tx:
-                await tx.room_full(vnum, zone, sector, width, height, flags, name, desc)
+                async with client.transaction([zone]) as tx:
+                    await tx.room_full(
+                        vnum, zone, sector, width, height, flags, name, desc
+                    )
 
-            return [TextContent(type="text", text=f"Room {vnum} created successfully")]
+                return [
+                    TextContent(type="text", text=f"Room {vnum} created successfully")
+                ]
+            finally:
+                await client.disconnect()
 
         elif name == "link_rooms":
-            await ctx.ensure_connected()
-            from_vnum = arguments["from_vnum"]
-            direction = arguments["direction"]
-            to_vnum = arguments["to_vnum"]
-            zone = arguments["zone"]
-            flags = arguments.get("flags", 0)
-            key = arguments.get("key", -1)
-            desc = arguments.get("desc", "")
-            keywords = arguments.get("keywords", "")
-            mode = arguments.get("mode", "BIDIR")
+            client = await _create_client(arguments)
+            await client.connect()
+            try:
+                from_vnum = arguments["from_vnum"]
+                direction = arguments["direction"]
+                to_vnum = arguments["to_vnum"]
+                zone = arguments["zone"]
+                flags = arguments.get("flags", 0)
+                key = arguments.get("key", -1)
+                desc = arguments.get("desc", "")
+                keywords = arguments.get("keywords", "")
+                mode = arguments.get("mode", "BIDIR")
 
-            async with ctx.client.transaction([zone]) as tx:
-                await tx.link_rooms(
-                    from_vnum, direction, to_vnum, flags, key, desc, keywords, mode
-                )
+                async with client.transaction([zone]) as tx:
+                    await tx.link_rooms(
+                        from_vnum, direction, to_vnum, flags, key, desc, keywords, mode
+                    )
 
-            return [
-                TextContent(
-                    type="text",
-                    text=f"Exit from {from_vnum} to {to_vnum} ({mode}) created",
-                )
-            ]
+                return [
+                    TextContent(
+                        type="text",
+                        text=f"Exit from {from_vnum} to {to_vnum} ({mode}) created",
+                    )
+                ]
+            finally:
+                await client.disconnect()
 
         elif name == "validate_zone":
-            await ctx.ensure_connected()
-            zone = arguments["zone"]
+            client = await _create_client(arguments)
+            await client.connect()
+            try:
+                zone = arguments["zone"]
 
-            async with ctx.client.transaction([zone]) as tx:
-                await tx.validate([zone])
+                async with client.transaction([zone]) as tx:
+                    await tx.validate([zone])
 
-            return [TextContent(type="text", text=f"Zone {zone} is valid")]
+                return [TextContent(type="text", text=f"Zone {zone} is valid")]
+            finally:
+                await client.disconnect()
 
         elif name == "export_zone":
-            await ctx.ensure_connected()
-            zone = arguments["zone"]
+            client = await _create_client(arguments)
+            await client.connect()
+            try:
+                zone = arguments["zone"]
 
-            async with ctx.client.transaction([zone]) as tx:
-                await tx.export([zone])
+                async with client.transaction([zone]) as tx:
+                    await tx.export([zone])
 
-            return [TextContent(type="text", text=f"Zone {zone} exported to disk")]
+                return [TextContent(type="text", text=f"Zone {zone} exported to disk")]
+            finally:
+                await client.disconnect()
 
         else:
             return [TextContent(type="text", text=f"Unknown tool: {name}")]
@@ -317,7 +494,13 @@ async def call_tool(name: str, arguments: dict) -> list[TextContent]:
     except BuilderPortError as e:
         return [TextContent(type="text", text=f"Error: {e.message} (code {e.code})")]
     except Exception as e:
-        return [TextContent(type="text", text=f"Internal error: {str(e)}")]
+        import traceback
+
+        return [
+            TextContent(
+                type="text", text=f"Internal error: {str(e)}\n{traceback.format_exc()}"
+            )
+        ]
 
 
 def main():
