@@ -199,6 +199,53 @@ Multiple AI agents (e.g., Cursor + Cline) ARE working on the same project:
 - **Load:** Read + Apply + Declare a rule (all three steps mandatory)
 - **Token Budget:** Cumulative token count of all loaded rules
 
+---
+
+## MCP Tools: TymeMUD Builder Gateway
+
+When working with the MUD world editor, you have access to the `tymemud-builder` MCP server with these tools:
+
+### Available Tools
+
+1. **read_room** - Read complete room data including exits and descriptions
+2. **list_zones** - List all zones with sector types and room flags
+3. **update_room** - Update specific room fields (non-destructive)
+4. **create_room** - Create or fully replace a room (destructive)
+5. **link_rooms** - Create exits between rooms
+6. **validate_zone** - Validate zone for errors
+7. **export_zone** - Export zone to disk
+
+### Required Parameters (ALL tools require these first 3 parameters)
+
+Every tool call MUST include:
+- **host**: BuilderPort host address (e.g., "127.0.0.1")
+- **port**: BuilderPort status port (e.g., 9697) 
+- **token**: Authentication token from lib/etc/builderport.token
+
+**CRITICAL:** There are NO defaults. You must explicitly provide these parameters on EVERY call.
+
+### How to Determine Connection Parameters
+
+**For agents working in their own worktree:**
+1. Check `tmp/agent_ports.tsv` to find your assigned port
+2. Status port = game port + 1 (if game is 9696, status is 9697)
+3. Token is in `_agent_work/<your_name>/MM32/lib/etc/builderport.token`
+
+**Example tool call:**
+```
+Use the tymemud-builder read_room tool with:
+- host: "127.0.0.1"
+- port: 9697
+- token: "c1gtri32"
+- vnum: 1000
+```
+
+### Multi-Agent Safety
+
+- Each agent connects to their own server instance
+- Never assume another agent's port - always check your assigned port
+- Fresh connection per call - no shared state between agents
+
 
 ## grepai - Semantic Code Search
 
