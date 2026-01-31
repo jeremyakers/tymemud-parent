@@ -2,7 +2,7 @@
 
 import asyncio
 import base64
-from typing import Optional, List, Dict, Any
+from typing import Optional, List, Dict, Any, Union
 from pathlib import Path
 
 
@@ -30,11 +30,10 @@ class BuilderPortClient:
 
     def _load_token(self) -> str:
         """Load token from lib/etc/builderport.token."""
-        # Try multiple locations from various working directories
         possible_roots = [
             Path.cwd(),
-            Path(__file__).parent.parent,  # Parent of llm_gateway
-            Path(__file__).parent.parent.parent,  # Grandparent
+            Path(__file__).parent.parent,
+            Path(__file__).parent.parent.parent,
             Path.home() / "tymemud",
             Path("/home/jeremy/tymemud"),
         ]
@@ -51,7 +50,6 @@ class BuilderPortClient:
                 if path.exists():
                     return path.read_text().strip()
 
-        # Also try env var
         import os
 
         if "BUILDERPORT_TOKEN" in os.environ:
@@ -67,16 +65,11 @@ class BuilderPortClient:
         """Connect and perform HELLO handshake."""
         self.reader, self.writer = await asyncio.open_connection(self.host, self.port)
 
-        # Read and skip initial greeting lines (banner may come before HELLO response)
-        # The server sends: empty line, then banner, then waits for hello
-        # Read lines until we've seen the banner (max 5 lines to prevent infinite loop)
+        # Read and skip initial greeting lines
         for _ in range(5):
             greeting = await self._read_line()
-            # If we see the banner, we're done reading greetings
             if "MikkiMUD" in greeting or "status port" in greeting.lower():
                 break
-            # If we got a non-empty, non-banner line, it might be the HELLO response
-            # (some server versions might respond differently)
             if greeting and not (
                 "MikkiMUD" in greeting or "status port" in greeting.lower()
             ):
@@ -85,7 +78,7 @@ class BuilderPortClient:
         # Send HELLO
         await self._send(f"hello {self.token} 1")
 
-        # Read response (skip empty lines that server may send)
+        # Read response (skip empty lines)
         response = ""
         for _ in range(3):
             response = await self._read_line()
@@ -151,30 +144,99 @@ class BuilderPortClient:
         except:
             return ""
 
-    async def get_room(self, vnum: int) -> Dict[str, Any]:
-        """Read a room's data."""
-        await self._send(f"wld_dump {vnum}")
+    async def get_room(self, vnum: int) -> Optional[Dict[str, Any]]:
+        """Read complete room data including exits and extra descriptions."""
+        zone = vnum // 100
+        await self._send(f"wld_load {zone}")
 
+        # Read OK
         response = await self._read_line()
-        if response.startswith("ERROR"):
-            code, msg_b64 = self._parse_error(response)
-            raise BuilderPortError(code, self.decode_text(msg_b64))
+        if not response.startswith("OK"):
+            return None
 
-        if response.startswith("DATA DUMP"):
-            parts = response.split(maxsplit=3)
-            if len(parts) >= 4:
-                return {
-                    "vnum": int(parts[2]),
-                    "name": self.decode_text(parts[3]),
-                }
+        # Read all data lines
+        lines = await self._read_bulk_response()
 
-        return {}
+        # Parse room data
+        room_data = None
+        exits = []
+        extra_descs = []
+        specfunc = None
 
-    async def list_zones(self) -> List[Dict[str, Any]]:
-        """List all zones."""
+        for line in lines:
+            if line.startswith("DATA ROOM "):
+                parts = line.split(maxsplit=8)
+                if len(parts) >= 9 and int(parts[2]) == vnum:
+                    room_data = {
+                        "vnum": int(parts[2]),
+                        "zone": int(parts[3]),
+                        "sector": int(parts[4]),
+                        "width": int(parts[5]),
+                        "height": int(parts[6]),
+                        "flags": int(parts[7]),
+                        "name": self.decode_text(parts[8]),
+                        "description": self.decode_text(parts[9])
+                        if len(parts) > 9
+                        else "",
+                        "exits": [],
+                        "extra_descriptions": [],
+                        "special_function": None,
+                    }
+            elif line.startswith("DATA EXIT ") and room_data:
+                parts = line.split(maxsplit=8)
+                if len(parts) >= 9 and int(parts[2]) == vnum:
+                    dir_names = [
+                        "North",
+                        "East",
+                        "South",
+                        "West",
+                        "Up",
+                        "Down",
+                        "Northeast",
+                        "Northwest",
+                        "Southeast",
+                        "Southwest",
+                    ]
+                    dir_code = int(parts[3])
+                    exits.append(
+                        {
+                            "direction_code": dir_code,
+                            "direction_name": dir_names[dir_code]
+                            if dir_code < len(dir_names)
+                            else f"Dir_{dir_code}",
+                            "to_vnum": int(parts[4]),
+                            "flags": int(parts[5]),
+                            "key": int(parts[6]),
+                            "description": self.decode_text(parts[7]),
+                            "keywords": self.decode_text(parts[8]),
+                        }
+                    )
+            elif line.startswith("DATA EXTRADESC ") and room_data:
+                parts = line.split(maxsplit=4)
+                if len(parts) >= 5 and int(parts[2]) == vnum:
+                    extra_descs.append(
+                        {
+                            "keywords": self.decode_text(parts[3]),
+                            "description": self.decode_text(parts[4]),
+                        }
+                    )
+            elif line.startswith("DATA SPECFUNC ") and room_data:
+                parts = line.split(maxsplit=3)
+                if len(parts) >= 4 and int(parts[2]) == vnum:
+                    specfunc = parts[3]
+
+        if room_data:
+            room_data["exits"] = exits
+            room_data["extra_descriptions"] = extra_descs
+            room_data["special_function"] = specfunc
+
+        return room_data
+
+    async def list_zones(self) -> Dict[str, Any]:
+        """List all zones with comprehensive metadata including sectors, flags, and special functions."""
         await self._send("wld_list")
 
-        # Read OK (skip empty lines that server may send)
+        # Read OK
         response = ""
         for _ in range(3):
             response = await self._read_line()
@@ -182,14 +244,24 @@ class BuilderPortClient:
                 break
 
         if not response.startswith("OK"):
-            return []
+            return {
+                "zones": [],
+                "sector_types": [],
+                "room_flags": [],
+                "special_functions": [],
+                "count": 0,
+            }
 
         # Read bulk data
         lines = await self._read_bulk_response()
+
         zones = []
+        sectors = []
+        room_flags = []
+        spec_funcs = []
 
         for line in lines:
-            if line.startswith("DATA ZONE"):
+            if line.startswith("DATA ZONE "):
                 parts = line.split(maxsplit=3)
                 if len(parts) >= 4:
                     zones.append(
@@ -198,8 +270,29 @@ class BuilderPortClient:
                             "name": self.decode_text(parts[3]),
                         }
                     )
+            elif line.startswith("DATA SECTOR "):
+                parts = line.split(maxsplit=3)
+                if len(parts) >= 4:
+                    sectors.append(
+                        {
+                            "id": int(parts[2]),
+                            "name": self.decode_text(parts[3]),
+                        }
+                    )
+            elif line.startswith("DATA ROOMFLAGS "):
+                flags_str = line[15:]
+                room_flags = [f.strip() for f in flags_str.split(",") if f.strip()]
+            elif line.startswith("DATA SPECFUNCS "):
+                funcs_str = line[16:]
+                spec_funcs = [f.strip() for f in funcs_str.split(",") if f.strip()]
 
-        return zones
+        return {
+            "zones": zones,
+            "sector_types": sectors,
+            "room_flags": room_flags,
+            "special_functions": spec_funcs,
+            "count": len(zones),
+        }
 
     def _parse_error(self, response: str) -> tuple:
         """Parse ERROR code message_b64 format."""
@@ -226,7 +319,6 @@ class TransactionContext:
         zone_str = ",".join(str(z) for z in self.zones)
         await self.client._send(f"tx_begin ZONES {zone_str}")
 
-        # Read response (skip empty lines)
         response = ""
         for _ in range(3):
             response = await self.client._read_line()
@@ -246,13 +338,10 @@ class TransactionContext:
             return
 
         if exc_val is None:
-            # Success - commit
             await self.client._send("tx_commit")
         else:
-            # Error - abort
             await self.client._send("tx_abort")
 
-        # Read response (skip empty lines)
         response = ""
         for _ in range(3):
             response = await self.client._read_line()
