@@ -1,0 +1,17 @@
+[project]
+name = "llm-gateway"
+version = "0.1.0"
+description = "MCP Gateway for TymeMUD BuilderPort Protocol"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "mcp>=1.0.0",
+    "asyncio",
+]
+
+[project.scripts]
+llm-gateway = "llm_gateway.server:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
