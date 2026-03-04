@@ -1,7 +1,7 @@
 # Nested repos (managed separately)
-MM3/
-MM32/
+_human_work/
 public_html/
+_pool/
 
 # Agent scratch / ephemeral
 _agent_work/
