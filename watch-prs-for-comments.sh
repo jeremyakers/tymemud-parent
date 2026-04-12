@@ -353,7 +353,10 @@ for PR_NUM in "${PR_NUMBERS[@]}"; do
     TITLE=$(echo "$PR_DATA" | jq -r '.title')
     
     LAST_COMMIT_TIME=$(get_pr_last_commit_date "$PR_NUM" "$REPO")
-    [ -z "$LAST_COMMIT_TIME" ] && LAST_COMMIT_TIME=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+    if [ -z "$LAST_COMMIT_TIME" ]; then
+        echo -e "${RED}❌ Failed to determine last commit time for PR #$PR_NUM${NC}"
+        exit 1
+    fi
     
     PR_TITLES[$PR_NUM]="$TITLE"
     LAST_COMMIT_TIMES[$PR_NUM]="$LAST_COMMIT_TIME"
@@ -541,7 +544,10 @@ while true; do
         
         # Check for new commits by comparing commit dates
         CURRENT_COMMIT_TIME=$(get_pr_last_commit_date "$PR_NUM" "$REPO")
-        [ -z "$CURRENT_COMMIT_TIME" ] && CURRENT_COMMIT_TIME=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+        if [ -z "$CURRENT_COMMIT_TIME" ]; then
+            echo -e "${RED}❌ Failed to determine current commit time for PR #$PR_NUM${NC}"
+            exit 1
+        fi
         
         if [ "$CURRENT_COMMIT_TIME" != "${LAST_COMMIT_TIMES[$PR_NUM]}" ]; then
             echo -e "${BLUE}📝 PR #$PR_NUM: new commit detected${NC}"
