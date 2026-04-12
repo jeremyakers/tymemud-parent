@@ -5,6 +5,7 @@
 # Usage: ./watch-prs-for-comments.sh [--repo owner/repo] [--check-once] [--after <timestamp>] [--codex-login <login>] <pr_number1> [pr_number2] ...
 
 set -e
+set -o pipefail
 
 RED='\033[0;31m'
 GREEN='\033[0;32m'
@@ -63,7 +64,7 @@ if [ -n "$REPO_ARG" ]; then
 else
     REMOTE_URL=$(git remote get-url origin 2>/dev/null || echo "")
     if [[ "$REMOTE_URL" == *github.com* ]]; then
-        REPO=$(echo "$REMOTE_URL" | sed 's/.*github.com[:/]//; s/.git$//')
+        REPO=$(echo "$REMOTE_URL" | sed 's/.*github.com[:/]//; s/\.git$//')
     fi
 fi
 
@@ -111,7 +112,7 @@ get_pr_last_commit_date() {
     
     if [ -z "$head_sha" ] || [ "$head_sha" = "null" ]; then
         echo ""
-        return 1
+        return 0
     fi
     
     local commit_date=$(gh api repos/$repo/commits/$head_sha --jq '.commit.committer.date' 2>/dev/null)
@@ -127,28 +128,28 @@ fetch_general_comment_reactions() {
     local repo=$1
     local comment_id=$2
 
-    gh api --paginate "repos/$repo/issues/comments/$comment_id/reactions" -H "Accept: application/vnd.github+json" --jq '.[]' 2>/dev/null | jq -s '.' || echo '[]'
+    gh api --paginate "repos/$repo/issues/comments/$comment_id/reactions" -H "Accept: application/vnd.github+json" --jq '.[]' 2>/dev/null | jq -s '.'
 }
 
 fetch_general_comments() {
     local pr_num=$1
     local repo=$2
 
-    gh api --paginate "repos/$repo/issues/$pr_num/comments" --jq '.[]' 2>/dev/null | jq -s '.' || echo '[]'
+    gh api --paginate "repos/$repo/issues/$pr_num/comments" --jq '.[]' 2>/dev/null | jq -s '.'
 }
 
 fetch_review_comment_reactions() {
     local repo=$1
     local comment_id=$2
 
-    gh api --paginate "repos/$repo/pulls/comments/$comment_id/reactions" -H "Accept: application/vnd.github+json" --jq '.[]' 2>/dev/null | jq -s '.' || echo '[]'
+    gh api --paginate "repos/$repo/pulls/comments/$comment_id/reactions" -H "Accept: application/vnd.github+json" --jq '.[]' 2>/dev/null | jq -s '.'
 }
 
 fetch_review_comments() {
     local pr_num=$1
     local repo=$2
 
-    gh api --paginate "repos/$repo/pulls/$pr_num/comments" --jq '.[]' 2>/dev/null | jq -s '.' || echo '[]'
+    gh api --paginate "repos/$repo/pulls/$pr_num/comments" --jq '.[]' 2>/dev/null | jq -s '.'
 }
 
 reaction_key() {
