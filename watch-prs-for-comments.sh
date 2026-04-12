@@ -355,8 +355,6 @@ has_new_pr_codex_approval_reaction() {
     local reaction_login=""
     local key=""
 
-    should_scan_comment_reactions "prreact" "$pr_num" || return 1
-
     reaction_count=$(echo "$reactions_json" | jq 'length')
     for ((reaction_idx=0; reaction_idx<reaction_count; reaction_idx++)); do
         reaction_id=$(echo "$reactions_json" | jq -r ".[$reaction_idx].id")
@@ -590,9 +588,11 @@ if [ $NEW_FOUND -eq 0 ]; then
             APPROVAL_FOUND=1
         fi
 
-        PR_REACTIONS=$(fetch_pr_reactions "$PR_NUM" "$REPO")
-        if has_new_pr_codex_approval_reaction "$PR_NUM" "$PR_REACTIONS" "$BASELINE"; then
-            APPROVAL_FOUND=1
+        if should_scan_comment_reactions "prreact" "$PR_NUM"; then
+            PR_REACTIONS=$(fetch_pr_reactions "$PR_NUM" "$REPO")
+            if has_new_pr_codex_approval_reaction "$PR_NUM" "$PR_REACTIONS" "$BASELINE"; then
+                APPROVAL_FOUND=1
+            fi
         fi
     done
 fi
@@ -737,9 +737,11 @@ while true; do
             APPROVAL_FOUND=1
         fi
 
-        PR_REACTIONS=$(fetch_pr_reactions "$PR_NUM" "$REPO")
-        if has_new_pr_codex_approval_reaction "$PR_NUM" "$PR_REACTIONS" "$BASELINE"; then
-            APPROVAL_FOUND=1
+        if should_scan_comment_reactions "prreact" "$PR_NUM"; then
+            PR_REACTIONS=$(fetch_pr_reactions "$PR_NUM" "$REPO")
+            if has_new_pr_codex_approval_reaction "$PR_NUM" "$PR_REACTIONS" "$BASELINE"; then
+                APPROVAL_FOUND=1
+            fi
         fi
     done
 
