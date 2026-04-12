@@ -17,6 +17,7 @@ REPO_ARG=""
 CHECK_ONCE=false
 AFTER_TIMESTAMP=""
 CODEX_REVIEWER_LOGIN="${CODEX_REVIEWER_LOGIN:-codex}"
+REACTION_POLL_INTERVAL_SECONDS="${REACTION_POLL_INTERVAL_SECONDS:-300}"
 PR_NUMBERS=()
 
 while [[ $# -gt 0 ]]; do
@@ -101,6 +102,7 @@ echo ""
 declare -A LAST_COMMIT_TIMES
 declare -A SEEN_COMMENT_IDS
 declare -A SEEN_REACTION_IDS
+declare -A LAST_REACTION_SCAN_TIMES
 declare -A PR_TITLES
 
 # Function to get latest commit date for a PR
@@ -160,6 +162,32 @@ reaction_key() {
     echo "${source_prefix}_${comment_id}_${reaction_id}"
 }
 
+comment_scan_key() {
+    local source_prefix=$1
+    local comment_id=$2
+
+    echo "${source_prefix}_${comment_id}"
+}
+
+should_scan_comment_reactions() {
+    local source_prefix=$1
+    local comment_id=$2
+    local scan_key=""
+    local now_epoch=0
+    local last_scan=0
+
+    scan_key=$(comment_scan_key "$source_prefix" "$comment_id")
+    now_epoch=$(date +%s)
+    last_scan=${LAST_REACTION_SCAN_TIMES[$scan_key]:-0}
+
+    if (( last_scan == 0 || now_epoch - last_scan >= REACTION_POLL_INTERVAL_SECONDS )); then
+        LAST_REACTION_SCAN_TIMES[$scan_key]=$now_epoch
+        return 0
+    fi
+
+    return 1
+}
+
 mark_codex_reactions_seen_through_baseline() {
     local pr_num=$1
     local source_type=$2
@@ -187,9 +215,11 @@ mark_codex_reactions_seen_through_baseline() {
     for ((comment_idx=0; comment_idx<count; comment_idx++)); do
         if [ "$source_type" = "general" ]; then
             comment_id=$(echo "$comments_json" | jq -r ".[$comment_idx].id")
+            LAST_REACTION_SCAN_TIMES[$(comment_scan_key "$source_prefix" "$comment_id")]=$(date +%s)
             reactions=$(fetch_general_comment_reactions "$REPO" "$comment_id")
         else
             comment_id=$(echo "$comments_json" | jq -r ".[$comment_idx].id")
+            LAST_REACTION_SCAN_TIMES[$(comment_scan_key "$source_prefix" "$comment_id")]=$(date +%s)
             reactions=$(fetch_review_comment_reactions "$REPO" "$comment_id")
         fi
 
@@ -235,9 +265,11 @@ has_new_codex_approval_reaction() {
     for ((comment_idx=0; comment_idx<count; comment_idx++)); do
         if [ "$source_type" = "general" ]; then
             comment_id=$(echo "$comments_json" | jq -r ".[$comment_idx].id")
+            should_scan_comment_reactions "$source_prefix" "$comment_id" || continue
             reactions=$(fetch_general_comment_reactions "$REPO" "$comment_id")
         else
             comment_id=$(echo "$comments_json" | jq -r ".[$comment_idx].id")
+            should_scan_comment_reactions "$source_prefix" "$comment_id" || continue
             reactions=$(fetch_review_comment_reactions "$REPO" "$comment_id")
         fi
 
@@ -377,6 +409,7 @@ echo ""
 echo -e "${BLUE}👀 Checking for existing new comments...${NC}"
 
 NEW_FOUND=0
+APPROVAL_FOUND=0
 
 # First sweep: check both general and review comments
 for PR_NUM in "${PR_NUMBERS[@]}"; do
@@ -460,14 +493,12 @@ if [ $NEW_FOUND -eq 0 ]; then
 
         GENERAL=$(fetch_general_comments "$PR_NUM" "$REPO")
         if has_new_codex_approval_reaction "$PR_NUM" "general" "$GENERAL" "$BASELINE"; then
-            printf '%s\n' "PR review completed: No new issues found. You may now run final Oracle verification pass on this code"
-            exit 0
+            APPROVAL_FOUND=1
         fi
 
         REVIEWS=$(fetch_review_comments "$PR_NUM" "$REPO")
         if has_new_codex_approval_reaction "$PR_NUM" "review" "$REVIEWS" "$BASELINE"; then
-            printf '%s\n' "PR review completed: No new issues found. You may now run final Oracle verification pass on this code"
-            exit 0
+            APPROVAL_FOUND=1
         fi
     done
 fi
@@ -476,6 +507,11 @@ if [ $NEW_FOUND -eq 1 ]; then
     echo ""
     echo -e "${GREEN}📋 Found new comments to address. Exiting so agent can process them.${NC}"
     exit 2
+fi
+
+if [ $APPROVAL_FOUND -eq 1 ]; then
+    printf '%s\n' "PR review completed: No new issues found. You may now run final Oracle verification pass on this code"
+    exit 0
 fi
 
 if [ "$CHECK_ONCE" = true ]; then
@@ -489,6 +525,7 @@ echo ""
 
 while true; do
     ALL_CLOSED=true
+    APPROVAL_FOUND=0
     
     for PR_NUM in "${PR_NUMBERS[@]}"; do
         [ -z "${LAST_COMMIT_TIMES[$PR_NUM]}" ] && continue
@@ -591,17 +628,23 @@ while true; do
         fi
 
         if has_new_codex_approval_reaction "$PR_NUM" "general" "$GENERAL" "$BASELINE"; then
-            printf '%s\n' "PR review completed: No new issues found. You may now run final Oracle verification pass on this code"
-            exit 0
+            APPROVAL_FOUND=1
         fi
 
         if has_new_codex_approval_reaction "$PR_NUM" "review" "$REVIEWS" "$BASELINE"; then
-            printf '%s\n' "PR review completed: No new issues found. You may now run final Oracle verification pass on this code"
-            exit 0
+            APPROVAL_FOUND=1
         fi
     done
-    
-    [ "$ALL_CLOSED" = true ] && echo -e "${GREEN}✅ All PRs closed${NC}" && exit 0
+
+    if [ "$ALL_CLOSED" = true ]; then
+        echo -e "${GREEN}✅ All PRs closed${NC}"
+        exit 0
+    fi
+
+    if [ $APPROVAL_FOUND -eq 1 ]; then
+        printf '%s\n' "PR review completed: No new issues found. You may now run final Oracle verification pass on this code"
+        exit 0
+    fi
     
     sleep 30
 done
