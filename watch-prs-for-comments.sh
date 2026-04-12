@@ -127,21 +127,28 @@ fetch_general_comment_reactions() {
     local repo=$1
     local comment_id=$2
 
-    gh api "repos/$repo/issues/comments/$comment_id/reactions" -H "Accept: application/vnd.github+json" 2>/dev/null || echo '[]'
+    gh api --paginate "repos/$repo/issues/comments/$comment_id/reactions" -H "Accept: application/vnd.github+json" --jq '.[]' 2>/dev/null | jq -s '.' || echo '[]'
 }
 
 fetch_general_comments() {
     local pr_num=$1
     local repo=$2
 
-    gh api "repos/$repo/issues/$pr_num/comments" 2>/dev/null || echo '[]'
+    gh api --paginate "repos/$repo/issues/$pr_num/comments" --jq '.[]' 2>/dev/null | jq -s '.' || echo '[]'
 }
 
 fetch_review_comment_reactions() {
     local repo=$1
     local comment_id=$2
 
-    gh api "repos/$repo/pulls/comments/$comment_id/reactions" -H "Accept: application/vnd.github+json" 2>/dev/null || echo '[]'
+    gh api --paginate "repos/$repo/pulls/comments/$comment_id/reactions" -H "Accept: application/vnd.github+json" --jq '.[]' 2>/dev/null | jq -s '.' || echo '[]'
+}
+
+fetch_review_comments() {
+    local pr_num=$1
+    local repo=$2
+
+    gh api --paginate "repos/$repo/pulls/$pr_num/comments" --jq '.[]' 2>/dev/null | jq -s '.' || echo '[]'
 }
 
 reaction_key() {
@@ -324,7 +331,7 @@ for PR_NUM in "${PR_NUMBERS[@]}"; do
     
     # Pre-mark older comments/reviews as seen
     GENERAL=$(fetch_general_comments "$PR_NUM" "$REPO")
-    REVIEWS=$(gh api repos/$REPO/pulls/$PR_NUM/comments 2>/dev/null || echo '[]')
+    REVIEWS=$(fetch_review_comments "$PR_NUM" "$REPO")
     
     COUNT=$(echo "$GENERAL" | jq 'length')
     for ((i=0; i<COUNT; i++)); do
@@ -414,7 +421,7 @@ for PR_NUM in "${PR_NUMBERS[@]}"; do
     done
     
     # Check review comments (line-specific)
-    REVIEWS=$(gh api repos/$REPO/pulls/$PR_NUM/comments 2>/dev/null || echo '[]')
+    REVIEWS=$(fetch_review_comments "$PR_NUM" "$REPO")
     COUNT=$(echo "$REVIEWS" | jq 'length')
     for ((i=0; i<COUNT; i++)); do
         ID=$(echo "$REVIEWS" | jq -r ".[$i].id")
@@ -456,7 +463,7 @@ if [ $NEW_FOUND -eq 0 ]; then
             exit 0
         fi
 
-        REVIEWS=$(gh api repos/$REPO/pulls/$PR_NUM/comments 2>/dev/null || echo '[]')
+        REVIEWS=$(fetch_review_comments "$PR_NUM" "$REPO")
         if has_new_codex_approval_reaction "$PR_NUM" "review" "$REVIEWS" "$BASELINE"; then
             printf '%s\n' "PR review completed: No new issues found. You may now run final Oracle verification pass on this code"
             exit 0
@@ -506,7 +513,7 @@ while true; do
             SEEN_REACTION_IDS[$PR_NUM]=""
             
             GENERAL=$(fetch_general_comments "$PR_NUM" "$REPO")
-            REVIEWS=$(gh api repos/$REPO/pulls/$PR_NUM/comments 2>/dev/null || echo '[]')
+            REVIEWS=$(fetch_review_comments "$PR_NUM" "$REPO")
             
             COUNT=$(echo "$GENERAL" | jq 'length')
             for ((i=0; i<COUNT; i++)); do
@@ -560,7 +567,7 @@ while true; do
             fi
         done
         
-        REVIEWS=$(gh api repos/$REPO/pulls/$PR_NUM/comments 2>/dev/null || echo '[]')
+        REVIEWS=$(fetch_review_comments "$PR_NUM" "$REPO")
         COUNT=$(echo "$REVIEWS" | jq 'length')
         for ((i=0; i<COUNT; i++)); do
             ID=$(echo "$REVIEWS" | jq -r ".[$i].id")
