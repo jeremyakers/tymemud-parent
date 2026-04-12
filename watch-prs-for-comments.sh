@@ -355,6 +355,8 @@ has_new_pr_codex_approval_reaction() {
     local reaction_login=""
     local key=""
 
+    should_scan_comment_reactions "prreact" "$pr_num" || return 1
+
     reaction_count=$(echo "$reactions_json" | jq 'length')
     for ((reaction_idx=0; reaction_idx<reaction_count; reaction_idx++)); do
         reaction_id=$(echo "$reactions_json" | jq -r ".[$reaction_idx].id")
