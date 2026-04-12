@@ -16,7 +16,7 @@ NC='\033[0m'
 REPO_ARG=""
 CHECK_ONCE=false
 AFTER_TIMESTAMP=""
-CODEX_REVIEWER_LOGIN="${CODEX_REVIEWER_LOGIN:-codex}"
+CODEX_REVIEWER_LOGIN="${CODEX_REVIEWER_LOGIN:-chatgpt-codex-connector}"
 REACTION_POLL_INTERVAL_SECONDS="${REACTION_POLL_INTERVAL_SECONDS:-300}"
 PR_NUMBERS=()
 
@@ -176,10 +176,6 @@ codex_login_matches() {
     normalized_codex_login=$(normalize_login "$CODEX_REVIEWER_LOGIN")
 
     if [ "$normalized_reaction_login" = "$normalized_codex_login" ]; then
-        return 0
-    fi
-
-    if [ "$CODEX_REVIEWER_LOGIN" = "codex" ] && [[ "$normalized_reaction_login" == *codex* ]]; then
         return 0
     fi
 
