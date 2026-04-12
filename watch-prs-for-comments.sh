@@ -215,11 +215,9 @@ mark_codex_reactions_seen_through_baseline() {
     for ((comment_idx=0; comment_idx<count; comment_idx++)); do
         if [ "$source_type" = "general" ]; then
             comment_id=$(echo "$comments_json" | jq -r ".[$comment_idx].id")
-            LAST_REACTION_SCAN_TIMES[$(comment_scan_key "$source_prefix" "$comment_id")]=$(date +%s)
             reactions=$(fetch_general_comment_reactions "$REPO" "$comment_id")
         else
             comment_id=$(echo "$comments_json" | jq -r ".[$comment_idx].id")
-            LAST_REACTION_SCAN_TIMES[$(comment_scan_key "$source_prefix" "$comment_id")]=$(date +%s)
             reactions=$(fetch_review_comment_reactions "$REPO" "$comment_id")
         fi
 
