@@ -340,8 +340,8 @@ for PR_NUM in "${PR_NUMBERS[@]}"; do
     echo -n "  PR #$PR_NUM: "
     
     PR_DATA=$(gh pr view "$PR_NUM" --repo "$REPO" --json number,title,state 2>/dev/null) || {
-        echo -e "${RED}❌ Failed to fetch${NC}"
-        continue
+        echo -e "${RED}❌ Failed to fetch PR #$PR_NUM metadata${NC}"
+        exit 1
     }
     
     STATE=$(echo "$PR_DATA" | jq -r '.state')
@@ -528,7 +528,10 @@ while true; do
     for PR_NUM in "${PR_NUMBERS[@]}"; do
         [ -z "${LAST_COMMIT_TIMES[$PR_NUM]}" ] && continue
         
-        STATE=$(gh pr view "$PR_NUM" --repo "$REPO" --json state --jq '.state' 2>/dev/null || echo "UNKNOWN")
+        STATE=$(gh pr view "$PR_NUM" --repo "$REPO" --json state --jq '.state' 2>/dev/null) || {
+            echo -e "${RED}❌ Failed to fetch PR #$PR_NUM state${NC}"
+            exit 1
+        }
         if [ "$STATE" != "OPEN" ]; then
             echo -e "${GREEN}✅ PR #$PR_NUM $STATE${NC}"
             unset LAST_COMMIT_TIMES[$PR_NUM]
