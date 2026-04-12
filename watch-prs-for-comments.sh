@@ -604,7 +604,7 @@ if [ $NEW_FOUND -eq 1 ]; then
 fi
 
 if [ $APPROVAL_FOUND -eq 1 ]; then
-    printf '%s\n' "PR review completed: No new issues found. You may now run final Oracle verification pass on this code"
+    printf '%s\n' "Codex PR review completed: No new issues found. If you haven't already: You may now run final Oracle verification pass on this code. Once both Codex reviewer and Oracle have signed off, alert the user that all reviews are complete and the code is ready to merge"
     exit 0
 fi
 
@@ -751,7 +751,7 @@ while true; do
     fi
 
     if [ $APPROVAL_FOUND -eq 1 ]; then
-        printf '%s\n' "PR review completed: No new issues found. You may now run final Oracle verification pass on this code"
+        printf '%s\n' "Codex PR review completed: No new issues found. If you haven't already: You may now run final Oracle verification pass on this code. Once both Codex reviewer and Oracle have signed off, alert the user that all reviews are complete and the code is ready to merge"
         exit 0
     fi
     
