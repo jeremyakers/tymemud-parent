@@ -126,6 +126,17 @@ get_pr_last_commit_date() {
     echo "$commit_date"
 }
 
+effective_baseline_for_pr() {
+    local pr_num=$1
+    local baseline="${LAST_COMMIT_TIMES[$pr_num]}"
+
+    if [ -n "$AFTER_TIMESTAMP" ] && { [ -z "$baseline" ] || [[ "$AFTER_TIMESTAMP" > "$baseline" ]]; }; then
+        baseline="$AFTER_TIMESTAMP"
+    fi
+
+    echo "$baseline"
+}
+
 fetch_general_comment_reactions() {
     local repo=$1
     local comment_id=$2
@@ -502,11 +513,7 @@ APPROVAL_FOUND=0
 for PR_NUM in "${PR_NUMBERS[@]}"; do
     [ -z "${LAST_COMMIT_TIMES[$PR_NUM]}" ] && continue
     
-    if [ -n "$AFTER_TIMESTAMP" ]; then
-        BASELINE="$AFTER_TIMESTAMP"
-    else
-        BASELINE="${LAST_COMMIT_TIMES[$PR_NUM]}"
-    fi
+    BASELINE=$(effective_baseline_for_pr "$PR_NUM")
     
     # Check general comments
     GENERAL=$(fetch_general_comments "$PR_NUM" "$REPO")
@@ -572,11 +579,7 @@ if [ $NEW_FOUND -eq 0 ]; then
     for PR_NUM in "${PR_NUMBERS[@]}"; do
         [ -z "${LAST_COMMIT_TIMES[$PR_NUM]}" ] && continue
 
-        if [ -n "$AFTER_TIMESTAMP" ]; then
-            BASELINE="$AFTER_TIMESTAMP"
-        else
-            BASELINE="${LAST_COMMIT_TIMES[$PR_NUM]}"
-        fi
+        BASELINE=$(effective_baseline_for_pr "$PR_NUM")
 
         GENERAL=$(fetch_general_comments "$PR_NUM" "$REPO")
         if has_new_codex_approval_reaction "$PR_NUM" "general" "$GENERAL" "$BASELINE"; then
@@ -679,11 +682,7 @@ while true; do
         
         NEW_FOUND=0
         
-        if [ -n "$AFTER_TIMESTAMP" ]; then
-            BASELINE="$AFTER_TIMESTAMP"
-        else
-            BASELINE="${LAST_COMMIT_TIMES[$PR_NUM]}"
-        fi
+        BASELINE=$(effective_baseline_for_pr "$PR_NUM")
         
         GENERAL=$(fetch_general_comments "$PR_NUM" "$REPO")
         COUNT=$(echo "$GENERAL" | jq 'length')
