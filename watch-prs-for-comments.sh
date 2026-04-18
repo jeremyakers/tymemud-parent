@@ -126,7 +126,17 @@ get_pr_last_commit_date() {
     echo "$commit_date"
 }
 
-effective_baseline_for_pr() {
+comment_baseline_for_pr() {
+    local pr_num=$1
+
+    if [ -n "$AFTER_TIMESTAMP" ]; then
+        echo "$AFTER_TIMESTAMP"
+    else
+        echo "${LAST_COMMIT_TIMES[$pr_num]}"
+    fi
+}
+
+approval_baseline_for_pr() {
     local pr_num=$1
     local baseline="${LAST_COMMIT_TIMES[$pr_num]}"
 
@@ -529,7 +539,8 @@ APPROVAL_FOUND=0
 for PR_NUM in "${PR_NUMBERS[@]}"; do
     [ -z "${LAST_COMMIT_TIMES[$PR_NUM]}" ] && continue
     
-    BASELINE=$(effective_baseline_for_pr "$PR_NUM")
+    COMMENT_BASELINE=$(comment_baseline_for_pr "$PR_NUM")
+    APPROVAL_BASELINE=$(approval_baseline_for_pr "$PR_NUM")
     
     # Check general comments
     GENERAL=$(fetch_general_comments "$PR_NUM" "$REPO")
@@ -548,7 +559,7 @@ for PR_NUM in "${PR_NUMBERS[@]}"; do
         fi
         
         # Use strict > comparison (exclusive)
-        if [ "$TIME" \> "$BASELINE" ] 2>/dev/null; then
+        if [ "$TIME" \> "$COMMENT_BASELINE" ] 2>/dev/null; then
             NEW_FOUND=1
             
             echo ""
@@ -579,7 +590,7 @@ for PR_NUM in "${PR_NUMBERS[@]}"; do
         [[ "${SEEN_COMMENT_IDS[$PR_NUM]}" == *"rev_${ID},"* ]] && continue
         
         # Use strict > comparison (exclusive)
-        if [ "$TIME" \> "$BASELINE" ] 2>/dev/null; then
+        if [ "$TIME" \> "$COMMENT_BASELINE" ] 2>/dev/null; then
             NEW_FOUND=1
             AUTHOR=$(echo "$REVIEWS" | jq -r ".[$i].user.login")
             BODY=$(echo "$REVIEWS" | jq -r ".[$i].body")
@@ -600,21 +611,22 @@ if [ $NEW_FOUND -eq 0 ]; then
     for PR_NUM in "${PR_NUMBERS[@]}"; do
         [ -z "${LAST_COMMIT_TIMES[$PR_NUM]}" ] && continue
 
-        BASELINE=$(effective_baseline_for_pr "$PR_NUM")
+        COMMENT_BASELINE=$(comment_baseline_for_pr "$PR_NUM")
+        APPROVAL_BASELINE=$(approval_baseline_for_pr "$PR_NUM")
 
         GENERAL=$(fetch_general_comments "$PR_NUM" "$REPO")
-        if has_new_codex_approval_reaction "$PR_NUM" "general" "$GENERAL" "$BASELINE"; then
+        if has_new_codex_approval_reaction "$PR_NUM" "general" "$GENERAL" "$APPROVAL_BASELINE"; then
             APPROVAL_FOUND=1
         fi
 
         REVIEWS=$(fetch_review_comments "$PR_NUM" "$REPO")
-        if has_new_codex_approval_reaction "$PR_NUM" "review" "$REVIEWS" "$BASELINE"; then
+        if has_new_codex_approval_reaction "$PR_NUM" "review" "$REVIEWS" "$APPROVAL_BASELINE"; then
             APPROVAL_FOUND=1
         fi
 
         if should_scan_comment_reactions "prreact" "$PR_NUM"; then
             PR_REACTIONS=$(fetch_pr_reactions "$PR_NUM" "$REPO")
-            if has_new_pr_codex_approval_reaction "$PR_NUM" "$PR_REACTIONS" "$BASELINE"; then
+            if has_new_pr_codex_approval_reaction "$PR_NUM" "$PR_REACTIONS" "$APPROVAL_BASELINE"; then
                 APPROVAL_FOUND=1
             fi
         fi
@@ -703,7 +715,8 @@ while true; do
         
         NEW_FOUND=0
         
-        BASELINE=$(effective_baseline_for_pr "$PR_NUM")
+        COMMENT_BASELINE=$(comment_baseline_for_pr "$PR_NUM")
+        APPROVAL_BASELINE=$(approval_baseline_for_pr "$PR_NUM")
         
         GENERAL=$(fetch_general_comments "$PR_NUM" "$REPO")
         COUNT=$(echo "$GENERAL" | jq 'length')
@@ -720,7 +733,7 @@ while true; do
                 continue
             fi
 
-            if [ "$TIME" \> "$BASELINE" ] 2>/dev/null; then
+            if [ "$TIME" \> "$COMMENT_BASELINE" ] 2>/dev/null; then
                 NEW_FOUND=1
                 
                 echo ""
@@ -755,17 +768,17 @@ while true; do
             exit 2
         fi
 
-        if has_new_codex_approval_reaction "$PR_NUM" "general" "$GENERAL" "$BASELINE"; then
+        if has_new_codex_approval_reaction "$PR_NUM" "general" "$GENERAL" "$APPROVAL_BASELINE"; then
             APPROVAL_FOUND=1
         fi
 
-        if has_new_codex_approval_reaction "$PR_NUM" "review" "$REVIEWS" "$BASELINE"; then
+        if has_new_codex_approval_reaction "$PR_NUM" "review" "$REVIEWS" "$APPROVAL_BASELINE"; then
             APPROVAL_FOUND=1
         fi
 
         if should_scan_comment_reactions "prreact" "$PR_NUM"; then
             PR_REACTIONS=$(fetch_pr_reactions "$PR_NUM" "$REPO")
-            if has_new_pr_codex_approval_reaction "$PR_NUM" "$PR_REACTIONS" "$BASELINE"; then
+            if has_new_pr_codex_approval_reaction "$PR_NUM" "$PR_REACTIONS" "$APPROVAL_BASELINE"; then
                 APPROVAL_FOUND=1
             fi
         fi
