@@ -16,7 +16,7 @@ NC='\033[0m'
 REPO_ARG=""
 CHECK_ONCE=false
 AFTER_TIMESTAMP=""
-CODEX_REVIEWER_LOGIN="${CODEX_REVIEWER_LOGIN:-codex}"
+CODEX_REVIEWER_LOGIN="${CODEX_REVIEWER_LOGIN:-chatgpt-codex-connector}"
 REACTION_POLL_INTERVAL_SECONDS="${REACTION_POLL_INTERVAL_SECONDS:-300}"
 PR_NUMBERS=()
 
@@ -126,6 +126,27 @@ get_pr_last_commit_date() {
     echo "$commit_date"
 }
 
+comment_baseline_for_pr() {
+    local pr_num=$1
+
+    if [ -n "$AFTER_TIMESTAMP" ]; then
+        echo "$AFTER_TIMESTAMP"
+    else
+        echo "${LAST_COMMIT_TIMES[$pr_num]}"
+    fi
+}
+
+approval_baseline_for_pr() {
+    local pr_num=$1
+    local baseline="${LAST_COMMIT_TIMES[$pr_num]}"
+
+    if [ -n "$AFTER_TIMESTAMP" ] && { [ -z "$baseline" ] || [[ "$AFTER_TIMESTAMP" > "$baseline" ]]; }; then
+        baseline="$AFTER_TIMESTAMP"
+    fi
+
+    echo "$baseline"
+}
+
 fetch_general_comment_reactions() {
     local repo=$1
     local comment_id=$2
@@ -152,6 +173,50 @@ fetch_review_comments() {
     local repo=$2
 
     gh api --paginate "repos/$repo/pulls/$pr_num/comments" --jq '.[]' 2>/dev/null | jq -s '.'
+}
+
+fetch_pr_reactions() {
+    local pr_num=$1
+    local repo=$2
+
+    gh api --paginate "repos/$repo/issues/$pr_num/reactions" -H "Accept: application/vnd.github+json" --jq '.[]' 2>/dev/null | jq -s '.'
+}
+
+normalize_login() {
+    local login=$1
+
+    echo "$login" | sed 's/\[bot\]$//'
+}
+
+codex_login_matches() {
+    local reaction_login=$1
+    local normalized_reaction_login=""
+    local normalized_codex_login=""
+
+    normalized_reaction_login=$(normalize_login "$reaction_login")
+    normalized_codex_login=$(normalize_login "$CODEX_REVIEWER_LOGIN")
+
+    if [ "$normalized_reaction_login" = "$normalized_codex_login" ]; then
+        return 0
+    fi
+
+    return 1
+}
+
+is_codex_no_issues_comment() {
+    local author_login=$1
+    local body=$2
+    local normalized_body=""
+
+    codex_login_matches "$author_login" || return 1
+
+    normalized_body=$(printf '%s' "$body" | tr '\n' ' ')
+
+    case "$normalized_body" in
+        "Codex Review: Didn't find any major issues."*) return 0 ;;
+    esac
+
+    return 1
 }
 
 reaction_key() {
@@ -229,7 +294,7 @@ mark_codex_reactions_seen_through_baseline() {
             reaction_login=$(echo "$reactions" | jq -r ".[$reaction_idx].user.login // empty")
             key=$(reaction_key "$source_prefix" "$comment_id" "$reaction_id")
 
-            if [ "$reaction_content" = "+1" ] && [ "$reaction_login" = "$CODEX_REVIEWER_LOGIN" ] && { [ -z "$reaction_time" ] || [ "$reaction_time" = "$baseline" ] || [[ "$reaction_time" < "$baseline" ]]; }; then
+            if [ "$reaction_content" = "+1" ] && codex_login_matches "$reaction_login" && { [ -z "$reaction_time" ] || [ "$reaction_time" = "$baseline" ] || [[ "$reaction_time" < "$baseline" ]]; }; then
                 SEEN_REACTION_IDS[$pr_num]="${SEEN_REACTION_IDS[$pr_num]}${key},"
             fi
         done
@@ -281,11 +346,66 @@ has_new_codex_approval_reaction() {
 
             [[ "${SEEN_REACTION_IDS[$pr_num]}" == *"${key},"* ]] && continue
 
-            if [ "$reaction_content" = "+1" ] && [ "$reaction_login" = "$CODEX_REVIEWER_LOGIN" ] && [ -n "$reaction_time" ] && [[ "$reaction_time" > "$baseline" ]]; then
+            if [ "$reaction_content" = "+1" ] && codex_login_matches "$reaction_login" && [ -n "$reaction_time" ] && [[ "$reaction_time" > "$baseline" ]]; then
                 SEEN_REACTION_IDS[$pr_num]="${SEEN_REACTION_IDS[$pr_num]}${key},"
                 return 0
             fi
         done
+    done
+
+    return 1
+}
+
+mark_pr_reactions_seen_through_baseline() {
+    local pr_num=$1
+    local reactions_json=$2
+    local baseline=$3
+    local reaction_count=0
+    local reaction_id=""
+    local reaction_time=""
+    local reaction_content=""
+    local reaction_login=""
+    local key=""
+
+    reaction_count=$(echo "$reactions_json" | jq 'length')
+    for ((reaction_idx=0; reaction_idx<reaction_count; reaction_idx++)); do
+        reaction_id=$(echo "$reactions_json" | jq -r ".[$reaction_idx].id")
+        reaction_time=$(echo "$reactions_json" | jq -r ".[$reaction_idx].created_at // empty")
+        reaction_content=$(echo "$reactions_json" | jq -r ".[$reaction_idx].content // empty")
+        reaction_login=$(echo "$reactions_json" | jq -r ".[$reaction_idx].user.login // empty")
+        key="prreact_${pr_num}_${reaction_id}"
+
+        if [ "$reaction_content" = "+1" ] && codex_login_matches "$reaction_login" && { [ -z "$reaction_time" ] || [ "$reaction_time" = "$baseline" ] || [[ "$reaction_time" < "$baseline" ]]; }; then
+            SEEN_REACTION_IDS[$pr_num]="${SEEN_REACTION_IDS[$pr_num]}${key},"
+        fi
+    done
+}
+
+has_new_pr_codex_approval_reaction() {
+    local pr_num=$1
+    local reactions_json=$2
+    local baseline=$3
+    local reaction_count=0
+    local reaction_id=""
+    local reaction_time=""
+    local reaction_content=""
+    local reaction_login=""
+    local key=""
+
+    reaction_count=$(echo "$reactions_json" | jq 'length')
+    for ((reaction_idx=0; reaction_idx<reaction_count; reaction_idx++)); do
+        reaction_id=$(echo "$reactions_json" | jq -r ".[$reaction_idx].id")
+        reaction_time=$(echo "$reactions_json" | jq -r ".[$reaction_idx].created_at // empty")
+        reaction_content=$(echo "$reactions_json" | jq -r ".[$reaction_idx].content // empty")
+        reaction_login=$(echo "$reactions_json" | jq -r ".[$reaction_idx].user.login // empty")
+        key="prreact_${pr_num}_${reaction_id}"
+
+        [[ "${SEEN_REACTION_IDS[$pr_num]}" == *"${key},"* ]] && continue
+
+        if [ "$reaction_content" = "+1" ] && codex_login_matches "$reaction_login" && [ -n "$reaction_time" ] && [[ "$reaction_time" > "$baseline" ]]; then
+            SEEN_REACTION_IDS[$pr_num]="${SEEN_REACTION_IDS[$pr_num]}${key},"
+            return 0
+        fi
     done
 
     return 1
@@ -366,6 +486,7 @@ for PR_NUM in "${PR_NUMBERS[@]}"; do
     # Pre-mark older comments/reviews as seen
     GENERAL=$(fetch_general_comments "$PR_NUM" "$REPO")
     REVIEWS=$(fetch_review_comments "$PR_NUM" "$REPO")
+    PR_REACTIONS=$(fetch_pr_reactions "$PR_NUM" "$REPO")
     
     COUNT=$(echo "$GENERAL" | jq 'length')
     for ((i=0; i<COUNT; i++)); do
@@ -398,9 +519,11 @@ for PR_NUM in "${PR_NUMBERS[@]}"; do
     if [ -n "$AFTER_TIMESTAMP" ]; then
         mark_codex_reactions_seen_through_baseline "$PR_NUM" "general" "$GENERAL" "$AFTER_TIMESTAMP"
         mark_codex_reactions_seen_through_baseline "$PR_NUM" "review" "$REVIEWS" "$AFTER_TIMESTAMP"
+        mark_pr_reactions_seen_through_baseline "$PR_NUM" "$PR_REACTIONS" "$AFTER_TIMESTAMP"
     else
         mark_codex_reactions_seen_through_baseline "$PR_NUM" "general" "$GENERAL" "$LAST_COMMIT_TIME"
         mark_codex_reactions_seen_through_baseline "$PR_NUM" "review" "$REVIEWS" "$LAST_COMMIT_TIME"
+        mark_pr_reactions_seen_through_baseline "$PR_NUM" "$PR_REACTIONS" "$LAST_COMMIT_TIME"
     fi
     
     echo -e "${GREEN}✓${NC} $TITLE (last commit: ${LAST_COMMIT_TIME:0:16})"
@@ -416,11 +539,8 @@ APPROVAL_FOUND=0
 for PR_NUM in "${PR_NUMBERS[@]}"; do
     [ -z "${LAST_COMMIT_TIMES[$PR_NUM]}" ] && continue
     
-    if [ -n "$AFTER_TIMESTAMP" ]; then
-        BASELINE="$AFTER_TIMESTAMP"
-    else
-        BASELINE="${LAST_COMMIT_TIMES[$PR_NUM]}"
-    fi
+    COMMENT_BASELINE=$(comment_baseline_for_pr "$PR_NUM")
+    APPROVAL_BASELINE=$(approval_baseline_for_pr "$PR_NUM")
     
     # Check general comments
     GENERAL=$(fetch_general_comments "$PR_NUM" "$REPO")
@@ -432,9 +552,14 @@ for PR_NUM in "${PR_NUMBERS[@]}"; do
         BODY=$(echo "$GENERAL" | jq -r ".[$i].body")
         
         [[ "${SEEN_COMMENT_IDS[$PR_NUM]}" == *"gen_${ID},"* ]] && continue
+
+        if is_codex_no_issues_comment "$AUTHOR" "$BODY"; then
+            SEEN_COMMENT_IDS[$PR_NUM]="${SEEN_COMMENT_IDS[$PR_NUM]}gen_${ID},"
+            continue
+        fi
         
         # Use strict > comparison (exclusive)
-        if [ "$TIME" \> "$BASELINE" ] 2>/dev/null; then
+        if [ "$TIME" \> "$COMMENT_BASELINE" ] 2>/dev/null; then
             NEW_FOUND=1
             
             echo ""
@@ -465,7 +590,7 @@ for PR_NUM in "${PR_NUMBERS[@]}"; do
         [[ "${SEEN_COMMENT_IDS[$PR_NUM]}" == *"rev_${ID},"* ]] && continue
         
         # Use strict > comparison (exclusive)
-        if [ "$TIME" \> "$BASELINE" ] 2>/dev/null; then
+        if [ "$TIME" \> "$COMMENT_BASELINE" ] 2>/dev/null; then
             NEW_FOUND=1
             AUTHOR=$(echo "$REVIEWS" | jq -r ".[$i].user.login")
             BODY=$(echo "$REVIEWS" | jq -r ".[$i].body")
@@ -486,20 +611,24 @@ if [ $NEW_FOUND -eq 0 ]; then
     for PR_NUM in "${PR_NUMBERS[@]}"; do
         [ -z "${LAST_COMMIT_TIMES[$PR_NUM]}" ] && continue
 
-        if [ -n "$AFTER_TIMESTAMP" ]; then
-            BASELINE="$AFTER_TIMESTAMP"
-        else
-            BASELINE="${LAST_COMMIT_TIMES[$PR_NUM]}"
-        fi
+        COMMENT_BASELINE=$(comment_baseline_for_pr "$PR_NUM")
+        APPROVAL_BASELINE=$(approval_baseline_for_pr "$PR_NUM")
 
         GENERAL=$(fetch_general_comments "$PR_NUM" "$REPO")
-        if has_new_codex_approval_reaction "$PR_NUM" "general" "$GENERAL" "$BASELINE"; then
+        if has_new_codex_approval_reaction "$PR_NUM" "general" "$GENERAL" "$APPROVAL_BASELINE"; then
             APPROVAL_FOUND=1
         fi
 
         REVIEWS=$(fetch_review_comments "$PR_NUM" "$REPO")
-        if has_new_codex_approval_reaction "$PR_NUM" "review" "$REVIEWS" "$BASELINE"; then
+        if has_new_codex_approval_reaction "$PR_NUM" "review" "$REVIEWS" "$APPROVAL_BASELINE"; then
             APPROVAL_FOUND=1
+        fi
+
+        if should_scan_comment_reactions "prreact" "$PR_NUM"; then
+            PR_REACTIONS=$(fetch_pr_reactions "$PR_NUM" "$REPO")
+            if has_new_pr_codex_approval_reaction "$PR_NUM" "$PR_REACTIONS" "$APPROVAL_BASELINE"; then
+                APPROVAL_FOUND=1
+            fi
         fi
     done
 fi
@@ -511,7 +640,7 @@ if [ $NEW_FOUND -eq 1 ]; then
 fi
 
 if [ $APPROVAL_FOUND -eq 1 ]; then
-    printf '%s\n' "PR review completed: No new issues found. You may now run final Oracle verification pass on this code"
+    printf '%s\n' "Codex PR review completed: No new issues found. If you haven't already: You may now run final Oracle verification pass on this code. Once both Codex reviewer and Oracle have signed off, alert the user that all reviews are complete and the code is ready to merge"
     exit 0
 fi
 
@@ -559,6 +688,7 @@ while true; do
             
             GENERAL=$(fetch_general_comments "$PR_NUM" "$REPO")
             REVIEWS=$(fetch_review_comments "$PR_NUM" "$REPO")
+            PR_REACTIONS=$(fetch_pr_reactions "$PR_NUM" "$REPO")
             
             COUNT=$(echo "$GENERAL" | jq 'length')
             for ((i=0; i<COUNT; i++)); do
@@ -580,15 +710,13 @@ while true; do
 
             mark_codex_reactions_seen_through_baseline "$PR_NUM" "general" "$GENERAL" "$CURRENT_COMMIT_TIME"
             mark_codex_reactions_seen_through_baseline "$PR_NUM" "review" "$REVIEWS" "$CURRENT_COMMIT_TIME"
+            mark_pr_reactions_seen_through_baseline "$PR_NUM" "$PR_REACTIONS" "$CURRENT_COMMIT_TIME"
         fi
         
         NEW_FOUND=0
         
-        if [ -n "$AFTER_TIMESTAMP" ]; then
-            BASELINE="$AFTER_TIMESTAMP"
-        else
-            BASELINE="${LAST_COMMIT_TIMES[$PR_NUM]}"
-        fi
+        COMMENT_BASELINE=$(comment_baseline_for_pr "$PR_NUM")
+        APPROVAL_BASELINE=$(approval_baseline_for_pr "$PR_NUM")
         
         GENERAL=$(fetch_general_comments "$PR_NUM" "$REPO")
         COUNT=$(echo "$GENERAL" | jq 'length')
@@ -597,10 +725,16 @@ while true; do
             TIME=$(echo "$GENERAL" | jq -r ".[$i].created_at")
             [[ "${SEEN_COMMENT_IDS[$PR_NUM]}" == *"gen_${ID},"* ]] && continue
 
-            if [ "$TIME" \> "$BASELINE" ] 2>/dev/null; then
+            AUTHOR=$(echo "$GENERAL" | jq -r ".[$i].user.login")
+            BODY=$(echo "$GENERAL" | jq -r ".[$i].body")
+
+            if is_codex_no_issues_comment "$AUTHOR" "$BODY"; then
+                SEEN_COMMENT_IDS[$PR_NUM]="${SEEN_COMMENT_IDS[$PR_NUM]}gen_${ID},"
+                continue
+            fi
+
+            if [ "$TIME" \> "$COMMENT_BASELINE" ] 2>/dev/null; then
                 NEW_FOUND=1
-                AUTHOR=$(echo "$GENERAL" | jq -r ".[$i].user.login")
-                BODY=$(echo "$GENERAL" | jq -r ".[$i].body")
                 
                 echo ""
                 echo -e "${YELLOW}🔔 NEW COMMENT on PR #$PR_NUM: ${PR_TITLES[$PR_NUM]}${NC}"
@@ -634,12 +768,19 @@ while true; do
             exit 2
         fi
 
-        if has_new_codex_approval_reaction "$PR_NUM" "general" "$GENERAL" "$BASELINE"; then
+        if has_new_codex_approval_reaction "$PR_NUM" "general" "$GENERAL" "$APPROVAL_BASELINE"; then
             APPROVAL_FOUND=1
         fi
 
-        if has_new_codex_approval_reaction "$PR_NUM" "review" "$REVIEWS" "$BASELINE"; then
+        if has_new_codex_approval_reaction "$PR_NUM" "review" "$REVIEWS" "$APPROVAL_BASELINE"; then
             APPROVAL_FOUND=1
+        fi
+
+        if should_scan_comment_reactions "prreact" "$PR_NUM"; then
+            PR_REACTIONS=$(fetch_pr_reactions "$PR_NUM" "$REPO")
+            if has_new_pr_codex_approval_reaction "$PR_NUM" "$PR_REACTIONS" "$APPROVAL_BASELINE"; then
+                APPROVAL_FOUND=1
+            fi
         fi
     done
 
@@ -649,7 +790,7 @@ while true; do
     fi
 
     if [ $APPROVAL_FOUND -eq 1 ]; then
-        printf '%s\n' "PR review completed: No new issues found. You may now run final Oracle verification pass on this code"
+        printf '%s\n' "Codex PR review completed: No new issues found. If you haven't already: You may now run final Oracle verification pass on this code. Once both Codex reviewer and Oracle have signed off, alert the user that all reviews are complete and the code is ready to merge"
         exit 0
     fi
     
