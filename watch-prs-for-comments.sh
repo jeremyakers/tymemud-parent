@@ -193,6 +193,22 @@ codex_login_matches() {
     return 1
 }
 
+is_codex_no_issues_comment() {
+    local author_login=$1
+    local body=$2
+    local normalized_body=""
+
+    codex_login_matches "$author_login" || return 1
+
+    normalized_body=$(printf '%s' "$body" | tr '\n' ' ')
+
+    case "$normalized_body" in
+        "Codex Review: Didn't find any major issues."*) return 0 ;;
+    esac
+
+    return 1
+}
+
 reaction_key() {
     local source_prefix=$1
     local comment_id=$2
@@ -525,6 +541,11 @@ for PR_NUM in "${PR_NUMBERS[@]}"; do
         BODY=$(echo "$GENERAL" | jq -r ".[$i].body")
         
         [[ "${SEEN_COMMENT_IDS[$PR_NUM]}" == *"gen_${ID},"* ]] && continue
+
+        if is_codex_no_issues_comment "$AUTHOR" "$BODY"; then
+            SEEN_COMMENT_IDS[$PR_NUM]="${SEEN_COMMENT_IDS[$PR_NUM]}gen_${ID},"
+            continue
+        fi
         
         # Use strict > comparison (exclusive)
         if [ "$TIME" \> "$BASELINE" ] 2>/dev/null; then
@@ -695,6 +716,11 @@ while true; do
                 NEW_FOUND=1
                 AUTHOR=$(echo "$GENERAL" | jq -r ".[$i].user.login")
                 BODY=$(echo "$GENERAL" | jq -r ".[$i].body")
+
+                if is_codex_no_issues_comment "$AUTHOR" "$BODY"; then
+                    SEEN_COMMENT_IDS[$PR_NUM]="${SEEN_COMMENT_IDS[$PR_NUM]}gen_${ID},"
+                    continue
+                fi
                 
                 echo ""
                 echo -e "${YELLOW}🔔 NEW COMMENT on PR #$PR_NUM: ${PR_TITLES[$PR_NUM]}${NC}"
