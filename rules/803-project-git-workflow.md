@@ -551,6 +551,32 @@ gh pr create --draft --title "feat(rules): add git workflow management"
 gh pr create --fill
 ```
 
+**Immediate post-PR follow-up (agent workflow):**
+
+After creating a PR, agents must not stop and ask whether monitoring should begin. The required sequence is:
+
+1. Print the PR URL to the user in chat immediately
+2. Start the PR watcher immediately after that
+3. Run the watcher in the foreground with a 2 hour timeout
+
+Examples:
+
+```bash
+# Same repo / single PR
+PR_URL=$(gh pr create --fill)
+# Print $PR_URL to the user in chat
+timeout 2h ./watch-prs-for-comments.sh owner/repo#123
+
+# Mixed repos in one watcher invocation
+timeout 2h ./watch-prs-for-comments.sh owner/repo#123 other-owner/other-repo#45
+```
+
+**Important:**
+- Prefer `owner/repo#123` for explicit repo-qualified monitoring
+- `--repo owner/repo 123` remains valid for same-repo batches
+- Use repeated `--after owner/repo#123=<timestamp>` flags when each PR needs its own resume point
+- Do not default to background/tmux monitoring in agent instructions
+
 **Using GitHub Web UI:**
 1. Navigate to repository on GitHub
 2. Click "Pull requests", then click "New pull request"
