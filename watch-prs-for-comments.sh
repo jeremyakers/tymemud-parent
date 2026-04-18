@@ -712,15 +712,16 @@ while true; do
             TIME=$(echo "$GENERAL" | jq -r ".[$i].created_at")
             [[ "${SEEN_COMMENT_IDS[$PR_NUM]}" == *"gen_${ID},"* ]] && continue
 
+            AUTHOR=$(echo "$GENERAL" | jq -r ".[$i].user.login")
+            BODY=$(echo "$GENERAL" | jq -r ".[$i].body")
+
+            if is_codex_no_issues_comment "$AUTHOR" "$BODY"; then
+                SEEN_COMMENT_IDS[$PR_NUM]="${SEEN_COMMENT_IDS[$PR_NUM]}gen_${ID},"
+                continue
+            fi
+
             if [ "$TIME" \> "$BASELINE" ] 2>/dev/null; then
                 NEW_FOUND=1
-                AUTHOR=$(echo "$GENERAL" | jq -r ".[$i].user.login")
-                BODY=$(echo "$GENERAL" | jq -r ".[$i].body")
-
-                if is_codex_no_issues_comment "$AUTHOR" "$BODY"; then
-                    SEEN_COMMENT_IDS[$PR_NUM]="${SEEN_COMMENT_IDS[$PR_NUM]}gen_${ID},"
-                    continue
-                fi
                 
                 echo ""
                 echo -e "${YELLOW}🔔 NEW COMMENT on PR #$PR_NUM: ${PR_TITLES[$PR_NUM]}${NC}"
