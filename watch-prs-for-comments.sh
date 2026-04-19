@@ -28,6 +28,7 @@ declare -A KEY_TO_AFTER=()
 declare -A KEY_TO_LATEST_ACTIVITY_TIME=()
 declare -A KEY_TO_LATEST_ACTIVITY_TYPE=()
 declare -A KEY_TO_NESTED_REACTION_SCAN_EPOCH=()
+declare -A KEY_TO_FORCE_REPORT_NESTED_REACTION_SCAN=()
 APPROVAL_SIGNAL_FOUND=0
 
 usage() {
@@ -503,6 +504,7 @@ scan_pr_activity() {
     local comment_id
     local needs_nested_reaction_scan=true
     local should_scan_nested_reaction_endpoints=true
+    local force_report_nested_reaction_scan="${KEY_TO_FORCE_REPORT_NESTED_REACTION_SCAN[$key]:-false}"
 
     register_latest_activity "$key" "${KEY_TO_LAST_COMMIT[$key]}" "head commit"
 
@@ -595,7 +597,17 @@ scan_pr_activity() {
         should_scan_nested_reaction_endpoints=false
     fi
 
+    if [[ "$report_new" == "true" && "$force_report_nested_reaction_scan" == "true" ]]; then
+        should_scan_nested_reaction_endpoints=true
+    fi
+
     if [[ "$should_scan_nested_reaction_endpoints" == true && ( "$report_new" == "false" || "$needs_nested_reaction_scan" == true ) ]]; then
+        if [[ "$report_new" == "false" && "$throttle_nested_reactions" == "true" ]]; then
+            KEY_TO_FORCE_REPORT_NESTED_REACTION_SCAN["$key"]=true
+        else
+            KEY_TO_FORCE_REPORT_NESTED_REACTION_SCAN["$key"]=false
+        fi
+
         mark_nested_reaction_scan "$key"
         count=$(jq 'length' <<<"$issue_comments")
         for ((i=0; i<count; i++)); do
@@ -610,6 +622,8 @@ scan_pr_activity() {
             file=$(jq -r ".[$i].path // \"unknown\"" <<<"$review_comments")
             process_reactions_for_review_comment "$repo" "$comment_id" "$key" "$baseline" "$file" "$report_new"
         done
+    else
+        KEY_TO_FORCE_REPORT_NESTED_REACTION_SCAN["$key"]=false
     fi
 }
 
@@ -879,6 +893,7 @@ monitor_loop() {
 
             KEY_TO_LATEST_ACTIVITY_TIME["$key"]=""
             KEY_TO_LATEST_ACTIVITY_TYPE["$key"]=""
+            KEY_TO_FORCE_REPORT_NESTED_REACTION_SCAN["$key"]=false
 
             scan_pr_activity "$key" "${KEY_TO_AFTER[$key]:-${KEY_TO_LAST_COMMIT[$key]}}" false true
             validate_after_cutoffs
