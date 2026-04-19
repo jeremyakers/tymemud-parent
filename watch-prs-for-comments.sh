@@ -313,7 +313,13 @@ runtime_baseline_cursor() {
 effective_baseline_for_key() {
     local key="$1"
     local cursor=""
+    local explicit_after="${KEY_TO_AFTER[$key]:-}"
     local latest_commit="${KEY_TO_LAST_COMMIT[$key]}"
+
+    if [[ -n "$explicit_after" ]]; then
+        printf '%s\n' "$explicit_after"
+        return 0
+    fi
 
     cursor="$(runtime_baseline_cursor "$key")"
     if [[ -z "$cursor" ]]; then

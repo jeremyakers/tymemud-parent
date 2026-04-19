@@ -105,3 +105,9 @@
 - Narrowed the wording in both watcher-facing docs from generic “OpenCode tool timeout” language to explicit OpenCode `bash` or `shell` tool language, because that is the exact tool surface the reviewer said agents must configure.
 - Standardized the requirement as “the longest allowed value, currently `7200000` ms, which is 2 hours” so the docs express both the durable rule and the current OpenCode limit without implying a shell `timeout` wrapper.
 - Kept all watcher startup examples as direct foreground watcher commands and preserved the mandatory sequence verbatim: print PR URL, start immediately, stay in the foreground, no approval pause.
+
+## 2026-04-19 18:46:22Z — Explicit after cutoff fix decision (Sisyphus-Junior)
+
+- Implemented the reviewer-requested fix only in `watch-prs-for-comments.sh:effective_baseline_for_key()`: the helper now returns `KEY_TO_AFTER[$key]` immediately when an explicit operator cutoff exists, and only falls through to the existing `runtime_baseline_cursor()` plus commit clamp when the watcher is using surfaced runtime state.
+- Left `runtime_baseline_cursor()` unchanged on purpose so the surfaced `KEY_TO_SURFACED_CURSOR` rewind-by-one-second logic still feeds the commit clamp exactly as before; no new state maps, no broader baseline model, and no control-flow changes were introduced.
+- Captured the required proof set in `.sisyphus/evidence/task-explicit-after-fix.log` and `.sisyphus/evidence/task-explicit-after-fix-error.log` so QA can verify both halves of the contract directly: the explicit `#102` approval is suppressed after `--after 10:05:00Z`, and the preserved `#107`, `#105`, and mixed-repo repeated `--after` regressions remain green.

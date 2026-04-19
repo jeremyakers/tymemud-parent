@@ -88,3 +88,9 @@
 - The reviewer wanted one more level of precision beyond “OpenCode tool timeout”: the docs now need to name the OpenCode `bash` or `shell` tool invocation directly so agents do not mistake this for a generic timeout on any tool.
 - The clearest wording is to pair the scope and the limit in one sentence: use the longest timeout allowed on the `bash` or `shell` tool, currently `7200000` ms, which is 2 hours.
 - The safest way to preserve workflow behavior is to leave the watcher command examples as plain foreground `./watch-prs-for-comments.sh ...` invocations and keep the timeout guidance in prose, not in a shell wrapper example.
+
+## 2026-04-19 18:46:22Z — Explicit after cutoff follow-up findings (Sisyphus-Junior)
+
+- The live bug was exactly the helper boundary in `watch-prs-for-comments.sh`: `effective_baseline_for_key()` still treated operator `KEY_TO_AFTER` and runtime surfaced cursors as one clamped path, so a valid post-commit explicit `--after` on `example/repo#102` got forced backward to the `10:00` commit timestamp and re-surfaced the `10:05` approval.
+- The smallest safe fix was to make explicit `KEY_TO_AFTER[$key]` authoritative before any runtime cursor math, while leaving the surfaced `KEY_TO_SURFACED_CURSOR` path behind `runtime_baseline_cursor()` unchanged so the restart-race rewind/clamp behavior for `example/repo#107` still holds.
+- Fresh fixture evidence in `.sisyphus/evidence/task-explicit-after-fix.log` now shows the intended split: `example/repo#102` with `--after ...10:05:00Z` exits `0` with `✓ No pending activity.` and no approval banner, while `example/repo#105` still exits `2`, `example/repo#107` still exits `2` after the waiting message, and the mixed-repo repeated `--after` pair still exits `0` cleanly.

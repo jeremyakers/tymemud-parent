@@ -1,0 +1,19 @@
+assertions:
+- shellcheck_exit_zero: PASS
+- explicit_after_102_exit_zero: PASS
+- explicit_after_102_no_pending_activity: PASS
+- explicit_after_102_no_new_codex_banner: PASS
+- explicit_after_102_no_approval_banner: PASS
+- restart_race_107_exit_two: PASS
+- restart_race_107_waiting_boundary_message: PASS
+- actionable_precedence_105_exit_two: PASS
+- actionable_precedence_105_new_pr_comment_banner: PASS
+- mixed_repo_repeated_after_exit_zero: PASS
+- mixed_repo_repeated_after_no_pending_activity: PASS
+
+grep_targets:
+- literal_absent_in_102: NEW CODEX
+- literal_absent_in_102: Codex approval/no-issues signal found
+- literal_present_in_107: Earlier actionable feedback is visible
+- literal_present_in_105: NEW PR COMMENT on example/repo#105
+- literal_present_in_mixed: example/other#201
