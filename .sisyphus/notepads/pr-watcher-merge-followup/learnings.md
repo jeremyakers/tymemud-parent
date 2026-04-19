@@ -63,3 +63,9 @@
 - A surfaced timestamp alone is still too weak when multiple events share the same second. The stable minimal fix was to rewind only the runtime surfaced cursor by one second when computing the next baseline, then suppress duplicates with per-event tokens scoped to the current watcher process.
 - The deterministic `example/repo#107` fixture proves the exact operator-visible behavior the user wanted: first sweep prints the pre-commit actionable comment at `2026-04-18T09:55:00Z`, the watcher keeps waiting with an explicit latest-cycle warning, and a later post-commit no-issues review boundary at `2026-04-18T10:06:00Z` causes one consolidated exit `2`.
 - The preserved contract evidence stayed intact in the same proof bundle: `example/repo#105` still exits `2` for actionable-over-approval precedence, mixed-repo selectors still initialize `example/repo#102` and `example/other#201` together, repeated per-PR `--after` still works, and the throttle fixture still shows top-level counters at `9` while nested reaction counters remain `1`.
+
+## 2026-04-19 16:05:00Z — Timeout wording follow-up findings (Sisyphus-Junior)
+
+- The reviewer concern was documentation-only: the prior wording made `timeout 2h ./watch-prs-for-comments.sh ...` read like the main enforcement point, but the real enforced limit is the OpenCode agent tool timeout set to `7200000` ms.
+- The safest wording keeps the shell command examples simple foreground watcher invocations, then states separately that `timeout 2h` is only a valid plain-shell wrapper example when the watcher is launched outside the OpenCode tool wrapper.
+- The workflow contract still needs explicit sequencing language in both docs: print the PR URL first, start the watcher immediately after that, keep it in the foreground, and do not pause for approval between those steps.

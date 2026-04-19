@@ -81,3 +81,9 @@
 - Defined the effective scan baseline as the earlier of latest commit metadata and the runtime cursor seed, where the runtime cursor is the explicit `--after` seed until something actionable is surfaced. Once actionable feedback is printed, the runtime baseline rewinds that surfaced second by one second so same-timestamp follow-up activity is re-fetched safely.
 - Treated pre-latest-commit actionable comments and review bodies as visible-but-pending instead of immediate exits, and treated post-latest-commit review activity or approval/no-issues signals as the exit boundary when pending pre-commit actionable feedback exists. That preserves `actionable > approval/no-issues > no activity` while still waiting for the latest review cycle to finish.
 - Added one focused fixture, `example/repo#107`, to `.sisyphus/testbin/gh` instead of broadening the harness architecture. It models the settled race directly: earlier actionable comment, later post-commit review boundary, single consolidated actionable exit.
+
+## 2026-04-19 16:05:00Z — Timeout wording follow-up decisions (Sisyphus-Junior)
+
+- Updated both `rules/803-project-git-workflow.md` and `.opencode/skill/pr-monitor.md` so the 2 hour requirement is documented as the OpenCode tool timeout, `7200000` ms, instead of treating the shell `timeout 2h` wrapper as the primary rule.
+- Kept the immediate post-PR sequence explicit and unchanged: print the PR URL in chat, start the watcher immediately, keep it in the foreground, and do not stop to ask for approval before monitoring.
+- Left `timeout 2h ./watch-prs-for-comments.sh ...` in the docs only as an allowed plain-shell example for non-OpenCode launches, which preserves shell accuracy without regressing the reviewer-requested clarification.
