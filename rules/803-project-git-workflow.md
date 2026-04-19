@@ -558,7 +558,7 @@ After creating a PR, agents must not stop and ask whether monitoring should begi
 1. Print the PR URL to the user in chat immediately
 2. Start the PR watcher immediately after that
 3. Run the watcher in the foreground
-4. If the watcher is started through the OpenCode agent command line tool, set that tool timeout to the 2 hour maximum, `7200000` ms
+4. If the watcher is started through the OpenCode `bash` or `shell` tool invocation, set that tool timeout to the longest allowed value, currently `7200000` ms, which is 2 hours
 
 Examples:
 
@@ -572,7 +572,7 @@ PR_URL=$(gh pr create --fill)
 ./watch-prs-for-comments.sh owner/repo#123 other-owner/other-repo#45
 ```
 
-If you are launching the watcher from a plain shell outside the OpenCode tool wrapper, `timeout 2h ./watch-prs-for-comments.sh ...` is still a valid shell example. Do not document that shell wrapper as the primary timeout requirement when the real requirement is the OpenCode tool timeout.
+Document the watcher timeout requirement only as the OpenCode `bash` or `shell` tool timeout, set to the longest allowed value, currently `7200000` ms, which is 2 hours.
 
 **Important:**
 - Prefer `owner/repo#123` for explicit repo-qualified monitoring
