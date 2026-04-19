@@ -87,3 +87,9 @@
 - Updated both `rules/803-project-git-workflow.md` and `.opencode/skill/pr-monitor.md` so the 2 hour requirement is documented as the OpenCode tool timeout, `7200000` ms, instead of treating the shell `timeout 2h` wrapper as the primary rule.
 - Kept the immediate post-PR sequence explicit and unchanged: print the PR URL in chat, start the watcher immediately, keep it in the foreground, and do not stop to ask for approval before monitoring.
 - Left `timeout 2h ./watch-prs-for-comments.sh ...` in the docs only as an allowed plain-shell example for non-OpenCode launches, which preserves shell accuracy without regressing the reviewer-requested clarification.
+
+## 2026-04-19 16:49:20Z — Forced report nested reaction gate decision (Sisyphus-Junior)
+
+- Implemented the reviewer-requested fix only at the final nested-reaction execution gate in `watch-prs-for-comments.sh`: the gate now treats `force_report_nested_reaction_scan=true` as sufficient to run nested reaction endpoints during that one reporting pass, even if earlier top-level actionable activity set `needs_nested_reaction_scan=false`.
+- Left `KEY_TO_FORCE_REPORT_NESTED_REACTION_SCAN` arming and clearing behavior untouched, so ordinary polling still honors the interval throttle and does not globally unthrottle reporting passes.
+- Chose not to modify `.sisyphus/testbin/gh`; the existing deterministic `example/repo#106`, `#103`, `#105`, and `#107` fixtures were already sufficient once the evidence run used clean fixture directories and the documented `--after` seed for the restart-race proof.

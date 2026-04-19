@@ -69,3 +69,10 @@
 - The reviewer concern was documentation-only: the prior wording made `timeout 2h ./watch-prs-for-comments.sh ...` read like the main enforcement point, but the real enforced limit is the OpenCode agent tool timeout set to `7200000` ms.
 - The safest wording keeps the shell command examples simple foreground watcher invocations, then states separately that `timeout 2h` is only a valid plain-shell wrapper example when the watcher is launched outside the OpenCode tool wrapper.
 - The workflow contract still needs explicit sequencing language in both docs: print the PR URL first, start the watcher immediately after that, keep it in the foreground, and do not pause for approval between those steps.
+
+## 2026-04-19 16:49:20Z — Forced report nested reaction gate findings (Sisyphus-Junior)
+
+- The confirmed live bug was exactly the final nested-reaction execution gate: `force_report_nested_reaction_scan` could reopen `should_scan_nested_reaction_endpoints`, but the later `needs_nested_reaction_scan` check still suppressed the forced reporting pass after new top-level actionable feedback.
+- The smallest safe fix was to let `force_report_nested_reaction_scan` satisfy that same final gate directly, leaving the throttle interval, arming/reset behavior, and two-pass `monitor_loop()` flow unchanged.
+- Fresh deterministic evidence in `.sisyphus/evidence/task-force-report-fix.log` now shows `example/repo#106` surfacing the nested Codex `+1` as `Type: issue comment reaction` with `nested_issue_reactions=3`, while `example/repo#103` still pins `nested_issue_reactions=1` and `nested_review_reactions=1` with top-level counters at `9`.
+- The preserved regression checks remained green in the same bundle: `example/repo#105` still exits `2` for actionable precedence, and `example/repo#107` still follows the restart-race path with explicit `--after` seeding and exit `2`.
