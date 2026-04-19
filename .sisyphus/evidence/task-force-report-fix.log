@@ -1,0 +1,128 @@
+=== shellcheck_watcher ===
+COMMAND: shellcheck watch-prs-for-comments.sh
+EXIT: 0
+STDOUT:
+
+
+=== forced_report_nested_approval_106 ===
+COMMAND: ./watch-prs-for-comments.sh example/repo#106
+EXIT: 0
+STDOUT:
+[0;34m🔍 Initializing monitors for:[0m
+[0;34m   - example/repo#106[0m
+
+  [0;32m✓[0m example/repo#106: Mock PR 106 (last commit: 2026-04-18T10:00)
+[0;34m     https://github.com/example/repo/pull/106[0m
+
+[0;34m👀 Checking for existing new activity...[0m
+[0;32m✓ No pending activity. Starting monitor...[0m
+[1;33m   Press Ctrl+C to stop[0m
+
+
+[1;33m═══════════════════════════════════════════════════════════════[0m
+[1;33m🔔 NEW CODEX 👍 on example/repo#106: Mock PR 106[0m
+[1;33m   Type: issue comment reaction[0m
+[1;33m   Context: pull request conversation comment approval signal[0m
+[1;33m   Posted: 2026-04-18T10:06:00Z[0m
+[1;33m═══════════════════════════════════════════════════════════════[0m
+From: @chatgpt-codex-connector[bot]
+[1;33m───────────────────────────────────────────────────────────────[0m
+[0;34mTo ignore this activity and future ones on this PR, restart with:[0m
+[0;34m   --after "example/repo#106=2026-04-18T10:06:00Z"[0m
+
+
+[0;32m✅ Codex approval/no-issues signal found. No new actionable feedback.[0m
+Codex PR review completed: No new issues found. If you haven't already: You may now run final Oracle verification pass on this code. Once both Codex reviewer and Oracle have signed off, alert the user that all reviews are complete and the code is ready to merge
+
+FIXTURE_DIR: .sisyphus/evidence/gh-fixture-task-force-report-106
+FIXTURE_COUNTS:
+date=5
+nested_issue_reactions=3
+
+=== throttle_invariant_103 ===
+COMMAND: timeout 95s ./watch-prs-for-comments.sh example/repo#103
+EXIT: 124
+STDOUT:
+[0;34m🔍 Initializing monitors for:[0m
+[0;34m   - example/repo#103[0m
+
+  [0;32m✓[0m example/repo#103: Mock PR 103 (last commit: 2026-04-18T10:00)
+[0;34m     https://github.com/example/repo/pull/103[0m
+
+[0;34m👀 Checking for existing new activity...[0m
+[0;32m✓ No pending activity. Starting monitor...[0m
+[1;33m   Press Ctrl+C to stop[0m
+
+
+FIXTURE_DIR: .sisyphus/evidence/gh-fixture-task-force-report-103
+FIXTURE_COUNTS:
+nested_issue_reactions=1
+nested_review_reactions=1
+top_level_issue_comments=9
+top_level_pr_reactions=9
+top_level_review_comments=9
+top_level_reviews=9
+
+=== actionable_precedence_105 ===
+COMMAND: ./watch-prs-for-comments.sh --check-once example/repo#105
+EXIT: 2
+STDOUT:
+[0;34m🔍 Initializing monitors for:[0m
+[0;34m   - example/repo#105[0m
+
+  [0;32m✓[0m example/repo#105: Mock PR 105 (last commit: 2026-04-18T10:00)
+[0;34m     https://github.com/example/repo/pull/105[0m
+
+[0;34m👀 Checking for existing new activity...[0m
+
+[1;33m═══════════════════════════════════════════════════════════════[0m
+[1;33m🔔 NEW PR COMMENT on example/repo#105: Mock PR 105[0m
+[1;33m   Posted: 2026-04-18T10:10:00Z[0m
+[1;33m═══════════════════════════════════════════════════════════════[0m
+From: @reviewer
+
+Please address the failing edge case.
+[1;33m───────────────────────────────────────────────────────────────[0m
+[0;34mTo ignore this activity and future ones on this PR, restart with:[0m
+[0;34m   --after "example/repo#105=2026-04-18T10:10:00Z"[0m
+
+
+[0;32m📋 Found new activity to address. Exiting so the agent can process it.[0m
+
+FIXTURE_DIR: .sisyphus/evidence/gh-fixture-task-force-report-105
+
+=== restart_race_107 ===
+COMMAND: timeout 3s ./watch-prs-for-comments.sh --after example/repo#107=2026-04-18T09:50:00Z example/repo#107
+EXIT: 2
+STDOUT:
+[0;34m🔍 Initializing monitors for:[0m
+[0;34m   - example/repo#107[0m
+
+  [0;32m✓[0m example/repo#107: Mock PR 107 (last commit: 2026-04-18T10:00)
+[0;34m     https://github.com/example/repo/pull/107[0m
+[0;34m     After: 2026-04-18T09:50:00Z[0m
+
+[0;34m👀 Checking for existing new activity...[0m
+
+[1;33m═══════════════════════════════════════════════════════════════[0m
+[1;33m🔔 NEW PR COMMENT on example/repo#107: Mock PR 107[0m
+[1;33m   Posted: 2026-04-18T09:55:00Z[0m
+[1;33m═══════════════════════════════════════════════════════════════[0m
+From: @reviewer
+
+Please still fix the restart race.
+[1;33m───────────────────────────────────────────────────────────────[0m
+[0;34mTo ignore this activity and future ones on this PR, restart with:[0m
+[0;34m   --after "example/repo#107=2026-04-18T09:55:00Z"[0m
+
+[1;33m⏳ Earlier actionable feedback is visible, but the latest review cycle is still in progress. Waiting for a post-commit review signal before exiting.[0m
+[1;33m   Press Ctrl+C to stop[0m
+
+
+[0;32m📋 Found new activity to address. Exiting so the agent can process it.[0m
+
+FIXTURE_DIR: .sisyphus/evidence/gh-fixture-task-force-report-107
+FIXTURE_COUNTS:
+race_issue_comments=4
+race_reviews=4
+

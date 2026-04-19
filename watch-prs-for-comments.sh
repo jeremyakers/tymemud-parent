@@ -734,7 +734,7 @@ scan_pr_activity() {
         should_scan_nested_reaction_endpoints=true
     fi
 
-    if [[ "$should_scan_nested_reaction_endpoints" == true && ( "$report_new" == "false" || "$needs_nested_reaction_scan" == true ) ]]; then
+    if [[ "$should_scan_nested_reaction_endpoints" == true && ( "$report_new" == "false" || "$needs_nested_reaction_scan" == true || "$force_report_nested_reaction_scan" == "true" ) ]]; then
         if [[ "$report_new" == "false" && "$throttle_nested_reactions" == "true" ]]; then
             KEY_TO_FORCE_REPORT_NESTED_REACTION_SCAN["$key"]=true
         else
