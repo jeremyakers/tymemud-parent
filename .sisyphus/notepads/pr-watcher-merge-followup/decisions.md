@@ -135,3 +135,9 @@
 - Added per-PR approval tracking with `KEY_TO_APPROVAL_SIGNAL_FOUND` plus `KEY_TO_IS_OPEN`, and introduced `all_open_prs_have_approval_signal()` so approval/no-issues success only fires when every still-open watched PR has produced its own approval signal.
 - Reset review-cycle approval state in `reset_review_cycle_runtime_state()`, mark keys open/closed in metadata refresh, and leave actionable aggregation unchanged so actionable feedback still preempts success immediately.
 - Captured the mixed and multi-approval proofs in `.sisyphus/evidence/task-all-pr-approval-fix.log` and `.sisyphus/evidence/task-all-pr-approval-fix-error.log`: `#102 + #104` succeed, `#102 + #201` waits, and `#107 + #102` still exits `2`.
+
+## 2026-04-19 22:31:10Z — Explicit codex-login override decision (Atlas)
+
+- Introduced `DEFAULT_CODEX_REVIEWER_LOGIN` and changed `is_codex_actor()` so hardcoded fallback aliases are only accepted when the configured reviewer remains the default. An explicit `--codex-login` override now enforces an exact reviewer match.
+- Kept the default behavior unchanged for existing users: `chatgpt-codex-connector[bot]`, `chatgpt-codex-connector`, and `codex` still count when no override is supplied.
+- Captured the proof in `.sisyphus/evidence/task-codex-login-override-fix.log` and `.sisyphus/evidence/task-codex-login-override-fix-error.log`: the default login still approves `#102`, while a custom override blocks that fallback approval and continues monitoring.

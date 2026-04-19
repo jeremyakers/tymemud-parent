@@ -11,9 +11,10 @@ YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
 NC='\033[0m'
 
+DEFAULT_CODEX_REVIEWER_LOGIN='chatgpt-codex-connector[bot]'
 REPO_ARG=""
 CHECK_ONCE=false
-CODEX_REVIEWER_LOGIN="${CODEX_REVIEWER_LOGIN:-chatgpt-codex-connector[bot]}"
+CODEX_REVIEWER_LOGIN="${CODEX_REVIEWER_LOGIN:-$DEFAULT_CODEX_REVIEWER_LOGIN}"
 REACTION_POLL_INTERVAL_SECONDS="${REACTION_POLL_INTERVAL_SECONDS:-300}"
 
 declare -a RAW_PR_ARGS=()
@@ -91,8 +92,15 @@ is_codex_actor() {
     login="$(normalize_login "$1")"
     local custom
     custom="$(normalize_login "$CODEX_REVIEWER_LOGIN")"
+    local default_login
+    default_login="$(normalize_login "$DEFAULT_CODEX_REVIEWER_LOGIN")"
 
     [[ "$login" == "$custom" ]] && return 0
+
+    if [[ "$custom" != "$default_login" ]]; then
+        return 1
+    fi
+
     [[ "$login" == "codex" ]] && return 0
     [[ "$login" == "chatgpt-codex-connector" ]] && return 0
     return 1

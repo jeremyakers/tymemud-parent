@@ -1,0 +1,7 @@
+assertions:
+- shellcheck_exit_zero: PASS
+- default_login_approval_exit_zero: PASS
+- default_login_success_banner: PASS
+- override_blocks_fallback_timeout: PASS
+- override_blocks_fallback_no_success: PASS
+- override_actionable_exit_two: PASS

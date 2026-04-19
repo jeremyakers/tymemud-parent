@@ -118,3 +118,9 @@
 - The previous success rule was still too loose: it allowed a single PR approval/no-issues signal to satisfy the global success condition as long as no actionable feedback was pending. That meant a second still-open PR with no approval yet could be silently skipped.
 - The corrected rule is per-open-PR: success only happens when every still-open watched PR has produced its own approval/no-issues signal, while actionable feedback still wins immediately.
 - Fresh evidence in `.sisyphus/evidence/task-all-pr-approval-fix.log` now shows `#102 + #104` exiting `0`, `#102 + #201` continuing to wait without a success banner, and `#107 + #102` still exiting `2` because actionable feedback outranks approval.
+
+## 2026-04-19 22:31:10Z — Explicit codex-login override findings (Atlas)
+
+- The live bug was in `is_codex_actor()`: even when `--codex-login` supplied a specific reviewer, the helper still accepted the hardcoded fallback aliases `codex` and `chatgpt-codex-connector`, so an approval from the wrong bot could still satisfy the watcher.
+- The smallest safe fix was to introduce a `DEFAULT_CODEX_REVIEWER_LOGIN` constant and treat fallback aliases as valid only when the configured reviewer is still the default. Once the caller overrides `--codex-login`, matching becomes exact.
+- Fresh evidence in `.sisyphus/evidence/task-codex-login-override-fix.log` now shows the default reviewer still approving `#102`, while `--codex-login custom-review-bot` blocks the fallback approval and keeps monitoring instead of exiting success.
