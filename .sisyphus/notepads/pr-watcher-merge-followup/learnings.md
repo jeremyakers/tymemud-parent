@@ -112,3 +112,9 @@
 - The `validate_after_cutoffs` failure was not just placement; the throttled validation pass could skip nested reactions and leave `KEY_TO_LATEST_ACTIVITY_TIME` regressed to top-level activity. Moving validation after the full reporting pass and arming a forced nested scan when the validation pass skips nested endpoints fixes the reproduced `#109` restart case.
 - Closed PRs must be treated as no longer participating in pending-actionable aggregation. Resetting review-cycle runtime state and clearing latest-activity fields before returning on a non-`OPEN` state prevents stale `KEY_TO_PENDING_PRECOMMIT_ACTIONABLE` from blocking approval success on other still-open PRs.
 - Fresh evidence in `.sisyphus/evidence/task-latest-fixes.log` now shows `example/repo#109` timing out cleanly instead of failing `--after`, `example/repo#110 + #102` exiting `0` with the approval banner after `#110` closes, and explicit `#102` behavior staying green.
+
+## 2026-04-19 21:24:10Z — All-PR approval requirement findings (Atlas)
+
+- The previous success rule was still too loose: it allowed a single PR approval/no-issues signal to satisfy the global success condition as long as no actionable feedback was pending. That meant a second still-open PR with no approval yet could be silently skipped.
+- The corrected rule is per-open-PR: success only happens when every still-open watched PR has produced its own approval/no-issues signal, while actionable feedback still wins immediately.
+- Fresh evidence in `.sisyphus/evidence/task-all-pr-approval-fix.log` now shows `#102 + #104` exiting `0`, `#102 + #201` continuing to wait without a success banner, and `#107 + #102` still exiting `2` because actionable feedback outranks approval.

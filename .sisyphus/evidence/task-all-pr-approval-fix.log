@@ -1,0 +1,134 @@
+[shellcheck]
+COMMAND=shellcheck "watch-prs-for-comments.sh"
+EXIT_CODE=0
+OUTPUT:
+
+[all_approved_102_104]
+COMMAND=PATH="$PWD/.sisyphus/testbin:$PATH" ./watch-prs-for-comments.sh --check-once example/repo#102 example/repo#104
+EXIT_CODE=0
+OUTPUT:
+[0;34m🔍 Initializing monitors for:[0m
+[0;34m   - example/repo#102[0m
+[0;34m   - example/repo#104[0m
+
+  [0;32m✓[0m example/repo#102: Mock PR 102 (last commit: 2026-04-18T10:00)
+[0;34m     https://github.com/example/repo/pull/102[0m
+  [0;32m✓[0m example/repo#104: Mock PR 104 (last commit: 2026-04-18T10:00)
+[0;34m     https://github.com/example/repo/pull/104[0m
+
+[0;34m👀 Checking for existing new activity...[0m
+
+[1;33m═══════════════════════════════════════════════════════════════[0m
+[1;33m🔔 NEW CODEX 👍 on example/repo#102: Mock PR 102[0m
+[1;33m   Type: pr reaction[0m
+[1;33m   Context: pull request approval signal[0m
+[1;33m   Posted: 2026-04-18T10:05:00Z[0m
+[1;33m═══════════════════════════════════════════════════════════════[0m
+From: @chatgpt-codex-connector[bot]
+[1;33m───────────────────────────────────────────────────────────────[0m
+[0;34mTo ignore this activity and future ones on this PR, restart with:[0m
+[0;34m   --after "example/repo#102=2026-04-18T10:05:00Z"[0m
+
+
+[0;32m✅ Codex approval/no-issues signal found. No new actionable feedback.[0m
+Codex PR review completed: No new issues found. If you haven't already: You may now run final Oracle verification pass on this code. Once both Codex reviewer and Oracle have signed off, alert the user that all reviews are complete and the code is ready to merge
+
+[not_all_approved_102_201]
+COMMAND=PATH="$PWD/.sisyphus/testbin:$PATH" /usr/bin/timeout 3s ./watch-prs-for-comments.sh example/repo#102 example/other#201
+EXIT_CODE=124
+OUTPUT:
+[0;34m🔍 Initializing monitors for:[0m
+[0;34m   - example/repo#102[0m
+[0;34m   - example/other#201[0m
+
+  [0;32m✓[0m example/repo#102: Mock PR 102 (last commit: 2026-04-18T10:00)
+[0;34m     https://github.com/example/repo/pull/102[0m
+  [0;32m✓[0m example/other#201: Mock PR 201 (last commit: 2026-04-18T10:00)
+[0;34m     https://github.com/example/other/pull/201[0m
+
+[0;34m👀 Checking for existing new activity...[0m
+
+[1;33m═══════════════════════════════════════════════════════════════[0m
+[1;33m🔔 NEW CODEX 👍 on example/repo#102: Mock PR 102[0m
+[1;33m   Type: pr reaction[0m
+[1;33m   Context: pull request approval signal[0m
+[1;33m   Posted: 2026-04-18T10:05:00Z[0m
+[1;33m═══════════════════════════════════════════════════════════════[0m
+From: @chatgpt-codex-connector[bot]
+[1;33m───────────────────────────────────────────────────────────────[0m
+[0;34mTo ignore this activity and future ones on this PR, restart with:[0m
+[0;34m   --after "example/repo#102=2026-04-18T10:05:00Z"[0m
+
+[0;32m✓ No pending activity. Starting monitor...[0m
+[1;33m   Press Ctrl+C to stop[0m
+
+
+[1;33m═══════════════════════════════════════════════════════════════[0m
+[1;33m🔔 NEW CODEX 👍 on example/repo#102: Mock PR 102[0m
+[1;33m   Type: pr reaction[0m
+[1;33m   Context: pull request approval signal[0m
+[1;33m   Posted: 2026-04-18T10:05:00Z[0m
+[1;33m═══════════════════════════════════════════════════════════════[0m
+From: @chatgpt-codex-connector[bot]
+[1;33m───────────────────────────────────────────────────────────────[0m
+[0;34mTo ignore this activity and future ones on this PR, restart with:[0m
+[0;34m   --after "example/repo#102=2026-04-18T10:05:00Z"[0m
+
+
+[actionable_beats_approval_107_102]
+COMMAND=PATH="$PWD/.sisyphus/testbin:$PATH" /usr/bin/timeout 3s ./watch-prs-for-comments.sh --after example/repo#107=2026-04-18T09:50:00Z example/repo#107 example/repo#102
+EXIT_CODE=2
+OUTPUT:
+[0;34m🔍 Initializing monitors for:[0m
+[0;34m   - example/repo#107[0m
+[0;34m   - example/repo#102[0m
+
+  [0;32m✓[0m example/repo#107: Mock PR 107 (last commit: 2026-04-18T10:00)
+[0;34m     https://github.com/example/repo/pull/107[0m
+[0;34m     After: 2026-04-18T09:50:00Z[0m
+  [0;32m✓[0m example/repo#102: Mock PR 102 (last commit: 2026-04-18T10:00)
+[0;34m     https://github.com/example/repo/pull/102[0m
+
+[0;34m👀 Checking for existing new activity...[0m
+
+[1;33m═══════════════════════════════════════════════════════════════[0m
+[1;33m🔔 NEW PR COMMENT on example/repo#107: Mock PR 107[0m
+[1;33m   Posted: 2026-04-18T09:55:00Z[0m
+[1;33m═══════════════════════════════════════════════════════════════[0m
+From: @reviewer
+
+Please still fix the restart race.
+[1;33m───────────────────────────────────────────────────────────────[0m
+[0;34mTo ignore this activity and future ones on this PR, restart with:[0m
+[0;34m   --after "example/repo#107=2026-04-18T09:55:00Z"[0m
+
+
+[1;33m═══════════════════════════════════════════════════════════════[0m
+[1;33m🔔 NEW CODEX 👍 on example/repo#102: Mock PR 102[0m
+[1;33m   Type: pr reaction[0m
+[1;33m   Context: pull request approval signal[0m
+[1;33m   Posted: 2026-04-18T10:05:00Z[0m
+[1;33m═══════════════════════════════════════════════════════════════[0m
+From: @chatgpt-codex-connector[bot]
+[1;33m───────────────────────────────────────────────────────────────[0m
+[0;34mTo ignore this activity and future ones on this PR, restart with:[0m
+[0;34m   --after "example/repo#102=2026-04-18T10:05:00Z"[0m
+
+[1;33m⏳ Earlier actionable feedback is visible, but the latest review cycle is still in progress. Waiting for a post-commit review signal before exiting.[0m
+[1;33m   Press Ctrl+C to stop[0m
+
+
+[1;33m═══════════════════════════════════════════════════════════════[0m
+[1;33m🔔 NEW CODEX 👍 on example/repo#102: Mock PR 102[0m
+[1;33m   Type: pr reaction[0m
+[1;33m   Context: pull request approval signal[0m
+[1;33m   Posted: 2026-04-18T10:05:00Z[0m
+[1;33m═══════════════════════════════════════════════════════════════[0m
+From: @chatgpt-codex-connector[bot]
+[1;33m───────────────────────────────────────────────────────────────[0m
+[0;34mTo ignore this activity and future ones on this PR, restart with:[0m
+[0;34m   --after "example/repo#102=2026-04-18T10:05:00Z"[0m
+
+
+[0;32m📋 Found new activity to address. Exiting so the agent can process it.[0m
+

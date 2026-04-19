@@ -24,11 +24,13 @@ declare -A KEY_TO_PR=()
 declare -A KEY_TO_TITLE=()
 declare -A KEY_TO_URL=()
 declare -A KEY_TO_HEAD_SHA=()
+declare -A KEY_TO_IS_OPEN=()
 declare -A KEY_TO_LAST_COMMIT=()
 declare -A KEY_TO_AFTER=()
 declare -A KEY_TO_SURFACED_CURSOR=()
 declare -A KEY_TO_PENDING_PRECOMMIT_ACTIONABLE=()
 declare -A KEY_TO_REPORTED_ACTIONABLE_KEYS=()
+declare -A KEY_TO_APPROVAL_SIGNAL_FOUND=()
 declare -A KEY_TO_LATEST_ACTIVITY_TIME=()
 declare -A KEY_TO_LATEST_ACTIVITY_TYPE=()
 declare -A KEY_TO_NESTED_REACTION_SCAN_EPOCH=()
@@ -261,6 +263,7 @@ reset_review_cycle_runtime_state() {
     KEY_TO_SURFACED_CURSOR["$key"]=""
     KEY_TO_PENDING_PRECOMMIT_ACTIONABLE["$key"]=false
     KEY_TO_REPORTED_ACTIONABLE_KEYS["$key"]=$'\n'
+    KEY_TO_APPROVAL_SIGNAL_FOUND["$key"]=false
     KEY_TO_NESTED_REACTION_SCAN_EPOCH["$key"]=0
     KEY_TO_FORCE_REPORT_NESTED_REACTION_SCAN["$key"]=false
 }
@@ -275,6 +278,24 @@ any_pending_precommit_actionable() {
     done
 
     return 1
+}
+
+all_open_prs_have_approval_signal() {
+    local key
+    local saw_open=false
+
+    for key in "${PR_KEYS[@]}"; do
+        if [[ "${KEY_TO_IS_OPEN[$key]:-true}" != "true" ]]; then
+            continue
+        fi
+
+        saw_open=true
+        if [[ "${KEY_TO_APPROVAL_SIGNAL_FOUND[$key]:-false}" != "true" ]]; then
+            return 1
+        fi
+    done
+
+    [[ "$saw_open" == true ]]
 }
 
 load_pr_metadata() {
@@ -312,6 +333,7 @@ load_pr_metadata() {
     KEY_TO_PR["$key"]="$pr"
     KEY_TO_TITLE["$key"]="$title"
     KEY_TO_URL["$key"]="$url"
+    KEY_TO_IS_OPEN["$key"]=true
     KEY_TO_HEAD_SHA["$key"]="$head_sha"
     KEY_TO_LAST_COMMIT["$key"]="$last_commit"
 }
@@ -560,6 +582,7 @@ record_reaction_approval() {
 
     if [[ "$report_new" == "true" ]] && compare_iso_gt "$timestamp" "$baseline" && is_post_commit_activity "$key" "$timestamp"; then
         APPROVAL_SIGNAL_FOUND=1
+        KEY_TO_APPROVAL_SIGNAL_FOUND["$key"]=true
         POSTCOMMIT_BOUNDARY_FOUND=1
         display_reaction "$key" "$reaction_type" "$actor" "$timestamp" "$context_line"
     fi
@@ -695,6 +718,7 @@ scan_pr_activity() {
                 flag_postcommit_boundary_if_needed "$key" "$timestamp" "$report_new" "$baseline"
                 if is_post_commit_activity "$key" "$timestamp"; then
                     APPROVAL_SIGNAL_FOUND=1
+                    KEY_TO_APPROVAL_SIGNAL_FOUND["$key"]=true
                 fi
                 continue
             fi
@@ -751,6 +775,7 @@ scan_pr_activity() {
                 flag_postcommit_boundary_if_needed "$key" "$timestamp" "$report_new" "$baseline"
                 if is_post_commit_activity "$key" "$timestamp"; then
                     APPROVAL_SIGNAL_FOUND=1
+                    KEY_TO_APPROVAL_SIGNAL_FOUND["$key"]=true
                 fi
                 continue
             fi
@@ -1048,8 +1073,10 @@ refresh_pr_state() {
 
     KEY_TO_TITLE["$key"]="$title"
     KEY_TO_URL["$key"]="$url"
+    KEY_TO_IS_OPEN["$key"]=true
 
     if [[ "$state" != "OPEN" ]]; then
+        KEY_TO_IS_OPEN["$key"]=false
         reset_review_cycle_runtime_state "$key"
         KEY_TO_LATEST_ACTIVITY_TIME["$key"]=""
         KEY_TO_LATEST_ACTIVITY_TYPE["$key"]=""
@@ -1114,7 +1141,7 @@ monitor_loop() {
             exit 2
         fi
 
-        if [[ "$APPROVAL_SIGNAL_FOUND" -eq 1 ]] && ! any_pending_precommit_actionable; then
+        if [[ "$APPROVAL_SIGNAL_FOUND" -eq 1 ]] && ! any_pending_precommit_actionable && all_open_prs_have_approval_signal; then
             echo ""
             pass "✅ Codex approval/no-issues signal found. No new actionable feedback."
             printf '%s\n' "Codex PR review completed: No new issues found. If you haven't already: You may now run final Oracle verification pass on this code. Once both Codex reviewer and Oracle have signed off, alert the user that all reviews are complete and the code is ready to merge"
@@ -1158,7 +1185,7 @@ main() {
         exit 2
     fi
 
-    if [[ "$APPROVAL_SIGNAL_FOUND" -eq 1 ]] && ! any_pending_precommit_actionable; then
+    if [[ "$APPROVAL_SIGNAL_FOUND" -eq 1 ]] && ! any_pending_precommit_actionable && all_open_prs_have_approval_signal; then
         echo ""
         pass "✅ Codex approval/no-issues signal found. No new actionable feedback."
         printf '%s\n' "Codex PR review completed: No new issues found. If you haven't already: You may now run final Oracle verification pass on this code. Once both Codex reviewer and Oracle have signed off, alert the user that all reviews are complete and the code is ready to merge"
