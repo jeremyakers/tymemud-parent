@@ -130,3 +130,9 @@
 - The live gap was specific to unthrottled reporting passes (`first_sweep()` / `--check-once`): once any newer top-level comment or review set `needs_nested_reaction_scan=false`, the final nested-reaction gate skipped issue/review comment reactions entirely because there was no preceding validation pass to arm the force flag.
 - The smallest safe fix was to treat unthrottled scans as always eligible for nested reaction endpoints, while leaving the throttled polling path on the existing `needs_nested_reaction_scan` / force-flag rules.
 - Fresh evidence in `.sisyphus/evidence/task-initial-report-fix.log` now shows `example/repo#111` scanning `initial_report_nested_issue_reactions.count=1` during `--check-once`, and the established forced-report polling proof for `#106` remains green.
+
+## 2026-04-19 22:52:05Z — Throttle-preserving handoff findings (Atlas)
+
+- The regression came from arming `KEY_TO_FORCE_REPORT_NESTED_REACTION_SCAN` even when a throttled validation pass skipped nested reactions. That made the immediate reporting pass re-enable nested endpoints every loop and defeated `REACTION_POLL_INTERVAL_SECONDS`.
+- The correct fix was simply to stop arming the force flag on the skip path. The force handoff still works when the validation pass actually performs a nested scan, and the initial-report fix still covers unthrottled `--check-once` / `first_sweep` scans.
+- Fresh evidence in `.sisyphus/evidence/task-throttle-preserving-fix.log` now shows `#103` back to `nested_issue_reactions.count=1` / `nested_review_reactions.count=1`, while the existing forced-report `#106` and initial-report `#111` proofs remain green.

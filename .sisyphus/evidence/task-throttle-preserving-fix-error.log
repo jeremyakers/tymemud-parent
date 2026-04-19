@@ -1,0 +1,9 @@
+assertions:
+- shellcheck_exit_zero: PASS
+- throttle_103_exit_124: PASS
+- throttle_103_nested_issue_once: PASS
+- throttle_103_nested_review_once: PASS
+- force_report_106_exit_zero: PASS
+- force_report_106_success: PASS
+- initial_report_111_nested_counter: PASS
+- initial_report_111_reaction_banner: PASS

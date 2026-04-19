@@ -835,11 +835,7 @@ scan_pr_activity() {
             process_reactions_for_review_comment "$repo" "$comment_id" "$key" "$baseline" "$file" "$report_new"
         done
     else
-        if [[ "$report_new" == "false" && "$throttle_nested_reactions" == "true" && "$should_scan_nested_reaction_endpoints" == false ]]; then
-            KEY_TO_FORCE_REPORT_NESTED_REACTION_SCAN["$key"]=true
-        else
-            KEY_TO_FORCE_REPORT_NESTED_REACTION_SCAN["$key"]=false
-        fi
+        KEY_TO_FORCE_REPORT_NESTED_REACTION_SCAN["$key"]=false
     fi
 
     if [[ "${KEY_TO_PENDING_PRECOMMIT_ACTIONABLE[$key]:-false}" == "true" && "$POSTCOMMIT_BOUNDARY_FOUND" -eq 1 ]]; then

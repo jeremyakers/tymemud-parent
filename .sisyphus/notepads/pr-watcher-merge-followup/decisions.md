@@ -147,3 +147,9 @@
 - Widened the final nested-reaction execution gate just enough to always run nested reaction endpoints when throttling is disabled. That makes `first_sweep()` / `--check-once` scan nested reactions even after a newer top-level comment or review flips `needs_nested_reaction_scan=false`.
 - Left the throttled polling path unchanged: when `throttle_nested_reactions==true`, the gate still relies on `needs_nested_reaction_scan` or the force flag so the long-run polling throttle invariant stays intact.
 - Captured the proof in `.sisyphus/evidence/task-initial-report-fix.log` and `.sisyphus/evidence/task-initial-report-fix-error.log`: `#111` now hits the nested-reaction endpoint in the initial reporting pass, and the existing forced-report polling scenario for `#106` still succeeds.
+
+## 2026-04-19 22:52:05Z — Throttle-preserving handoff decision (Atlas)
+
+- Removed the skip-path arming of `KEY_TO_FORCE_REPORT_NESTED_REACTION_SCAN` in `scan_pr_activity()`. The force flag is now only set when a throttled validation pass actually performed nested scans, preserving the original handoff intent without re-enabling nested endpoints every loop.
+- Left the unthrottled initial-report gate widening intact, so `first_sweep()` / `--check-once` still scan nested reactions when needed.
+- Captured the proof in `.sisyphus/evidence/task-throttle-preserving-fix.log` and `.sisyphus/evidence/task-throttle-preserving-fix-error.log`: the `#103` throttle counters stay pinned at one scan, while `#106` forced-report approval and `#111` initial-report nested reaction coverage remain intact.
