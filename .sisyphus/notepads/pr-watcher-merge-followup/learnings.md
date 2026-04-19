@@ -76,3 +76,15 @@
 - The smallest safe fix was to let `force_report_nested_reaction_scan` satisfy that same final gate directly, leaving the throttle interval, arming/reset behavior, and two-pass `monitor_loop()` flow unchanged.
 - Fresh deterministic evidence in `.sisyphus/evidence/task-force-report-fix.log` now shows `example/repo#106` surfacing the nested Codex `+1` as `Type: issue comment reaction` with `nested_issue_reactions=3`, while `example/repo#103` still pins `nested_issue_reactions=1` and `nested_review_reactions=1` with top-level counters at `9`.
 - The preserved regression checks remained green in the same bundle: `example/repo#105` still exits `2` for actionable precedence, and `example/repo#107` still follows the restart-race path with explicit `--after` seeding and exit `2`.
+
+## 2026-04-19 17:05:00Z — Shell-timeout cleanup findings (Sisyphus-Junior)
+
+- The reviewer requirement was stricter than the earlier follow-up wording: even calling `timeout 2h ./watch-prs-for-comments.sh ...` a valid plain-shell example was too permissive and had to be removed entirely from watcher-facing docs.
+- The safe cleanup was purely documentation-level in `.opencode/skill/pr-monitor.md` and `rules/803-project-git-workflow.md`, with the 2 hour guidance retained only as the OpenCode tool timeout value, `7200000` ms.
+- The strongest QA proof for this pass is one grep-driven artifact, `.sisyphus/evidence/task-timeout-guidance-cleanup.log`, because it shows both absence and preservation in one place: no `timeout 2h` matches remain in the touched docs, and the immediate PR URL, start-now, foreground-monitoring language still exists.
+
+## 2026-04-19 17:13:19Z — Bash-tool timeout wording findings (Sisyphus-Junior)
+
+- The reviewer wanted one more level of precision beyond “OpenCode tool timeout”: the docs now need to name the OpenCode `bash` or `shell` tool invocation directly so agents do not mistake this for a generic timeout on any tool.
+- The clearest wording is to pair the scope and the limit in one sentence: use the longest timeout allowed on the `bash` or `shell` tool, currently `7200000` ms, which is 2 hours.
+- The safest way to preserve workflow behavior is to leave the watcher command examples as plain foreground `./watch-prs-for-comments.sh ...` invocations and keep the timeout guidance in prose, not in a shell wrapper example.

@@ -1,0 +1,65 @@
+== bash_or_shell_wording ==
+18:4. **When using the OpenCode `bash` or `shell` tool invocation, set that tool timeout to the longest allowed value, currently `7200000` ms, which is 2 hours**
+23:```bash
+34:The workflow timeout requirement here applies only to the OpenCode `bash` or `shell` tool invocation that starts the watcher. Use the longest timeout allowed on that tool, currently `7200000` ms, which is 2 hours.
+48:```bash
+59:```bash
+68:```bash
+77:```bash
+87:```bash
+95:```bash
+141:```bash
+155:```bash
+209:```bash
+216:```bash
+225:```bash
+250:- In OpenCode, the timeout requirement is the `bash` or `shell` tool timeout set to the longest allowed value, currently `7200000` ms, which is 2 hours
+90:```bash
+99:```bash
+115:```bash
+124:```bash
+134:```bash
+144:```bash
+168:```bash
+179:```bash
+199:```bash
+207:```bash
+225:```bash
+236:```bash
+286:```bash
+342:```bash
+409:> ```bash
+505:```bash
+542:```bash
+561:4. If the watcher is started through the OpenCode `bash` or `shell` tool invocation, set that tool timeout to the longest allowed value, currently `7200000` ms, which is 2 hours
+565:```bash
+575:Document the watcher timeout requirement only as the OpenCode `bash` or `shell` tool timeout, set to the longest allowed value, currently `7200000` ms, which is 2 hours.
+661:```bash
+692:```bash
+693:#!/bin/bash
+744:```bash
+792:```bash
+800:```bash
+809:```bash
+822:```bash
+849:```bash
+
+== longest_allowed_7200000 ==
+18:4. **When using the OpenCode `bash` or `shell` tool invocation, set that tool timeout to the longest allowed value, currently `7200000` ms, which is 2 hours**
+34:The workflow timeout requirement here applies only to the OpenCode `bash` or `shell` tool invocation that starts the watcher. Use the longest timeout allowed on that tool, currently `7200000` ms, which is 2 hours.
+250:- In OpenCode, the timeout requirement is the `bash` or `shell` tool timeout set to the longest allowed value, currently `7200000` ms, which is 2 hours
+561:4. If the watcher is started through the OpenCode `bash` or `shell` tool invocation, set that tool timeout to the longest allowed value, currently `7200000` ms, which is 2 hours
+575:Document the watcher timeout requirement only as the OpenCode `bash` or `shell` tool timeout, set to the longest allowed value, currently `7200000` ms, which is 2 hours.
+
+== immediate_foreground_sequence ==
+15:1. **Print the PR URL to the user in chat immediately**
+16:2. **Start the watcher immediately after that**
+17:3. **Run it in the foreground**
+19:5. **Do not pause to ask the user whether to start monitoring** unless the watcher cannot be started
+558:1. Print the PR URL to the user in chat immediately
+559:2. Start the PR watcher immediately after that
+560:3. Run the watcher in the foreground
+582:- Do not pause for approval between printing the PR URL and starting foreground monitoring
+
+== timeout_2h_absence_check ==
+OK: no forbidden timeout 2h guidance found

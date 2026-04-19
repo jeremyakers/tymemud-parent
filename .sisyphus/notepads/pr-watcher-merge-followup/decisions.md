@@ -93,3 +93,15 @@
 - Implemented the reviewer-requested fix only at the final nested-reaction execution gate in `watch-prs-for-comments.sh`: the gate now treats `force_report_nested_reaction_scan=true` as sufficient to run nested reaction endpoints during that one reporting pass, even if earlier top-level actionable activity set `needs_nested_reaction_scan=false`.
 - Left `KEY_TO_FORCE_REPORT_NESTED_REACTION_SCAN` arming and clearing behavior untouched, so ordinary polling still honors the interval throttle and does not globally unthrottle reporting passes.
 - Chose not to modify `.sisyphus/testbin/gh`; the existing deterministic `example/repo#106`, `#103`, `#105`, and `#107` fixtures were already sufficient once the evidence run used clean fixture directories and the documented `--after` seed for the restart-race proof.
+
+## 2026-04-19 17:05:00Z — Shell-timeout cleanup decisions (Sisyphus-Junior)
+
+- Removed all watcher documentation that presented `timeout 2h ./watch-prs-for-comments.sh ...` as a command-line usage pattern. The docs now describe the 2 hour limit only as the OpenCode tool timeout, `7200000` ms.
+- Kept the post-PR sequence unchanged and explicit in both touched docs: print the PR URL in chat, start monitoring immediately, keep the watcher in the foreground, and do not pause for approval before monitoring starts.
+- Used a docs-only grep QA artifact pair, `.sisyphus/evidence/task-timeout-guidance-cleanup.log` and `.sisyphus/evidence/task-timeout-guidance-cleanup-error.log`, instead of broader validation so this follow-up stayed tightly scoped to the reviewer comment.
+
+## 2026-04-19 17:13:19Z — Bash-tool timeout wording decisions (Sisyphus-Junior)
+
+- Narrowed the wording in both watcher-facing docs from generic “OpenCode tool timeout” language to explicit OpenCode `bash` or `shell` tool language, because that is the exact tool surface the reviewer said agents must configure.
+- Standardized the requirement as “the longest allowed value, currently `7200000` ms, which is 2 hours” so the docs express both the durable rule and the current OpenCode limit without implying a shell `timeout` wrapper.
+- Kept all watcher startup examples as direct foreground watcher commands and preserved the mandatory sequence verbatim: print PR URL, start immediately, stay in the foreground, no approval pause.
