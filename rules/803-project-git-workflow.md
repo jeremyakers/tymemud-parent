@@ -557,7 +557,8 @@ After creating a PR, agents must not stop and ask whether monitoring should begi
 
 1. Print the PR URL to the user in chat immediately
 2. Start the PR watcher immediately after that
-3. Run the watcher in the foreground with a 2 hour timeout
+3. Run the watcher in the foreground
+4. If the watcher is started through the OpenCode agent command line tool, set that tool timeout to the 2 hour maximum, `7200000` ms
 
 Examples:
 
@@ -565,17 +566,20 @@ Examples:
 # Same repo / single PR
 PR_URL=$(gh pr create --fill)
 # Print $PR_URL to the user in chat
-timeout 2h ./watch-prs-for-comments.sh owner/repo#123
+./watch-prs-for-comments.sh owner/repo#123
 
 # Mixed repos in one watcher invocation
-timeout 2h ./watch-prs-for-comments.sh owner/repo#123 other-owner/other-repo#45
+./watch-prs-for-comments.sh owner/repo#123 other-owner/other-repo#45
 ```
+
+If you are launching the watcher from a plain shell outside the OpenCode tool wrapper, `timeout 2h ./watch-prs-for-comments.sh ...` is still a valid shell example. Do not document that shell wrapper as the primary timeout requirement when the real requirement is the OpenCode tool timeout.
 
 **Important:**
 - Prefer `owner/repo#123` for explicit repo-qualified monitoring
 - `--repo owner/repo 123` remains valid for same-repo batches
 - Use repeated `--after owner/repo#123=<timestamp>` flags when each PR needs its own resume point
 - Do not default to background/tmux monitoring in agent instructions
+- Do not pause for approval between printing the PR URL and starting foreground monitoring
 
 **Using GitHub Web UI:**
 1. Navigate to repository on GitHub
