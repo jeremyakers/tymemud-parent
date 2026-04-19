@@ -172,13 +172,33 @@ The watcher tracks each PR independently, including:
 3. Compute each PR's latest activity and validate all `--after` values
 4. Perform an immediate first sweep
 5. Exit with code `2` if actionable activity already exists
-6. If no new activity exists and `--check-once` is not set, poll every 30 seconds until activity appears or all monitored PRs close
+6. Exit with code `0` if the first sweep finds only approval or no-issues signals and no actionable feedback
+7. If no new activity exists and `--check-once` is not set, poll every 30 seconds until actionable feedback appears, an approval or no-issues outcome appears, or all monitored PRs close
+
+## Outcome Priority
+
+The watcher separates actionable review feedback from approval or no-issues completion signals.
+
+- **Actionable feedback wins** when both kinds of signals appear in the same run.
+- **Approval or no-issues is a distinct success outcome** when no actionable feedback is present.
+- **No activity** means nothing new happened after the baseline, so the watcher keeps polling unless `--check-once` was used.
+
+Approval or no-issues can come from the supported Codex no-issues body or the supported Codex `+1` reaction paths listed above. Those signals tell the agent it can stop waiting, but they do not override real review comments.
+
+## Polling and Nested Reaction Throttling
+
+The watcher always does a full first sweep.
+
+- The initial pass and `--check-once` still scan nested issue-comment and review-comment reactions in full.
+- Throttling applies only inside repeated polling iterations.
+- The throttle is only a loop optimization for repeated nested reaction rescans. It is not a seen-state cache and it does not persist across restarts.
+- Top-level PR reaction checks stay unthrottled.
 
 ## Exit Codes
 
 | Code | Meaning | Agent Action |
 |------|---------|--------------|
-| 0 | No pending activity (`--check-once`) or all monitored PRs closed during foreground monitoring | Move on to the next task |
+| 0 | Approval or no-issues detected with no actionable feedback, or no pending activity in `--check-once`, or all monitored PRs closed during foreground monitoring | Move on to the next task |
 | 1 | Error (bad args, bad repo, invalid `--after`, auth failure, fetch failure) | Read the error and rerun correctly |
 | 2 | New actionable watcher activity detected | Address the feedback now |
 
