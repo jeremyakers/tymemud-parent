@@ -23,6 +23,7 @@ declare -A KEY_TO_REPO=()
 declare -A KEY_TO_PR=()
 declare -A KEY_TO_TITLE=()
 declare -A KEY_TO_URL=()
+declare -A KEY_TO_HEAD_SHA=()
 declare -A KEY_TO_LAST_COMMIT=()
 declare -A KEY_TO_AFTER=()
 declare -A KEY_TO_SURFACED_CURSOR=()
@@ -243,6 +244,27 @@ get_pr_last_commit_date() {
     printf '%s\n' "$commit_date"
 }
 
+get_pr_head_sha() {
+    local repo="$1"
+    local pr="$2"
+    local head_sha=""
+
+    head_sha=$(gh pr view "$pr" --repo "$repo" --json headRefOid --jq '.headRefOid' 2>/dev/null || true)
+    [[ -n "$head_sha" && "$head_sha" != "null" ]] || return 1
+
+    printf '%s\n' "$head_sha"
+}
+
+reset_review_cycle_runtime_state() {
+    local key="$1"
+
+    KEY_TO_SURFACED_CURSOR["$key"]=""
+    KEY_TO_PENDING_PRECOMMIT_ACTIONABLE["$key"]=false
+    KEY_TO_REPORTED_ACTIONABLE_KEYS["$key"]=$'\n'
+    KEY_TO_NESTED_REACTION_SCAN_EPOCH["$key"]=0
+    KEY_TO_FORCE_REPORT_NESTED_REACTION_SCAN["$key"]=false
+}
+
 load_pr_metadata() {
     local key="$1"
     local repo="$2"
@@ -251,6 +273,7 @@ load_pr_metadata() {
     local state
     local title
     local url
+    local head_sha
     local last_commit
 
     if ! pr_data=$(gh pr view "$pr" --repo "$repo" --json number,title,state,url 2>/dev/null); then
@@ -265,6 +288,10 @@ load_pr_metadata() {
         fail "PR #$pr in $repo is $state. The watcher only monitors open PRs."
     fi
 
+    if ! head_sha=$(get_pr_head_sha "$repo" "$pr"); then
+        fail "Could not determine the latest head SHA for $repo#$pr."
+    fi
+
     if ! last_commit=$(get_pr_last_commit_date "$repo" "$pr"); then
         fail "Could not determine the latest commit timestamp for $repo#$pr."
     fi
@@ -273,6 +300,7 @@ load_pr_metadata() {
     KEY_TO_PR["$key"]="$pr"
     KEY_TO_TITLE["$key"]="$title"
     KEY_TO_URL["$key"]="$url"
+    KEY_TO_HEAD_SHA["$key"]="$head_sha"
     KEY_TO_LAST_COMMIT["$key"]="$last_commit"
 }
 
@@ -785,9 +813,7 @@ resolve_after_mappings() {
 
     for pr_key in "${PR_KEYS[@]}"; do
         KEY_TO_AFTER["$pr_key"]=""
-        KEY_TO_SURFACED_CURSOR["$pr_key"]=""
-        KEY_TO_PENDING_PRECOMMIT_ACTIONABLE["$pr_key"]=false
-        KEY_TO_REPORTED_ACTIONABLE_KEYS["$pr_key"]=$'\n'
+        reset_review_cycle_runtime_state "$pr_key"
     done
 
     for raw in "${RAW_AFTER_ARGS[@]}"; do
@@ -991,6 +1017,7 @@ refresh_pr_state() {
     local state
     local title
     local url
+    local current_head_sha
     local current_commit
 
     if ! pr_data=$(gh pr view "$pr" --repo "$repo" --json title,state,url 2>/dev/null); then
@@ -1009,13 +1036,21 @@ refresh_pr_state() {
         return 1
     fi
 
+    if ! current_head_sha=$(get_pr_head_sha "$repo" "$pr"); then
+        fail "Could not refresh the latest head SHA for ${key}."
+    fi
+
     if ! current_commit=$(get_pr_last_commit_date "$repo" "$pr"); then
         fail "Could not refresh the latest commit timestamp for ${key}."
     fi
 
-    if [[ "$current_commit" != "${KEY_TO_LAST_COMMIT[$key]}" ]]; then
+    if [[ "$current_head_sha" != "${KEY_TO_HEAD_SHA[$key]:-}" ]]; then
         note "📝 ${key}: new commit detected"
         note "   New baseline: ${current_commit:0:16}"
+        reset_review_cycle_runtime_state "$key"
+        KEY_TO_HEAD_SHA["$key"]="$current_head_sha"
+        KEY_TO_LAST_COMMIT["$key"]="$current_commit"
+    elif [[ "$current_commit" != "${KEY_TO_LAST_COMMIT[$key]}" ]]; then
         KEY_TO_LAST_COMMIT["$key"]="$current_commit"
     fi
 

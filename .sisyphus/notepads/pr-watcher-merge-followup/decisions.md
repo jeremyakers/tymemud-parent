@@ -111,3 +111,9 @@
 - Implemented the reviewer-requested fix only in `watch-prs-for-comments.sh:effective_baseline_for_key()`: the helper now returns `KEY_TO_AFTER[$key]` immediately when an explicit operator cutoff exists, and only falls through to the existing `runtime_baseline_cursor()` plus commit clamp when the watcher is using surfaced runtime state.
 - Left `runtime_baseline_cursor()` unchanged on purpose so the surfaced `KEY_TO_SURFACED_CURSOR` rewind-by-one-second logic still feeds the commit clamp exactly as before; no new state maps, no broader baseline model, and no control-flow changes were introduced.
 - Captured the required proof set in `.sisyphus/evidence/task-explicit-after-fix.log` and `.sisyphus/evidence/task-explicit-after-fix-error.log` so QA can verify both halves of the contract directly: the explicit `#102` approval is suppressed after `--after 10:05:00Z`, and the preserved `#107`, `#105`, and mixed-repo repeated `--after` regressions remain green.
+
+## 2026-04-19 19:18:40Z — Head-change runtime reset decision (Atlas)
+
+- Added `KEY_TO_HEAD_SHA` and a focused `reset_review_cycle_runtime_state()` helper so review-cycle identity is keyed off head SHA, not just commit timestamp, and only cycle-scoped runtime maps are cleared when the head changes.
+- The reset scope is intentionally narrow: `KEY_TO_PENDING_PRECOMMIT_ACTIONABLE`, `KEY_TO_SURFACED_CURSOR`, `KEY_TO_REPORTED_ACTIONABLE_KEYS`, `KEY_TO_NESTED_REACTION_SCAN_EPOCH`, and `KEY_TO_FORCE_REPORT_NESTED_REACTION_SCAN` reset on head change, while `KEY_TO_AFTER` remains operator-controlled and survives unchanged.
+- Extended `.sisyphus/testbin/gh` with a minimal `example/repo#108` fixture that changes head SHA without changing commit timestamp. The proof in `.sisyphus/evidence/task-head-reset-fix.log` confirms the stale-state reset without regressing the explicit-`--after`, restart-race, or actionable-precedence behaviors.

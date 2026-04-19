@@ -94,3 +94,9 @@
 - The live bug was exactly the helper boundary in `watch-prs-for-comments.sh`: `effective_baseline_for_key()` still treated operator `KEY_TO_AFTER` and runtime surfaced cursors as one clamped path, so a valid post-commit explicit `--after` on `example/repo#102` got forced backward to the `10:00` commit timestamp and re-surfaced the `10:05` approval.
 - The smallest safe fix was to make explicit `KEY_TO_AFTER[$key]` authoritative before any runtime cursor math, while leaving the surfaced `KEY_TO_SURFACED_CURSOR` path behind `runtime_baseline_cursor()` unchanged so the restart-race rewind/clamp behavior for `example/repo#107` still holds.
 - Fresh fixture evidence in `.sisyphus/evidence/task-explicit-after-fix.log` now shows the intended split: `example/repo#102` with `--after ...10:05:00Z` exits `0` with `✓ No pending activity.` and no approval banner, while `example/repo#105` still exits `2`, `example/repo#107` still exits `2` after the waiting message, and the mixed-repo repeated `--after` pair still exits `0` cleanly.
+
+## 2026-04-19 19:18:40Z — Head-change runtime reset findings (Atlas)
+
+- The live bug was the commit-refresh boundary in `refresh_pr_state()`: the watcher updated `KEY_TO_LAST_COMMIT` for a new head but kept cycle-scoped runtime state alive, so stale pre-commit pending/actionable markers could leak into the next review cycle and manufacture a false actionable exit.
+- The smallest safe fix was to introduce `KEY_TO_HEAD_SHA` as the review-cycle identity, reset only runtime cycle maps on SHA change, and leave `KEY_TO_AFTER` untouched so explicit operator restarts still work exactly as before.
+- Fresh fixture evidence in `.sisyphus/evidence/task-head-reset-fix.log` now shows `example/repo#108` logging `new commit detected` and exiting `0` on a later no-issues signal instead of exiting `2`, while the preserved explicit-`--after` (`#102`), restart-race (`#107`), and actionable precedence (`#105`) proofs stay green.

@@ -1,0 +1,13 @@
+assertions:
+- shellcheck_exit_zero: PASS
+- head_reset_108_exit_zero: PASS
+- head_reset_108_new_commit_detected: PASS
+- head_reset_108_approval_exit: PASS
+- head_reset_108_no_false_actionable_exit: PASS
+- explicit_after_102_exit_zero: PASS
+- explicit_after_102_no_pending: PASS
+- explicit_after_102_no_new_codex: PASS
+- restart_race_107_exit_two: PASS
+- restart_race_107_waiting_message: PASS
+- actionable_105_exit_two: PASS
+- actionable_105_banner: PASS
