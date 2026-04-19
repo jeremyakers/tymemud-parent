@@ -15,7 +15,7 @@ After opening a PR, agents must do this in order:
 1. **Print the PR URL to the user in chat immediately**
 2. **Start the watcher immediately after that**
 3. **Run it in the foreground**
-4. **When using the OpenCode agent command line tool, set the tool timeout to the 2 hour maximum, `7200000` ms**
+4. **When using the OpenCode `bash` or `shell` tool invocation, set that tool timeout to the longest allowed value, currently `7200000` ms, which is 2 hours**
 5. **Do not pause to ask the user whether to start monitoring** unless the watcher cannot be started
 
 Canonical post-PR flow:
@@ -31,7 +31,7 @@ gh pr create --title "fix: ..." --body "..."
 ./watch-prs-for-comments.sh owner/repo#123
 ```
 
-If you are launching the watcher from a plain shell outside the OpenCode tool wrapper, `timeout 2h ./watch-prs-for-comments.sh ...` is still a valid shell example. The real workflow requirement being enforced here is the OpenCode tool timeout, not the shell wrapper by itself.
+The workflow timeout requirement here applies only to the OpenCode `bash` or `shell` tool invocation that starts the watcher. Use the longest timeout allowed on that tool, currently `7200000` ms, which is 2 hours.
 
 ## Prerequisites
 
@@ -48,7 +48,6 @@ Use `owner/repo#123` when you want zero ambiguity:
 ```bash
 ./watch-prs-for-comments.sh jeremyakers/tymemud-src#104
 ./watch-prs-for-comments.sh jeremyakers/tymemud-src#104 jeremyakers/tymemud-lib#63
-timeout 2h ./watch-prs-for-comments.sh jeremyakers/tymemud-src#104
 ```
 
 This is the **recommended** form.
@@ -60,7 +59,6 @@ If all PRs are in the same repo, the watcher still supports `--repo owner/repo` 
 ```bash
 ./watch-prs-for-comments.sh --repo jeremyakers/tymemud-src 104
 ./watch-prs-for-comments.sh --repo jeremyakers/tymemud-src 104 105 106
-timeout 2h ./watch-prs-for-comments.sh --repo jeremyakers/tymemud-lib 63
 ```
 
 ## Usage
@@ -249,6 +247,5 @@ The watcher always does a full first sweep.
 
 **No, do not background it by default**
 - The standard workflow is foreground monitoring, started immediately after printing the PR URL
-- In OpenCode, the timeout requirement is the agent tool timeout set to `7200000` ms, which is 2 hours
-- `timeout 2h` is only a plain-shell wrapper example when you are not running through the OpenCode tool wrapper
+- In OpenCode, the timeout requirement is the `bash` or `shell` tool timeout set to the longest allowed value, currently `7200000` ms, which is 2 hours
 - Background/tmux patterns are not the default recommendation for agents anymore
