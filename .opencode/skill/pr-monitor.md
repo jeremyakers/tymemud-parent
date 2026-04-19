@@ -15,7 +15,7 @@ After opening a PR, agents must do this in order:
 1. **Print the PR URL to the user in chat immediately**
 2. **Start the watcher immediately after that**
 3. **Run it in the foreground**
-4. **Use a 2 hour timeout**
+4. **When using the OpenCode agent command line tool, set the tool timeout to the 2 hour maximum, `7200000` ms**
 5. **Do not pause to ask the user whether to start monitoring** unless the watcher cannot be started
 
 Canonical post-PR flow:
@@ -28,8 +28,10 @@ gh pr create --title "fix: ..." --body "..."
 # Example: https://github.com/owner/repo/pull/123
 
 # 3. Immediately start foreground monitoring
-timeout 2h ./watch-prs-for-comments.sh owner/repo#123
+./watch-prs-for-comments.sh owner/repo#123
 ```
+
+If you are launching the watcher from a plain shell outside the OpenCode tool wrapper, `timeout 2h ./watch-prs-for-comments.sh ...` is still a valid shell example. The real workflow requirement being enforced here is the OpenCode tool timeout, not the shell wrapper by itself.
 
 ## Prerequisites
 
@@ -153,7 +155,7 @@ Yes, one invocation can watch PRs in different repos now.
 Use the repo-qualified selector form:
 
 ```bash
-timeout 2h ./watch-prs-for-comments.sh \
+./watch-prs-for-comments.sh \
   jeremyakers/tymemud-src#104 \
   jeremyakers/tymemud-lib#63
 ```
@@ -208,14 +210,14 @@ The watcher always does a full first sweep.
 
 ```bash
 # PR URL already printed to the user in chat
-timeout 2h ./watch-prs-for-comments.sh jeremyakers/tymemud-src#104
+./watch-prs-for-comments.sh jeremyakers/tymemud-src#104
 ```
 
 ### Two PRs in different repos
 
 ```bash
 # Print both PR URLs to the user first
-timeout 2h ./watch-prs-for-comments.sh \
+./watch-prs-for-comments.sh \
   jeremyakers/tymemud-src#104 \
   jeremyakers/tymemud-lib#63
 ```
@@ -223,7 +225,7 @@ timeout 2h ./watch-prs-for-comments.sh \
 ### Ignoring already-seen bot activity on one PR only
 
 ```bash
-timeout 2h ./watch-prs-for-comments.sh \
+./watch-prs-for-comments.sh \
   --after jeremyakers/tymemud-lib#63=2026-04-17T22:08:40Z \
   jeremyakers/tymemud-src#104 \
   jeremyakers/tymemud-lib#63
@@ -246,5 +248,7 @@ timeout 2h ./watch-prs-for-comments.sh \
 - Re-run with the suggested corrected value
 
 **No, do not background it by default**
-- The standard workflow is foreground monitoring with `timeout 2h`
+- The standard workflow is foreground monitoring, started immediately after printing the PR URL
+- In OpenCode, the timeout requirement is the agent tool timeout set to `7200000` ms, which is 2 hours
+- `timeout 2h` is only a plain-shell wrapper example when you are not running through the OpenCode tool wrapper
 - Background/tmux patterns are not the default recommendation for agents anymore
