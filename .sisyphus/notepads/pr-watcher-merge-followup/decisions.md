@@ -117,3 +117,9 @@
 - Added `KEY_TO_HEAD_SHA` and a focused `reset_review_cycle_runtime_state()` helper so review-cycle identity is keyed off head SHA, not just commit timestamp, and only cycle-scoped runtime maps are cleared when the head changes.
 - The reset scope is intentionally narrow: `KEY_TO_PENDING_PRECOMMIT_ACTIONABLE`, `KEY_TO_SURFACED_CURSOR`, `KEY_TO_REPORTED_ACTIONABLE_KEYS`, `KEY_TO_NESTED_REACTION_SCAN_EPOCH`, and `KEY_TO_FORCE_REPORT_NESTED_REACTION_SCAN` reset on head change, while `KEY_TO_AFTER` remains operator-controlled and survives unchanged.
 - Extended `.sisyphus/testbin/gh` with a minimal `example/repo#108` fixture that changes head SHA without changing commit timestamp. The proof in `.sisyphus/evidence/task-head-reset-fix.log` confirms the stale-state reset without regressing the explicit-`--after`, restart-race, or actionable-precedence behaviors.
+
+## 2026-04-19 20:13:00Z — Multi-PR approval priority decision (Atlas)
+
+- Added one helper, `any_pending_precommit_actionable()`, and used it only to guard the approval-success exits in `main()` and `monitor_loop()`. Approval/no-issues now returns exit `0` only when no watched PR still has pending earlier actionable feedback.
+- Left `scan_pr_activity()` and all per-key state gathering unchanged on purpose. The bug was in the final success decision, not in how pending state or approvals were recorded.
+- Captured the mixed-PR proof in `.sisyphus/evidence/task-multi-pr-approval-fix.log` and `.sisyphus/evidence/task-multi-pr-approval-fix-error.log`: combined `#107 + #102` no longer returns a false success, while single-PR approval on `#102` and single-PR restart-race behavior on `#107` remain intact.

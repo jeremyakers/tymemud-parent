@@ -265,6 +265,18 @@ reset_review_cycle_runtime_state() {
     KEY_TO_FORCE_REPORT_NESTED_REACTION_SCAN["$key"]=false
 }
 
+any_pending_precommit_actionable() {
+    local key
+
+    for key in "${PR_KEYS[@]}"; do
+        if [[ "${KEY_TO_PENDING_PRECOMMIT_ACTIONABLE[$key]:-false}" == "true" ]]; then
+            return 0
+        fi
+    done
+
+    return 1
+}
+
 load_pr_metadata() {
     local key="$1"
     local repo="$2"
@@ -1093,7 +1105,7 @@ monitor_loop() {
             exit 2
         fi
 
-        if [[ "$APPROVAL_SIGNAL_FOUND" -eq 1 ]]; then
+        if [[ "$APPROVAL_SIGNAL_FOUND" -eq 1 ]] && ! any_pending_precommit_actionable; then
             echo ""
             pass "✅ Codex approval/no-issues signal found. No new actionable feedback."
             printf '%s\n' "Codex PR review completed: No new issues found. If you haven't already: You may now run final Oracle verification pass on this code. Once both Codex reviewer and Oracle have signed off, alert the user that all reviews are complete and the code is ready to merge"
@@ -1137,7 +1149,7 @@ main() {
         exit 2
     fi
 
-    if [[ "$APPROVAL_SIGNAL_FOUND" -eq 1 ]]; then
+    if [[ "$APPROVAL_SIGNAL_FOUND" -eq 1 ]] && ! any_pending_precommit_actionable; then
         echo ""
         pass "✅ Codex approval/no-issues signal found. No new actionable feedback."
         printf '%s\n' "Codex PR review completed: No new issues found. If you haven't already: You may now run final Oracle verification pass on this code. Once both Codex reviewer and Oracle have signed off, alert the user that all reviews are complete and the code is ready to merge"

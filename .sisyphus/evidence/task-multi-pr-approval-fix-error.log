@@ -1,0 +1,10 @@
+assertions:
+- shellcheck_exit_zero: PASS
+- multi_pr_pending_exit_two: PASS
+- multi_pr_shows_pending_comment: PASS
+- multi_pr_waiting_message: PASS
+- multi_pr_no_success_banner: PASS
+- multi_pr_actionable_exit_banner: PASS
+- single_pr_approval_still_zero: PASS
+- single_pr_approval_has_success_banner: PASS
+- restart_race_107_exit_two: PASS

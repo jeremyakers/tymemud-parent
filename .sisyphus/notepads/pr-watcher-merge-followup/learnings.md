@@ -100,3 +100,9 @@
 - The live bug was the commit-refresh boundary in `refresh_pr_state()`: the watcher updated `KEY_TO_LAST_COMMIT` for a new head but kept cycle-scoped runtime state alive, so stale pre-commit pending/actionable markers could leak into the next review cycle and manufacture a false actionable exit.
 - The smallest safe fix was to introduce `KEY_TO_HEAD_SHA` as the review-cycle identity, reset only runtime cycle maps on SHA change, and leave `KEY_TO_AFTER` untouched so explicit operator restarts still work exactly as before.
 - Fresh fixture evidence in `.sisyphus/evidence/task-head-reset-fix.log` now shows `example/repo#108` logging `new commit detected` and exiting `0` on a later no-issues signal instead of exiting `2`, while the preserved explicit-`--after` (`#102`), restart-race (`#107`), and actionable precedence (`#105`) proofs stay green.
+
+## 2026-04-19 20:13:00Z — Multi-PR approval priority findings (Atlas)
+
+- The live bug was in the final approval-success exits: `APPROVAL_SIGNAL_FOUND` is global, but pending actionable state is tracked per PR, so a success on PR B could incorrectly return exit `0` while PR A was still waiting on earlier actionable feedback.
+- The smallest safe fix was to add a tiny `any_pending_precommit_actionable()` helper and use it only to guard the two approval-success exit branches. That preserves the existing scan/aggregation flow while enforcing actionable-over-approval across all watched PRs.
+- Fresh evidence in `.sisyphus/evidence/task-multi-pr-approval-fix.log` now shows the mixed `example/repo#107 example/repo#102` run timing out with the pending-actionable wait message instead of exiting `0`, while single-PR approval on `#102` still exits `0` and restart-race `#107` still exits `2`.
