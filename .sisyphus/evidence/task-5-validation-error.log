@@ -1,0 +1,51 @@
+Baseline integrity summary:
+- Reaction approval coverage still proves the watcher prints the Codex banner, reaction type/context, and restart hint for a +1 approval on example/repo#102.
+- Mixed-repo selector proof still keeps explicit owner/repo#pr parsing active across example/repo#102 and example/other#201.
+- Repeated per-PR --after proof still uses two explicit selector mappings and returns no pending activity instead of misapplying a global cutoff.
+- Invalid future --after still fails before monitoring with corrective latest-activity details from the current fixture state.
+- Polling-time nested reaction coverage now uses an explicit opt-in date shim so `example/repo#106` matches the real Codex bug: first sweep stays quiet, the throttled validation pass reaches nested reactions first, and the immediately following reporting pass renders the approval.
+- Polling-only throttling still leaves top-level endpoints advancing while nested reaction scans remain capped at one call in the timeout window for example/repo#103.
+
+[reaction_render_key_patterns]
+contains_new_codex_banner=True
+contains_type_pr_reaction=True
+contains_context_pull_request_approval_signal=True
+contains_restart_hint=True
+contains_success_exit=True
+
+[approval_success_key_patterns]
+issue_body_success_message=True
+issue_body_banner_absent=True
+
+[mixed_repo_key_patterns]
+repo102_key_present=True
+other201_key_present=True
+repo102_url_present=True
+other201_url_present=True
+
+[repeated_after_key_patterns]
+contains_no_pending_activity=True
+after_repo102_mapping_used=True
+after_other201_mapping_used=True
+
+[invalid_after_key_patterns]
+latest_activity_issue_comment=True
+latest_timestamp_2026-04-18T10:12:00Z=True
+
+[polling_nested_reaction_approval_key_patterns]
+contains_monitor_start=True
+contains_issue_comment_reaction_banner=True
+contains_issue_comment_reaction_type=True
+contains_issue_comment_reaction_context=True
+contains_issue_comment_reaction_restart_hint=True
+contains_issue_comment_reaction_success_exit=True
+date_calls_five=True
+nested_issue_reactions_three_calls=True
+
+[polling_loop_throttle_counts]
+nested_issue_reactions=1
+nested_review_reactions=1
+top_level_issue_comments=9
+top_level_pr_reactions=9
+top_level_review_comments=9
+top_level_reviews=9

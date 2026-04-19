@@ -1,0 +1,196 @@
+shellcheck: PASS
+
+Matrix summary:
+- reaction_approval_rendering => exit 0; Codex +1 approval renders the NEW CODEX banner and restart hint for example/repo#102
+- approval_success => exit 0; issue-body no-issues approval still yields the distinct success message for example/repo#104
+- actionable_precedence => exit 2; actionable output still wins over approval/no-issues for example/repo#105
+- mixed_repo_selectors => exit 0; repo-qualified selectors still initialize example/repo#102 and example/other#201 together with distinct repo URLs
+- repeated_per_pr_after => exit 0; exact per-PR --after values still suppress already-known activity for both watched PRs
+- invalid_future_after => exit 1; corrective latest-activity output still reports issue comment at 2026-04-18T10:12:00Z
+- polling_nested_reaction_approval => exit 0; with the opt-in date shim, example/repo#106 now models the real bug: the polling validation pass reaches nested reactions first and the immediate reporting pass still renders the approval banner in the same cycle
+- polling_loop_throttle => exit 124 via timeout; top-level polling still continues while nested reaction endpoints stay throttled at one scan for example/repo#103
+
+[shellcheck]
+COMMAND=shellcheck watch-prs-for-comments.sh .sisyphus/testbin/gh .sisyphus/testbin/sleep .sisyphus/testbin/date
+EXIT_CODE=0
+
+[reaction_approval_rendering]
+COMMAND=PATH="$PWD/.sisyphus/testbin:$PATH" ./watch-prs-for-comments.sh --check-once example/repo#102
+EXIT_CODE=0
+[0;34m🔍 Initializing monitors for:[0m
+[0;34m   - example/repo#102[0m
+
+  [0;32m✓[0m example/repo#102: Mock PR 102 (last commit: 2026-04-18T10:00)
+[0;34m     https://github.com/example/repo/pull/102[0m
+
+[0;34m👀 Checking for existing new activity...[0m
+
+[1;33m═══════════════════════════════════════════════════════════════[0m
+[1;33m🔔 NEW CODEX 👍 on example/repo#102: Mock PR 102[0m
+[1;33m   Type: pr reaction[0m
+[1;33m   Context: pull request approval signal[0m
+[1;33m   Posted: 2026-04-18T10:05:00Z[0m
+[1;33m═══════════════════════════════════════════════════════════════[0m
+From: @chatgpt-codex-connector[bot]
+[1;33m───────────────────────────────────────────────────────────────[0m
+[0;34mTo ignore this activity and future ones on this PR, restart with:[0m
+[0;34m   --after "example/repo#102=2026-04-18T10:05:00Z"[0m
+
+
+[0;32m✅ Codex approval/no-issues signal found. No new actionable feedback.[0m
+Codex PR review completed: No new issues found. If you haven't already: You may now run final Oracle verification pass on this code. Once both Codex reviewer and Oracle have signed off, alert the user that all reviews are complete and the code is ready to merge
+
+[approval_success]
+COMMAND=PATH="$PWD/.sisyphus/testbin:$PATH" ./watch-prs-for-comments.sh --check-once example/repo#104
+EXIT_CODE=0
+[0;34m🔍 Initializing monitors for:[0m
+[0;34m   - example/repo#104[0m
+
+  [0;32m✓[0m example/repo#104: Mock PR 104 (last commit: 2026-04-18T10:00)
+[0;34m     https://github.com/example/repo/pull/104[0m
+
+[0;34m👀 Checking for existing new activity...[0m
+
+[0;32m✅ Codex approval/no-issues signal found. No new actionable feedback.[0m
+Codex PR review completed: No new issues found. If you haven't already: You may now run final Oracle verification pass on this code. Once both Codex reviewer and Oracle have signed off, alert the user that all reviews are complete and the code is ready to merge
+
+[actionable_precedence]
+COMMAND=PATH="$PWD/.sisyphus/testbin:$PATH" ./watch-prs-for-comments.sh --check-once example/repo#105
+EXIT_CODE=2
+[0;34m🔍 Initializing monitors for:[0m
+[0;34m   - example/repo#105[0m
+
+  [0;32m✓[0m example/repo#105: Mock PR 105 (last commit: 2026-04-18T10:00)
+[0;34m     https://github.com/example/repo/pull/105[0m
+
+[0;34m👀 Checking for existing new activity...[0m
+
+[1;33m═══════════════════════════════════════════════════════════════[0m
+[1;33m🔔 NEW PR COMMENT on example/repo#105: Mock PR 105[0m
+[1;33m   Posted: 2026-04-18T10:10:00Z[0m
+[1;33m═══════════════════════════════════════════════════════════════[0m
+From: @reviewer
+
+Please address the failing edge case.
+[1;33m───────────────────────────────────────────────────────────────[0m
+[0;34mTo ignore this activity and future ones on this PR, restart with:[0m
+[0;34m   --after "example/repo#105=2026-04-18T10:10:00Z"[0m
+
+
+[0;32m📋 Found new activity to address. Exiting so the agent can process it.[0m
+
+[mixed_repo_selectors]
+COMMAND=PATH="$PWD/.sisyphus/testbin:$PATH" ./watch-prs-for-comments.sh --check-once example/repo#102 example/other#201
+EXIT_CODE=0
+[0;34m🔍 Initializing monitors for:[0m
+[0;34m   - example/repo#102[0m
+[0;34m   - example/other#201[0m
+
+  [0;32m✓[0m example/repo#102: Mock PR 102 (last commit: 2026-04-18T10:00)
+[0;34m     https://github.com/example/repo/pull/102[0m
+  [0;32m✓[0m example/other#201: Mock PR 201 (last commit: 2026-04-18T10:00)
+[0;34m     https://github.com/example/other/pull/201[0m
+
+[0;34m👀 Checking for existing new activity...[0m
+
+[1;33m═══════════════════════════════════════════════════════════════[0m
+[1;33m🔔 NEW CODEX 👍 on example/repo#102: Mock PR 102[0m
+[1;33m   Type: pr reaction[0m
+[1;33m   Context: pull request approval signal[0m
+[1;33m   Posted: 2026-04-18T10:05:00Z[0m
+[1;33m═══════════════════════════════════════════════════════════════[0m
+From: @chatgpt-codex-connector[bot]
+[1;33m───────────────────────────────────────────────────────────────[0m
+[0;34mTo ignore this activity and future ones on this PR, restart with:[0m
+[0;34m   --after "example/repo#102=2026-04-18T10:05:00Z"[0m
+
+
+[0;32m✅ Codex approval/no-issues signal found. No new actionable feedback.[0m
+Codex PR review completed: No new issues found. If you haven't already: You may now run final Oracle verification pass on this code. Once both Codex reviewer and Oracle have signed off, alert the user that all reviews are complete and the code is ready to merge
+
+[repeated_per_pr_after]
+COMMAND=PATH="$PWD/.sisyphus/testbin:$PATH" ./watch-prs-for-comments.sh --check-once --after example/repo#102=2026-04-18T10:05:00Z --after example/other#201=2026-04-18T10:00:00Z example/repo#102 example/other#201
+EXIT_CODE=0
+[0;34m🔍 Initializing monitors for:[0m
+[0;34m   - example/repo#102[0m
+[0;34m   - example/other#201[0m
+
+  [0;32m✓[0m example/repo#102: Mock PR 102 (last commit: 2026-04-18T10:00)
+[0;34m     https://github.com/example/repo/pull/102[0m
+[0;34m     After: 2026-04-18T10:05:00Z[0m
+  [0;32m✓[0m example/other#201: Mock PR 201 (last commit: 2026-04-18T10:00)
+[0;34m     https://github.com/example/other/pull/201[0m
+[0;34m     After: 2026-04-18T10:00:00Z[0m
+
+[0;34m👀 Checking for existing new activity...[0m
+[0;32m✓ No pending activity.[0m
+
+[invalid_future_after]
+COMMAND=PATH="$PWD/.sisyphus/testbin:$PATH" ./watch-prs-for-comments.sh --check-once --after example/repo#104=2099-01-01T00:00:00Z example/repo#104
+EXIT_CODE=1
+[0;34m🔍 Initializing monitors for:[0m
+[0;34m   - example/repo#104[0m
+
+  [0;32m✓[0m example/repo#104: Mock PR 104 (last commit: 2026-04-18T10:00)
+[0;34m     https://github.com/example/repo/pull/104[0m
+[0;34m     After: 2099-01-01T00:00:00Z[0m
+
+[0;31m❌ --after example/repo#104=2099-01-01T00:00:00Z may not be later than the most recent PR activity.[0m
+[0;31m   Latest activity: issue comment[0m
+[0;31m   Latest timestamp: 2026-04-18T10:12:00Z[0m
+[0;31m   Retry with: --after "example/repo#104=2026-04-18T10:12:00Z"[0m
+
+[polling_nested_reaction_approval]
+COMMAND=PATH="$PWD/.sisyphus/testbin:$PATH" GH_FIXTURE_TIME_SCENARIO="polling-nested-handoff" ./watch-prs-for-comments.sh example/repo#106
+EXIT_CODE=0
+[0;34m🔍 Initializing monitors for:[0m
+[0;34m   - example/repo#106[0m
+
+  [0;32m✓[0m example/repo#106: Mock PR 106 (last commit: 2026-04-18T10:00)
+[0;34m     https://github.com/example/repo/pull/106[0m
+
+[0;34m👀 Checking for existing new activity...[0m
+[0;32m✓ No pending activity. Starting monitor...[0m
+[1;33m   Press Ctrl+C to stop[0m
+
+
+[1;33m═══════════════════════════════════════════════════════════════[0m
+[1;33m🔔 NEW CODEX 👍 on example/repo#106: Mock PR 106[0m
+[1;33m   Type: issue comment reaction[0m
+[1;33m   Context: pull request conversation comment approval signal[0m
+[1;33m   Posted: 2026-04-18T10:06:00Z[0m
+[1;33m═══════════════════════════════════════════════════════════════[0m
+From: @chatgpt-codex-connector[bot]
+[1;33m───────────────────────────────────────────────────────────────[0m
+[0;34mTo ignore this activity and future ones on this PR, restart with:[0m
+[0;34m   --after "example/repo#106=2026-04-18T10:06:00Z"[0m
+
+
+[0;32m✅ Codex approval/no-issues signal found. No new actionable feedback.[0m
+Codex PR review completed: No new issues found. If you haven't already: You may now run final Oracle verification pass on this code. Once both Codex reviewer and Oracle have signed off, alert the user that all reviews are complete and the code is ready to merge
+
+[polling_loop_throttle]
+COMMAND=PATH="$PWD/.sisyphus/testbin:$PATH" GH_FIXTURE_RUN_ID="task5-throttle" /usr/bin/timeout 3s ./watch-prs-for-comments.sh example/repo#103
+EXIT_CODE=124
+[0;34m🔍 Initializing monitors for:[0m
+[0;34m   - example/repo#103[0m
+
+  [0;32m✓[0m example/repo#103: Mock PR 103 (last commit: 2026-04-18T10:00)
+[0;34m     https://github.com/example/repo/pull/103[0m
+
+[0;34m👀 Checking for existing new activity...[0m
+[0;32m✓ No pending activity. Starting monitor...[0m
+[1;33m   Press Ctrl+C to stop[0m
+
+[polling_nested_reaction_approval_counts]
+fixture_dir=gh-fixture-watcher-1360906
+date_calls=5
+nested_issue_reactions=3
+
+[polling_loop_throttle_counts]
+nested_issue_reactions=1
+nested_review_reactions=1
+top_level_issue_comments=9
+top_level_pr_reactions=9
+top_level_review_comments=9
+top_level_reviews=9
