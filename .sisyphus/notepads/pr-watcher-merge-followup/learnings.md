@@ -136,3 +136,9 @@
 - The regression came from arming `KEY_TO_FORCE_REPORT_NESTED_REACTION_SCAN` even when a throttled validation pass skipped nested reactions. That made the immediate reporting pass re-enable nested endpoints every loop and defeated `REACTION_POLL_INTERVAL_SECONDS`.
 - The correct fix was simply to stop arming the force flag on the skip path. The force handoff still works when the validation pass actually performs a nested scan, and the initial-report fix still covers unthrottled `--check-once` / `first_sweep` scans.
 - Fresh evidence in `.sisyphus/evidence/task-throttle-preserving-fix.log` now shows `#103` back to `nested_issue_reactions.count=1` / `nested_review_reactions.count=1`, while the existing forced-report `#106` and initial-report `#111` proofs remain green.
+
+## 2026-04-19 23:07:20Z — Approval reaction deduplication findings (Atlas)
+
+- The live bug was noise, not correctness: once an approval reaction was above the baseline, the watcher would redisplay the same `NEW CODEX 👍` banner on every polling loop because reactions were never marked as reported.
+- The smallest safe fix was to add a per-PR approval-report token set and use it only to suppress repeat banners. The approval state itself still counts toward final success, so deduplication does not block eventual approval exits.
+- Fresh evidence in `.sisyphus/evidence/task-approval-dedupe-fix.log` now shows the mixed pending case printing the `#102` approval banner only once while continuing to wait, and the single-PR approval path still exits `0` with one approval banner.

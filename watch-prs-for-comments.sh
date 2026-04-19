@@ -31,6 +31,7 @@ declare -A KEY_TO_AFTER=()
 declare -A KEY_TO_SURFACED_CURSOR=()
 declare -A KEY_TO_PENDING_PRECOMMIT_ACTIONABLE=()
 declare -A KEY_TO_REPORTED_ACTIONABLE_KEYS=()
+declare -A KEY_TO_REPORTED_APPROVAL_KEYS=()
 declare -A KEY_TO_APPROVAL_SIGNAL_FOUND=()
 declare -A KEY_TO_LATEST_ACTIVITY_TIME=()
 declare -A KEY_TO_LATEST_ACTIVITY_TYPE=()
@@ -271,6 +272,7 @@ reset_review_cycle_runtime_state() {
     KEY_TO_SURFACED_CURSOR["$key"]=""
     KEY_TO_PENDING_PRECOMMIT_ACTIONABLE["$key"]=false
     KEY_TO_REPORTED_ACTIONABLE_KEYS["$key"]=$'\n'
+    KEY_TO_REPORTED_APPROVAL_KEYS["$key"]=$'\n'
     KEY_TO_APPROVAL_SIGNAL_FOUND["$key"]=false
     KEY_TO_NESTED_REACTION_SCAN_EPOCH["$key"]=0
     KEY_TO_FORCE_REPORT_NESTED_REACTION_SCAN["$key"]=false
@@ -425,6 +427,21 @@ mark_actionable_reported() {
     local token="$2"
 
     KEY_TO_REPORTED_ACTIONABLE_KEYS["$key"]+="$token"$'\n'
+}
+
+is_already_reported_approval() {
+    local key="$1"
+    local token="$2"
+    local reported="${KEY_TO_REPORTED_APPROVAL_KEYS[$key]:-}"
+
+    [[ "$reported" == *$'\n'"$token"$'\n'* ]]
+}
+
+mark_approval_reported() {
+    local key="$1"
+    local token="$2"
+
+    KEY_TO_REPORTED_APPROVAL_KEYS["$key"]+="$token"$'\n'
 }
 
 record_actionable_visibility() {
@@ -585,6 +602,7 @@ record_reaction_approval() {
     local context_line="$5"
     local baseline="$6"
     local report_new="$7"
+    local token=""
 
     register_latest_activity "$key" "$timestamp" "$reaction_type"
 
@@ -592,7 +610,11 @@ record_reaction_approval() {
         APPROVAL_SIGNAL_FOUND=1
         KEY_TO_APPROVAL_SIGNAL_FOUND["$key"]=true
         POSTCOMMIT_BOUNDARY_FOUND=1
-        display_reaction "$key" "$reaction_type" "$actor" "$timestamp" "$context_line"
+        token="approval:${reaction_type}:${actor}:${timestamp}:${context_line}"
+        if ! is_already_reported_approval "$key" "$token"; then
+            display_reaction "$key" "$reaction_type" "$actor" "$timestamp" "$context_line"
+            mark_approval_reported "$key" "$token"
+        fi
     fi
 }
 
