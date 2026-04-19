@@ -123,3 +123,9 @@
 - Added one helper, `any_pending_precommit_actionable()`, and used it only to guard the approval-success exits in `main()` and `monitor_loop()`. Approval/no-issues now returns exit `0` only when no watched PR still has pending earlier actionable feedback.
 - Left `scan_pr_activity()` and all per-key state gathering unchanged on purpose. The bug was in the final success decision, not in how pending state or approvals were recorded.
 - Captured the mixed-PR proof in `.sisyphus/evidence/task-multi-pr-approval-fix.log` and `.sisyphus/evidence/task-multi-pr-approval-fix-error.log`: combined `#107 + #102` no longer returns a false success, while single-PR approval on `#102` and single-PR restart-race behavior on `#107` remain intact.
+
+## 2026-04-19 20:31:30Z — Full-scan validation and closed-PR cleanup decision (Atlas)
+
+- Moved `validate_after_cutoffs()` in `monitor_loop()` to run only after the reporting pass, and changed the nested-reaction skip path so a throttled validation pass arms `KEY_TO_FORCE_REPORT_NESTED_REACTION_SCAN` for the immediate reporting pass instead of clearing it. This preserves the full-scan contract for restart validation without relaxing the long-run throttle invariant.
+- On PR closure, `refresh_pr_state()` now resets review-cycle runtime state and clears latest-activity fields before returning. That makes closed PRs stop contributing stale pending-actionable state to `any_pending_precommit_actionable()` and prevents empty latest-activity validation failures for closed keys.
+- Captured both new proofs in `.sisyphus/evidence/task-latest-fixes.log` and `.sisyphus/evidence/task-latest-fixes-error.log`: `#109` validates `--after` after a full scan, and `#110 + #102` proves closed-PR cleanup no longer blocks approval success.

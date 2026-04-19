@@ -1,0 +1,9 @@
+assertions:
+- shellcheck_exit_zero: PASS
+- after_full_scan_no_invalid_after: PASS
+- after_full_scan_timeout_waits: PASS
+- after_full_scan_no_success_banner: PASS
+- closed_pending_exits_zero: PASS
+- closed_pending_success_banner: PASS
+- closed_pending_closed_notice: PASS
+- explicit_after_102_still_zero: PASS

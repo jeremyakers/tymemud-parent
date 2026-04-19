@@ -802,7 +802,11 @@ scan_pr_activity() {
             process_reactions_for_review_comment "$repo" "$comment_id" "$key" "$baseline" "$file" "$report_new"
         done
     else
-        KEY_TO_FORCE_REPORT_NESTED_REACTION_SCAN["$key"]=false
+        if [[ "$report_new" == "false" && "$throttle_nested_reactions" == "true" && "$should_scan_nested_reaction_endpoints" == false ]]; then
+            KEY_TO_FORCE_REPORT_NESTED_REACTION_SCAN["$key"]=true
+        else
+            KEY_TO_FORCE_REPORT_NESTED_REACTION_SCAN["$key"]=false
+        fi
     fi
 
     if [[ "${KEY_TO_PENDING_PRECOMMIT_ACTIONABLE[$key]:-false}" == "true" && "$POSTCOMMIT_BOUNDARY_FOUND" -eq 1 ]]; then
@@ -881,6 +885,8 @@ validate_after_cutoffs() {
 
         latest_time="${KEY_TO_LATEST_ACTIVITY_TIME[$key]:-}"
         latest_type="${KEY_TO_LATEST_ACTIVITY_TYPE[$key]:-unknown activity}"
+
+        [[ -n "$latest_time" ]] || continue
 
         if compare_iso_gt "$cutoff" "$latest_time"; then
             echo -e "${RED}❌ --after ${key}=${cutoff} may not be later than the most recent PR activity.${NC}" >&2
@@ -1044,6 +1050,9 @@ refresh_pr_state() {
     KEY_TO_URL["$key"]="$url"
 
     if [[ "$state" != "OPEN" ]]; then
+        reset_review_cycle_runtime_state "$key"
+        KEY_TO_LATEST_ACTIVITY_TIME["$key"]=""
+        KEY_TO_LATEST_ACTIVITY_TYPE["$key"]=""
         warn "✅ ${key} ${state}"
         return 1
     fi
@@ -1092,11 +1101,11 @@ monitor_loop() {
             POSTCOMMIT_BOUNDARY_FOUND=0
 
             scan_pr_activity "$key" "$(effective_baseline_for_key "$key")" false true
-            validate_after_cutoffs
 
             baseline="$(effective_baseline_for_key "$key")"
             POSTCOMMIT_BOUNDARY_FOUND=0
             scan_pr_activity "$key" "$baseline" true true
+            validate_after_cutoffs
         done
 
         if [[ "$NEW_SIGNAL_FOUND" -eq 1 ]]; then
