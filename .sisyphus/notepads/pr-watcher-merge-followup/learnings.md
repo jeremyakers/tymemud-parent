@@ -124,3 +124,9 @@
 - The live bug was in `is_codex_actor()`: even when `--codex-login` supplied a specific reviewer, the helper still accepted the hardcoded fallback aliases `codex` and `chatgpt-codex-connector`, so an approval from the wrong bot could still satisfy the watcher.
 - The smallest safe fix was to introduce a `DEFAULT_CODEX_REVIEWER_LOGIN` constant and treat fallback aliases as valid only when the configured reviewer is still the default. Once the caller overrides `--codex-login`, matching becomes exact.
 - Fresh evidence in `.sisyphus/evidence/task-codex-login-override-fix.log` now shows the default reviewer still approving `#102`, while `--codex-login custom-review-bot` blocks the fallback approval and keeps monitoring instead of exiting success.
+
+## 2026-04-19 22:40:40Z — Initial-report nested reaction findings (Atlas)
+
+- The live gap was specific to unthrottled reporting passes (`first_sweep()` / `--check-once`): once any newer top-level comment or review set `needs_nested_reaction_scan=false`, the final nested-reaction gate skipped issue/review comment reactions entirely because there was no preceding validation pass to arm the force flag.
+- The smallest safe fix was to treat unthrottled scans as always eligible for nested reaction endpoints, while leaving the throttled polling path on the existing `needs_nested_reaction_scan` / force-flag rules.
+- Fresh evidence in `.sisyphus/evidence/task-initial-report-fix.log` now shows `example/repo#111` scanning `initial_report_nested_issue_reactions.count=1` during `--check-once`, and the established forced-report polling proof for `#106` remains green.

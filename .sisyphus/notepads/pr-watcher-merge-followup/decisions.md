@@ -141,3 +141,9 @@
 - Introduced `DEFAULT_CODEX_REVIEWER_LOGIN` and changed `is_codex_actor()` so hardcoded fallback aliases are only accepted when the configured reviewer remains the default. An explicit `--codex-login` override now enforces an exact reviewer match.
 - Kept the default behavior unchanged for existing users: `chatgpt-codex-connector[bot]`, `chatgpt-codex-connector`, and `codex` still count when no override is supplied.
 - Captured the proof in `.sisyphus/evidence/task-codex-login-override-fix.log` and `.sisyphus/evidence/task-codex-login-override-fix-error.log`: the default login still approves `#102`, while a custom override blocks that fallback approval and continues monitoring.
+
+## 2026-04-19 22:40:40Z — Initial-report nested reaction decision (Atlas)
+
+- Widened the final nested-reaction execution gate just enough to always run nested reaction endpoints when throttling is disabled. That makes `first_sweep()` / `--check-once` scan nested reactions even after a newer top-level comment or review flips `needs_nested_reaction_scan=false`.
+- Left the throttled polling path unchanged: when `throttle_nested_reactions==true`, the gate still relies on `needs_nested_reaction_scan` or the force flag so the long-run polling throttle invariant stays intact.
+- Captured the proof in `.sisyphus/evidence/task-initial-report-fix.log` and `.sisyphus/evidence/task-initial-report-fix-error.log`: `#111` now hits the nested-reaction endpoint in the initial reporting pass, and the existing forced-report polling scenario for `#106` still succeeds.
