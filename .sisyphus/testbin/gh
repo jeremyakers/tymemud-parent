@@ -90,6 +90,10 @@ if [[ "$cmd" == "api" ]]; then
             printf '2026-04-18T10:00:00Z\n'
             exit 0
             ;;
+        repos/example/repo/commits/sha-107)
+            printf '2026-04-18T10:00:00Z\n'
+            exit 0
+            ;;
         repos/example/repo/issues/102/comments\?per_page=100)
             printf '[]\n'
             exit 0
@@ -100,6 +104,11 @@ if [[ "$cmd" == "api" ]]; then
             ;;
         repos/example/repo/issues/106/comments\?per_page=100)
             printf '[{"id":1061,"created_at":"2026-04-18T09:55:00Z","user":{"login":"reviewer"},"body":"Earlier context."}]\n'
+            exit 0
+            ;;
+        repos/example/repo/issues/107/comments\?per_page=100)
+            log_endpoint_call race_issue_comments
+            printf '[{"id":1071,"created_at":"2026-04-18T09:55:00Z","user":{"login":"reviewer"},"body":"Please still fix the restart race."}]\n'
             exit 0
             ;;
         repos/example/repo/issues/104/comments\?per_page=100)
@@ -119,6 +128,10 @@ if [[ "$cmd" == "api" ]]; then
             printf '[]\n'
             exit 0
             ;;
+        repos/example/repo/pulls/107/comments\?per_page=100)
+            printf '[]\n'
+            exit 0
+            ;;
         repos/example/repo/pulls/103/comments\?per_page=100)
             log_endpoint_call top_level_review_comments
             printf '[{"id":1032,"created_at":"2026-04-18T09:56:00Z","user":{"login":"reviewer"},"body":"Earlier inline note.","path":"src/mock.c","line":12,"original_line":12,"start_line":12,"end_line":12,"commit_id":"deadbeef103"}]\n'
@@ -128,12 +141,26 @@ if [[ "$cmd" == "api" ]]; then
             printf '[]\n'
             exit 0
             ;;
+        repos/example/repo/pulls/107/reviews\?per_page=100)
+            log_endpoint_call race_reviews
+            review_call_count=$(<"$fixture_dir/race_reviews.count")
+            if (( review_call_count < 3 )); then
+                printf '[]\n'
+            else
+                printf '[{"id":1073,"submitted_at":"2026-04-18T10:06:00Z","state":"COMMENTED","user":{"login":"chatgpt-codex-connector[bot]"},"body":"Codex Review: Didn'"'"'t find any major issues."}]\n'
+            fi
+            exit 0
+            ;;
         repos/example/repo/pulls/103/reviews\?per_page=100)
             log_endpoint_call top_level_reviews
             printf '[]\n'
             exit 0
             ;;
         repos/example/repo/issues/comments/1021/reactions\?per_page=100|repos/example/repo/issues/comments/1041/reactions\?per_page=100|repos/example/repo/issues/comments/1051/reactions\?per_page=100|repos/example/repo/issues/comments/1052/reactions\?per_page=100)
+            printf '[]\n'
+            exit 0
+            ;;
+        repos/example/repo/issues/comments/1071/reactions\?per_page=100)
             printf '[]\n'
             exit 0
             ;;
@@ -161,7 +188,7 @@ if [[ "$cmd" == "api" ]]; then
             printf '[{"id":2021,"created_at":"2026-04-18T10:05:00Z","user":{"login":"chatgpt-codex-connector[bot]"},"content":"+1"}]\n'
             exit 0
             ;;
-        repos/example/repo/issues/104/reactions\?per_page=100|repos/example/repo/issues/105/reactions\?per_page=100|repos/example/repo/issues/106/reactions\?per_page=100|repos/example/other/issues/201/reactions\?per_page=100)
+        repos/example/repo/issues/104/reactions\?per_page=100|repos/example/repo/issues/105/reactions\?per_page=100|repos/example/repo/issues/106/reactions\?per_page=100|repos/example/repo/issues/107/reactions\?per_page=100|repos/example/other/issues/201/reactions\?per_page=100)
             printf '[]\n'
             exit 0
             ;;

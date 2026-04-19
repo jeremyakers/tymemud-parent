@@ -25,11 +25,15 @@ declare -A KEY_TO_TITLE=()
 declare -A KEY_TO_URL=()
 declare -A KEY_TO_LAST_COMMIT=()
 declare -A KEY_TO_AFTER=()
+declare -A KEY_TO_SURFACED_CURSOR=()
+declare -A KEY_TO_PENDING_PRECOMMIT_ACTIONABLE=()
+declare -A KEY_TO_REPORTED_ACTIONABLE_KEYS=()
 declare -A KEY_TO_LATEST_ACTIVITY_TIME=()
 declare -A KEY_TO_LATEST_ACTIVITY_TYPE=()
 declare -A KEY_TO_NESTED_REACTION_SCAN_EPOCH=()
 declare -A KEY_TO_FORCE_REPORT_NESTED_REACTION_SCAN=()
 APPROVAL_SIGNAL_FOUND=0
+POSTCOMMIT_BOUNDARY_FOUND=0
 
 usage() {
     cat <<'EOF'
@@ -117,6 +121,14 @@ compare_iso_gte() {
 
     [[ "$left" == "$right" ]] && return 0
     compare_iso_gt "$left" "$right"
+}
+
+compare_iso_lte() {
+    local left="$1"
+    local right="$2"
+
+    [[ "$left" == "$right" ]] && return 0
+    [[ "$left" < "$right" ]]
 }
 
 trimmed_nonempty() {
@@ -275,6 +287,114 @@ register_latest_activity() {
     fi
 }
 
+get_runtime_cursor() {
+    local key="$1"
+
+    if [[ -n "${KEY_TO_SURFACED_CURSOR[$key]:-}" ]]; then
+        printf '%s\n' "${KEY_TO_SURFACED_CURSOR[$key]}"
+        return 0
+    fi
+
+    printf '%s\n' "${KEY_TO_AFTER[$key]:-}"
+}
+
+runtime_baseline_cursor() {
+    local key="$1"
+    local surfaced="${KEY_TO_SURFACED_CURSOR[$key]:-}"
+
+    if [[ -n "$surfaced" ]]; then
+        date -u -d "$surfaced -1 second" +"%Y-%m-%dT%H:%M:%SZ"
+        return 0
+    fi
+
+    printf '%s\n' "${KEY_TO_AFTER[$key]:-}"
+}
+
+effective_baseline_for_key() {
+    local key="$1"
+    local cursor=""
+    local latest_commit="${KEY_TO_LAST_COMMIT[$key]}"
+
+    cursor="$(runtime_baseline_cursor "$key")"
+    if [[ -z "$cursor" ]]; then
+        printf '%s\n' "$latest_commit"
+        return 0
+    fi
+
+    if compare_iso_gt "$cursor" "$latest_commit"; then
+        printf '%s\n' "$latest_commit"
+        return 0
+    fi
+
+    printf '%s\n' "$cursor"
+}
+
+is_post_commit_activity() {
+    local key="$1"
+    local timestamp="$2"
+
+    compare_iso_gt "$timestamp" "${KEY_TO_LAST_COMMIT[$key]}"
+}
+
+is_already_reported_actionable() {
+    local key="$1"
+    local token="$2"
+    local reported="${KEY_TO_REPORTED_ACTIONABLE_KEYS[$key]:-}"
+
+    [[ "$reported" == *$'\n'"$token"$'\n'* ]]
+}
+
+mark_actionable_reported() {
+    local key="$1"
+    local token="$2"
+
+    KEY_TO_REPORTED_ACTIONABLE_KEYS["$key"]+="$token"$'\n'
+}
+
+record_actionable_visibility() {
+    local key="$1"
+    local timestamp="$2"
+    local token="$3"
+
+    if compare_iso_gt "$timestamp" "${KEY_TO_SURFACED_CURSOR[$key]:-}"; then
+        KEY_TO_SURFACED_CURSOR["$key"]="$timestamp"
+    fi
+
+    mark_actionable_reported "$key" "$token"
+}
+
+flag_postcommit_boundary_if_needed() {
+    local key="$1"
+    local timestamp="$2"
+    local report_new="$3"
+    local baseline="$4"
+
+    [[ "$report_new" == "true" ]] || return 0
+    compare_iso_gt "$timestamp" "$baseline" || return 0
+    is_post_commit_activity "$key" "$timestamp" || return 0
+
+    POSTCOMMIT_BOUNDARY_FOUND=1
+}
+
+record_actionable_event() {
+    local key="$1"
+    local timestamp="$2"
+    local token="$3"
+    local display_callback="$4"
+    shift 4
+
+    if is_post_commit_activity "$key" "$timestamp"; then
+        NEW_SIGNAL_FOUND=1
+    else
+        KEY_TO_PENDING_PRECOMMIT_ACTIONABLE["$key"]=true
+    fi
+
+    if ! is_already_reported_actionable "$key" "$token"; then
+        "$display_callback" "$@"
+        record_actionable_visibility "$key" "$timestamp" "$token"
+    fi
+}
+
 display_restart_hint() {
     local key="$1"
     local timestamp="$2"
@@ -392,8 +512,9 @@ record_reaction_approval() {
 
     register_latest_activity "$key" "$timestamp" "$reaction_type"
 
-    if [[ "$report_new" == "true" ]] && compare_iso_gt "$timestamp" "$baseline"; then
+    if [[ "$report_new" == "true" ]] && compare_iso_gt "$timestamp" "$baseline" && is_post_commit_activity "$key" "$timestamp"; then
         APPROVAL_SIGNAL_FOUND=1
+        POSTCOMMIT_BOUNDARY_FOUND=1
         display_reaction "$key" "$reaction_type" "$actor" "$timestamp" "$context_line"
     fi
 }
@@ -502,6 +623,7 @@ scan_pr_activity() {
     local state
     local content
     local comment_id
+    local review_id
     local needs_nested_reaction_scan=true
     local should_scan_nested_reaction_endpoints=true
     local force_report_nested_reaction_scan="${KEY_TO_FORCE_REPORT_NESTED_REACTION_SCAN[$key]:-false}"
@@ -524,13 +646,15 @@ scan_pr_activity() {
 
         if [[ "$report_new" == "true" ]] && compare_iso_gt "$timestamp" "$baseline"; then
             if is_codex_no_issues_body "$actor" "$body"; then
-                APPROVAL_SIGNAL_FOUND=1
+                flag_postcommit_boundary_if_needed "$key" "$timestamp" "$report_new" "$baseline"
+                if is_post_commit_activity "$key" "$timestamp"; then
+                    APPROVAL_SIGNAL_FOUND=1
+                fi
                 continue
             fi
 
-            NEW_SIGNAL_FOUND=1
             needs_nested_reaction_scan=false
-            display_issue_comment "$key" "$actor" "$body" "$timestamp"
+            record_actionable_event "$key" "$timestamp" "issue-comment:${comment_id}" display_issue_comment "$key" "$actor" "$body" "$timestamp"
         fi
     done
 
@@ -550,34 +674,43 @@ scan_pr_activity() {
         register_latest_activity "$key" "$timestamp" "review comment"
 
         if [[ "$report_new" == "true" ]] && compare_iso_gt "$timestamp" "$baseline"; then
-            NEW_SIGNAL_FOUND=1
             needs_nested_reaction_scan=false
-            display_review_comment "$key" "$file" "$line" "$original_line" "$start_line" "$end_line" "$commit_id" "$actor" "$body" "$timestamp"
+            record_actionable_event "$key" "$timestamp" "review-comment:${comment_id}" display_review_comment "$key" "$file" "$line" "$original_line" "$start_line" "$end_line" "$commit_id" "$actor" "$body" "$timestamp"
         fi
     done
 
     count=$(jq 'length' <<<"$reviews")
     for ((i=0; i<count; i++)); do
+        review_id=$(jq -r ".[$i].id // \"review-$i\"" <<<"$reviews")
         timestamp=$(jq -r ".[$i].submitted_at // \"\"" <<<"$reviews")
         [[ -n "$timestamp" ]] || continue
 
         body=$(jq -r ".[$i].body // \"\"" <<<"$reviews")
-        trimmed_nonempty "$body" || continue
-
         actor=$(jq -r ".[$i].user.login" <<<"$reviews")
         state=$(jq -r ".[$i].state" <<<"$reviews")
 
         register_latest_activity "$key" "$timestamp" "review body"
 
+        if [[ "$report_new" == "true" ]] && compare_iso_gt "$timestamp" "$baseline" && ! trimmed_nonempty "$body"; then
+            if [[ "${KEY_TO_PENDING_PRECOMMIT_ACTIONABLE[$key]:-false}" == "true" ]]; then
+                flag_postcommit_boundary_if_needed "$key" "$timestamp" "$report_new" "$baseline"
+            fi
+            continue
+        fi
+
+        trimmed_nonempty "$body" || continue
+
         if [[ "$report_new" == "true" ]] && compare_iso_gt "$timestamp" "$baseline"; then
             if is_codex_no_issues_body "$actor" "$body"; then
-                APPROVAL_SIGNAL_FOUND=1
+                flag_postcommit_boundary_if_needed "$key" "$timestamp" "$report_new" "$baseline"
+                if is_post_commit_activity "$key" "$timestamp"; then
+                    APPROVAL_SIGNAL_FOUND=1
+                fi
                 continue
             fi
 
-            NEW_SIGNAL_FOUND=1
             needs_nested_reaction_scan=false
-            display_review_body "$key" "$state" "$actor" "$body" "$timestamp"
+            record_actionable_event "$key" "$timestamp" "review:${review_id}" display_review_body "$key" "$state" "$actor" "$body" "$timestamp"
         fi
     done
 
@@ -625,6 +758,10 @@ scan_pr_activity() {
     else
         KEY_TO_FORCE_REPORT_NESTED_REACTION_SCAN["$key"]=false
     fi
+
+    if [[ "${KEY_TO_PENDING_PRECOMMIT_ACTIONABLE[$key]:-false}" == "true" && "$POSTCOMMIT_BOUNDARY_FOUND" -eq 1 ]]; then
+        NEW_SIGNAL_FOUND=1
+    fi
 }
 
 resolve_after_mappings() {
@@ -642,6 +779,9 @@ resolve_after_mappings() {
 
     for pr_key in "${PR_KEYS[@]}"; do
         KEY_TO_AFTER["$pr_key"]=""
+        KEY_TO_SURFACED_CURSOR["$pr_key"]=""
+        KEY_TO_PENDING_PRECOMMIT_ACTIONABLE["$pr_key"]=false
+        KEY_TO_REPORTED_ACTIONABLE_KEYS["$pr_key"]=$'\n'
     done
 
     for raw in "${RAW_AFTER_ARGS[@]}"; do
@@ -827,10 +967,12 @@ first_sweep() {
 
     NEW_SIGNAL_FOUND=0
     APPROVAL_SIGNAL_FOUND=0
+    POSTCOMMIT_BOUNDARY_FOUND=0
     note "👀 Checking for existing new activity..."
 
     for key in "${PR_KEYS[@]}"; do
-        baseline="${KEY_TO_AFTER[$key]:-${KEY_TO_LAST_COMMIT[$key]}}"
+        POSTCOMMIT_BOUNDARY_FOUND=0
+        baseline="$(effective_baseline_for_key "$key")"
         scan_pr_activity "$key" "$baseline" true false
     done
 }
@@ -894,15 +1036,21 @@ monitor_loop() {
             KEY_TO_LATEST_ACTIVITY_TIME["$key"]=""
             KEY_TO_LATEST_ACTIVITY_TYPE["$key"]=""
             KEY_TO_FORCE_REPORT_NESTED_REACTION_SCAN["$key"]=false
+            POSTCOMMIT_BOUNDARY_FOUND=0
 
-            scan_pr_activity "$key" "${KEY_TO_AFTER[$key]:-${KEY_TO_LAST_COMMIT[$key]}}" false true
+            scan_pr_activity "$key" "$(effective_baseline_for_key "$key")" false true
             validate_after_cutoffs
 
-            baseline="${KEY_TO_AFTER[$key]:-${KEY_TO_LAST_COMMIT[$key]}}"
+            baseline="$(effective_baseline_for_key "$key")"
+            POSTCOMMIT_BOUNDARY_FOUND=0
             scan_pr_activity "$key" "$baseline" true true
         done
 
-        [[ "$NEW_SIGNAL_FOUND" -eq 1 ]] && exit 2
+        if [[ "$NEW_SIGNAL_FOUND" -eq 1 ]]; then
+            echo ""
+            pass "📋 Found new activity to address. Exiting so the agent can process it."
+            exit 2
+        fi
 
         if [[ "$APPROVAL_SIGNAL_FOUND" -eq 1 ]]; then
             echo ""
@@ -960,7 +1108,12 @@ main() {
         exit 0
     fi
 
-    pass "✓ No pending activity. Starting monitor..."
+    if printf '%s\n' "${KEY_TO_PENDING_PRECOMMIT_ACTIONABLE[@]:-}" | grep -qx 'true'; then
+        warn "⏳ Earlier actionable feedback is visible, but the latest review cycle is still in progress. Waiting for a post-commit review signal before exiting."
+    else
+        pass "✓ No pending activity. Starting monitor..."
+    fi
+
     warn "   Press Ctrl+C to stop"
     echo ""
     monitor_loop
