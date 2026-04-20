@@ -74,6 +74,8 @@ If all PRs are in the same repo, the watcher still supports `--repo owner/repo` 
 ./watch-prs-for-comments.sh --repo jeremyakers/tymemud-lib --check-once 63
 ```
 
+When `--check-once` finds no actionable activity but the PR is still open, it exits with a distinct pending status so callers can distinguish "still waiting" from "feedback to address now."
+
 ### Resume after a specific activity
 
 The canonical form is one optional `--after <selector>=<timestamp>` per PR:
@@ -202,6 +204,7 @@ The watcher always does a full first sweep.
 | 0 | All monitored PRs merged | Move on to the next task |
 | 1 | Error, invalid invocation, auth/fetch failure, or a watched PR closed without merge | Read the error and rerun correctly |
 | 2 | New actionable watcher activity detected | Address the feedback now |
+| 3 | `--check-once` found no actionable activity, but review is still pending on open PRs | Keep waiting; do not treat this as actionable feedback |
 
 ## Recommended Agent Examples
 
@@ -245,6 +248,10 @@ The watcher always does a full first sweep.
 **"--after ... may not be later than the most recent watcher baseline or supported activity"**
 - Copy the exact timestamp printed by the watcher
 - Re-run with the suggested corrected value
+
+**Using a non-default Codex reviewer identity**
+- Pass `--codex-login <login>` when your Codex reviewer bot uses a different GitHub login.
+- Restart hints preserve that override automatically.
 
 **No, do not background it by default**
 - The standard workflow is foreground monitoring, started immediately after printing the PR URL

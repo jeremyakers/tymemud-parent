@@ -11,8 +11,10 @@ YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
 NC='\033[0m'
 
+DEFAULT_CODEX_REVIEWER_LOGIN='chatgpt-codex-connector[bot]'
 REPO_ARG=""
 CHECK_ONCE=false
+CODEX_REVIEWER_LOGIN="${CODEX_REVIEWER_LOGIN:-$DEFAULT_CODEX_REVIEWER_LOGIN}"
 LAST_FETCH_ERROR=""
 
 declare -a RAW_PR_ARGS=()
@@ -36,7 +38,7 @@ POSTCOMMIT_BOUNDARY_FOUND=0
 usage() {
     cat <<'EOF'
 Usage:
-  ./watch-prs-for-comments.sh [--repo owner/repo] [--check-once] [--after <selector>=<timestamp>] <pr...>
+  ./watch-prs-for-comments.sh [--repo owner/repo] [--check-once] [--after <selector>=<timestamp>] [--codex-login <login>] <pr...>
 
 PR selectors:
   owner/repo#123        Monitor PR #123 in owner/repo
@@ -73,6 +75,31 @@ warn() {
 pass() {
     local message="$1"
     echo -e "${GREEN}${message}${NC}"
+}
+
+normalize_login() {
+    local login="${1,,}"
+    login="${login%\[bot\]}"
+    printf '%s\n' "$login"
+}
+
+is_codex_actor() {
+    local login
+    login="$(normalize_login "$1")"
+    local custom
+    custom="$(normalize_login "$CODEX_REVIEWER_LOGIN")"
+    local default_login
+    default_login="$(normalize_login "$DEFAULT_CODEX_REVIEWER_LOGIN")"
+
+    [[ "$login" == "$custom" ]] && return 0
+
+    if [[ "$custom" != "$default_login" ]]; then
+        return 1
+    fi
+
+    [[ "$login" == "codex" ]] && return 0
+    [[ "$login" == "chatgpt-codex-connector" ]] && return 0
+    return 1
 }
 
 normalize_timestamp() {
@@ -123,19 +150,12 @@ shell_quote() {
     printf '%q' "$1"
 }
 
-is_default_codex_actor() {
-    local login="${1,,}"
-    login="${login%\[bot\]}"
-
-    [[ "$login" == "codex" || "$login" == "chatgpt-codex-connector" ]]
-}
-
 is_codex_no_issues_noise() {
     local actor="$1"
     local body="$2"
     local normalized_body=""
 
-    is_default_codex_actor "$actor" || return 1
+    is_codex_actor "$actor" || return 1
     normalized_body="$(normalize_message_whitespace "$body")"
 
     case "$normalized_body" in
@@ -491,6 +511,10 @@ display_restart_hint() {
         command+=" --check-once"
     fi
 
+    if [[ "$CODEX_REVIEWER_LOGIN" != "$DEFAULT_CODEX_REVIEWER_LOGIN" ]]; then
+        command+=" --codex-login $(shell_quote "$CODEX_REVIEWER_LOGIN")"
+    fi
+
     for current_key in "${PR_KEYS[@]}"; do
         if [[ "$current_key" == "$key" ]]; then
             current_after="$timestamp"
@@ -838,6 +862,11 @@ parse_args() {
                 RAW_AFTER_ARGS+=("$2")
                 shift 2
                 ;;
+            --codex-login)
+                [[ $# -ge 2 ]] || fail "--codex-login requires a login"
+                CODEX_REVIEWER_LOGIN="$2"
+                shift 2
+                ;;
             --help|-h)
                 usage
                 exit 0
@@ -870,7 +899,7 @@ resolve_pr_targets() {
         [[ -n "$current_repo" ]] || fail "Could not determine repository. Use --repo owner/repo or run from a git repo with a GitHub remote."
         local current_pr
         current_pr=$(gh pr view --repo "$current_repo" --json number --jq '.number' 2>/dev/null || true)
-        [[ -n "$current_pr" ]] || fail "Usage: $0 [--repo owner/repo] [--check-once] [--after <selector>=<timestamp>] <pr selector...>"
+        [[ -n "$current_pr" ]] || fail "Usage: $0 [--repo owner/repo] [--check-once] [--after <selector>=<timestamp>] [--codex-login <login>] <pr selector...>"
         RAW_PR_ARGS=("$current_pr")
         note "ℹ️  Using current PR: ${current_repo}#${current_pr}"
     fi
@@ -1080,7 +1109,7 @@ main() {
             exit 2
         fi
         warn "⏳ No actionable feedback is currently visible, but the watched PRs are still open. A normal watch run would keep waiting for merge or new feedback."
-        exit 2
+        exit 3
     fi
 
     if printf '%s\n' "${KEY_TO_PENDING_PRECOMMIT_ACTIONABLE[@]:-}" | grep -qx 'true'; then
