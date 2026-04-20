@@ -166,3 +166,9 @@
 - Oracle’s follow-up FAIL was a real last-mile UX gap: even after the restart-hint rewrite, a non-default `--codex-login` was still omitted from the generated command, so operators could silently fall back to the default reviewer identity on restart.
 - The safe fix was tiny: when `CODEX_REVIEWER_LOGIN` differs from `DEFAULT_CODEX_REVIEWER_LOGIN`, prepend `--codex-login <value>` to the generated restart command.
 - Fresh evidence in `.sisyphus/evidence/task-oracle-codex-login-restart-fix.log` now shows the custom reviewer override preserved in the restart hint, while the default case still omits the flag.
+
+## 2026-04-20 02:31:50Z — Final Oracle follow-up findings (Atlas)
+
+- Oracle’s second follow-up FAIL was also real: the restart hint still dropped `--check-once`, and the one-shot path still treated “review pending” and “review complete” as the same green success unless an old actionable comment had already been seen.
+- The fixes were both surgical: preserve `--check-once` in generated restart commands when the current run used it, and make the `CHECK_ONCE` branch return a waiting exit/message whenever no approval/no-issues signal has been observed yet for the still-open PR set.
+- Fresh evidence in `.sisyphus/evidence/task-oracle-final-followup-fixes.log` now shows the custom restart command preserving both `--check-once` and `--codex-login`, a pending-review snapshot returning exit `2` with an explicit waiting message, and the acknowledged-clean / alternate-reviewer approval paths still succeeding.

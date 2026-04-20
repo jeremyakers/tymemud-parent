@@ -180,6 +180,16 @@ is_codex_no_issues_body() {
     return 1
 }
 
+is_approval_activity_type() {
+    local activity_type="$1"
+
+    case "$activity_type" in
+        "pr reaction"|"issue comment reaction"|"review comment reaction"|"review approval") return 0 ;;
+    esac
+
+    return 1
+}
+
 fetch_paginated_array() {
     local endpoint="$1"
     local output
@@ -309,6 +319,38 @@ all_open_prs_have_approval_signal() {
         if [[ "${KEY_TO_APPROVAL_SIGNAL_FOUND[$key]:-false}" != "true" ]]; then
             return 1
         fi
+    done
+
+    [[ "$saw_open" == true ]]
+}
+
+all_open_prs_acknowledged_or_approved() {
+    local key
+    local saw_open=false
+    local explicit_after
+    local latest_time
+    local latest_type
+
+    for key in "${PR_KEYS[@]}"; do
+        if [[ "${KEY_TO_IS_OPEN[$key]:-true}" != "true" ]]; then
+            continue
+        fi
+
+        saw_open=true
+
+        if [[ "${KEY_TO_APPROVAL_SIGNAL_FOUND[$key]:-false}" == "true" ]]; then
+            continue
+        fi
+
+        explicit_after="${KEY_TO_AFTER[$key]:-}"
+        latest_time="${KEY_TO_LATEST_ACTIVITY_TIME[$key]:-}"
+        latest_type="${KEY_TO_LATEST_ACTIVITY_TYPE[$key]:-}"
+
+        if [[ -n "$explicit_after" && -n "$latest_time" ]] && compare_iso_lte "$latest_time" "$explicit_after" && is_approval_activity_type "$latest_type"; then
+            continue
+        fi
+
+        return 1
     done
 
     [[ "$saw_open" == true ]]
@@ -504,6 +546,10 @@ display_restart_hint() {
     local current_key
     local current_after
     local command="./watch-prs-for-comments.sh"
+
+    if [[ "$CHECK_ONCE" == true ]]; then
+        command+=" --check-once"
+    fi
 
     if [[ "$CODEX_REVIEWER_LOGIN" != "$DEFAULT_CODEX_REVIEWER_LOGIN" ]]; then
         command+=" --codex-login $(shell_quote "$CODEX_REVIEWER_LOGIN")"
@@ -778,6 +824,7 @@ scan_pr_activity() {
 
         if [[ "$report_new" == "true" ]] && compare_iso_gt "$timestamp" "$baseline"; then
             if is_codex_no_issues_body "$actor" "$body"; then
+                register_latest_activity "$key" "$timestamp" "review approval"
                 flag_postcommit_boundary_if_needed "$key" "$timestamp" "$report_new" "$baseline"
                 if is_post_commit_activity "$key" "$timestamp"; then
                     APPROVAL_SIGNAL_FOUND=1
@@ -835,6 +882,7 @@ scan_pr_activity() {
 
         if [[ "$report_new" == "true" ]] && compare_iso_gt "$timestamp" "$baseline"; then
             if is_codex_no_issues_body "$actor" "$body"; then
+                register_latest_activity "$key" "$timestamp" "review approval"
                 flag_postcommit_boundary_if_needed "$key" "$timestamp" "$report_new" "$baseline"
                 if is_post_commit_activity "$key" "$timestamp"; then
                     APPROVAL_SIGNAL_FOUND=1
@@ -1268,6 +1316,10 @@ main() {
     if [[ "$CHECK_ONCE" == true ]]; then
         if any_pending_precommit_actionable; then
             warn "⏳ Earlier actionable feedback is visible, but the latest review cycle is still in progress. A normal watch run would keep waiting for a post-commit review signal."
+            exit 2
+        fi
+        if ! all_open_prs_acknowledged_or_approved; then
+            warn "⏳ No actionable feedback is currently visible, but review is still pending. A normal watch run would keep waiting for approval or new feedback."
             exit 2
         fi
         pass "✓ No pending activity."

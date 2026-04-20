@@ -177,3 +177,9 @@
 - Extended `display_restart_hint()` so the generated restart command includes `--codex-login <value>` whenever the current run is using a non-default reviewer override.
 - Left the default path unchanged, so ordinary runs still emit the simpler restart command without an unnecessary flag.
 - Captured the proof in `.sisyphus/evidence/task-oracle-codex-login-restart-fix.log` and `.sisyphus/evidence/task-oracle-codex-login-restart-fix-error.log`: the custom reviewer restart hint now preserves `--codex-login custom-review-bot`, and the default reviewer case still omits it.
+
+## 2026-04-20 02:31:50Z — Final Oracle follow-up decision (Atlas)
+
+- Extended `display_restart_hint()` again so the generated restart command also preserves `--check-once` whenever the current run is a snapshot run.
+- Tightened the `CHECK_ONCE` branch so only true completion states return `0`: if there is no actionable feedback but the still-open PR set has not yet reached approval/no-issues completion, the command now returns exit `2` with an explicit “review is still pending” message instead of a false-green success.
+- Captured the proof in `.sisyphus/evidence/task-oracle-final-followup-fixes.log` and `.sisyphus/evidence/task-oracle-final-followup-fixes-error.log`: restart hints preserve both flags, pending review is distinct from review complete, and acknowledged-clean / alternate-reviewer approval paths remain intact.
