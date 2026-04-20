@@ -158,6 +158,10 @@ normalize_message_whitespace() {
     printf '%s\n' "$value"
 }
 
+shell_quote() {
+    printf '%q' "$1"
+}
+
 is_codex_no_issues_body() {
     local actor="$1"
     local body="$2"
@@ -169,6 +173,8 @@ is_codex_no_issues_body() {
 
     case "$normalized_body" in
         "Codex Review: Didn't find any major issues."*) return 0 ;;
+        "Didn't find any major issues."*) return 0 ;;
+        "No new issues found."*) return 0 ;;
     esac
 
     return 1
@@ -327,8 +333,16 @@ load_pr_metadata() {
     title=$(jq -r '.title' <<<"$pr_data")
     url=$(jq -r '.url' <<<"$pr_data")
 
+    KEY_TO_REPO["$key"]="$repo"
+    KEY_TO_PR["$key"]="$pr"
+    KEY_TO_TITLE["$key"]="$title"
+    KEY_TO_URL["$key"]="$url"
+
     if [[ "$state" != "OPEN" ]]; then
-        fail "PR #$pr in $repo is $state. The watcher only monitors open PRs."
+        KEY_TO_IS_OPEN["$key"]=false
+        KEY_TO_HEAD_SHA["$key"]=""
+        KEY_TO_LAST_COMMIT["$key"]=""
+        return 1
     fi
 
     if ! head_sha=$(get_pr_head_sha "$repo" "$pr"); then
@@ -339,10 +353,6 @@ load_pr_metadata() {
         fail "Could not determine the latest commit timestamp for $repo#$pr."
     fi
 
-    KEY_TO_REPO["$key"]="$repo"
-    KEY_TO_PR["$key"]="$pr"
-    KEY_TO_TITLE["$key"]="$title"
-    KEY_TO_URL["$key"]="$url"
     KEY_TO_IS_OPEN["$key"]=true
     KEY_TO_HEAD_SHA["$key"]="$head_sha"
     KEY_TO_LAST_COMMIT["$key"]="$last_commit"
@@ -491,9 +501,28 @@ record_actionable_event() {
 display_restart_hint() {
     local key="$1"
     local timestamp="$2"
+    local current_key
+    local current_after
+    local command="./watch-prs-for-comments.sh"
 
-    echo -e "${BLUE}To ignore this activity and future ones on this PR, restart with:${NC}"
-    echo -e "${BLUE}   --after \"${key}=${timestamp}\"${NC}"
+    for current_key in "${PR_KEYS[@]}"; do
+        if [[ "$current_key" == "$key" ]]; then
+            current_after="$timestamp"
+        else
+            current_after="${KEY_TO_AFTER[$current_key]:-}"
+        fi
+
+        if [[ -n "$current_after" ]]; then
+            command+=" --after $(shell_quote "${current_key}=${current_after}")"
+        fi
+    done
+
+    for current_key in "${PR_KEYS[@]}"; do
+        command+=" $(shell_quote "$current_key")"
+    done
+
+    echo -e "${BLUE}To ignore this activity and future ones on this PR, restart with the same watch set:${NC}"
+    echo -e "${BLUE}   ${command}${NC}"
     echo ""
 }
 
@@ -967,7 +996,11 @@ print_pr_status() {
     for key in "${PR_KEYS[@]}"; do
         title="${KEY_TO_TITLE[$key]}"
         last_commit="${KEY_TO_LAST_COMMIT[$key]}"
-        echo -e "  ${GREEN}✓${NC} ${key}: ${title} (last commit: ${last_commit:0:16})"
+        if [[ "${KEY_TO_IS_OPEN[$key]:-true}" == "true" ]]; then
+            echo -e "  ${GREEN}✓${NC} ${key}: ${title} (last commit: ${last_commit:0:16})"
+        else
+            echo -e "  ${YELLOW}✓${NC} ${key}: ${title} (closed)"
+        fi
         echo -e "${BLUE}     ${KEY_TO_URL[$key]}${NC}"
         if [[ -n "${KEY_TO_AFTER[$key]:-}" ]]; then
             echo -e "${BLUE}     After: ${KEY_TO_AFTER[$key]}${NC}"
@@ -1046,14 +1079,23 @@ resolve_pr_targets() {
 
 load_all_pr_metadata() {
     local key
+    local any_open=false
     for key in "${PR_KEYS[@]}"; do
-        load_pr_metadata "$key" "${KEY_TO_REPO[$key]:-${key%#*}}" "${KEY_TO_PR[$key]:-${key##*#}}"
+        if load_pr_metadata "$key" "${KEY_TO_REPO[$key]:-${key%#*}}" "${KEY_TO_PR[$key]:-${key##*#}}"; then
+            any_open=true
+        fi
     done
+
+    if [[ "$any_open" != true ]]; then
+        pass "✅ All monitored PRs are already closed"
+        exit 0
+    fi
 }
 
 prime_latest_activity() {
     local key
     for key in "${PR_KEYS[@]}"; do
+        [[ "${KEY_TO_IS_OPEN[$key]:-true}" == "true" ]] || continue
         [[ -n "${KEY_TO_AFTER[$key]:-}" ]] || continue
         KEY_TO_LATEST_ACTIVITY_TIME["$key"]=""
         KEY_TO_LATEST_ACTIVITY_TYPE["$key"]=""
@@ -1072,6 +1114,7 @@ first_sweep() {
     note "👀 Checking for existing new activity..."
 
     for key in "${PR_KEYS[@]}"; do
+        [[ "${KEY_TO_IS_OPEN[$key]:-true}" == "true" ]] || continue
         POSTCOMMIT_BOUNDARY_FOUND=0
         baseline="$(effective_baseline_for_key "$key")"
         scan_pr_activity "$key" "$baseline" true false

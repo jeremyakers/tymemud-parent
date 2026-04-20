@@ -154,3 +154,9 @@
 - The live failure mode was exactly what Codex called out: nested issue/review reaction helpers were invoked directly under `set -e`, so one bad nested endpoint aborted the whole watcher with a raw exit `1` and no watcher-specific error context.
 - The smallest safe fix was to wrap the nested helper calls at their loop sites with explicit `|| fail ...` messages. That preserves the current hard-fail behavior for bad nested endpoints, but makes the failure clear and operator-readable instead of looking like a random mid-scan crash.
 - Fresh evidence in `.sisyphus/evidence/task-nested-reaction-failure-fix.log` now shows `example/repo#111` preserving already-surfaced output and then failing with `Failed to fetch nested review-comment reactions for example/repo#111 comment 1112.`, while clean `#102` behavior remains intact.
+
+## 2026-04-20 02:12:40Z — Oracle follow-up UX fixes findings (Atlas)
+
+- Oracle’s remaining UX concerns were all real and all small-scope: restart hints were incomplete for multi-PR runs, closed selectors could still confuse startup behavior, and `--codex-login` only changed actor matching without letting a clean alternate reviewer body count as approval.
+- The restart hint is now a complete restart command for the same watch set, including the updated `--after` for the triggering PR plus any existing `--after` values for the other watched PRs.
+- Closed selectors now no longer block startup monitoring of still-open PRs, and an explicit alternate reviewer with a clean “Didn’t find any major issues.” body now counts as approval. Fresh proof for all three fixes is in `.sisyphus/evidence/task-oracle-followup-fixes.log`.

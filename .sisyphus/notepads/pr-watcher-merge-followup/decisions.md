@@ -165,3 +165,9 @@
 - Added an explicit `any_pending_precommit_actionable()` guard to the `CHECK_ONCE` branch so old-cycle actionable feedback can no longer fall through to the generic `✓ No pending activity.` success path.
 - Reused the existing waiting semantics instead of inventing a new status: `--check-once` now returns exit `2` with the same “latest review cycle is still in progress” warning when earlier actionable feedback is visible.
 - Captured the proof in `.sisyphus/evidence/task-check-once-false-success-fix.log` and `.sisyphus/evidence/task-check-once-false-success-fix-error.log`: `#110` and `#110 + #102` no longer produce false-green output, while the clean `#102` case remains a true success.
+
+## 2026-04-20 02:12:40Z — Oracle follow-up UX fixes decision (Atlas)
+
+- Made restart hints safe for multi-PR monitoring by rendering a full restart command for the same watch set, carrying forward existing `--after` values and substituting the new timestamp only for the PR that triggered the hint.
+- Changed startup closed-PR handling from hard-fail to graceful skip: closed selectors populate status output as closed, do not block still-open PRs, and only produce an immediate success when *all* monitored PRs are already closed.
+- Broadened clean-approval body recognition for explicit `--codex-login` overrides so an alternate matched reviewer saying “Didn’t find any major issues.” or “No new issues found.” is treated as approval, not actionable feedback. Proof for all three changes lives in `.sisyphus/evidence/task-oracle-followup-fixes.log` and `.sisyphus/evidence/task-oracle-followup-fixes-error.log`.
