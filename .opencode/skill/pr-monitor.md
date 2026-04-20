@@ -2,6 +2,8 @@
 
 Monitor one or more GitHub PRs for actionable post-baseline review activity without losing the current agent session.
 
+The watcher is **merge-only for success**. It does **not** treat Codex `+1` reactions or no-issues review bodies as completion signals.
+
 ## When to Use
 
 - Immediately after opening a PR
@@ -9,6 +11,8 @@ Monitor one or more GitHub PRs for actionable post-baseline review activity with
 - When monitoring multiple PRs in one repo or across multiple repos
 
 ## Mandatory Agent Workflow
+
+Before opening a PR, and again before pushing any new commits to an already-open PR branch, agents must get a fresh Oracle signoff on the exact code they are about to publish.
 
 After opening a PR, agents must do this in order:
 
@@ -111,11 +115,9 @@ The watcher surfaces only these supported signal types:
 - **PR conversation comments**
 - **Inline review comments** with file/line metadata
 - **Submitted reviews with a non-empty body**
-- **Codex `+1` reactions on the PR itself**
-- **Codex `+1` reactions on PR conversation comments**
-- **Codex `+1` reactions on inline review comments**
 
 It does **not** treat every GitHub event as actionable watcher activity.
+It also does **not** treat approval emojis, thumbs-up reactions, or "no issues found" bodies as success.
 
 ## Baseline Rules
 
@@ -129,7 +131,7 @@ It does **not** treat every GitHub event as actionable watcher activity.
 
 The watcher rejects obviously wrong cutoffs.
 
-If an `--after` value is later than the PR's most recent activity, the script exits with an error and prints:
+If an `--after` value is later than the PR's most recent watcher baseline or supported activity, the script exits with an error and prints:
 
 - the PR selector
 - the latest activity type
@@ -163,43 +165,42 @@ The watcher tracks each PR independently, including:
 - repo selection
 - commit baseline
 - optional `--after` cutoff
-- latest activity validation
+- latest watcher baseline or supported activity validation
 
 ## How It Works
 
 1. Resolve the watched PR set
 2. Resolve per-PR baselines (`last commit` or `--after`)
-3. Compute each PR's latest activity and validate all `--after` values
+3. Compute each PR's latest watcher baseline or supported activity and validate all `--after` values
 4. Perform an immediate first sweep
 5. Exit with code `2` if actionable activity already exists
-6. Exit with code `0` if the first sweep finds only approval or no-issues signals and no actionable feedback
-7. If no new activity exists and `--check-once` is not set, poll every 30 seconds until actionable feedback appears, an approval or no-issues outcome appears, or all monitored PRs close
+6. Exit with code `0` only when all watched PRs are merged
+7. If no new activity exists and `--check-once` is not set, poll every 30 seconds until actionable feedback appears, the watched PRs merge, or a watched PR closes without merge
 
 ## Outcome Priority
 
-The watcher separates actionable review feedback from approval or no-issues completion signals.
+The watcher separates actionable review feedback from merge state.
 
-- **Actionable feedback wins** when both kinds of signals appear in the same run.
-- **Approval or no-issues is a distinct success outcome** when no actionable feedback is present.
-- **No activity** means nothing new happened after the baseline, so the watcher keeps polling unless `--check-once` was used.
+- **Actionable feedback wins** when new review activity appears.
+- **Merge is the only success outcome.**
+- **No activity on an open PR** means nothing new happened after the baseline, so the watcher keeps polling unless `--check-once` was used.
+- **Closed without merge** is a terminal non-success outcome.
 
-Approval or no-issues can come from the supported Codex no-issues body or the supported Codex `+1` reaction paths listed above. Those signals tell the agent it can stop waiting, but they do not override real review comments.
+Oracle remains a required process gate before publishing code, but that requirement is enforced by workflow, not by watcher heuristics.
 
-## Polling and Nested Reaction Throttling
+## Polling Behavior
 
 The watcher always does a full first sweep.
 
-- The initial pass and `--check-once` still scan nested issue-comment and review-comment reactions in full.
-- Throttling applies only inside repeated polling iterations.
-- The throttle is only a loop optimization for repeated nested reaction rescans. It is not a seen-state cache and it does not persist across restarts.
-- Top-level PR reaction checks stay unthrottled.
+- The initial pass and `--check-once` scan comments and reviews in full.
+- The script keeps the restart/baseline safety rules, but it no longer polls reaction endpoints looking for approval signals.
 
 ## Exit Codes
 
 | Code | Meaning | Agent Action |
 |------|---------|--------------|
-| 0 | Approval or no-issues detected with no actionable feedback, or no pending activity in `--check-once`, or all monitored PRs closed during foreground monitoring | Move on to the next task |
-| 1 | Error (bad args, bad repo, invalid `--after`, auth failure, fetch failure) | Read the error and rerun correctly |
+| 0 | All monitored PRs merged | Move on to the next task |
+| 1 | Error, invalid invocation, auth/fetch failure, or a watched PR closed without merge | Read the error and rerun correctly |
 | 2 | New actionable watcher activity detected | Address the feedback now |
 
 ## Recommended Agent Examples
@@ -241,7 +242,7 @@ The watcher always does a full first sweep.
 - The PR may belong to a different repo than the current checkout
 - Use `owner/repo#123` to remove ambiguity
 
-**"--after ... may not be later than the most recent PR activity"**
+**"--after ... may not be later than the most recent watcher baseline or supported activity"**
 - Copy the exact timestamp printed by the watcher
 - Re-run with the suggested corrected value
 
@@ -249,3 +250,10 @@ The watcher always does a full first sweep.
 - The standard workflow is foreground monitoring, started immediately after printing the PR URL
 - In OpenCode, the timeout requirement is the `bash` or `shell` tool timeout set to the longest allowed value, currently `7200000` ms, which is 2 hours
 - Background/tmux patterns are not the default recommendation for agents anymore
+
+## Required Oracle Review Flow
+
+- **Before opening a PR:** get a fresh Oracle signoff on the exact code you plan to publish.
+- **Before pushing any new commit to an open PR branch:** get a fresh Oracle signoff on the exact updated code you plan to push.
+- **After printing the PR URL:** start the watcher immediately; do not wait for more user confirmation.
+- **Do not treat watcher success as Oracle success.** Merge-only watcher success means GitHub state reached merge, not that Oracle can be skipped.
