@@ -1178,7 +1178,8 @@ load_all_pr_metadata() {
     done
 
     if [[ "$any_open" != true ]]; then
-        fail "All monitored PRs are already closed. Start the watcher on an open PR instead."
+        pass "ℹ️ All monitored PRs are already closed. Nothing to monitor."
+        exit 0
     fi
 }
 
