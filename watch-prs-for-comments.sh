@@ -38,7 +38,6 @@ declare -A KEY_TO_LATEST_ACTIVITY_TIME=()
 declare -A KEY_TO_LATEST_ACTIVITY_TYPE=()
 declare -A KEY_TO_NESTED_REACTION_SCAN_EPOCH=()
 declare -A KEY_TO_FORCE_REPORT_NESTED_REACTION_SCAN=()
-APPROVAL_SIGNAL_FOUND=0
 POSTCOMMIT_BOUNDARY_FOUND=0
 
 usage() {
@@ -721,7 +720,6 @@ record_reaction_approval() {
     register_latest_activity "$key" "$timestamp" "$reaction_type"
 
     if [[ "$report_new" == "true" ]] && compare_iso_gt "$timestamp" "$baseline" && is_post_commit_activity "$key" "$timestamp"; then
-        APPROVAL_SIGNAL_FOUND=1
         KEY_TO_APPROVAL_SIGNAL_FOUND["$key"]=true
         POSTCOMMIT_BOUNDARY_FOUND=1
         token="approval:${reaction_type}:${actor}:${timestamp}:${context_line}"
@@ -862,7 +860,6 @@ scan_pr_activity() {
             if compare_iso_gt "$timestamp" "$baseline"; then
                 flag_postcommit_boundary_if_needed "$key" "$timestamp" "$report_new" "$baseline"
                 if is_post_commit_activity "$key" "$timestamp"; then
-                    APPROVAL_SIGNAL_FOUND=1
                     KEY_TO_APPROVAL_SIGNAL_FOUND["$key"]=true
                 fi
             fi
@@ -922,7 +919,6 @@ scan_pr_activity() {
             if compare_iso_gt "$timestamp" "$baseline"; then
                 flag_postcommit_boundary_if_needed "$key" "$timestamp" "$report_new" "$baseline"
                 if is_post_commit_activity "$key" "$timestamp"; then
-                    APPROVAL_SIGNAL_FOUND=1
                     KEY_TO_APPROVAL_SIGNAL_FOUND["$key"]=true
                 fi
             fi
@@ -1200,7 +1196,6 @@ first_sweep() {
     local baseline
 
     NEW_SIGNAL_FOUND=0
-    APPROVAL_SIGNAL_FOUND=0
     POSTCOMMIT_BOUNDARY_FOUND=0
     note "👀 Checking for existing new activity..."
 
@@ -1273,8 +1268,6 @@ monitor_loop() {
     while true; do
         any_open=false
         NEW_SIGNAL_FOUND=0
-        APPROVAL_SIGNAL_FOUND=0
-
         for key in "${PR_KEYS[@]}"; do
             if ! refresh_pr_state "$key"; then
                 continue
@@ -1301,7 +1294,7 @@ monitor_loop() {
             exit 2
         fi
 
-        if [[ "$APPROVAL_SIGNAL_FOUND" -eq 1 ]] && ! any_pending_precommit_actionable && all_open_prs_acknowledged_or_approved; then
+        if ! any_pending_precommit_actionable && all_open_prs_acknowledged_or_approved; then
             echo ""
             pass "✅ Codex approval/no-issues signal found. No new actionable feedback."
             printf '%s\n' "Codex PR review completed: No new issues found. If you haven't already: You may now run final Oracle verification pass on this code. Once both Codex reviewer and Oracle have signed off, alert the user that all reviews are complete and the code is ready to merge"
@@ -1345,7 +1338,7 @@ main() {
         exit 2
     fi
 
-    if [[ "$APPROVAL_SIGNAL_FOUND" -eq 1 ]] && ! any_pending_precommit_actionable && all_open_prs_acknowledged_or_approved; then
+    if ! any_pending_precommit_actionable && all_open_prs_acknowledged_or_approved; then
         echo ""
         pass "✅ Codex approval/no-issues signal found. No new actionable feedback."
         printf '%s\n' "Codex PR review completed: No new issues found. If you haven't already: You may now run final Oracle verification pass on this code. Once both Codex reviewer and Oracle have signed off, alert the user that all reviews are complete and the code is ready to merge"
