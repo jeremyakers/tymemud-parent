@@ -551,6 +551,14 @@ gh pr create --draft --title "feat(rules): add git workflow management"
 gh pr create --fill
 ```
 
+**Oracle signoff gate (required):**
+
+Before opening a PR, agents must get a fresh Oracle signoff on the exact code they intend to publish.
+
+If additional commits are needed after review feedback, agents must get a fresh Oracle signoff again **before pushing each new commit batch to that open PR branch**.
+
+The PR watcher is not a substitute for Oracle. Oracle is a workflow gate; the watcher is only a PR activity/merge monitor.
+
 **Immediate post-PR follow-up (agent workflow):**
 
 After creating a PR, agents must not stop and ask whether monitoring should begin. The required sequence is:
@@ -580,6 +588,7 @@ Document the watcher timeout requirement only as the OpenCode `bash` or `shell` 
 - Use repeated `--after owner/repo#123=<timestamp>` flags when each PR needs its own resume point
 - Do not default to background/tmux monitoring in agent instructions
 - Do not pause for approval between printing the PR URL and starting foreground monitoring
+- The watcher is **merge-only for success**; do not document thumbs-up reactions or no-issues review bodies as terminal success conditions
 
 **Using GitHub Web UI:**
 1. Navigate to repository on GitHub

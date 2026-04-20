@@ -169,6 +169,10 @@ PY
 - Always work on a feature/fix branch in your worktree and submit a PR:
   - MM3 PRs target `svn/MM_3_Final`
   - MM32 PRs target `svn/MM_3-2_Start`
+- **Before opening a PR:** get a fresh Oracle signoff on the exact code you are about to publish
+- **Before pushing any new commits to an open PR branch:** get a fresh Oracle signoff again on the exact updated code you are about to push
+- **After opening a PR:** print the PR URL to the user and immediately start `watch-prs-for-comments.sh` in the foreground
+- The watcher is **merge-only for success**; it is not an approval heuristic and it does not replace Oracle
 
 ## 5) PR hygiene: never “update” merged/closed PRs (required)
 
@@ -196,4 +200,3 @@ Rules:
 - **Don’t assume ports are free** (check + register).
 - **Don’t start long-running servers on default/common ports** without coordination.
 - **Don’t “work around” engine state bugs with output-only hacks** (see `AGENTS.md`: “Fix the Cause; Don’t Work Around It”).
-
