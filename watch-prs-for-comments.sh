@@ -11,11 +11,8 @@ YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
 NC='\033[0m'
 
-DEFAULT_CODEX_REVIEWER_LOGIN='chatgpt-codex-connector[bot]'
 REPO_ARG=""
 CHECK_ONCE=false
-CODEX_REVIEWER_LOGIN="${CODEX_REVIEWER_LOGIN:-$DEFAULT_CODEX_REVIEWER_LOGIN}"
-REACTION_POLL_INTERVAL_SECONDS="${REACTION_POLL_INTERVAL_SECONDS:-300}"
 LAST_FETCH_ERROR=""
 
 declare -a RAW_PR_ARGS=()
@@ -25,25 +22,21 @@ declare -A KEY_TO_REPO=()
 declare -A KEY_TO_PR=()
 declare -A KEY_TO_TITLE=()
 declare -A KEY_TO_URL=()
+declare -A KEY_TO_STATE=()
 declare -A KEY_TO_HEAD_SHA=()
-declare -A KEY_TO_IS_OPEN=()
 declare -A KEY_TO_LAST_COMMIT=()
 declare -A KEY_TO_AFTER=()
 declare -A KEY_TO_SURFACED_CURSOR=()
 declare -A KEY_TO_PENDING_PRECOMMIT_ACTIONABLE=()
 declare -A KEY_TO_REPORTED_ACTIONABLE_KEYS=()
-declare -A KEY_TO_REPORTED_APPROVAL_KEYS=()
-declare -A KEY_TO_APPROVAL_SIGNAL_FOUND=()
 declare -A KEY_TO_LATEST_ACTIVITY_TIME=()
 declare -A KEY_TO_LATEST_ACTIVITY_TYPE=()
-declare -A KEY_TO_NESTED_REACTION_SCAN_EPOCH=()
-declare -A KEY_TO_FORCE_REPORT_NESTED_REACTION_SCAN=()
 POSTCOMMIT_BOUNDARY_FOUND=0
 
 usage() {
     cat <<'EOF'
 Usage:
-  ./watch-prs-for-comments.sh [--repo owner/repo] [--check-once] [--after <selector>=<timestamp>] [--codex-login <login>] <pr...>
+  ./watch-prs-for-comments.sh [--repo owner/repo] [--check-once] [--after <selector>=<timestamp>] <pr...>
 
 PR selectors:
   owner/repo#123        Monitor PR #123 in owner/repo
@@ -82,31 +75,6 @@ pass() {
     echo -e "${GREEN}${message}${NC}"
 }
 
-normalize_login() {
-    local login="${1,,}"
-    login="${login%\[bot\]}"
-    printf '%s\n' "$login"
-}
-
-is_codex_actor() {
-    local login
-    login="$(normalize_login "$1")"
-    local custom
-    custom="$(normalize_login "$CODEX_REVIEWER_LOGIN")"
-    local default_login
-    default_login="$(normalize_login "$DEFAULT_CODEX_REVIEWER_LOGIN")"
-
-    [[ "$login" == "$custom" ]] && return 0
-
-    if [[ "$custom" != "$default_login" ]]; then
-        return 1
-    fi
-
-    [[ "$login" == "codex" ]] && return 0
-    [[ "$login" == "chatgpt-codex-connector" ]] && return 0
-    return 1
-}
-
 normalize_timestamp() {
     local raw="$1"
     local normalized
@@ -125,22 +93,6 @@ compare_iso_gt() {
     [[ -n "$left" ]] || return 1
     [[ -n "$right" ]] || return 0
     [[ "$left" > "$right" ]]
-}
-
-compare_iso_gte() {
-    local left="$1"
-    local right="$2"
-
-    [[ "$left" == "$right" ]] && return 0
-    compare_iso_gt "$left" "$right"
-}
-
-compare_iso_lte() {
-    local left="$1"
-    local right="$2"
-
-    [[ "$left" == "$right" ]] && return 0
-    [[ "$left" < "$right" ]]
 }
 
 trimmed_nonempty() {
@@ -171,29 +123,25 @@ shell_quote() {
     printf '%q' "$1"
 }
 
-is_codex_no_issues_body() {
+is_default_codex_actor() {
+    local login="${1,,}"
+    login="${login%\[bot\]}"
+
+    [[ "$login" == "codex" || "$login" == "chatgpt-codex-connector" ]]
+}
+
+is_codex_no_issues_noise() {
     local actor="$1"
     local body="$2"
     local normalized_body=""
 
-    is_codex_actor "$actor" || return 1
-
+    is_default_codex_actor "$actor" || return 1
     normalized_body="$(normalize_message_whitespace "$body")"
 
     case "$normalized_body" in
         "Codex Review: Didn't find any major issues."*) return 0 ;;
         "Didn't find any major issues."*) return 0 ;;
         "No new issues found."*) return 0 ;;
-    esac
-
-    return 1
-}
-
-is_approval_activity_type() {
-    local activity_type="$1"
-
-    case "$activity_type" in
-        "pr reaction"|"issue comment reaction"|"review comment reaction"|"review approval") return 0 ;;
     esac
 
     return 1
@@ -315,10 +263,6 @@ reset_review_cycle_runtime_state() {
     KEY_TO_SURFACED_CURSOR["$key"]=""
     KEY_TO_PENDING_PRECOMMIT_ACTIONABLE["$key"]=false
     KEY_TO_REPORTED_ACTIONABLE_KEYS["$key"]=$'\n'
-    KEY_TO_REPORTED_APPROVAL_KEYS["$key"]=$'\n'
-    KEY_TO_APPROVAL_SIGNAL_FOUND["$key"]=false
-    KEY_TO_NESTED_REACTION_SCAN_EPOCH["$key"]=0
-    KEY_TO_FORCE_REPORT_NESTED_REACTION_SCAN["$key"]=false
 }
 
 any_pending_precommit_actionable() {
@@ -333,54 +277,49 @@ any_pending_precommit_actionable() {
     return 1
 }
 
-all_open_prs_have_approval_signal() {
+is_pr_open() {
     local key
-    local saw_open=false
+
+    key="$1"
+    [[ "${KEY_TO_STATE[$key]:-OPEN}" == "OPEN" ]]
+}
+
+is_pr_merged() {
+    local key
+
+    key="$1"
+    [[ "${KEY_TO_STATE[$key]:-}" == "MERGED" ]]
+}
+
+is_pr_closed_unmerged() {
+    local key
+
+    key="$1"
+    [[ "${KEY_TO_STATE[$key]:-}" == "CLOSED" ]]
+}
+
+all_prs_merged() {
+    local key
 
     for key in "${PR_KEYS[@]}"; do
-        if [[ "${KEY_TO_IS_OPEN[$key]:-true}" != "true" ]]; then
-            continue
-        fi
-
-        saw_open=true
-        if [[ "${KEY_TO_APPROVAL_SIGNAL_FOUND[$key]:-false}" != "true" ]]; then
+        if ! is_pr_merged "$key"; then
             return 1
         fi
     done
 
-    [[ "$saw_open" == true ]]
+    return 0
 }
 
-all_open_prs_acknowledged_or_approved() {
+any_closed_unmerged_prs() {
     local key
-    local saw_open=false
-    local explicit_after
-    local latest_time
-    local latest_type
 
     for key in "${PR_KEYS[@]}"; do
-        if [[ "${KEY_TO_IS_OPEN[$key]:-true}" != "true" ]]; then
-            continue
+        if is_pr_closed_unmerged "$key"; then
+            return 0
         fi
-
-        saw_open=true
-
-        if [[ "${KEY_TO_APPROVAL_SIGNAL_FOUND[$key]:-false}" == "true" ]]; then
-            continue
-        fi
-
-        explicit_after="${KEY_TO_AFTER[$key]:-}"
-        latest_time="${KEY_TO_LATEST_ACTIVITY_TIME[$key]:-}"
-        latest_type="${KEY_TO_LATEST_ACTIVITY_TYPE[$key]:-}"
-
-        if [[ -n "$explicit_after" && -n "$latest_time" ]] && compare_iso_lte "$latest_time" "$explicit_after" && is_approval_activity_type "$latest_type"; then
-            continue
-        fi
-
-        return 1
     done
 
-    [[ "$saw_open" == true ]]
+    return 1
 }
 
 load_pr_metadata() {
@@ -406,9 +345,9 @@ load_pr_metadata() {
     KEY_TO_PR["$key"]="$pr"
     KEY_TO_TITLE["$key"]="$title"
     KEY_TO_URL["$key"]="$url"
+    KEY_TO_STATE["$key"]="$state"
 
     if [[ "$state" != "OPEN" ]]; then
-        KEY_TO_IS_OPEN["$key"]=false
         KEY_TO_HEAD_SHA["$key"]=""
         KEY_TO_LAST_COMMIT["$key"]=""
         return 1
@@ -422,7 +361,6 @@ load_pr_metadata() {
         fail "Could not determine the latest commit timestamp for $repo#$pr."
     fi
 
-    KEY_TO_IS_OPEN["$key"]=true
     KEY_TO_HEAD_SHA["$key"]="$head_sha"
     KEY_TO_LAST_COMMIT["$key"]="$last_commit"
 }
@@ -432,28 +370,11 @@ register_latest_activity() {
     local timestamp="$2"
     local activity_type="$3"
     local current_time="${KEY_TO_LATEST_ACTIVITY_TIME[$key]:-}"
-    local current_type="${KEY_TO_LATEST_ACTIVITY_TYPE[$key]:-}"
 
     if compare_iso_gt "$timestamp" "$current_time"; then
         KEY_TO_LATEST_ACTIVITY_TIME["$key"]="$timestamp"
         KEY_TO_LATEST_ACTIVITY_TYPE["$key"]="$activity_type"
-        return 0
     fi
-
-    if [[ "$timestamp" == "$current_time" ]] && is_approval_activity_type "$activity_type" && ! is_approval_activity_type "$current_type"; then
-        KEY_TO_LATEST_ACTIVITY_TYPE["$key"]="$activity_type"
-    fi
-}
-
-get_runtime_cursor() {
-    local key="$1"
-
-    if [[ -n "${KEY_TO_SURFACED_CURSOR[$key]:-}" ]]; then
-        printf '%s\n' "${KEY_TO_SURFACED_CURSOR[$key]}"
-        return 0
-    fi
-
-    printf '%s\n' "${KEY_TO_AFTER[$key]:-}"
 }
 
 runtime_baseline_cursor() {
@@ -515,21 +436,6 @@ mark_actionable_reported() {
     KEY_TO_REPORTED_ACTIONABLE_KEYS["$key"]+="$token"$'\n'
 }
 
-is_already_reported_approval() {
-    local key="$1"
-    local token="$2"
-    local reported="${KEY_TO_REPORTED_APPROVAL_KEYS[$key]:-}"
-
-    [[ "$reported" == *$'\n'"$token"$'\n'* ]]
-}
-
-mark_approval_reported() {
-    local key="$1"
-    local token="$2"
-
-    KEY_TO_REPORTED_APPROVAL_KEYS["$key"]+="$token"$'\n'
-}
-
 record_actionable_visibility() {
     local key="$1"
     local timestamp="$2"
@@ -583,10 +489,6 @@ display_restart_hint() {
 
     if [[ "$CHECK_ONCE" == true ]]; then
         command+=" --check-once"
-    fi
-
-    if [[ "$CODEX_REVIEWER_LOGIN" != "$DEFAULT_CODEX_REVIEWER_LOGIN" ]]; then
-        command+=" --codex-login $(shell_quote "$CODEX_REVIEWER_LOGIN")"
     fi
 
     for current_key in "${PR_KEYS[@]}"; do
@@ -686,140 +588,15 @@ display_review_body() {
     display_restart_hint "$key" "$timestamp"
 }
 
-display_reaction() {
-    local key="$1"
-    local reaction_type="$2"
-    local actor="$3"
-    local timestamp="$4"
-    local context_line="$5"
-
-    echo ""
-    echo -e "${YELLOW}═══════════════════════════════════════════════════════════════${NC}"
-    echo -e "${YELLOW}🔔 NEW CODEX 👍 on ${key}: ${KEY_TO_TITLE[$key]}${NC}"
-    echo -e "${YELLOW}   Type: ${reaction_type}${NC}"
-    if [[ -n "$context_line" ]]; then
-        echo -e "${YELLOW}   Context: ${context_line}${NC}"
-    fi
-    echo -e "${YELLOW}   Posted: ${timestamp}${NC}"
-    echo -e "${YELLOW}═══════════════════════════════════════════════════════════════${NC}"
-    echo "From: @$actor"
-    echo -e "${YELLOW}───────────────────────────────────────────────────────────────${NC}"
-    display_restart_hint "$key" "$timestamp"
-}
-
-record_reaction_approval() {
-    local key="$1"
-    local reaction_type="$2"
-    local actor="$3"
-    local timestamp="$4"
-    local context_line="$5"
-    local baseline="$6"
-    local report_new="$7"
-    local token=""
-
-    register_latest_activity "$key" "$timestamp" "$reaction_type"
-
-    if [[ "$report_new" == "true" ]] && compare_iso_gt "$timestamp" "$baseline" && is_post_commit_activity "$key" "$timestamp"; then
-        KEY_TO_APPROVAL_SIGNAL_FOUND["$key"]=true
-        POSTCOMMIT_BOUNDARY_FOUND=1
-        token="approval:${reaction_type}:${actor}:${timestamp}:${context_line}"
-        if ! is_already_reported_approval "$key" "$token"; then
-            display_reaction "$key" "$reaction_type" "$actor" "$timestamp" "$context_line"
-            mark_approval_reported "$key" "$token"
-        fi
-    fi
-}
-
-process_reactions_for_issue_comment() {
-    local repo="$1"
-    local comment_id="$2"
-    local key="$3"
-    local baseline="$4"
-    local report_new="$5"
-    local reactions
-    local count=0
-    local i
-    local actor
-    local content
-    local timestamp
-
-    reactions=$(fetch_paginated_array "repos/$repo/issues/comments/$comment_id/reactions?per_page=100") || return 1
-    count=$(jq 'length' <<<"$reactions")
-
-    for ((i=0; i<count; i++)); do
-        actor=$(jq -r ".[$i].user.login" <<<"$reactions")
-        content=$(jq -r ".[$i].content" <<<"$reactions")
-        timestamp=$(jq -r ".[$i].created_at" <<<"$reactions")
-
-        [[ "$content" == "+1" ]] || continue
-        is_codex_actor "$actor" || continue
-
-        record_reaction_approval "$key" "issue comment reaction" "$actor" "$timestamp" "pull request conversation comment approval signal" "$baseline" "$report_new"
-    done
-}
-
-process_reactions_for_review_comment() {
-    local repo="$1"
-    local comment_id="$2"
-    local key="$3"
-    local baseline="$4"
-    local file="$5"
-    local report_new="$6"
-    local reactions
-    local count=0
-    local i
-    local actor
-    local content
-    local timestamp
-
-    reactions=$(fetch_paginated_array "repos/$repo/pulls/comments/$comment_id/reactions?per_page=100") || return 1
-    count=$(jq 'length' <<<"$reactions")
-
-    for ((i=0; i<count; i++)); do
-        actor=$(jq -r ".[$i].user.login" <<<"$reactions")
-        content=$(jq -r ".[$i].content" <<<"$reactions")
-        timestamp=$(jq -r ".[$i].created_at" <<<"$reactions")
-
-        [[ "$content" == "+1" ]] || continue
-        is_codex_actor "$actor" || continue
-
-        record_reaction_approval "$key" "review comment reaction" "$actor" "$timestamp" "inline review comment on ${file}" "$baseline" "$report_new"
-    done
-}
-
-should_scan_nested_reactions() {
-    local key="$1"
-    local throttle_during_polling="$2"
-    local now_epoch=0
-    local last_scan=0
-
-    if [[ "$throttle_during_polling" != "true" ]]; then
-        return 0
-    fi
-
-    now_epoch=$(date +%s)
-    last_scan="${KEY_TO_NESTED_REACTION_SCAN_EPOCH[$key]:-0}"
-
-    (( last_scan == 0 || now_epoch - last_scan >= REACTION_POLL_INTERVAL_SECONDS ))
-}
-
-mark_nested_reaction_scan() {
-    local key="$1"
-
-    KEY_TO_NESTED_REACTION_SCAN_EPOCH["$key"]="$(date +%s)"
-}
-
 scan_pr_activity() {
     local key="$1"
     local baseline="$2"
     local report_new="$3"
-    local throttle_nested_reactions="${4:-false}"
     local repo="${KEY_TO_REPO[$key]}"
     local pr="${KEY_TO_PR[$key]}"
     local issue_comments
     local review_comments
     local reviews
-    local pr_reactions
     local count=0
     local i
     local timestamp
@@ -832,19 +609,14 @@ scan_pr_activity() {
     local end_line
     local commit_id
     local state
-    local content
     local comment_id
     local review_id
-    local needs_nested_reaction_scan=true
-    local should_scan_nested_reaction_endpoints=true
-    local force_report_nested_reaction_scan="${KEY_TO_FORCE_REPORT_NESTED_REACTION_SCAN[$key]:-false}"
 
     register_latest_activity "$key" "${KEY_TO_LAST_COMMIT[$key]}" "head commit"
 
     issue_comments=$(fetch_paginated_array "repos/$repo/issues/$pr/comments?per_page=100") || fail "Failed to fetch issue comments for $key.$(fetch_error_suffix)"
     review_comments=$(fetch_paginated_array "repos/$repo/pulls/$pr/comments?per_page=100") || fail "Failed to fetch review comments for $key.$(fetch_error_suffix)"
     reviews=$(fetch_paginated_array "repos/$repo/pulls/$pr/reviews?per_page=100") || fail "Failed to fetch reviews for $key.$(fetch_error_suffix)"
-    pr_reactions=$(fetch_paginated_array "repos/$repo/issues/$pr/reactions?per_page=100") || fail "Failed to fetch PR reactions for $key.$(fetch_error_suffix)"
 
     count=$(jq 'length' <<<"$issue_comments")
     for ((i=0; i<count; i++)); do
@@ -853,21 +625,13 @@ scan_pr_activity() {
         actor=$(jq -r ".[$i].user.login" <<<"$issue_comments")
         body=$(jq -r ".[$i].body // \"\"" <<<"$issue_comments")
 
-        register_latest_activity "$key" "$timestamp" "issue comment"
-
-        if [[ "$report_new" == "true" ]] && is_codex_no_issues_body "$actor" "$body"; then
-            register_latest_activity "$key" "$timestamp" "review approval"
-            if compare_iso_gt "$timestamp" "$baseline"; then
-                flag_postcommit_boundary_if_needed "$key" "$timestamp" "$report_new" "$baseline"
-                if is_post_commit_activity "$key" "$timestamp"; then
-                    KEY_TO_APPROVAL_SIGNAL_FOUND["$key"]=true
-                fi
-            fi
+        if is_codex_no_issues_noise "$actor" "$body"; then
             continue
         fi
 
+        register_latest_activity "$key" "$timestamp" "issue comment"
+
         if [[ "$report_new" == "true" ]] && compare_iso_gt "$timestamp" "$baseline"; then
-            needs_nested_reaction_scan=false
             record_actionable_event "$key" "$timestamp" "issue-comment:${comment_id}" display_issue_comment "$key" "$actor" "$body" "$timestamp"
         fi
     done
@@ -888,7 +652,6 @@ scan_pr_activity() {
         register_latest_activity "$key" "$timestamp" "review comment"
 
         if [[ "$report_new" == "true" ]] && compare_iso_gt "$timestamp" "$baseline"; then
-            needs_nested_reaction_scan=false
             record_actionable_event "$key" "$timestamp" "review-comment:${comment_id}" display_review_comment "$key" "$file" "$line" "$original_line" "$start_line" "$end_line" "$commit_id" "$actor" "$body" "$timestamp"
         fi
     done
@@ -903,6 +666,10 @@ scan_pr_activity() {
         actor=$(jq -r ".[$i].user.login" <<<"$reviews")
         state=$(jq -r ".[$i].state" <<<"$reviews")
 
+        if is_codex_no_issues_noise "$actor" "$body"; then
+            continue
+        fi
+
         register_latest_activity "$key" "$timestamp" "review body"
 
         if [[ "$report_new" == "true" ]] && compare_iso_gt "$timestamp" "$baseline" && ! trimmed_nonempty "$body"; then
@@ -914,67 +681,10 @@ scan_pr_activity() {
 
         trimmed_nonempty "$body" || continue
 
-        if [[ "$report_new" == "true" ]] && is_codex_no_issues_body "$actor" "$body"; then
-            register_latest_activity "$key" "$timestamp" "review approval"
-            if compare_iso_gt "$timestamp" "$baseline"; then
-                flag_postcommit_boundary_if_needed "$key" "$timestamp" "$report_new" "$baseline"
-                if is_post_commit_activity "$key" "$timestamp"; then
-                    KEY_TO_APPROVAL_SIGNAL_FOUND["$key"]=true
-                fi
-            fi
-            continue
-        fi
-
         if [[ "$report_new" == "true" ]] && compare_iso_gt "$timestamp" "$baseline"; then
-            needs_nested_reaction_scan=false
             record_actionable_event "$key" "$timestamp" "review:${review_id}" display_review_body "$key" "$state" "$actor" "$body" "$timestamp"
         fi
     done
-
-    count=$(jq 'length' <<<"$pr_reactions")
-    for ((i=0; i<count; i++)); do
-        actor=$(jq -r ".[$i].user.login" <<<"$pr_reactions")
-        content=$(jq -r ".[$i].content" <<<"$pr_reactions")
-        timestamp=$(jq -r ".[$i].created_at" <<<"$pr_reactions")
-
-        [[ "$content" == "+1" ]] || continue
-        is_codex_actor "$actor" || continue
-
-        record_reaction_approval "$key" "pr reaction" "$actor" "$timestamp" "pull request approval signal" "$baseline" "$report_new"
-    done
-
-    if ! should_scan_nested_reactions "$key" "$throttle_nested_reactions"; then
-        should_scan_nested_reaction_endpoints=false
-    fi
-
-    if [[ "$report_new" == "true" && "$force_report_nested_reaction_scan" == "true" ]]; then
-        should_scan_nested_reaction_endpoints=true
-    fi
-
-    if [[ "$should_scan_nested_reaction_endpoints" == true && ( "$throttle_nested_reactions" != "true" || "$report_new" == "false" || "$needs_nested_reaction_scan" == true || "$force_report_nested_reaction_scan" == "true" ) ]]; then
-        if [[ "$report_new" == "false" && "$throttle_nested_reactions" == "true" ]]; then
-            KEY_TO_FORCE_REPORT_NESTED_REACTION_SCAN["$key"]=true
-        else
-            KEY_TO_FORCE_REPORT_NESTED_REACTION_SCAN["$key"]=false
-        fi
-
-        mark_nested_reaction_scan "$key"
-        count=$(jq 'length' <<<"$issue_comments")
-        for ((i=0; i<count; i++)); do
-            comment_id=$(jq -r ".[$i].id" <<<"$issue_comments")
-            actor=$(jq -r ".[$i].user.login" <<<"$issue_comments")
-            process_reactions_for_issue_comment "$repo" "$comment_id" "$key" "$baseline" "$report_new" || fail "Failed to fetch nested issue-comment reactions for ${key} comment ${comment_id}.$(fetch_error_suffix)"
-        done
-
-        count=$(jq 'length' <<<"$review_comments")
-        for ((i=0; i<count; i++)); do
-            comment_id=$(jq -r ".[$i].id" <<<"$review_comments")
-            file=$(jq -r ".[$i].path // \"unknown\"" <<<"$review_comments")
-            process_reactions_for_review_comment "$repo" "$comment_id" "$key" "$baseline" "$file" "$report_new" || fail "Failed to fetch nested review-comment reactions for ${key} comment ${comment_id}.$(fetch_error_suffix)"
-        done
-    else
-        KEY_TO_FORCE_REPORT_NESTED_REACTION_SCAN["$key"]=false
-    fi
 
     if [[ "${KEY_TO_PENDING_PRECOMMIT_ACTIONABLE[$key]:-false}" == "true" && "$POSTCOMMIT_BOUNDARY_FOUND" -eq 1 ]]; then
         NEW_SIGNAL_FOUND=1
@@ -1056,7 +766,7 @@ validate_after_cutoffs() {
         [[ -n "$latest_time" ]] || continue
 
         if compare_iso_gt "$cutoff" "$latest_time"; then
-            echo -e "${RED}❌ --after ${key}=${cutoff} may not be later than the most recent PR activity.${NC}" >&2
+            echo -e "${RED}❌ --after ${key}=${cutoff} may not be later than the most recent watcher baseline or supported activity.${NC}" >&2
             echo -e "${RED}   Latest activity: ${latest_type}${NC}" >&2
             echo -e "${RED}   Latest timestamp: ${latest_time}${NC}" >&2
             echo -e "${RED}   Retry with: --after \"${key}=${latest_time}\"${NC}" >&2
@@ -1079,14 +789,18 @@ print_pr_status() {
     local key
     local title
     local last_commit
+    local state
 
     for key in "${PR_KEYS[@]}"; do
         title="${KEY_TO_TITLE[$key]}"
         last_commit="${KEY_TO_LAST_COMMIT[$key]}"
-        if [[ "${KEY_TO_IS_OPEN[$key]:-true}" == "true" ]]; then
+        state="${KEY_TO_STATE[$key]:-OPEN}"
+        if [[ "$state" == "OPEN" ]]; then
             echo -e "  ${GREEN}✓${NC} ${key}: ${title} (last commit: ${last_commit:0:16})"
+        elif [[ "$state" == "MERGED" ]]; then
+            echo -e "  ${GREEN}✓${NC} ${key}: ${title} (merged)"
         else
-            echo -e "  ${YELLOW}✓${NC} ${key}: ${title} (closed)"
+            echo -e "  ${YELLOW}✓${NC} ${key}: ${title} (closed without merge)"
         fi
         echo -e "${BLUE}     ${KEY_TO_URL[$key]}${NC}"
         if [[ -n "${KEY_TO_AFTER[$key]:-}" ]]; then
@@ -1111,11 +825,6 @@ parse_args() {
             --after)
                 [[ $# -ge 2 ]] || fail "--after requires a timestamp or selector=timestamp"
                 RAW_AFTER_ARGS+=("$2")
-                shift 2
-                ;;
-            --codex-login)
-                [[ $# -ge 2 ]] || fail "--codex-login requires a login"
-                CODEX_REVIEWER_LOGIN="$2"
                 shift 2
                 ;;
             --help|-h)
@@ -1148,7 +857,7 @@ resolve_pr_targets() {
         [[ -n "$current_repo" ]] || fail "Could not determine repository. Use --repo owner/repo or run from a git repo with a GitHub remote."
         local current_pr
         current_pr=$(gh pr view --repo "$current_repo" --json number --jq '.number' 2>/dev/null || true)
-        [[ -n "$current_pr" ]] || fail "Usage: $0 [--repo owner/repo] [--check-once] [--after <selector>=<timestamp>] [--codex-login <login>] <pr selector...>"
+        [[ -n "$current_pr" ]] || fail "Usage: $0 [--repo owner/repo] [--check-once] [--after <selector>=<timestamp>] <pr selector...>"
         RAW_PR_ARGS=("$current_pr")
         note "ℹ️  Using current PR: ${current_repo}#${current_pr}"
     fi
@@ -1166,15 +875,17 @@ resolve_pr_targets() {
 
 load_all_pr_metadata() {
     local key
-    local any_open=false
+
     for key in "${PR_KEYS[@]}"; do
-        if load_pr_metadata "$key" "${KEY_TO_REPO[$key]:-${key%#*}}" "${KEY_TO_PR[$key]:-${key##*#}}"; then
-            any_open=true
-        fi
+        load_pr_metadata "$key" "${KEY_TO_REPO[$key]:-${key%#*}}" "${KEY_TO_PR[$key]:-${key##*#}}" || true
     done
 
-    if [[ "$any_open" != true ]]; then
-        pass "ℹ️ All monitored PRs are already closed. Nothing to monitor."
+    if any_closed_unmerged_prs; then
+        fail "One or more monitored PRs are already closed without merge. Merge is the only success condition for this watcher."
+    fi
+
+    if all_prs_merged; then
+        pass "✅ All monitored PRs are already merged."
         exit 0
     fi
 }
@@ -1182,12 +893,12 @@ load_all_pr_metadata() {
 prime_latest_activity() {
     local key
     for key in "${PR_KEYS[@]}"; do
-        [[ "${KEY_TO_IS_OPEN[$key]:-true}" == "true" ]] || continue
+        is_pr_open "$key" || continue
         [[ -n "${KEY_TO_AFTER[$key]:-}" ]] || continue
         KEY_TO_LATEST_ACTIVITY_TIME["$key"]=""
         KEY_TO_LATEST_ACTIVITY_TYPE["$key"]=""
         NEW_SIGNAL_FOUND=0
-        scan_pr_activity "$key" "9999-12-31T23:59:59Z" false false
+        scan_pr_activity "$key" "9999-12-31T23:59:59Z" false
     done
 }
 
@@ -1200,10 +911,10 @@ first_sweep() {
     note "👀 Checking for existing new activity..."
 
     for key in "${PR_KEYS[@]}"; do
-        [[ "${KEY_TO_IS_OPEN[$key]:-true}" == "true" ]] || continue
+        is_pr_open "$key" || continue
         POSTCOMMIT_BOUNDARY_FOUND=0
         baseline="$(effective_baseline_for_key "$key")"
-        scan_pr_activity "$key" "$baseline" true false
+        scan_pr_activity "$key" "$baseline" true
     done
 }
 
@@ -1228,14 +939,19 @@ refresh_pr_state() {
 
     KEY_TO_TITLE["$key"]="$title"
     KEY_TO_URL["$key"]="$url"
-    KEY_TO_IS_OPEN["$key"]=true
+    KEY_TO_STATE["$key"]="$state"
 
     if [[ "$state" != "OPEN" ]]; then
-        KEY_TO_IS_OPEN["$key"]=false
         reset_review_cycle_runtime_state "$key"
         KEY_TO_LATEST_ACTIVITY_TIME["$key"]=""
         KEY_TO_LATEST_ACTIVITY_TYPE["$key"]=""
-        warn "ℹ️ ${key} ${state}"
+        KEY_TO_HEAD_SHA["$key"]=""
+        KEY_TO_LAST_COMMIT["$key"]=""
+        if [[ "$state" == "MERGED" ]]; then
+            note "🎉 ${key} merged"
+        else
+            warn "ℹ️ ${key} closed without merge"
+        fi
         return 1
     fi
 
@@ -1261,30 +977,25 @@ refresh_pr_state() {
 }
 
 monitor_loop() {
-    local any_open=false
     local key
     local baseline
 
     while true; do
-        any_open=false
         NEW_SIGNAL_FOUND=0
         for key in "${PR_KEYS[@]}"; do
             if ! refresh_pr_state "$key"; then
                 continue
             fi
 
-            any_open=true
-
             KEY_TO_LATEST_ACTIVITY_TIME["$key"]=""
             KEY_TO_LATEST_ACTIVITY_TYPE["$key"]=""
-            KEY_TO_FORCE_REPORT_NESTED_REACTION_SCAN["$key"]=false
             POSTCOMMIT_BOUNDARY_FOUND=0
 
-            scan_pr_activity "$key" "$(effective_baseline_for_key "$key")" false true
+            scan_pr_activity "$key" "$(effective_baseline_for_key "$key")" false
 
             baseline="$(effective_baseline_for_key "$key")"
             POSTCOMMIT_BOUNDARY_FOUND=0
-            scan_pr_activity "$key" "$baseline" true true
+            scan_pr_activity "$key" "$baseline" true
             validate_after_cutoffs
         done
 
@@ -1294,15 +1005,13 @@ monitor_loop() {
             exit 2
         fi
 
-        if ! any_pending_precommit_actionable && all_open_prs_acknowledged_or_approved; then
+        if any_closed_unmerged_prs; then
             echo ""
-            pass "✅ Codex approval/no-issues signal found. No new actionable feedback."
-            printf '%s\n' "Codex PR review completed: No new issues found. If you haven't already: You may now run final Oracle verification pass on this code. Once both Codex reviewer and Oracle have signed off, alert the user that all reviews are complete and the code is ready to merge"
-            exit 0
+            fail "One or more monitored PRs closed without merge. Merge is the only success condition for this watcher."
         fi
 
-        if [[ "$any_open" != true ]]; then
-            pass "✅ All monitored PRs closed"
+        if all_prs_merged; then
+            pass "✅ All monitored PRs merged"
             exit 0
         fi
 
@@ -1338,10 +1047,14 @@ main() {
         exit 2
     fi
 
-    if ! any_pending_precommit_actionable && all_open_prs_acknowledged_or_approved; then
+    if any_closed_unmerged_prs; then
         echo ""
-        pass "✅ Codex approval/no-issues signal found. No new actionable feedback."
-        printf '%s\n' "Codex PR review completed: No new issues found. If you haven't already: You may now run final Oracle verification pass on this code. Once both Codex reviewer and Oracle have signed off, alert the user that all reviews are complete and the code is ready to merge"
+        fail "One or more monitored PRs closed without merge. Merge is the only success condition for this watcher."
+    fi
+
+    if all_prs_merged; then
+        echo ""
+        pass "✅ All monitored PRs merged"
         exit 0
     fi
 
@@ -1350,18 +1063,14 @@ main() {
             warn "⏳ Earlier actionable feedback is visible, but the latest review cycle is still in progress. A normal watch run would keep waiting for a post-commit review signal."
             exit 2
         fi
-        if ! all_open_prs_acknowledged_or_approved; then
-            warn "⏳ No actionable feedback is currently visible, but review is still pending. A normal watch run would keep waiting for approval or new feedback."
-            exit 2
-        fi
-        pass "✓ No pending activity."
-        exit 0
+        warn "⏳ No actionable feedback is currently visible, but the watched PRs are still open. A normal watch run would keep waiting for merge or new feedback."
+        exit 2
     fi
 
     if printf '%s\n' "${KEY_TO_PENDING_PRECOMMIT_ACTIONABLE[@]:-}" | grep -qx 'true'; then
         warn "⏳ Earlier actionable feedback is visible, but the latest review cycle is still in progress. Waiting for a post-commit review signal before exiting."
     else
-        pass "✓ No pending activity. Starting monitor..."
+        pass "✓ No pending actionable feedback yet. Starting monitor until merge or new feedback..."
     fi
 
     warn "   Press Ctrl+C to stop"

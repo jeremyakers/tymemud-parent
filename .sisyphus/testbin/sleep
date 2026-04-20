@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Test harness helper: avoid real sleeps during fixture-backed watcher runs.
+exit 0
