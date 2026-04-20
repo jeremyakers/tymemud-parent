@@ -182,3 +182,8 @@
 
 - Oracle later flagged stale pre-commit actionable state surviving a later approval/no-issues signal, but under the user’s clarified intent that is not a bug: earlier actionable feedback should still trigger an agent-handling exit once the later review-cycle boundary arrives, so the agent can process both together.
 - The genuinely valid UX fixes from that pass were narrower: fully closed startup should not exit green, and closed-PR status should not use success-style wording. Those fixes remain the only code changes I’m carrying forward from that review pass.
+
+## 2026-04-20 03:14:55Z — Clarified-intent proof for latest head (Atlas)
+
+- I re-verified the exact mixed case the user cares about: earlier actionable feedback on one watched PR plus a later approval signal on another still exits `2` with the waiting/actionable message, not a false green success. That matches the intended “surface both and let the agent handle them” design.
+- The same proof bundle also confirms the only real UX blocker from Oracle’s last pass that I kept: fully closed startup now fails with an explicit message instead of exiting green.

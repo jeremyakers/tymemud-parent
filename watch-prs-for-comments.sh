@@ -849,7 +849,6 @@ scan_pr_activity() {
                 if is_post_commit_activity "$key" "$timestamp"; then
                     APPROVAL_SIGNAL_FOUND=1
                     KEY_TO_APPROVAL_SIGNAL_FOUND["$key"]=true
-                    KEY_TO_PENDING_PRECOMMIT_ACTIONABLE["$key"]=false
                 fi
                 continue
             fi
@@ -908,7 +907,6 @@ scan_pr_activity() {
                 if is_post_commit_activity "$key" "$timestamp"; then
                     APPROVAL_SIGNAL_FOUND=1
                     KEY_TO_APPROVAL_SIGNAL_FOUND["$key"]=true
-                    KEY_TO_PENDING_PRECOMMIT_ACTIONABLE["$key"]=false
                 fi
                 continue
             fi

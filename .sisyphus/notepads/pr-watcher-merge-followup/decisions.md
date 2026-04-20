@@ -193,3 +193,8 @@
 
 - With the user’s clarified intent, pre-commit actionable feedback plus a later post-commit approval/no-issues signal should still produce an actionable exit so the agent handles the full review set atomically. That means the suggested “clear stale pending on later approval” change is intentionally rejected.
 - The only changes retained from that Oracle pass are the actual operator-UX blockers: all-closed startup now fails instead of exiting green, and closed-PR status uses informational warning wording instead of a success-style checkmark.
+
+## 2026-04-20 03:14:55Z — Clarified-intent verification decision (Atlas)
+
+- Captured a dedicated proof in `.sisyphus/evidence/task-oracle-preserve-actionable-fix.log` and `.sisyphus/evidence/task-oracle-preserve-actionable-fix-error.log` that preserves the intended semantics: pre-commit actionable feedback is not cleared by a later approval signal, and the watcher still exits `2` so the agent handles the full review set.
+- This leaves the all-closed startup failure as the only retained behavior change from Oracle’s previous blocker list; the pending-actionable path remains intentionally unchanged under the user’s explicit requirements.
