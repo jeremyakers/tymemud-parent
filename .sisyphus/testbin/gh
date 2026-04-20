@@ -10,10 +10,9 @@ fi
 
 if [[ "$cmd" == "pr" && "${1:-}" == "view" ]]; then
     shift
-    pr_num="$1"
-    shift
     joined=" $* "
     repo="example/repo"
+    pr_num=""
 
     while [[ $# -gt 0 ]]; do
         case "$1" in
@@ -21,11 +20,21 @@ if [[ "$cmd" == "pr" && "${1:-}" == "view" ]]; then
                 repo="$2"
                 shift 2
                 ;;
+            ''|--*)
+                shift
+                ;;
             *)
+                if [[ -z "$pr_num" && "$1" =~ ^[0-9]+$ ]]; then
+                    pr_num="$1"
+                fi
                 shift
                 ;;
         esac
     done
+
+    if [[ -z "$pr_num" ]]; then
+        pr_num="104"
+    fi
 
     if [[ "$joined" == *" --json headRefOid "* ]]; then
         if [[ "$repo" == "example/repo" && "$pr_num" == "108" ]]; then
