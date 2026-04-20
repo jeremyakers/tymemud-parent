@@ -1,0 +1,41 @@
+[shellcheck]
+COMMAND=shellcheck "watch-prs-for-comments.sh" ".sisyphus/testbin/gh"
+EXIT_CODE=0
+OUTPUT:
+
+[all_closed_startup_fails]
+COMMAND=PATH="$PWD/.sisyphus/testbin:$PATH" ./watch-prs-for-comments.sh --check-once example/repo#113
+EXIT_CODE=1
+OUTPUT:
+[0;31m❌ All monitored PRs are already closed. Start the watcher on an open PR instead.[0m
+
+[mixed_closed_open_startup]
+COMMAND=PATH="$PWD/.sisyphus/testbin:$PATH" ./watch-prs-for-comments.sh --check-once example/repo#113 example/repo#102
+EXIT_CODE=0
+OUTPUT:
+[0;34m🔍 Initializing monitors for:[0m
+[0;34m   - example/repo#113[0m
+[0;34m   - example/repo#102[0m
+
+  [1;33m✓[0m example/repo#113: Mock PR 113 (closed)
+[0;34m     https://github.com/example/repo/pull/113[0m
+  [0;32m✓[0m example/repo#102: Mock PR 102 (last commit: 2026-04-18T10:00)
+[0;34m     https://github.com/example/repo/pull/102[0m
+
+[0;34m👀 Checking for existing new activity...[0m
+
+[1;33m═══════════════════════════════════════════════════════════════[0m
+[1;33m🔔 NEW CODEX 👍 on example/repo#102: Mock PR 102[0m
+[1;33m   Type: pr reaction[0m
+[1;33m   Context: pull request approval signal[0m
+[1;33m   Posted: 2026-04-18T10:05:00Z[0m
+[1;33m═══════════════════════════════════════════════════════════════[0m
+From: @chatgpt-codex-connector[bot]
+[1;33m───────────────────────────────────────────────────────────────[0m
+[0;34mTo ignore this activity and future ones on this PR, restart with the same watch set:[0m
+[0;34m   ./watch-prs-for-comments.sh --check-once --after example/repo#102=2026-04-18T10:05:00Z example/repo#113 example/repo#102[0m
+
+
+[0;32m✅ Codex approval/no-issues signal found. No new actionable feedback.[0m
+Codex PR review completed: No new issues found. If you haven't already: You may now run final Oracle verification pass on this code. Once both Codex reviewer and Oracle have signed off, alert the user that all reviews are complete and the code is ready to merge
+

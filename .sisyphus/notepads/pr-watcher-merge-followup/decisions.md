@@ -188,3 +188,8 @@
 
 - Kept the same UX fixes on the real current branch head and added `fetch_error_suffix()` so fetch failures can carry underlying `gh`/`jq` error details into watcher fail messages when those details are present.
 - Captured the actual-head proof in `.sisyphus/evidence/task-oracle-actual-head-followup.log` and `.sisyphus/evidence/task-oracle-actual-head-followup-error.log`: restart hints preserve `--check-once` and custom reviewer overrides, pending review no longer reports success, and nested reaction failures remain explicit and scoped to the failing comment endpoint.
+
+## 2026-04-20 03:02:20Z — Clarified Oracle blocker decision (Atlas)
+
+- With the user’s clarified intent, pre-commit actionable feedback plus a later post-commit approval/no-issues signal should still produce an actionable exit so the agent handles the full review set atomically. That means the suggested “clear stale pending on later approval” change is intentionally rejected.
+- The only changes retained from that Oracle pass are the actual operator-UX blockers: all-closed startup now fails instead of exiting green, and closed-PR status uses informational warning wording instead of a success-style checkmark.

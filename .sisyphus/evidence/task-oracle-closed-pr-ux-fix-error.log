@@ -1,0 +1,7 @@
+assertions:
+- shellcheck_exit_zero: PASS
+- all_closed_exit_one: PASS
+- all_closed_message: PASS
+- mixed_closed_open_exit_zero: PASS
+- mixed_closed_open_closed_label: PASS
+- mixed_closed_open_no_success_emoji_for_closed: PASS

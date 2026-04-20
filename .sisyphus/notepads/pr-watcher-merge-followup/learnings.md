@@ -177,3 +177,8 @@
 
 - The prior Oracle review was stale against the live root-branch head, so I reran the UX checks directly on the current branch and fixed the same two operator-facing gaps in the actual file: restart hints now preserve both `--check-once` and non-default reviewer overrides, and one-shot runs now return a distinct pending-review status instead of a false-green success.
 - Fresh evidence in `.sisyphus/evidence/task-oracle-actual-head-followup.log` shows those behaviors working on the real branch head. Nested reaction failures still fail clearly at the specific comment endpoint; when the underlying `gh` error text is available, the helper now preserves it for fail messages.
+
+## 2026-04-20 03:02:20Z — Clarified Oracle blocker reconciliation (Atlas)
+
+- Oracle later flagged stale pre-commit actionable state surviving a later approval/no-issues signal, but under the user’s clarified intent that is not a bug: earlier actionable feedback should still trigger an agent-handling exit once the later review-cycle boundary arrives, so the agent can process both together.
+- The genuinely valid UX fixes from that pass were narrower: fully closed startup should not exit green, and closed-PR status should not use success-style wording. Those fixes remain the only code changes I’m carrying forward from that review pass.

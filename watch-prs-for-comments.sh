@@ -849,6 +849,7 @@ scan_pr_activity() {
                 if is_post_commit_activity "$key" "$timestamp"; then
                     APPROVAL_SIGNAL_FOUND=1
                     KEY_TO_APPROVAL_SIGNAL_FOUND["$key"]=true
+                    KEY_TO_PENDING_PRECOMMIT_ACTIONABLE["$key"]=false
                 fi
                 continue
             fi
@@ -907,6 +908,7 @@ scan_pr_activity() {
                 if is_post_commit_activity "$key" "$timestamp"; then
                     APPROVAL_SIGNAL_FOUND=1
                     KEY_TO_APPROVAL_SIGNAL_FOUND["$key"]=true
+                    KEY_TO_PENDING_PRECOMMIT_ACTIONABLE["$key"]=false
                 fi
                 continue
             fi
@@ -1159,8 +1161,7 @@ load_all_pr_metadata() {
     done
 
     if [[ "$any_open" != true ]]; then
-        pass "✅ All monitored PRs are already closed"
-        exit 0
+        fail "All monitored PRs are already closed. Start the watcher on an open PR instead."
     fi
 }
 
@@ -1221,7 +1222,7 @@ refresh_pr_state() {
         reset_review_cycle_runtime_state "$key"
         KEY_TO_LATEST_ACTIVITY_TIME["$key"]=""
         KEY_TO_LATEST_ACTIVITY_TYPE["$key"]=""
-        warn "✅ ${key} ${state}"
+        warn "ℹ️ ${key} ${state}"
         return 1
     fi
 
