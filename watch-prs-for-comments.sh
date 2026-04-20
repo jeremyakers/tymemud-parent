@@ -202,15 +202,23 @@ is_approval_activity_type() {
 
 fetch_paginated_array() {
     local endpoint="$1"
+    local stderr_file=""
     local raw_output
     local output
 
     LAST_FETCH_ERROR=""
+    stderr_file=$(mktemp)
 
-    if ! raw_output=$(gh api --paginate -H "Accept: application/vnd.github+json" "$endpoint" 2>&1); then
-        LAST_FETCH_ERROR="$raw_output"
+    if ! raw_output=$(gh api --paginate -H "Accept: application/vnd.github+json" "$endpoint" 2>"$stderr_file"); then
+        LAST_FETCH_ERROR="$(<"$stderr_file")"
+        rm -f "$stderr_file"
         return 1
     fi
+
+    if [[ -s "$stderr_file" ]]; then
+        LAST_FETCH_ERROR="$(<"$stderr_file")"
+    fi
+    rm -f "$stderr_file"
 
     if ! output=$(jq -sc 'add' <<<"$raw_output" 2>&1); then
         LAST_FETCH_ERROR="$output"
@@ -424,9 +432,16 @@ register_latest_activity() {
     local key="$1"
     local timestamp="$2"
     local activity_type="$3"
+    local current_time="${KEY_TO_LATEST_ACTIVITY_TIME[$key]:-}"
+    local current_type="${KEY_TO_LATEST_ACTIVITY_TYPE[$key]:-}"
 
-    if compare_iso_gt "$timestamp" "${KEY_TO_LATEST_ACTIVITY_TIME[$key]:-}"; then
+    if compare_iso_gt "$timestamp" "$current_time"; then
         KEY_TO_LATEST_ACTIVITY_TIME["$key"]="$timestamp"
+        KEY_TO_LATEST_ACTIVITY_TYPE["$key"]="$activity_type"
+        return 0
+    fi
+
+    if [[ "$timestamp" == "$current_time" ]] && is_approval_activity_type "$activity_type" && ! is_approval_activity_type "$current_type"; then
         KEY_TO_LATEST_ACTIVITY_TYPE["$key"]="$activity_type"
     fi
 }
@@ -842,17 +857,19 @@ scan_pr_activity() {
 
         register_latest_activity "$key" "$timestamp" "issue comment"
 
-        if [[ "$report_new" == "true" ]] && compare_iso_gt "$timestamp" "$baseline"; then
-            if is_codex_no_issues_body "$actor" "$body"; then
-                register_latest_activity "$key" "$timestamp" "review approval"
+        if [[ "$report_new" == "true" ]] && is_codex_no_issues_body "$actor" "$body"; then
+            register_latest_activity "$key" "$timestamp" "review approval"
+            if compare_iso_gt "$timestamp" "$baseline"; then
                 flag_postcommit_boundary_if_needed "$key" "$timestamp" "$report_new" "$baseline"
                 if is_post_commit_activity "$key" "$timestamp"; then
                     APPROVAL_SIGNAL_FOUND=1
                     KEY_TO_APPROVAL_SIGNAL_FOUND["$key"]=true
                 fi
-                continue
             fi
+            continue
+        fi
 
+        if [[ "$report_new" == "true" ]] && compare_iso_gt "$timestamp" "$baseline"; then
             needs_nested_reaction_scan=false
             record_actionable_event "$key" "$timestamp" "issue-comment:${comment_id}" display_issue_comment "$key" "$actor" "$body" "$timestamp"
         fi
@@ -900,17 +917,19 @@ scan_pr_activity() {
 
         trimmed_nonempty "$body" || continue
 
-        if [[ "$report_new" == "true" ]] && compare_iso_gt "$timestamp" "$baseline"; then
-            if is_codex_no_issues_body "$actor" "$body"; then
-                register_latest_activity "$key" "$timestamp" "review approval"
+        if [[ "$report_new" == "true" ]] && is_codex_no_issues_body "$actor" "$body"; then
+            register_latest_activity "$key" "$timestamp" "review approval"
+            if compare_iso_gt "$timestamp" "$baseline"; then
                 flag_postcommit_boundary_if_needed "$key" "$timestamp" "$report_new" "$baseline"
                 if is_post_commit_activity "$key" "$timestamp"; then
                     APPROVAL_SIGNAL_FOUND=1
                     KEY_TO_APPROVAL_SIGNAL_FOUND["$key"]=true
                 fi
-                continue
             fi
+            continue
+        fi
 
+        if [[ "$report_new" == "true" ]] && compare_iso_gt "$timestamp" "$baseline"; then
             needs_nested_reaction_scan=false
             record_actionable_event "$key" "$timestamp" "review:${review_id}" display_review_body "$key" "$state" "$actor" "$body" "$timestamp"
         fi
