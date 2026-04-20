@@ -1301,7 +1301,7 @@ monitor_loop() {
             exit 2
         fi
 
-        if [[ "$APPROVAL_SIGNAL_FOUND" -eq 1 ]] && ! any_pending_precommit_actionable && all_open_prs_have_approval_signal; then
+        if [[ "$APPROVAL_SIGNAL_FOUND" -eq 1 ]] && ! any_pending_precommit_actionable && all_open_prs_acknowledged_or_approved; then
             echo ""
             pass "✅ Codex approval/no-issues signal found. No new actionable feedback."
             printf '%s\n' "Codex PR review completed: No new issues found. If you haven't already: You may now run final Oracle verification pass on this code. Once both Codex reviewer and Oracle have signed off, alert the user that all reviews are complete and the code is ready to merge"
@@ -1345,7 +1345,7 @@ main() {
         exit 2
     fi
 
-    if [[ "$APPROVAL_SIGNAL_FOUND" -eq 1 ]] && ! any_pending_precommit_actionable && all_open_prs_have_approval_signal; then
+    if [[ "$APPROVAL_SIGNAL_FOUND" -eq 1 ]] && ! any_pending_precommit_actionable && all_open_prs_acknowledged_or_approved; then
         echo ""
         pass "✅ Codex approval/no-issues signal found. No new actionable feedback."
         printf '%s\n' "Codex PR review completed: No new issues found. If you haven't already: You may now run final Oracle verification pass on this code. Once both Codex reviewer and Oracle have signed off, alert the user that all reviews are complete and the code is ready to merge"
