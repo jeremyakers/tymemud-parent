@@ -16,6 +16,7 @@ REPO_ARG=""
 CHECK_ONCE=false
 CODEX_REVIEWER_LOGIN="${CODEX_REVIEWER_LOGIN:-$DEFAULT_CODEX_REVIEWER_LOGIN}"
 REACTION_POLL_INTERVAL_SECONDS="${REACTION_POLL_INTERVAL_SECONDS:-300}"
+LAST_FETCH_ERROR=""
 
 declare -a RAW_PR_ARGS=()
 declare -a RAW_AFTER_ARGS=()
@@ -158,6 +159,15 @@ normalize_message_whitespace() {
     printf '%s\n' "$value"
 }
 
+fetch_error_suffix() {
+    local normalized=""
+
+    [[ -n "$LAST_FETCH_ERROR" ]] || return 0
+    normalized="$(normalize_message_whitespace "$LAST_FETCH_ERROR")"
+    [[ -n "$normalized" ]] || return 0
+    printf ' Details: %s' "$normalized"
+}
+
 shell_quote() {
     printf '%q' "$1"
 }
@@ -192,9 +202,18 @@ is_approval_activity_type() {
 
 fetch_paginated_array() {
     local endpoint="$1"
+    local raw_output
     local output
 
-    if ! output=$(gh api --paginate -H "Accept: application/vnd.github+json" "$endpoint" 2>/dev/null | jq -sc 'add'); then
+    LAST_FETCH_ERROR=""
+
+    if ! raw_output=$(gh api --paginate -H "Accept: application/vnd.github+json" "$endpoint" 2>&1); then
+        LAST_FETCH_ERROR="$raw_output"
+        return 1
+    fi
+
+    if ! output=$(jq -sc 'add' <<<"$raw_output" 2>&1); then
+        LAST_FETCH_ERROR="$output"
         return 1
     fi
 
@@ -202,6 +221,7 @@ fetch_paginated_array() {
         output='[]'
     fi
 
+    LAST_FETCH_ERROR=""
     printf '%s\n' "$output"
 }
 
@@ -368,7 +388,7 @@ load_pr_metadata() {
     local last_commit
 
     if ! pr_data=$(gh pr view "$pr" --repo "$repo" --json number,title,state,url 2>/dev/null); then
-        fail "Failed to fetch PR #$pr in $repo. If this PR belongs to a different repo, use --repo owner/repo $pr or owner/repo#$pr."
+        fail "Failed to fetch PR #$pr in $repo.$(fetch_error_suffix) If this PR belongs to a different repo, use --repo owner/repo $pr or owner/repo#$pr."
     fi
 
     state=$(jq -r '.state' <<<"$pr_data")
@@ -808,10 +828,10 @@ scan_pr_activity() {
 
     register_latest_activity "$key" "${KEY_TO_LAST_COMMIT[$key]}" "head commit"
 
-    issue_comments=$(fetch_paginated_array "repos/$repo/issues/$pr/comments?per_page=100") || fail "Failed to fetch issue comments for $key."
-    review_comments=$(fetch_paginated_array "repos/$repo/pulls/$pr/comments?per_page=100") || fail "Failed to fetch review comments for $key."
-    reviews=$(fetch_paginated_array "repos/$repo/pulls/$pr/reviews?per_page=100") || fail "Failed to fetch reviews for $key."
-    pr_reactions=$(fetch_paginated_array "repos/$repo/issues/$pr/reactions?per_page=100") || fail "Failed to fetch PR reactions for $key."
+    issue_comments=$(fetch_paginated_array "repos/$repo/issues/$pr/comments?per_page=100") || fail "Failed to fetch issue comments for $key.$(fetch_error_suffix)"
+    review_comments=$(fetch_paginated_array "repos/$repo/pulls/$pr/comments?per_page=100") || fail "Failed to fetch review comments for $key.$(fetch_error_suffix)"
+    reviews=$(fetch_paginated_array "repos/$repo/pulls/$pr/reviews?per_page=100") || fail "Failed to fetch reviews for $key.$(fetch_error_suffix)"
+    pr_reactions=$(fetch_paginated_array "repos/$repo/issues/$pr/reactions?per_page=100") || fail "Failed to fetch PR reactions for $key.$(fetch_error_suffix)"
 
     count=$(jq 'length' <<<"$issue_comments")
     for ((i=0; i<count; i++)); do
@@ -928,14 +948,14 @@ scan_pr_activity() {
         for ((i=0; i<count; i++)); do
             comment_id=$(jq -r ".[$i].id" <<<"$issue_comments")
             actor=$(jq -r ".[$i].user.login" <<<"$issue_comments")
-            process_reactions_for_issue_comment "$repo" "$comment_id" "$key" "$baseline" "$report_new" || fail "Failed to fetch nested issue-comment reactions for ${key} comment ${comment_id}."
+            process_reactions_for_issue_comment "$repo" "$comment_id" "$key" "$baseline" "$report_new" || fail "Failed to fetch nested issue-comment reactions for ${key} comment ${comment_id}.$(fetch_error_suffix)"
         done
 
         count=$(jq 'length' <<<"$review_comments")
         for ((i=0; i<count; i++)); do
             comment_id=$(jq -r ".[$i].id" <<<"$review_comments")
             file=$(jq -r ".[$i].path // \"unknown\"" <<<"$review_comments")
-            process_reactions_for_review_comment "$repo" "$comment_id" "$key" "$baseline" "$file" "$report_new" || fail "Failed to fetch nested review-comment reactions for ${key} comment ${comment_id}."
+            process_reactions_for_review_comment "$repo" "$comment_id" "$key" "$baseline" "$file" "$report_new" || fail "Failed to fetch nested review-comment reactions for ${key} comment ${comment_id}.$(fetch_error_suffix)"
         done
     else
         KEY_TO_FORCE_REPORT_NESTED_REACTION_SCAN["$key"]=false

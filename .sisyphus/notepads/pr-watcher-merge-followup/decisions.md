@@ -183,3 +183,8 @@
 - Extended `display_restart_hint()` again so the generated restart command also preserves `--check-once` whenever the current run is a snapshot run.
 - Tightened the `CHECK_ONCE` branch so only true completion states return `0`: if there is no actionable feedback but the still-open PR set has not yet reached approval/no-issues completion, the command now returns exit `2` with an explicit “review is still pending” message instead of a false-green success.
 - Captured the proof in `.sisyphus/evidence/task-oracle-final-followup-fixes.log` and `.sisyphus/evidence/task-oracle-final-followup-fixes-error.log`: restart hints preserve both flags, pending review is distinct from review complete, and acknowledged-clean / alternate-reviewer approval paths remain intact.
+
+## 2026-04-20 02:43:30Z — Actual-head Oracle follow-up decision (Atlas)
+
+- Kept the same UX fixes on the real current branch head and added `fetch_error_suffix()` so fetch failures can carry underlying `gh`/`jq` error details into watcher fail messages when those details are present.
+- Captured the actual-head proof in `.sisyphus/evidence/task-oracle-actual-head-followup.log` and `.sisyphus/evidence/task-oracle-actual-head-followup-error.log`: restart hints preserve `--check-once` and custom reviewer overrides, pending review no longer reports success, and nested reaction failures remain explicit and scoped to the failing comment endpoint.

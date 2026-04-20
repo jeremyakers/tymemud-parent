@@ -172,3 +172,8 @@
 - Oracle’s second follow-up FAIL was also real: the restart hint still dropped `--check-once`, and the one-shot path still treated “review pending” and “review complete” as the same green success unless an old actionable comment had already been seen.
 - The fixes were both surgical: preserve `--check-once` in generated restart commands when the current run used it, and make the `CHECK_ONCE` branch return a waiting exit/message whenever no approval/no-issues signal has been observed yet for the still-open PR set.
 - Fresh evidence in `.sisyphus/evidence/task-oracle-final-followup-fixes.log` now shows the custom restart command preserving both `--check-once` and `--codex-login`, a pending-review snapshot returning exit `2` with an explicit waiting message, and the acknowledged-clean / alternate-reviewer approval paths still succeeding.
+
+## 2026-04-20 02:43:30Z — Actual-head Oracle follow-up findings (Atlas)
+
+- The prior Oracle review was stale against the live root-branch head, so I reran the UX checks directly on the current branch and fixed the same two operator-facing gaps in the actual file: restart hints now preserve both `--check-once` and non-default reviewer overrides, and one-shot runs now return a distinct pending-review status instead of a false-green success.
+- Fresh evidence in `.sisyphus/evidence/task-oracle-actual-head-followup.log` shows those behaviors working on the real branch head. Nested reaction failures still fail clearly at the specific comment endpoint; when the underlying `gh` error text is available, the helper now preserves it for fail messages.
