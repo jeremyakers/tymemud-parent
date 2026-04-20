@@ -148,3 +148,9 @@
 - Oracle was right: `--check-once` could print actionable old-cycle feedback and then still end with `✓ No pending activity.` because that branch never checked `any_pending_precommit_actionable()`.
 - The smallest safe fix was to reuse the waiting semantics in the `CHECK_ONCE` path: if earlier actionable feedback is visible, print the waiting warning and return exit `2` instead of a false success.
 - Fresh evidence in `.sisyphus/evidence/task-check-once-false-success-fix.log` now shows `#110` and mixed `#110 + #102` returning `2` with the waiting message, while the clean explicit-`--after` `#102` case still exits `0` with `✓ No pending activity.`
+
+## 2026-04-20 01:39:10Z — Nested reaction failure messaging findings (Atlas)
+
+- The live failure mode was exactly what Codex called out: nested issue/review reaction helpers were invoked directly under `set -e`, so one bad nested endpoint aborted the whole watcher with a raw exit `1` and no watcher-specific error context.
+- The smallest safe fix was to wrap the nested helper calls at their loop sites with explicit `|| fail ...` messages. That preserves the current hard-fail behavior for bad nested endpoints, but makes the failure clear and operator-readable instead of looking like a random mid-scan crash.
+- Fresh evidence in `.sisyphus/evidence/task-nested-reaction-failure-fix.log` now shows `example/repo#111` preserving already-surfaced output and then failing with `Failed to fetch nested review-comment reactions for example/repo#111 comment 1112.`, while clean `#102` behavior remains intact.

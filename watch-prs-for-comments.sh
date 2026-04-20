@@ -847,14 +847,14 @@ scan_pr_activity() {
         for ((i=0; i<count; i++)); do
             comment_id=$(jq -r ".[$i].id" <<<"$issue_comments")
             actor=$(jq -r ".[$i].user.login" <<<"$issue_comments")
-            process_reactions_for_issue_comment "$repo" "$comment_id" "$key" "$baseline" "$report_new"
+            process_reactions_for_issue_comment "$repo" "$comment_id" "$key" "$baseline" "$report_new" || fail "Failed to fetch nested issue-comment reactions for ${key} comment ${comment_id}."
         done
 
         count=$(jq 'length' <<<"$review_comments")
         for ((i=0; i<count; i++)); do
             comment_id=$(jq -r ".[$i].id" <<<"$review_comments")
             file=$(jq -r ".[$i].path // \"unknown\"" <<<"$review_comments")
-            process_reactions_for_review_comment "$repo" "$comment_id" "$key" "$baseline" "$file" "$report_new"
+            process_reactions_for_review_comment "$repo" "$comment_id" "$key" "$baseline" "$file" "$report_new" || fail "Failed to fetch nested review-comment reactions for ${key} comment ${comment_id}."
         done
     else
         KEY_TO_FORCE_REPORT_NESTED_REACTION_SCAN["$key"]=false

@@ -1,0 +1,6 @@
+assertions:
+- shellcheck_exit_zero: PASS
+- nested_failure_exit_one: PASS
+- nested_failure_clear_message: PASS
+- nested_failure_preserves_visible_output: PASS
+- clean_102_exit_zero: PASS
