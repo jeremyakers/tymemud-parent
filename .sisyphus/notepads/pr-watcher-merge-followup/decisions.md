@@ -171,3 +171,9 @@
 - Made restart hints safe for multi-PR monitoring by rendering a full restart command for the same watch set, carrying forward existing `--after` values and substituting the new timestamp only for the PR that triggered the hint.
 - Changed startup closed-PR handling from hard-fail to graceful skip: closed selectors populate status output as closed, do not block still-open PRs, and only produce an immediate success when *all* monitored PRs are already closed.
 - Broadened clean-approval body recognition for explicit `--codex-login` overrides so an alternate matched reviewer saying “Didn’t find any major issues.” or “No new issues found.” is treated as approval, not actionable feedback. Proof for all three changes lives in `.sisyphus/evidence/task-oracle-followup-fixes.log` and `.sisyphus/evidence/task-oracle-followup-fixes-error.log`.
+
+## 2026-04-20 02:22:15Z — Restart hint reviewer-override preservation decision (Atlas)
+
+- Extended `display_restart_hint()` so the generated restart command includes `--codex-login <value>` whenever the current run is using a non-default reviewer override.
+- Left the default path unchanged, so ordinary runs still emit the simpler restart command without an unnecessary flag.
+- Captured the proof in `.sisyphus/evidence/task-oracle-codex-login-restart-fix.log` and `.sisyphus/evidence/task-oracle-codex-login-restart-fix-error.log`: the custom reviewer restart hint now preserves `--codex-login custom-review-bot`, and the default reviewer case still omits it.

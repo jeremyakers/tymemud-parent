@@ -160,3 +160,9 @@
 - Oracle’s remaining UX concerns were all real and all small-scope: restart hints were incomplete for multi-PR runs, closed selectors could still confuse startup behavior, and `--codex-login` only changed actor matching without letting a clean alternate reviewer body count as approval.
 - The restart hint is now a complete restart command for the same watch set, including the updated `--after` for the triggering PR plus any existing `--after` values for the other watched PRs.
 - Closed selectors now no longer block startup monitoring of still-open PRs, and an explicit alternate reviewer with a clean “Didn’t find any major issues.” body now counts as approval. Fresh proof for all three fixes is in `.sisyphus/evidence/task-oracle-followup-fixes.log`.
+
+## 2026-04-20 02:22:15Z — Restart hint codex-login preservation findings (Atlas)
+
+- Oracle’s follow-up FAIL was a real last-mile UX gap: even after the restart-hint rewrite, a non-default `--codex-login` was still omitted from the generated command, so operators could silently fall back to the default reviewer identity on restart.
+- The safe fix was tiny: when `CODEX_REVIEWER_LOGIN` differs from `DEFAULT_CODEX_REVIEWER_LOGIN`, prepend `--codex-login <value>` to the generated restart command.
+- Fresh evidence in `.sisyphus/evidence/task-oracle-codex-login-restart-fix.log` now shows the custom reviewer override preserved in the restart hint, while the default case still omits the flag.

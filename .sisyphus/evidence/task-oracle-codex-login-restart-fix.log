@@ -1,0 +1,75 @@
+[shellcheck]
+COMMAND=shellcheck "watch-prs-for-comments.sh"
+EXIT_CODE=0
+OUTPUT:
+
+[custom_restart_hint]
+COMMAND=PATH="$PWD/.sisyphus/testbin:$PATH" ./watch-prs-for-comments.sh --check-once --codex-login custom-review-bot --after example/repo#110=2026-04-18T09:50:00Z example/repo#110 example/repo#102
+EXIT_CODE=2
+OUTPUT:
+[0;34m🔍 Initializing monitors for:[0m
+[0;34m   - example/repo#110[0m
+[0;34m   - example/repo#102[0m
+
+  [0;32m✓[0m example/repo#110: Mock PR 110 (last commit: 2026-04-18T10:00)
+[0;34m     https://github.com/example/repo/pull/110[0m
+[0;34m     After: 2026-04-18T09:50:00Z[0m
+  [0;32m✓[0m example/repo#102: Mock PR 102 (last commit: 2026-04-18T10:00)
+[0;34m     https://github.com/example/repo/pull/102[0m
+
+[0;34m👀 Checking for existing new activity...[0m
+
+[1;33m═══════════════════════════════════════════════════════════════[0m
+[1;33m🔔 NEW PR COMMENT on example/repo#110: Mock PR 110[0m
+[1;33m   Posted: 2026-04-18T09:55:00Z[0m
+[1;33m═══════════════════════════════════════════════════════════════[0m
+From: @reviewer
+
+Please address the old cycle issue.
+[1;33m───────────────────────────────────────────────────────────────[0m
+[0;34mTo ignore this activity and future ones on this PR, restart with the same watch set:[0m
+[0;34m   ./watch-prs-for-comments.sh --codex-login custom-review-bot --after example/repo#110=2026-04-18T09:55:00Z example/repo#110 example/repo#102[0m
+
+[1;33m⏳ Earlier actionable feedback is visible, but the latest review cycle is still in progress. A normal watch run would keep waiting for a post-commit review signal.[0m
+
+[default_restart_hint]
+COMMAND=PATH="$PWD/.sisyphus/testbin:$PATH" ./watch-prs-for-comments.sh --check-once --after example/repo#110=2026-04-18T09:50:00Z example/repo#110 example/repo#102
+EXIT_CODE=2
+OUTPUT:
+[0;34m🔍 Initializing monitors for:[0m
+[0;34m   - example/repo#110[0m
+[0;34m   - example/repo#102[0m
+
+  [0;32m✓[0m example/repo#110: Mock PR 110 (last commit: 2026-04-18T10:00)
+[0;34m     https://github.com/example/repo/pull/110[0m
+[0;34m     After: 2026-04-18T09:50:00Z[0m
+  [0;32m✓[0m example/repo#102: Mock PR 102 (last commit: 2026-04-18T10:00)
+[0;34m     https://github.com/example/repo/pull/102[0m
+
+[0;34m👀 Checking for existing new activity...[0m
+
+[1;33m═══════════════════════════════════════════════════════════════[0m
+[1;33m🔔 NEW PR COMMENT on example/repo#110: Mock PR 110[0m
+[1;33m   Posted: 2026-04-18T09:55:00Z[0m
+[1;33m═══════════════════════════════════════════════════════════════[0m
+From: @reviewer
+
+Please address the old cycle issue.
+[1;33m───────────────────────────────────────────────────────────────[0m
+[0;34mTo ignore this activity and future ones on this PR, restart with the same watch set:[0m
+[0;34m   ./watch-prs-for-comments.sh --after example/repo#110=2026-04-18T09:55:00Z example/repo#110 example/repo#102[0m
+
+
+[1;33m═══════════════════════════════════════════════════════════════[0m
+[1;33m🔔 NEW CODEX 👍 on example/repo#102: Mock PR 102[0m
+[1;33m   Type: pr reaction[0m
+[1;33m   Context: pull request approval signal[0m
+[1;33m   Posted: 2026-04-18T10:05:00Z[0m
+[1;33m═══════════════════════════════════════════════════════════════[0m
+From: @chatgpt-codex-connector[bot]
+[1;33m───────────────────────────────────────────────────────────────[0m
+[0;34mTo ignore this activity and future ones on this PR, restart with the same watch set:[0m
+[0;34m   ./watch-prs-for-comments.sh --after example/repo#110=2026-04-18T09:50:00Z --after example/repo#102=2026-04-18T10:05:00Z example/repo#110 example/repo#102[0m
+
+[1;33m⏳ Earlier actionable feedback is visible, but the latest review cycle is still in progress. A normal watch run would keep waiting for a post-commit review signal.[0m
+

@@ -505,6 +505,10 @@ display_restart_hint() {
     local current_after
     local command="./watch-prs-for-comments.sh"
 
+    if [[ "$CODEX_REVIEWER_LOGIN" != "$DEFAULT_CODEX_REVIEWER_LOGIN" ]]; then
+        command+=" --codex-login $(shell_quote "$CODEX_REVIEWER_LOGIN")"
+    fi
+
     for current_key in "${PR_KEYS[@]}"; do
         if [[ "$current_key" == "$key" ]]; then
             current_after="$timestamp"
