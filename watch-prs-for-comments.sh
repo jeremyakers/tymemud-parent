@@ -626,6 +626,9 @@ scan_pr_activity() {
         body=$(jq -r ".[$i].body // \"\"" <<<"$issue_comments")
 
         if is_codex_no_issues_noise "$actor" "$body"; then
+            if [[ "$report_new" == "true" ]] && compare_iso_gt "$timestamp" "$baseline" && [[ "${KEY_TO_PENDING_PRECOMMIT_ACTIONABLE[$key]:-false}" == "true" ]]; then
+                flag_postcommit_boundary_if_needed "$key" "$timestamp" "$report_new" "$baseline"
+            fi
             continue
         fi
 
@@ -667,6 +670,9 @@ scan_pr_activity() {
         state=$(jq -r ".[$i].state" <<<"$reviews")
 
         if is_codex_no_issues_noise "$actor" "$body"; then
+            if [[ "$report_new" == "true" ]] && compare_iso_gt "$timestamp" "$baseline" && [[ "${KEY_TO_PENDING_PRECOMMIT_ACTIONABLE[$key]:-false}" == "true" ]]; then
+                flag_postcommit_boundary_if_needed "$key" "$timestamp" "$report_new" "$baseline"
+            fi
             continue
         fi
 
