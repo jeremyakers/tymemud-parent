@@ -1,0 +1,10 @@
+assertions:
+- shellcheck_exit_zero: PASS
+- closed_110_exit_two: PASS
+- closed_110_has_waiting_message: PASS
+- closed_110_no_false_success: PASS
+- mixed_110_102_exit_two: PASS
+- mixed_110_102_has_waiting_message: PASS
+- mixed_110_102_no_false_success: PASS
+- clean_102_exit_zero: PASS
+- clean_102_success_message: PASS

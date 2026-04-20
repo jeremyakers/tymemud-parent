@@ -1219,6 +1219,10 @@ main() {
     fi
 
     if [[ "$CHECK_ONCE" == true ]]; then
+        if any_pending_precommit_actionable; then
+            warn "⏳ Earlier actionable feedback is visible, but the latest review cycle is still in progress. A normal watch run would keep waiting for a post-commit review signal."
+            exit 2
+        fi
         pass "✓ No pending activity."
         exit 0
     fi

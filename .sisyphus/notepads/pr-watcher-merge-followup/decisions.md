@@ -159,3 +159,9 @@
 - Added `KEY_TO_REPORTED_APPROVAL_KEYS` plus `is_already_reported_approval()` / `mark_approval_reported()` so previously surfaced approval reactions are not re-announced every polling loop.
 - Kept `KEY_TO_APPROVAL_SIGNAL_FOUND` untouched: deduplication suppresses repeat banners only, while the underlying approval state still contributes to success once all open PRs are approved.
 - Captured the proof in `.sisyphus/evidence/task-approval-dedupe-fix.log` and `.sisyphus/evidence/task-approval-dedupe-fix-error.log`: mixed pending `#102 + #201` shows exactly one approval banner, and single-PR `#102` still exits `0` cleanly.
+
+## 2026-04-19 23:18:35Z — Check-once pending-actionable decision (Atlas)
+
+- Added an explicit `any_pending_precommit_actionable()` guard to the `CHECK_ONCE` branch so old-cycle actionable feedback can no longer fall through to the generic `✓ No pending activity.` success path.
+- Reused the existing waiting semantics instead of inventing a new status: `--check-once` now returns exit `2` with the same “latest review cycle is still in progress” warning when earlier actionable feedback is visible.
+- Captured the proof in `.sisyphus/evidence/task-check-once-false-success-fix.log` and `.sisyphus/evidence/task-check-once-false-success-fix-error.log`: `#110` and `#110 + #102` no longer produce false-green output, while the clean `#102` case remains a true success.

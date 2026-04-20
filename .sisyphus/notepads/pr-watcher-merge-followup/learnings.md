@@ -142,3 +142,9 @@
 - The live bug was noise, not correctness: once an approval reaction was above the baseline, the watcher would redisplay the same `NEW CODEX 👍` banner on every polling loop because reactions were never marked as reported.
 - The smallest safe fix was to add a per-PR approval-report token set and use it only to suppress repeat banners. The approval state itself still counts toward final success, so deduplication does not block eventual approval exits.
 - Fresh evidence in `.sisyphus/evidence/task-approval-dedupe-fix.log` now shows the mixed pending case printing the `#102` approval banner only once while continuing to wait, and the single-PR approval path still exits `0` with one approval banner.
+
+## 2026-04-19 23:18:35Z — Check-once false-success findings (Atlas)
+
+- Oracle was right: `--check-once` could print actionable old-cycle feedback and then still end with `✓ No pending activity.` because that branch never checked `any_pending_precommit_actionable()`.
+- The smallest safe fix was to reuse the waiting semantics in the `CHECK_ONCE` path: if earlier actionable feedback is visible, print the waiting warning and return exit `2` instead of a false success.
+- Fresh evidence in `.sisyphus/evidence/task-check-once-false-success-fix.log` now shows `#110` and mixed `#110 + #102` returning `2` with the waiting message, while the clean explicit-`--after` `#102` case still exits `0` with `✓ No pending activity.`
