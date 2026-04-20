@@ -703,6 +703,8 @@ resolve_after_mappings() {
     local matched=false
     local accepted=""
     local pr_key
+    local parsed_output
+    local -a parsed=()
 
     for pr_key in "${PR_KEYS[@]}"; do
         KEY_TO_AFTER["$pr_key"]=""
@@ -714,7 +716,10 @@ resolve_after_mappings() {
             selector="${raw%%=*}"
             timestamp="${raw#*=}"
 
-            mapfile -t parsed < <(parse_repo_pr_token "$selector" "$current_repo")
+            if ! parsed_output="$(parse_repo_pr_token "$selector" "$current_repo")"; then
+                exit 1
+            fi
+            mapfile -t parsed <<<"$parsed_output"
             parsed_repo="${parsed[0]}"
             parsed_pr="${parsed[1]}"
             normalized_selector="$(make_pr_key "$parsed_repo" "$parsed_pr")"
@@ -848,6 +853,8 @@ resolve_pr_targets() {
     local repo
     local pr
     local key
+    local parsed_output
+    local -a parsed=()
 
     if [[ -z "$current_repo" ]]; then
         current_repo="$(detect_repo_from_git || true)"
@@ -863,7 +870,10 @@ resolve_pr_targets() {
     fi
 
     for token in "${RAW_PR_ARGS[@]}"; do
-        mapfile -t parsed < <(parse_repo_pr_token "$token" "$current_repo")
+        if ! parsed_output="$(parse_repo_pr_token "$token" "$current_repo")"; then
+            exit 1
+        fi
+        mapfile -t parsed <<<"$parsed_output"
         repo="${parsed[0]}"
         pr="${parsed[1]}"
         key="$(make_pr_key "$repo" "$pr")"
