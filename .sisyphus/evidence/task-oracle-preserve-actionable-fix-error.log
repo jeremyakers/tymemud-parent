@@ -1,0 +1,6 @@
+assertions:
+- shellcheck_exit_zero: PASS
+- preserve_actionable_exit_two: PASS
+- preserve_actionable_waiting: PASS
+- preserve_actionable_no_success: PASS
+- all_closed_exit_one: PASS

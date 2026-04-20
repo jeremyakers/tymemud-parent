@@ -1,0 +1,312 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+cmd="${1:-}"
+shift || true
+
+if [[ "$cmd" == "auth" && "${1:-}" == "status" ]]; then
+    exit 0
+fi
+
+if [[ "$cmd" == "pr" && "${1:-}" == "view" ]]; then
+    shift
+    joined=" $* "
+    repo="example/repo"
+    pr_num=""
+
+    while [[ $# -gt 0 ]]; do
+        case "$1" in
+            --repo)
+                repo="$2"
+                shift 2
+                ;;
+            ''|--*)
+                shift
+                ;;
+            *)
+                if [[ -z "$pr_num" && "$1" =~ ^[0-9]+$ ]]; then
+                    pr_num="$1"
+                fi
+                shift
+                ;;
+        esac
+    done
+
+    if [[ -z "$pr_num" ]]; then
+        pr_num="104"
+    fi
+
+    if [[ "$joined" == *" --json headRefOid "* ]]; then
+        if [[ "$repo" == "example/repo" && "$pr_num" == "108" ]]; then
+            fixture_run_id="${GH_FIXTURE_RUN_ID:-${PPID:-unknown}}"
+            if [[ -d ".sisyphus/evidence" ]]; then
+                fixture_dir=".sisyphus/evidence/gh-fixture-${fixture_run_id}"
+            else
+                fixture_dir="${TMPDIR:-/tmp}/tymemud-gh-fixture-${fixture_run_id}"
+            fi
+            mkdir -p "$fixture_dir"
+            counter_file="$fixture_dir/pr108_head_oid.count"
+            count=0
+            if [[ -f "$counter_file" ]]; then
+                count=$(<"$counter_file")
+            fi
+            count=$((count + 1))
+            printf '%s\n' "$count" >"$counter_file"
+            if (( count <= 2 )); then
+                printf 'sha-108-a\n'
+            else
+                printf 'sha-108-b\n'
+            fi
+            exit 0
+        fi
+        if [[ "$repo" == "example/repo" && "$pr_num" == "110" ]]; then
+            printf 'sha-110\n'
+            exit 0
+        fi
+        if [[ "$repo" == "example/repo" && "$pr_num" == "113" ]]; then
+            printf 'sha-113\n'
+            exit 0
+        fi
+        if [[ "$repo" == "example/repo" && "$pr_num" == "115" ]]; then
+            printf 'sha-115\n'
+            exit 0
+        fi
+        printf 'sha-%s\n' "$pr_num"
+        exit 0
+    fi
+
+    if [[ "$joined" == *" --json number,title,state,url "* || "$joined" == *" --json title,state,url "* ]]; then
+        if [[ "$repo" == "example/repo" && "$pr_num" == "110" ]]; then
+            fixture_run_id="${GH_FIXTURE_RUN_ID:-${PPID:-unknown}}"
+            if [[ -d ".sisyphus/evidence" ]]; then
+                fixture_dir=".sisyphus/evidence/gh-fixture-${fixture_run_id}"
+            else
+                fixture_dir="${TMPDIR:-/tmp}/tymemud-gh-fixture-${fixture_run_id}"
+            fi
+            mkdir -p "$fixture_dir"
+            counter_file="$fixture_dir/pr110_state.count"
+            count=0
+            if [[ -f "$counter_file" ]]; then
+                count=$(<"$counter_file")
+            fi
+            count=$((count + 1))
+            printf '%s\n' "$count" >"$counter_file"
+            if (( count == 1 )); then
+                printf '{"title":"Mock PR %s","state":"OPEN","url":"https://github.com/%s/pull/%s"}\n' "$pr_num" "$repo" "$pr_num"
+            else
+                printf '{"title":"Mock PR %s","state":"CLOSED","url":"https://github.com/%s/pull/%s"}\n' "$pr_num" "$repo" "$pr_num"
+            fi
+            exit 0
+        fi
+        if [[ "$repo" == "example/repo" && "$pr_num" == "113" ]]; then
+            printf '{"title":"Mock PR %s","state":"CLOSED","url":"https://github.com/%s/pull/%s"}\n' "$pr_num" "$repo" "$pr_num"
+            exit 0
+        fi
+        if [[ "$repo" == "example/repo" && "$pr_num" == "114" ]]; then
+            printf '{"title":"Mock PR %s","state":"MERGED","url":"https://github.com/%s/pull/%s"}\n' "$pr_num" "$repo" "$pr_num"
+            exit 0
+        fi
+        if [[ "$repo" == "example/repo" && "$pr_num" == "115" ]]; then
+            fixture_run_id="${GH_FIXTURE_RUN_ID:-${PPID:-unknown}}"
+            if [[ -d ".sisyphus/evidence" ]]; then
+                fixture_dir=".sisyphus/evidence/gh-fixture-${fixture_run_id}"
+            else
+                fixture_dir="${TMPDIR:-/tmp}/tymemud-gh-fixture-${fixture_run_id}"
+            fi
+            mkdir -p "$fixture_dir"
+            counter_file="$fixture_dir/pr115_state.count"
+            count=0
+            if [[ -f "$counter_file" ]]; then
+                count=$(<"$counter_file")
+            fi
+            count=$((count + 1))
+            printf '%s\n' "$count" >"$counter_file"
+            if (( count == 1 )); then
+                printf '{"title":"Mock PR %s","state":"OPEN","url":"https://github.com/%s/pull/%s"}\n' "$pr_num" "$repo" "$pr_num"
+            else
+                printf '{"title":"Mock PR %s","state":"MERGED","url":"https://github.com/%s/pull/%s"}\n' "$pr_num" "$repo" "$pr_num"
+            fi
+            exit 0
+        fi
+        printf '{"title":"Mock PR %s","state":"OPEN","url":"https://github.com/%s/pull/%s"}\n' "$pr_num" "$repo" "$pr_num"
+        exit 0
+    fi
+
+    if [[ "$joined" == *" --json number "* ]]; then
+        printf '{"number":%s}\n' "$pr_num"
+        exit 0
+    fi
+fi
+
+if [[ "$cmd" == "api" ]]; then
+    fixture_run_id="${GH_FIXTURE_RUN_ID:-${PPID:-unknown}}"
+    if [[ -d ".sisyphus/evidence" ]]; then
+        fixture_dir=".sisyphus/evidence/gh-fixture-${fixture_run_id}"
+    else
+        fixture_dir="${TMPDIR:-/tmp}/tymemud-gh-fixture-${fixture_run_id}"
+    fi
+    mkdir -p "$fixture_dir"
+
+    endpoint=""
+    while [[ $# -gt 0 ]]; do
+        case "$1" in
+            --paginate)
+                shift
+                ;;
+            -H|--header|--jq|-X|--method|-F|-f)
+                shift 2
+                ;;
+            --*)
+                shift
+                ;;
+            *)
+                endpoint="$1"
+                break
+                ;;
+        esac
+    done
+
+    log_endpoint_call() {
+        local bucket="$1"
+        local counter_file="$fixture_dir/$bucket.count"
+        local count=0
+
+        if [[ -f "$counter_file" ]]; then
+            count=$(<"$counter_file")
+        fi
+
+        count=$((count + 1))
+        printf '%s\n' "$count" >"$counter_file"
+        printf 'fixture gh %s call=%s endpoint=%s\n' "$bucket" "$count" "$endpoint" >&2
+    }
+
+    case "$endpoint" in
+        repos/example/repo/commits/sha-102|repos/example/repo/commits/sha-103|repos/example/repo/commits/sha-104|repos/example/repo/commits/sha-105|repos/example/repo/commits/sha-106|repos/example/repo/commits/sha-108-a|repos/example/repo/commits/sha-108-b|repos/example/repo/commits/sha-109|repos/example/repo/commits/sha-110|repos/example/repo/commits/sha-111|repos/example/repo/commits/sha-112|repos/example/repo/commits/sha-115|repos/example/other/commits/sha-201)
+            printf '2026-04-18T10:00:00Z\n'
+            exit 0
+            ;;
+        repos/example/repo/commits/sha-107)
+            printf '2026-04-18T10:00:00Z\n'
+            exit 0
+            ;;
+        repos/example/repo/issues/102/comments\?per_page=100)
+            printf '[]\n'
+            exit 0
+            ;;
+        repos/example/repo/issues/105/comments\?per_page=100)
+            printf '[{"id":1051,"created_at":"2026-04-18T10:10:00Z","user":{"login":"reviewer"},"body":"Please address the failing edge case."},{"id":1052,"created_at":"2026-04-18T10:15:00Z","user":{"login":"chatgpt-codex-connector[bot]"},"body":"Codex Review: Didn'"'"'t find any major issues."}]\n'
+            exit 0
+            ;;
+        repos/example/repo/issues/106/comments\?per_page=100)
+            printf '[{"id":1061,"created_at":"2026-04-18T09:55:00Z","user":{"login":"reviewer"},"body":"Earlier context."}]\n'
+            exit 0
+            ;;
+        repos/example/repo/issues/107/comments\?per_page=100)
+            log_endpoint_call race_issue_comments
+            printf '[{"id":1071,"created_at":"2026-04-18T09:55:00Z","user":{"login":"reviewer"},"body":"Please still fix the restart race."}]\n'
+            exit 0
+            ;;
+        repos/example/repo/issues/108/comments\?per_page=100)
+            log_endpoint_call head_reset_issue_comments
+            comment_call_count=$(<"$fixture_dir/head_reset_issue_comments.count")
+            if (( comment_call_count == 1 )); then
+                printf '[{"id":1081,"created_at":"2026-04-18T09:55:00Z","user":{"login":"reviewer"},"body":"Old cycle actionable comment."}]\n'
+            else
+                printf '[]\n'
+            fi
+            exit 0
+            ;;
+        repos/example/repo/issues/109/comments\?per_page=100)
+            printf '[{"id":1091,"created_at":"2026-04-18T09:55:00Z","user":{"login":"reviewer"},"body":"Earlier context."}]\n'
+            exit 0
+            ;;
+        repos/example/repo/issues/110/comments\?per_page=100)
+            printf '[{"id":1101,"created_at":"2026-04-18T09:55:00Z","user":{"login":"reviewer"},"body":"Please address the old cycle issue."}]\n'
+            exit 0
+            ;;
+        repos/example/repo/issues/111/comments\?per_page=100)
+            printf '[{"id":1111,"created_at":"2026-04-18T09:55:00Z","user":{"login":"reviewer"},"body":"Pre-commit actionable context."}]\n'
+            exit 0
+            ;;
+        repos/example/repo/issues/112/comments\?per_page=100|repos/example/repo/issues/113/comments\?per_page=100|repos/example/repo/issues/115/comments\?per_page=100)
+            printf '[]\n'
+            exit 0
+            ;;
+        repos/example/repo/issues/104/comments\?per_page=100)
+            printf '[{"id":1041,"created_at":"2026-04-18T10:12:00Z","user":{"login":"chatgpt-codex-connector[bot]"},"body":"Codex Review: Didn'"'"'t find any major issues."}]\n'
+            exit 0
+            ;;
+        repos/example/other/issues/201/comments\?per_page=100)
+            printf '[]\n'
+            exit 0
+            ;;
+        repos/example/repo/issues/103/comments\?per_page=100)
+            log_endpoint_call top_level_issue_comments
+            printf '[{"id":1031,"created_at":"2026-04-18T09:55:00Z","user":{"login":"reviewer"},"body":"Earlier context."}]\n'
+            exit 0
+            ;;
+        repos/example/repo/pulls/102/comments\?per_page=100|repos/example/repo/pulls/104/comments\?per_page=100|repos/example/repo/pulls/105/comments\?per_page=100|repos/example/repo/pulls/106/comments\?per_page=100|repos/example/other/pulls/201/comments\?per_page=100)
+            printf '[]\n'
+            exit 0
+            ;;
+        repos/example/repo/pulls/107/comments\?per_page=100|repos/example/repo/pulls/108/comments\?per_page=100|repos/example/repo/pulls/109/comments\?per_page=100|repos/example/repo/pulls/110/comments\?per_page=100|repos/example/repo/pulls/112/comments\?per_page=100|repos/example/repo/pulls/115/comments\?per_page=100)
+            printf '[]\n'
+            exit 0
+            ;;
+        repos/example/repo/pulls/111/comments\?per_page=100)
+            printf '[{"id":1112,"created_at":"2026-04-18T10:02:00Z","user":{"login":"reviewer"},"body":"Current-cycle inline note.","path":"src/mock.c","line":14,"original_line":14,"start_line":14,"end_line":14,"commit_id":"deadbeef111"}]\n'
+            exit 0
+            ;;
+        repos/example/repo/pulls/103/comments\?per_page=100)
+            log_endpoint_call top_level_review_comments
+            printf '[{"id":1032,"created_at":"2026-04-18T09:56:00Z","user":{"login":"reviewer"},"body":"Earlier inline note.","path":"src/mock.c","line":12,"original_line":12,"start_line":12,"end_line":12,"commit_id":"deadbeef103"}]\n'
+            exit 0
+            ;;
+        repos/example/repo/pulls/102/reviews\?per_page=100|repos/example/repo/pulls/104/reviews\?per_page=100|repos/example/repo/pulls/105/reviews\?per_page=100|repos/example/repo/pulls/106/reviews\?per_page=100|repos/example/repo/pulls/110/reviews\?per_page=100|repos/example/repo/pulls/115/reviews\?per_page=100|repos/example/other/pulls/201/reviews\?per_page=100)
+            printf '[]\n'
+            exit 0
+            ;;
+        repos/example/repo/pulls/109/reviews\?per_page=100)
+            printf '[]\n'
+            exit 0
+            ;;
+        repos/example/repo/pulls/112/reviews\?per_page=100)
+            printf '[{"id":1123,"submitted_at":"2026-04-18T10:06:00Z","state":"COMMENTED","user":{"login":"custom-review-bot"},"body":"Didn'"'"'t find any major issues."}]\n'
+            exit 0
+            ;;
+        repos/example/repo/pulls/111/reviews\?per_page=100)
+            printf '[]\n'
+            exit 0
+            ;;
+        repos/example/repo/pulls/107/reviews\?per_page=100)
+            log_endpoint_call race_reviews
+            review_call_count=$(<"$fixture_dir/race_reviews.count")
+            if (( review_call_count < 3 )); then
+                printf '[]\n'
+            else
+                printf '[{"id":1073,"submitted_at":"2026-04-18T10:06:00Z","state":"COMMENTED","user":{"login":"chatgpt-codex-connector[bot]"},"body":"Codex Review: Didn'"'"'t find any major issues."}]\n'
+            fi
+            exit 0
+            ;;
+        repos/example/repo/pulls/108/reviews\?per_page=100)
+            log_endpoint_call head_reset_reviews
+            review_call_count=$(<"$fixture_dir/head_reset_reviews.count")
+            if (( review_call_count < 3 )); then
+                printf '[]\n'
+            else
+                printf '[{"id":1083,"submitted_at":"2026-04-18T10:06:00Z","state":"COMMENTED","user":{"login":"chatgpt-codex-connector[bot]"},"body":"Codex Review: Didn'"'"'t find any major issues."}]\n'
+            fi
+            exit 0
+            ;;
+        repos/example/repo/pulls/103/reviews\?per_page=100)
+            log_endpoint_call top_level_reviews
+            printf '[]\n'
+            exit 0
+            ;;
+    esac
+fi
+
+printf 'mock gh: unsupported invocation:' >&2
+printf ' %q' "$cmd" "$@" >&2
+printf '\n' >&2
+exit 1

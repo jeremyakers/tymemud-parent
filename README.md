@@ -90,6 +90,8 @@ This is intentional so builders can safely validate world/command table changes 
      - YOU ARE RESPONSIBLE FOR CREATING Pull Requests for your work! Do not ask the user to do it for you!
      - PR-only submission rules (no direct pushes to `svn/MM_3_Final` / `svn/MM_3-2_Start`)
      - PR hygiene: **never** push new commits expecting to “update” a merged/closed PR (open a new PR instead)
+     - Oracle review gate: **before opening a PR, and before pushing any new commits to an open PR branch, get a fresh Oracle signoff on the exact code you are about to publish**
+     - After opening a PR: print the PR URL to the user and immediately start `watch-prs-for-comments.sh` in the foreground; watcher success is merge-only
 
 3. **Load the appropriate MANIFESTO.md:**
    - Read the branch-specific MANIFESTO.md before making changes
@@ -149,4 +151,3 @@ This is intentional so builders can safely validate world/command table changes 
 | Stable | `MM3/` | `MM3/src/` | `MM3/src/MANIFESTO.md` | Production, bugfixes |
 | Dev | `MM32/` | `MM32/src/` | `MM32/src/MANIFESTO.md` | New features, refactoring |
 | Web | `public_html/` | `public_html/` | N/A | Website (PHP/Apache) |
-

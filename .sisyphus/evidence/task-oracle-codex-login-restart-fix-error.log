@@ -1,0 +1,5 @@
+assertions:
+- shellcheck_exit_zero: PASS
+- custom_restart_includes_codex_login: PASS
+- custom_restart_includes_all_selectors: PASS
+- default_restart_omits_codex_login: PASS

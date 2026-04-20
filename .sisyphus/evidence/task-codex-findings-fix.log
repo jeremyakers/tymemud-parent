@@ -1,0 +1,75 @@
+[shellcheck]
+COMMAND=shellcheck "watch-prs-for-comments.sh" ".sisyphus/testbin/gh"
+EXIT_CODE=0
+OUTPUT:
+
+[stderr_json_107]
+COMMAND=PATH="$PWD/.sisyphus/testbin:$PATH" GH_FIXTURE_RUN_ID="task-codex-finding-107" ./watch-prs-for-comments.sh --check-once example/repo#107
+EXIT_CODE=0
+OUTPUT:
+[0;34m🔍 Initializing monitors for:[0m
+[0;34m   - example/repo#107[0m
+
+  [0;32m✓[0m example/repo#107: Mock PR 107 (last commit: 2026-04-18T10:00)
+[0;34m     https://github.com/example/repo/pull/107[0m
+
+[0;34m👀 Checking for existing new activity...[0m
+
+[0;32m✅ Codex approval/no-issues signal found. No new actionable feedback.[0m
+Codex PR review completed: No new issues found. If you haven't already: You may now run final Oracle verification pass on this code. Once both Codex reviewer and Oracle have signed off, alert the user that all reviews are complete and the code is ready to merge
+
+[cutoff_equal_104]
+COMMAND=PATH="$PWD/.sisyphus/testbin:$PATH" ./watch-prs-for-comments.sh --check-once --after example/repo#104=2026-04-18T10:12:00Z example/repo#104
+EXIT_CODE=0
+OUTPUT:
+[0;34m🔍 Initializing monitors for:[0m
+[0;34m   - example/repo#104[0m
+
+  [0;32m✓[0m example/repo#104: Mock PR 104 (last commit: 2026-04-18T10:00)
+[0;34m     https://github.com/example/repo/pull/104[0m
+[0;34m     After: 2026-04-18T10:12:00Z[0m
+
+[0;34m👀 Checking for existing new activity...[0m
+[0;32m✓ No pending activity.[0m
+
+[thumbs_up_does_not_erase_unseen_107_102]
+COMMAND=PATH="$PWD/.sisyphus/testbin:$PATH" GH_FIXTURE_RUN_ID="task-codex-finding-107-102" ./watch-prs-for-comments.sh --check-once --after example/repo#107=2026-04-18T09:50:00Z example/repo#107 example/repo#102
+EXIT_CODE=2
+OUTPUT:
+[0;34m🔍 Initializing monitors for:[0m
+[0;34m   - example/repo#107[0m
+[0;34m   - example/repo#102[0m
+
+  [0;32m✓[0m example/repo#107: Mock PR 107 (last commit: 2026-04-18T10:00)
+[0;34m     https://github.com/example/repo/pull/107[0m
+[0;34m     After: 2026-04-18T09:50:00Z[0m
+  [0;32m✓[0m example/repo#102: Mock PR 102 (last commit: 2026-04-18T10:00)
+[0;34m     https://github.com/example/repo/pull/102[0m
+
+[0;34m👀 Checking for existing new activity...[0m
+
+[1;33m═══════════════════════════════════════════════════════════════[0m
+[1;33m🔔 NEW PR COMMENT on example/repo#107: Mock PR 107[0m
+[1;33m   Posted: 2026-04-18T09:55:00Z[0m
+[1;33m═══════════════════════════════════════════════════════════════[0m
+From: @reviewer
+
+Please still fix the restart race.
+[1;33m───────────────────────────────────────────────────────────────[0m
+[0;34mTo ignore this activity and future ones on this PR, restart with the same watch set:[0m
+[0;34m   ./watch-prs-for-comments.sh --check-once --after example/repo#107=2026-04-18T09:55:00Z example/repo#107 example/repo#102[0m
+
+
+[1;33m═══════════════════════════════════════════════════════════════[0m
+[1;33m🔔 NEW CODEX 👍 on example/repo#102: Mock PR 102[0m
+[1;33m   Type: pr reaction[0m
+[1;33m   Context: pull request approval signal[0m
+[1;33m   Posted: 2026-04-18T10:05:00Z[0m
+[1;33m═══════════════════════════════════════════════════════════════[0m
+From: @chatgpt-codex-connector[bot]
+[1;33m───────────────────────────────────────────────────────────────[0m
+[0;34mTo ignore this activity and future ones on this PR, restart with the same watch set:[0m
+[0;34m   ./watch-prs-for-comments.sh --check-once --after example/repo#107=2026-04-18T09:50:00Z --after example/repo#102=2026-04-18T10:05:00Z example/repo#107 example/repo#102[0m
+
+[1;33m⏳ Earlier actionable feedback is visible, but the latest review cycle is still in progress. A normal watch run would keep waiting for a post-commit review signal.[0m
+

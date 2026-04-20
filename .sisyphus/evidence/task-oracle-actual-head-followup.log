@@ -1,0 +1,75 @@
+[shellcheck]
+COMMAND=shellcheck "watch-prs-for-comments.sh" ".sisyphus/testbin/gh"
+EXIT_CODE=0
+OUTPUT:
+
+[restart_hint_multipr]
+COMMAND=PATH="$PWD/.sisyphus/testbin:$PATH" ./watch-prs-for-comments.sh --check-once --codex-login custom-review-bot --after example/repo#110=2026-04-18T09:50:00Z example/repo#110 example/repo#102
+EXIT_CODE=2
+OUTPUT:
+[0;34m🔍 Initializing monitors for:[0m
+[0;34m   - example/repo#110[0m
+[0;34m   - example/repo#102[0m
+
+  [0;32m✓[0m example/repo#110: Mock PR 110 (last commit: 2026-04-18T10:00)
+[0;34m     https://github.com/example/repo/pull/110[0m
+[0;34m     After: 2026-04-18T09:50:00Z[0m
+  [0;32m✓[0m example/repo#102: Mock PR 102 (last commit: 2026-04-18T10:00)
+[0;34m     https://github.com/example/repo/pull/102[0m
+
+[0;34m👀 Checking for existing new activity...[0m
+
+[1;33m═══════════════════════════════════════════════════════════════[0m
+[1;33m🔔 NEW PR COMMENT on example/repo#110: Mock PR 110[0m
+[1;33m   Posted: 2026-04-18T09:55:00Z[0m
+[1;33m═══════════════════════════════════════════════════════════════[0m
+From: @reviewer
+
+Please address the old cycle issue.
+[1;33m───────────────────────────────────────────────────────────────[0m
+[0;34mTo ignore this activity and future ones on this PR, restart with the same watch set:[0m
+[0;34m   ./watch-prs-for-comments.sh --check-once --codex-login custom-review-bot --after example/repo#110=2026-04-18T09:55:00Z example/repo#110 example/repo#102[0m
+
+[1;33m⏳ Earlier actionable feedback is visible, but the latest review cycle is still in progress. A normal watch run would keep waiting for a post-commit review signal.[0m
+
+[pending_review_check_once]
+COMMAND=PATH="$PWD/.sisyphus/testbin:$PATH" ./watch-prs-for-comments.sh --check-once example/other#201
+EXIT_CODE=2
+OUTPUT:
+[0;34m🔍 Initializing monitors for:[0m
+[0;34m   - example/other#201[0m
+
+  [0;32m✓[0m example/other#201: Mock PR 201 (last commit: 2026-04-18T10:00)
+[0;34m     https://github.com/example/other/pull/201[0m
+
+[0;34m👀 Checking for existing new activity...[0m
+[1;33m⏳ No actionable feedback is currently visible, but review is still pending. A normal watch run would keep waiting for approval or new feedback.[0m
+
+[nested_failure_details]
+COMMAND=PATH="$PWD/.sisyphus/testbin:$PATH" ./watch-prs-for-comments.sh --check-once example/repo#111
+EXIT_CODE=1
+OUTPUT:
+[0;34m🔍 Initializing monitors for:[0m
+[0;34m   - example/repo#111[0m
+
+  [0;32m✓[0m example/repo#111: Mock PR 111 (last commit: 2026-04-18T10:00)
+[0;34m     https://github.com/example/repo/pull/111[0m
+
+[0;34m👀 Checking for existing new activity...[0m
+
+[1;33m═══════════════════════════════════════════════════════════════[0m
+[1;33m🔔 NEW REVIEW COMMENT on example/repo#111: Mock PR 111[0m
+[1;33m   File: src/mock.c[0m
+[1;33m   Location: line 14[0m
+[1;33m   Commit: deadbee[0m
+[1;33m   Posted: 2026-04-18T10:02:00Z[0m
+[1;33m═══════════════════════════════════════════════════════════════[0m
+From: @reviewer
+
+Current-cycle inline note.
+[1;33m───────────────────────────────────────────────────────────────[0m
+[0;34mTo ignore this activity and future ones on this PR, restart with the same watch set:[0m
+[0;34m   ./watch-prs-for-comments.sh --check-once --after example/repo#111=2026-04-18T10:02:00Z example/repo#111[0m
+
+[0;31m❌ Failed to fetch nested issue-comment reactions for example/repo#111 comment 1111.[0m
+

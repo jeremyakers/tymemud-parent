@@ -1,0 +1,20 @@
+=== shellcheck_watcher ===
+EXIT: 0
+STDERR:
+
+=== forced_report_nested_approval_106 ===
+EXIT: 0
+STDERR:
+
+=== throttle_invariant_103 ===
+EXIT: 124
+STDERR:
+
+=== actionable_precedence_105 ===
+EXIT: 2
+STDERR:
+
+=== restart_race_107 ===
+EXIT: 2
+STDERR:
+

@@ -551,6 +551,45 @@ gh pr create --draft --title "feat(rules): add git workflow management"
 gh pr create --fill
 ```
 
+**Oracle signoff gate (required):**
+
+Before opening a PR, agents must get a fresh Oracle signoff on the exact code they intend to publish.
+
+If additional commits are needed after review feedback, agents must get a fresh Oracle signoff again **before pushing each new commit batch to that open PR branch**.
+
+The PR watcher is not a substitute for Oracle. Oracle is a workflow gate; the watcher is only a PR activity/merge monitor.
+
+**Immediate post-PR follow-up (agent workflow):**
+
+After creating a PR, agents must not stop and ask whether monitoring should begin. The required sequence is:
+
+1. Print the PR URL to the user in chat immediately
+2. Start the PR watcher immediately after that
+3. Run the watcher in the foreground
+4. If the watcher is started through the OpenCode `bash` or `shell` tool invocation, set that tool timeout to the longest allowed value, currently `7200000` ms, which is 2 hours
+
+Examples:
+
+```bash
+# Same repo / single PR
+PR_URL=$(gh pr create --fill)
+# Print $PR_URL to the user in chat
+./watch-prs-for-comments.sh owner/repo#123
+
+# Mixed repos in one watcher invocation
+./watch-prs-for-comments.sh owner/repo#123 other-owner/other-repo#45
+```
+
+Document the watcher timeout requirement only as the OpenCode `bash` or `shell` tool timeout, set to the longest allowed value, currently `7200000` ms, which is 2 hours.
+
+**Important:**
+- Prefer `owner/repo#123` for explicit repo-qualified monitoring
+- `--repo owner/repo 123` remains valid for same-repo batches
+- Use repeated `--after owner/repo#123=<timestamp>` flags when each PR needs its own resume point
+- Do not default to background/tmux monitoring in agent instructions
+- Do not pause for approval between printing the PR URL and starting foreground monitoring
+- The watcher is **merge-only for success**; do not document thumbs-up reactions or no-issues review bodies as terminal success conditions
+
 **Using GitHub Web UI:**
 1. Navigate to repository on GitHub
 2. Click "Pull requests", then click "New pull request"

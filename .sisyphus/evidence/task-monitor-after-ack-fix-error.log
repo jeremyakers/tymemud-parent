@@ -1,0 +1,7 @@
+assertions:
+- shellcheck_exit_zero: PASS
+- monitor_after_ack_exit_zero: PASS
+- monitor_after_ack_success: PASS
+- check_once_after_ack_exit_zero: PASS
+- thumbs_up_unseen_exit_two: PASS
+- thumbs_up_unseen_no_success: PASS

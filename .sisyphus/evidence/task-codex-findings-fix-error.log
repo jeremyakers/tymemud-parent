@@ -1,0 +1,9 @@
+assertions:
+- shellcheck_exit_zero: PASS
+- stderr_json_107_no_false_parse_failure: FAIL
+- cutoff_equal_104_exit_zero: PASS
+- cutoff_equal_104_success: PASS
+- cutoff_equal_104_no_pending_review: PASS
+- thumbs_up_unseen_exit_two: PASS
+- thumbs_up_unseen_has_comment: PASS
+- thumbs_up_unseen_no_success: PASS

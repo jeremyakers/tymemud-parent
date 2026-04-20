@@ -1,0 +1,24 @@
+## reaction_approval_rendering
+COMMAND=./watch-prs-for-comments.sh --check-once example/repo#102
+EXIT=0
+
+## actionable_precedence
+COMMAND=./watch-prs-for-comments.sh --check-once example/repo#105
+EXIT=2
+
+## mixed_repo_selectors
+COMMAND=./watch-prs-for-comments.sh --check-once example/repo#102 example/other#201
+EXIT=0
+
+## repeated_per_pr_after
+COMMAND=./watch-prs-for-comments.sh --check-once --after example/repo#102=2026-04-18T10:05:00Z --after example/other#201=2026-04-18T10:00:00Z example/repo#102 example/other#201
+EXIT=0
+
+## polling_loop_throttle
+COMMAND=/usr/bin/timeout 3s ./watch-prs-for-comments.sh example/repo#103
+EXIT=124
+
+## restart_race_consolidated_exit
+COMMAND=/usr/bin/timeout 3s ./watch-prs-for-comments.sh --after example/repo#107=2026-04-18T09:50:00Z example/repo#107
+EXIT=2
+

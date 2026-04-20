@@ -1,0 +1,8 @@
+assertions:
+- shellcheck_exit_zero: PASS
+- approval_clears_pending_exit_zero: FAIL
+- approval_clears_pending_success: FAIL
+- approval_clears_pending_no_waiting: FAIL
+- all_closed_startup_exit_one: PASS
+- all_closed_startup_message: PASS
+- midloop_closed_info: FAIL

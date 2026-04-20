@@ -1,0 +1,8 @@
+assertions:
+- shellcheck_exit_zero: PASS
+- initial_report_no_success_banner: PASS
+- initial_report_nested_counter: PASS
+- initial_report_review_comment_banner: PASS
+- initial_report_reaction_banner: PASS
+- force_report_106_exit_zero: PASS
+- force_report_106_success_banner: PASS

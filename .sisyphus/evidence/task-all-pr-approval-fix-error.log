@@ -1,0 +1,8 @@
+assertions:
+- shellcheck_exit_zero: PASS
+- all_approved_exit_zero: PASS
+- all_approved_success_banner: PASS
+- not_all_approved_timeout: PASS
+- not_all_approved_no_success_banner: PASS
+- actionable_beats_approval_exit_two: PASS
+- actionable_beats_approval_no_success_banner: PASS

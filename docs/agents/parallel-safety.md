@@ -2,6 +2,23 @@
 
 This repository is often worked on by **multiple agents in parallel on the same host**. Follow this doc to avoid stepping on each other.
 
+## Agent Role Detection
+
+Before following any rule in this document, determine your role:
+
+**Are you a PARENT AGENT or a SUBAGENT?**
+
+- **PARENT AGENT**: You are the main agent directly handling the user's request.
+  - Your worktree path contains YOUR agent name: `_agent_work/<your_name>/...`
+  - You are responsible for creating isolated worktrees and registering ports
+  
+- **SUBAGENT**: You were spawned by another agent via `task()`, `explore`, or `librarian`.
+  - You work in your PARENT'S worktree: `_agent_work/<parent_name>/...`
+  - You share your parent's ports and resources
+  - **CRITICAL**: NEVER create new worktrees, NEVER register ports, NEVER kill shared processes (especially game servers)
+
+**Quick Detection:** If your current path is inside `_agent_work/<name>/` and `<name>` is NOT your agent name, you are a SUBAGENT.
+
 ## Non-Negotiables
 
 - **Never edit the shared trees while another agent is working**
@@ -18,7 +35,7 @@ This repository is often worked on by **multiple agents in parallel on the same 
   - If you started a server, you should have the **PID**. Stop *that PID only*.
   - If you do not own the PID, do not kill it.
 
-## 1) Create your isolated workspace tree (recommended)
+## [PARENT AGENTS ONLY] 1) Create your isolated workspace tree
 
 Create one worktree per agent and keep your changes confined to that directory.
 
@@ -28,6 +45,8 @@ Example layout:
 - `_agent_work/<agent_name>/MM3/` (your isolated MM3 tree, if needed)
 
 If you’re unsure how the repo expects worktrees to be created, search `AGENTS.md` / `README.md` and mirror the existing `_agent_work/*_agent/` patterns.
+
+> **SUBAGENTS:** SKIP THIS SECTION. You work in your parent's existing worktree. Do not create new worktrees.
 
 ### Pre-flight: “am I in my worktree?”
 
@@ -85,9 +104,11 @@ git worktree add -b fix/<short_desc> ../../_agent_work/<agent_name>/MM3/src orig
 cp -a ../lib ../../_agent_work/<agent_name>/MM3/
 ```
 
-## 2) Ports: pick a unique port and register it
+## [PARENT AGENTS ONLY] 2) Ports: pick a unique port and register it
 
 Agents frequently run servers locally for SIT testing. Port conflicts waste time and can break other runs.
+
+> **SUBAGENTS:** SKIP THIS SECTION. Use the same ports as your parent agent. Never register ports yourself.
 
 ### Canonical port registry
 
@@ -121,13 +142,24 @@ PY
 
 3. **Append your allocation** to `tmp/agent_ports.tsv` before starting the server.
 
-## 3) Testing hygiene (SIT / servers)
+## [ALL AGENTS] 3) Testing hygiene (SIT / servers)
 
 - **Run tests in the foreground** so you can see failures and logs as they happen.
 - **Do not run “global cleanup”** steps that might kill other agents’ work.
 - Prefer the test harness to manage the server it launched, and if manual cleanup is needed:
   - stop by PID
   - or fix the harness to store/stop the exact PID it created
+
+### [SUBAGENTS - CRITICAL] Shared Game Server Protection
+
+**NEVER kill game server processes, even if they appear idle or stuck.**
+- Game servers are **SHARED RESOURCES** across all subagents working in the same worktree
+- If you see a server running on a port, it may be in use by another subagent
+- **Never use `pkill`, `killall`, or pattern-based killing** — these kill other agents' work
+- If you think a server needs to be stopped, **ask the parent agent to handle it**
+- Never assume "this port is free" - it may be in use by another subagent
+
+**Remember:** You are a subagent working in your parent's worktree. You share resources with other subagents.
 
 ## 4) PR-only workflow (required)
 
@@ -137,6 +169,10 @@ PY
 - Always work on a feature/fix branch in your worktree and submit a PR:
   - MM3 PRs target `svn/MM_3_Final`
   - MM32 PRs target `svn/MM_3-2_Start`
+- **Before opening a PR:** get a fresh Oracle signoff on the exact code you are about to publish
+- **Before pushing any new commits to an open PR branch:** get a fresh Oracle signoff again on the exact updated code you are about to push
+- **After opening a PR:** print the PR URL to the user and immediately start `watch-prs-for-comments.sh` in the foreground
+- The watcher is **merge-only for success**; it is not an approval heuristic and it does not replace Oracle
 
 ## 5) PR hygiene: never “update” merged/closed PRs (required)
 
@@ -164,4 +200,3 @@ Rules:
 - **Don’t assume ports are free** (check + register).
 - **Don’t start long-running servers on default/common ports** without coordination.
 - **Don’t “work around” engine state bugs with output-only hacks** (see `AGENTS.md`: “Fix the Cause; Don’t Work Around It”).
-

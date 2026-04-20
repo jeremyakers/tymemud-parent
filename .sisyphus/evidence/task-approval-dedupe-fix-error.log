@@ -1,0 +1,8 @@
+assertions:
+- shellcheck_exit_zero: PASS
+- mixed_pending_timeout: PASS
+- mixed_pending_single_banner: PASS
+- mixed_pending_no_success_banner: PASS
+- single_approval_exit_zero: PASS
+- single_approval_single_banner: PASS
+- single_approval_success: PASS

@@ -1,0 +1,9 @@
+assertions:
+- shellcheck_exit_zero: PASS
+- multipr_exit_two: PASS
+- multipr_restart_has_both_selectors: PASS
+- closed_startup_exit_zero: PASS
+- closed_startup_shows_closed: PASS
+- closed_startup_success_on_open: PASS
+- override_body_exit_zero: PASS
+- override_body_success: PASS

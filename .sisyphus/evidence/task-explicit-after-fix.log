@@ -1,0 +1,83 @@
+shellcheck:
+COMMAND=shellcheck watch-prs-for-comments.sh
+EXIT_CODE=0
+
+[explicit_after_authoritative_102]
+COMMAND=PATH="$PWD/.sisyphus/testbin:$PATH" ./watch-prs-for-comments.sh --check-once --after example/repo#102=2026-04-18T10:05:00Z example/repo#102
+EXIT_CODE=0
+OUTPUT:
+🔍 Initializing monitors for:
+   - example/repo#102
+
+  ✓ example/repo#102: Mock PR 102 (last commit: 2026-04-18T10:00)
+     https://github.com/example/repo/pull/102
+     After: 2026-04-18T10:05:00Z
+
+👀 Checking for existing new activity...
+✓ No pending activity.
+
+[restart_race_107]
+COMMAND=PATH="$PWD/.sisyphus/testbin:$PATH" /usr/bin/timeout 3s ./watch-prs-for-comments.sh --after example/repo#107=2026-04-18T09:50:00Z example/repo#107
+EXIT_CODE=2
+OUTPUT:
+🔍 Initializing monitors for:
+   - example/repo#107
+
+  ✓ example/repo#107: Mock PR 107 (last commit: 2026-04-18T10:00)
+     https://github.com/example/repo/pull/107
+     After: 2026-04-18T09:50:00Z
+
+👀 Checking for existing new activity...
+
+🔔 NEW PR COMMENT on example/repo#107: Mock PR 107
+   Posted: 2026-04-18T09:55:00Z
+From: @reviewer
+
+Please still fix the restart race.
+To ignore this activity and future ones on this PR, restart with:
+   --after "example/repo#107=2026-04-18T09:55:00Z"
+
+⏳ Earlier actionable feedback is visible, but the latest review cycle is still in progress. Waiting for a post-commit review signal before exiting.
+   Press Ctrl+C to stop
+
+📋 Found new activity to address. Exiting so the agent can process it.
+
+[actionable_precedence_105]
+COMMAND=PATH="$PWD/.sisyphus/testbin:$PATH" ./watch-prs-for-comments.sh --check-once example/repo#105
+EXIT_CODE=2
+OUTPUT:
+🔍 Initializing monitors for:
+   - example/repo#105
+
+  ✓ example/repo#105: Mock PR 105 (last commit: 2026-04-18T10:00)
+     https://github.com/example/repo/pull/105
+
+👀 Checking for existing new activity...
+
+🔔 NEW PR COMMENT on example/repo#105: Mock PR 105
+   Posted: 2026-04-18T10:10:00Z
+From: @reviewer
+
+Please address the failing edge case.
+To ignore this activity and future ones on this PR, restart with:
+   --after "example/repo#105=2026-04-18T10:10:00Z"
+
+📋 Found new activity to address. Exiting so the agent can process it.
+
+[mixed_repo_repeated_after]
+COMMAND=PATH="$PWD/.sisyphus/testbin:$PATH" ./watch-prs-for-comments.sh --check-once --after example/repo#102=2026-04-18T10:05:00Z --after example/other#201=2026-04-18T10:00:00Z example/repo#102 example/other#201
+EXIT_CODE=0
+OUTPUT:
+🔍 Initializing monitors for:
+   - example/repo#102
+   - example/other#201
+
+  ✓ example/repo#102: Mock PR 102 (last commit: 2026-04-18T10:00)
+     https://github.com/example/repo/pull/102
+     After: 2026-04-18T10:05:00Z
+  ✓ example/other#201: Mock PR 201 (last commit: 2026-04-18T10:00)
+     https://github.com/example/other/pull/201
+     After: 2026-04-18T10:00:00Z
+
+👀 Checking for existing new activity...
+✓ No pending activity.

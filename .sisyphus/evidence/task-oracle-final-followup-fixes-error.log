@@ -1,0 +1,10 @@
+assertions:
+- shellcheck_exit_zero: PASS
+- restart_hint_has_check_once: PASS
+- pending_review_exit_two: PASS
+- pending_review_message: PASS
+- pending_review_no_false_success: PASS
+- acknowledged_clean_exit_zero: PASS
+- acknowledged_clean_success: PASS
+- override_112_exit_zero: PASS
+- override_112_success: PASS
