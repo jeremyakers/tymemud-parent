@@ -11,7 +11,7 @@ fi
 if [[ "$cmd" == "pr" && "${1:-}" == "view" ]]; then
     shift
     joined=" $* "
-    repo="example/repo"
+    repo="${GH_REPO:-example/repo}"
     pr_num=""
     jq_filter=""
 
@@ -205,7 +205,7 @@ if [[ "$cmd" == "api" ]]; then
             if [[ "$jq_filter" == ".head.sha" ]]; then printf 'sha-103\n'; else printf '{"head":{"sha":"sha-103"}}\n'; fi
             exit 0
             ;;
-        repos/example/repo/pulls/104)
+        repos/example/repo/pulls/104|repos/*/pulls/104)
             if [[ "$jq_filter" == ".head.sha" ]]; then printf 'sha-104\n'; else printf '{"head":{"sha":"sha-104"}}\n'; fi
             exit 0
             ;;
@@ -270,7 +270,7 @@ if [[ "$cmd" == "api" ]]; then
             if [[ "$jq_filter" == ".head.sha" ]]; then printf 'sha-201\n'; else printf '{"head":{"sha":"sha-201"}}\n'; fi
             exit 0
             ;;
-        repos/example/repo/commits/sha-102|repos/example/repo/commits/sha-103|repos/example/repo/commits/sha-104|repos/example/repo/commits/sha-105|repos/example/repo/commits/sha-106|repos/example/repo/commits/sha-108-a|repos/example/repo/commits/sha-108-b|repos/example/repo/commits/sha-109|repos/example/repo/commits/sha-110|repos/example/repo/commits/sha-111|repos/example/repo/commits/sha-112|repos/example/repo/commits/sha-115|repos/example/other/commits/sha-201)
+        repos/example/repo/commits/sha-102|repos/example/repo/commits/sha-103|repos/example/repo/commits/sha-104|repos/*/commits/sha-104|repos/example/repo/commits/sha-105|repos/example/repo/commits/sha-106|repos/example/repo/commits/sha-108-a|repos/example/repo/commits/sha-108-b|repos/example/repo/commits/sha-109|repos/example/repo/commits/sha-110|repos/example/repo/commits/sha-111|repos/example/repo/commits/sha-112|repos/example/repo/commits/sha-115|repos/example/other/commits/sha-201)
             printf '2026-04-18T10:00:00Z\n'
             exit 0
             ;;
@@ -321,7 +321,7 @@ if [[ "$cmd" == "api" ]]; then
             printf '[]\n'
             exit 0
             ;;
-        repos/example/repo/issues/104/comments\?per_page=100)
+        repos/example/repo/issues/104/comments\?per_page=100|repos/*/issues/104/comments\?per_page=100)
             printf '[{"id":1041,"created_at":"2026-04-18T10:12:00Z","user":{"login":"chatgpt-codex-connector[bot]"},"body":"Codex Review: Didn'"'"'t find any major issues."}]\n'
             exit 0
             ;;
@@ -334,7 +334,7 @@ if [[ "$cmd" == "api" ]]; then
             printf '[{"id":1031,"created_at":"2026-04-18T09:55:00Z","user":{"login":"reviewer"},"body":"Earlier context."}]\n'
             exit 0
             ;;
-        repos/example/repo/pulls/102/comments\?per_page=100|repos/example/repo/pulls/104/comments\?per_page=100|repos/example/repo/pulls/105/comments\?per_page=100|repos/example/repo/pulls/106/comments\?per_page=100|repos/example/other/pulls/201/comments\?per_page=100)
+        repos/example/repo/pulls/102/comments\?per_page=100|repos/example/repo/pulls/104/comments\?per_page=100|repos/*/pulls/104/comments\?per_page=100|repos/example/repo/pulls/105/comments\?per_page=100|repos/example/repo/pulls/106/comments\?per_page=100|repos/example/other/pulls/201/comments\?per_page=100)
             printf '[]\n'
             exit 0
             ;;
@@ -351,7 +351,7 @@ if [[ "$cmd" == "api" ]]; then
             printf '[{"id":1032,"created_at":"2026-04-18T09:56:00Z","user":{"login":"reviewer"},"body":"Earlier inline note.","path":"src/mock.c","line":12,"original_line":12,"start_line":12,"end_line":12,"commit_id":"deadbeef103"}]\n'
             exit 0
             ;;
-        repos/example/repo/pulls/102/reviews\?per_page=100|repos/example/repo/pulls/104/reviews\?per_page=100|repos/example/repo/pulls/105/reviews\?per_page=100|repos/example/repo/pulls/106/reviews\?per_page=100|repos/example/repo/pulls/110/reviews\?per_page=100|repos/example/repo/pulls/115/reviews\?per_page=100|repos/example/other/pulls/201/reviews\?per_page=100)
+        repos/example/repo/pulls/102/reviews\?per_page=100|repos/example/repo/pulls/104/reviews\?per_page=100|repos/*/pulls/104/reviews\?per_page=100|repos/example/repo/pulls/105/reviews\?per_page=100|repos/example/repo/pulls/106/reviews\?per_page=100|repos/example/repo/pulls/110/reviews\?per_page=100|repos/example/repo/pulls/115/reviews\?per_page=100|repos/example/other/pulls/201/reviews\?per_page=100)
             printf '[]\n'
             exit 0
             ;;
