@@ -278,14 +278,9 @@ get_pr_head_sha() {
 }
 
 get_current_pr_number() {
-    local repo="$1"
-    local current_branch=""
     local pr_number=""
 
-    current_branch=$(git branch --show-current 2>/dev/null || true)
-    [[ -n "$current_branch" ]] || return 1
-
-    pr_number=$(gh pr view "$current_branch" --repo "$repo" --json number --jq '.number' 2>/dev/null || true)
+    pr_number=$(gh pr view --json number --jq '.number' 2>/dev/null || true)
     [[ -n "$pr_number" && "$pr_number" != "null" ]] || return 1
 
     printf '%s\n' "$pr_number"
@@ -912,7 +907,7 @@ resolve_pr_targets() {
     if [[ ${#RAW_PR_ARGS[@]} -eq 0 ]]; then
         [[ -n "$current_repo" ]] || fail "Could not determine repository. Use --repo owner/repo or run from a git repo with a GitHub remote."
         local current_pr
-        current_pr=$(get_current_pr_number "$current_repo" || true)
+        current_pr=$(get_current_pr_number || true)
         [[ -n "$current_pr" ]] || fail "Usage: $0 [--repo owner/repo] [--check-once] [--after <selector>=<timestamp>] [--codex-login <login>] <pr selector...>"
         RAW_PR_ARGS=("$current_pr")
         note "ℹ️  Using current PR: ${current_repo}#${current_pr}"
