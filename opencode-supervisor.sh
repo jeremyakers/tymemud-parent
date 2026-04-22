@@ -17,7 +17,8 @@ while true; do
     log "Upgrade exited with status $?"
 
     log "Starting: opencode --mdns"
-    opencode --mdns 2>&1 | tee -a "$LOGFILE"
+    script -q -e -f -a "$LOGFILE" -c "opencode --mdns"
+    #opencode --mdns 2>&1 | tee -a "$LOGFILE"
     rc=$?
 
     log "opencode exited with status $rc"
