@@ -11,11 +11,13 @@ Before following any rule in this document, determine your role:
 - **PARENT AGENT**: You are the main agent directly handling the user's request.
   - Your worktree path contains YOUR agent name: `_agent_work/<your_name>/...`
   - You are responsible for creating isolated worktrees and registering ports
+  - When spawning subagents: ALWAYS Tell the subagent what folder your worktree is in!
   
 - **SUBAGENT**: You were spawned by another agent via `task()`, `explore`, or `librarian`.
   - You work in your PARENT'S worktree: `_agent_work/<parent_name>/...`
   - You share your parent's ports and resources
   - **CRITICAL**: NEVER create new worktrees, NEVER register ports, NEVER kill shared processes (especially game servers)
+  - Do not guess what tree to work in. If a parent agent doesn't tell you what folder to work in. STOP and REFUSE to proceed,
 
 **Quick Detection:** If your current path is inside `_agent_work/<name>/` and `<name>` is NOT your agent name, you are a SUBAGENT.
 
@@ -149,6 +151,10 @@ PY
 - Prefer the test harness to manage the server it launched, and if manual cleanup is needed:
   - stop by PID
   - or fix the harness to store/stop the exact PID it created
+- After **every** manual server restart, re-read the fresh BuilderPort token from
+  that worktree's `lib/etc/builderport.token` before making BuilderPort/MCP
+  calls. The token is regenerated on boot, so a pre-restart token will return
+  `401 Unauthorized` against the new process.
 
 ### [SUBAGENTS - CRITICAL] Shared Game Server Protection
 

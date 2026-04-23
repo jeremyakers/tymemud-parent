@@ -49,7 +49,30 @@ echo -e "<agent_name>\t<port>\t<purpose>\t$(date -u +%Y-%m-%dT%H:%M:%S%Z)\t$(pwd
 Ensure these files exist in your worktree:
 - `lib/mysql-interface.conf` - MySQL connection config
 - `lib/commands.dat` - Command definitions
-- `lib/etc/builderport.token` - BuilderPort auth token (for v1 protocol)
+- `lib/etc/builderport.token` - BuilderPort auth token file (for v1 protocol)
+
+### 4. BuilderPort Token Refresh (CRITICAL)
+**The BuilderPort token changes on every server boot.**
+
+This means any token you used before a restart becomes stale immediately after
+the new server starts. Before making any BuilderPort call after boot, re-read
+`lib/etc/builderport.token` from the restarted worktree and use that fresh
+value.
+
+Required post-boot sequence:
+
+```bash
+# Start server first
+cd _agent_work/<agent_name>/MM32
+src/bin/tyme3 <port> > server_<port>.log 2>&1 &
+
+# THEN read the fresh token written by this boot
+cat lib/etc/builderport.token
+```
+
+If BuilderPort returns `401 Unauthorized` after a restart, assume you are using
+a stale token first. Re-read `lib/etc/builderport.token` before investigating
+anything else.
 
 ## Startup Command
 
@@ -67,6 +90,9 @@ ps aux | grep "tyme3.*<port>" | grep -v grep
 # Check status port responds
 echo -e "who\nquit" | nc -w 2 127.0.0.1 <status_port>
 # Status port = game port + 1 (e.g., 9696 -> 9697)
+
+# Re-read the fresh BuilderPort token from this boot before MCP/API use
+cat lib/etc/builderport.token
 ```
 
 ## Troubleshooting
@@ -83,6 +109,10 @@ echo -e "who\nquit" | nc -w 2 127.0.0.1 <status_port>
 - **Cause**: Another agent's server running on same port
 - **Fix**: Check `tmp/agent_ports.tsv` and use an available port
 
+**Issue**: BuilderPort returns `401 Unauthorized` after restart
+- **Cause**: Using the token from the previous server process
+- **Fix**: Re-read `lib/etc/builderport.token`; the server rewrites it on each boot
+
 ## Example Usage
 
 ```bash
@@ -96,6 +126,7 @@ src/bin/tyme3 9696 > server_9696.log 2>&1 &
 # Verify
 ps aux | grep "tyme3.*9696"
 echo -e "who\nquit" | nc -w 2 127.0.0.1 9697
+cat lib/etc/builderport.token
 ```
 
 ## Safety Notes
