@@ -13,7 +13,7 @@
 ## Repository Structure
 
 ~/tymemud is a meta repo! There are multiple repos! Make sure you're looking in the right folder.
-Each workspace contains three separate git repositories:
+Each workspace contains three to four (3-4) separate git repositories:
 
 ### DO NOT WORK OUTSIDE YOUR OWN WORKTREES
 ### DO NOT EDIT FILES UNDER _human_work - YOU MAY USE THIS AS THE BASIS FOR CREATING YOUR OWN WORKTREE
@@ -78,55 +78,24 @@ This is intentional so builders can safely validate world/command table changes 
 
 **When working on code in this project:**
 
-1. **Identify which MikkiMUD version (each has its own branch) you're working on and CREATE YOUR OWN WORKTREE:**
-   - MikkiMUD 3.0 (MM3) Files are in `MM3/src/` → Using branch `svn/MM_3_Final` → Use `MM3/src/MANIFESTO.md`
-   - MikkiMUD 3.2 (MM32) Files are in `MM32/src/` → Using branch `svn/MM_3-2_Start` → Use `MM32/src/MANIFESTO.md`
+1. **Choose the correct repo/worktree first:**
+   - MikkiMUD 3.0 (MM3) work belongs in `MM3/src/` on branch `svn/MM_3_Final`
+   - MikkiMUD 3.2 (MM32) work belongs in `MM32/src/` on branch `svn/MM_3-2_Start`
+   - Create and use your own isolated worktree under `_agent_work/<agent_name>/...`
 
-2. IMPORTANT: **Parallel-safe workflow (worktrees, ports, PRs):**
-   - Multiple Agents (Human and AI alike!) are working in parallel on this project!
-   - Follow `docs/agents/parallel-safety.md` (**mandatory**) for:
-     - how to create your own `_agent_work/<agent_name>/MM3/{src,lib}` and `_agent_work/<agent_name>/MM32/{src,lib}` worktrees
-     - how to pick/register ports (`tmp/agent_ports.tsv`) and stop only your own server PIDs
-     - YOU ARE RESPONSIBLE FOR CREATING Pull Requests for your work! Do not ask the user to do it for you!
-     - PR-only submission rules (no direct pushes to `svn/MM_3_Final` / `svn/MM_3-2_Start`)
-     - PR hygiene: **never** push new commits expecting to “update” a merged/closed PR (open a new PR instead)
-     - Oracle review gate: **before opening a PR, and before pushing any new commits to an open PR branch, get a fresh Oracle signoff on the exact code you are about to publish**
-     - After opening a PR: print the PR URL to the user and immediately start `watch-prs-for-comments.sh` in the foreground; watcher success is merge-only
+2. **Load the correct branch-specific manifesto:**
+   - `MM3/src/MANIFESTO.md` for MM3 work
+   - `MM32/src/MANIFESTO.md` for MM32 work
 
-3. **Load the appropriate MANIFESTO.md:**
-   - Read the branch-specific MANIFESTO.md before making changes
-   - Follow all coding rules and patterns defined in that file
+3. **Use the canonical agent docs instead of relying on duplicate summaries here:**
+   - Bootstrap / response protocol: `AGENTS.md`
+   - Parallel-safe workflow: `docs/agents/parallel-safety.md`
+   - Detailed grepai guidance: project skill `grepai-usage`
+   - MCP/tooling guidance: `docs/agents/mcp-tooling.md`
 
-4. **Respect branch boundaries:**
-   - Don't mix MM3 and MM32 code patterns
-   - Each branch may have different standards and features
-
-5. **Fix the cause; don’t work around it (avoid masking bugs):**
-   - Prefer **ordering/state fixes** that ensure required data is set before it’s used (e.g., set `attack_weapon` when a form is chosen, not later).
-   - Avoid “fallbacks” that **change output to look valid** while hiding incorrect engine state (e.g., printing some other weapon/bodypart instead of surfacing the bad state).
-   - It is OK to use **data-coverage fallbacks** (e.g., default prose if a DB text slot is missing). That masks missing content, not an engine bug.
-
-6. **When referencing files/paths in agent messages (clickable links in IDE):**
-   - Always use paths **relative to the project root** (this repo root folder), not relative to a sub-repo like `MM32/src/`.
-     - Good: `_agent_work/channeling_agent/MM32/src/docs/release/mm32-3.2-tuning-report.md`
-     - Bad (ambiguous when multiple agent worktrees exist): `MM32/src/docs/release/mm32-3.2-tuning-report.md`
-   - Wrap paths in **inline code** (backticks): `` `relative/path/from/repo/root` ``
-   - **Do not** use Markdown link syntax (`[text](path)`) for local files; plain inline paths are what Cursor auto-links reliably.
-
-7. **ALWAYS TRACK changes, task status, important context, TODOs, etc in durable files (Not in chat).**
-   - Create / Save FULL plan details for any plan you create under `docs/plans` - NEVER simply describe a plan in chat to the user!
-     - Use "todo" tracking tools such as "todowrite" and "todoread" tools to build and track TODO progress
-   - Chat's only retain limited context and as you work, context is lost
-   - Always follow the "memory bank" rules in RULES_INDEX.md
-   - Always track details on changes you make in CHANGELOG.md
-   - Put the *details* of your changes in the changelog and then *summarize* to chat. Do not use the user chat interface to provide lengthy detailed explanations of changes.
-   - When writing to memory bank, changelogs, etc: Always identify yourself as to which agent you are making the change or adding the memory bank entry
-     - This ensures each agent knows what other agents are changing
-   - In Summary: 
-     - PLAN: Document what you plan to do, TODOs that need to be created and specific tasks that need to be done, etc
-       - Use "todowrite" and "todoread" tools to track TODO progress
-     - memory-bank: Document current status: Current status of plan execution
-     - CHANGELOG: What I have changed
+4. **Respect branch and repo boundaries:**
+   - Do not mix MM3 and MM32 code patterns
+   - Use paths relative to the project root when referencing local files in agent messages
 
 ---
 

@@ -10,5 +10,5 @@ The `memory-bank/` folder remains focused on:
 ## Index
 - `docs/db/` – Database schema + data inventories (combat/channeling)
 - `docs/agents/` – Agent workflow docs (parallel safety, ports, isolated worktrees)
+- `docs/agents/mcp-tooling.md` – Canonical MCP selection and scoping guidance
 - `docs/mm2/` – MM2 nostalgia extraction artifacts and notes
-
