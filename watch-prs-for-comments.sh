@@ -309,6 +309,12 @@ persist_watcher_state() {
     mkdir -p "$(dirname "$STATE_FILE")"
     tmp_file="${STATE_FILE}.tmp"
 
+    if [[ -f "$STATE_FILE" ]]; then
+        if ! state_json=$(jq 'if type == "object" then . else {} end' "$STATE_FILE"); then
+            fail "Could not parse watcher state file: $STATE_FILE"
+        fi
+    fi
+
     for key in "${PR_KEYS[@]}"; do
         state_json=$(jq \
             --arg key "$key" \
