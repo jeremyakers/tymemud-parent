@@ -340,9 +340,7 @@ initialize_watcher_state() {
         explicit_after="${KEY_TO_AFTER[$key]:-}"
 
         if [[ -n "$explicit_after" ]]; then
-            KEY_TO_BASELINE["$key"]="$explicit_after"
             reset_review_cycle_runtime_state "$key"
-            continue
         fi
 
         if [[ -z "${KEY_TO_BASELINE[$key]:-}" ]]; then
@@ -357,8 +355,6 @@ initialize_watcher_state() {
             KEY_TO_PENDING_PRECOMMIT_ACTIONABLE["$key"]=false
         fi
     done
-
-    persist_watcher_state
 }
 
 any_pending_precommit_actionable() {
@@ -1187,6 +1183,7 @@ main() {
 
     prime_latest_activity
     validate_after_cutoffs
+    persist_watcher_state
 
     first_sweep
 
