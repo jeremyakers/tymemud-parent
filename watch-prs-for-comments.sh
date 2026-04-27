@@ -2,6 +2,7 @@
 # watch-prs-for-comments.sh
 # Monitor GitHub PRs for actionable post-baseline review activity.
 
+
 set -euo pipefail
 IFS=$'\n\t'
 
@@ -28,12 +29,18 @@ declare -A KEY_TO_STATE=()
 declare -A KEY_TO_HEAD_SHA=()
 declare -A KEY_TO_LAST_COMMIT=()
 declare -A KEY_TO_AFTER=()
+declare -A KEY_TO_BASELINE=()
 declare -A KEY_TO_SURFACED_CURSOR=()
 declare -A KEY_TO_PENDING_PRECOMMIT_ACTIONABLE=()
 declare -A KEY_TO_REPORTED_ACTIONABLE_KEYS=()
+declare -A KEY_TO_ACTIONABLE_VISIBLE=()
+declare -A KEY_TO_LATEST_ACTIONABLE_TIME=()
+declare -A KEY_TO_CODEX_REVIEW_ACTIVE=()
+declare -A KEY_TO_CODEX_REVIEW_SIGNAL_TIME=()
+declare -A KEY_TO_CODEX_REVIEW_RELEASE_TIME=()
 declare -A KEY_TO_LATEST_ACTIVITY_TIME=()
 declare -A KEY_TO_LATEST_ACTIVITY_TYPE=()
-POSTCOMMIT_BOUNDARY_FOUND=0
+STATE_FILE="${PR_WATCHER_STATE_FILE:-.sisyphus/watch-prs-for-comments.state.json}"
 
 usage() {
     cat <<'EOF'
@@ -297,6 +304,133 @@ reset_review_cycle_runtime_state() {
     KEY_TO_SURFACED_CURSOR["$key"]=""
     KEY_TO_PENDING_PRECOMMIT_ACTIONABLE["$key"]=false
     KEY_TO_REPORTED_ACTIONABLE_KEYS["$key"]=$'\n'
+    KEY_TO_ACTIONABLE_VISIBLE["$key"]=false
+    KEY_TO_LATEST_ACTIONABLE_TIME["$key"]=""
+    KEY_TO_CODEX_REVIEW_ACTIVE["$key"]=false
+    KEY_TO_CODEX_REVIEW_SIGNAL_TIME["$key"]=""
+    KEY_TO_CODEX_REVIEW_RELEASE_TIME["$key"]=""
+}
+
+clamp_baseline_to_current_head() {
+    local key="$1"
+    local baseline="${KEY_TO_BASELINE[$key]:-}"
+    local current_head="${KEY_TO_LAST_COMMIT[$key]:-}"
+
+    if [[ -n "$baseline" && -n "$current_head" ]] && compare_iso_gt "$baseline" "$current_head"; then
+        KEY_TO_BASELINE["$key"]="$current_head"
+    fi
+}
+
+read_watcher_state_json() {
+    local state_json
+
+    if [[ ! -f "$STATE_FILE" ]]; then
+        printf '{}\n'
+        return 0
+    fi
+
+    if ! state_json=$(jq -s 'if length == 1 and (.[0] | type == "object") then .[0] else {} end' "$STATE_FILE"); then
+        fail "Could not parse watcher state file: $STATE_FILE"
+    fi
+
+    if [[ -z "${state_json//[[:space:]]/}" ]]; then
+        state_json='{}'
+    fi
+
+    printf '%s\n' "$state_json"
+}
+
+persist_watcher_state() {
+    local tmp_file
+    local lock_file
+    local lock_fd
+    local state_json='{}'
+    local key
+
+    mkdir -p "$(dirname "$STATE_FILE")"
+    lock_file="${STATE_FILE}.lock"
+    tmp_file="${STATE_FILE}.$$.tmp"
+
+    exec {lock_fd}>"$lock_file"
+    if ! flock "$lock_fd"; then
+        fail "Could not lock watcher state file: $STATE_FILE"
+    fi
+
+    state_json=$(read_watcher_state_json)
+
+    for key in "${PR_KEYS[@]}"; do
+        state_json=$(jq \
+            --arg key "$key" \
+            --arg baseline "${KEY_TO_BASELINE[$key]:-}" \
+            '.[$key] = {
+                baseline: $baseline
+            }' <<<"$state_json")
+    done
+
+    printf '%s\n' "$state_json" >"$tmp_file"
+    mv "$tmp_file" "$STATE_FILE"
+    flock -u "$lock_fd"
+    exec {lock_fd}>&-
+}
+
+load_persisted_watcher_state() {
+    local state_json
+    local key
+
+    [[ -f "$STATE_FILE" ]] || return 0
+
+    state_json=$(read_watcher_state_json)
+
+    for key in "${PR_KEYS[@]}"; do
+        KEY_TO_BASELINE["$key"]=$(jq -r --arg key "$key" '.[$key].baseline // ""' <<<"$state_json")
+    done
+}
+
+initialize_watcher_state() {
+    local key
+    local explicit_after
+
+    for key in "${PR_KEYS[@]}"; do
+        explicit_after="${KEY_TO_AFTER[$key]:-}"
+
+        if [[ -n "$explicit_after" ]]; then
+            reset_review_cycle_runtime_state "$key"
+        fi
+
+        if [[ -z "${KEY_TO_BASELINE[$key]:-}" ]]; then
+            KEY_TO_BASELINE["$key"]="${KEY_TO_LAST_COMMIT[$key]:-}"
+        fi
+
+        clamp_baseline_to_current_head "$key"
+
+        if [[ -z "${KEY_TO_REPORTED_ACTIONABLE_KEYS[$key]:-}" ]]; then
+            KEY_TO_REPORTED_ACTIONABLE_KEYS["$key"]=$'\n'
+        fi
+
+        if [[ -z "${KEY_TO_PENDING_PRECOMMIT_ACTIONABLE[$key]:-}" ]]; then
+            KEY_TO_PENDING_PRECOMMIT_ACTIONABLE["$key"]=false
+        fi
+
+        if [[ -z "${KEY_TO_ACTIONABLE_VISIBLE[$key]:-}" ]]; then
+            KEY_TO_ACTIONABLE_VISIBLE["$key"]=false
+        fi
+
+        if [[ -z "${KEY_TO_LATEST_ACTIONABLE_TIME[$key]:-}" ]]; then
+            KEY_TO_LATEST_ACTIONABLE_TIME["$key"]=""
+        fi
+
+        if [[ -z "${KEY_TO_CODEX_REVIEW_ACTIVE[$key]:-}" ]]; then
+            KEY_TO_CODEX_REVIEW_ACTIVE["$key"]=false
+        fi
+
+        if [[ -z "${KEY_TO_CODEX_REVIEW_SIGNAL_TIME[$key]:-}" ]]; then
+            KEY_TO_CODEX_REVIEW_SIGNAL_TIME["$key"]=""
+        fi
+
+        if [[ -z "${KEY_TO_CODEX_REVIEW_RELEASE_TIME[$key]:-}" ]]; then
+            KEY_TO_CODEX_REVIEW_RELEASE_TIME["$key"]=""
+        fi
+    done
 }
 
 any_pending_precommit_actionable() {
@@ -309,6 +443,91 @@ any_pending_precommit_actionable() {
     done
 
     return 1
+}
+
+is_codex_review_active_for_key() {
+    local key="$1"
+    local signal_time="${KEY_TO_CODEX_REVIEW_SIGNAL_TIME[$key]:-}"
+
+    [[ "${KEY_TO_CODEX_REVIEW_ACTIVE[$key]:-false}" == "true" ]] || return 1
+    is_post_commit_activity "$key" "$signal_time"
+}
+
+codex_review_release_signal_seen_after_eyes() {
+    local key="$1"
+    local signal_time="${KEY_TO_CODEX_REVIEW_SIGNAL_TIME[$key]:-}"
+    local release_time="${KEY_TO_CODEX_REVIEW_RELEASE_TIME[$key]:-}"
+
+    [[ -n "$signal_time" ]] || return 0
+
+    compare_iso_gt "$release_time" "$signal_time"
+}
+
+reset_actionable_scan_state() {
+    local key="$1"
+
+    # Only clear per-scan actionable visibility here. Codex :eyes: state is
+    # intentionally sticky once observed; the GitHub reactions API only shows
+    # current reactions, and disappearance alone must not release the hold.
+    # A later Codex comment, review, or +1 reaction is the explicit release.
+    KEY_TO_ACTIONABLE_VISIBLE["$key"]=false
+    KEY_TO_LATEST_ACTIONABLE_TIME["$key"]=""
+    KEY_TO_PENDING_PRECOMMIT_ACTIONABLE["$key"]=false
+}
+
+finalize_actionable_scan_state() {
+    local key="$1"
+
+    [[ "${KEY_TO_ACTIONABLE_VISIBLE[$key]:-false}" == "true" ]] || return 0
+
+    if is_codex_review_active_for_key "$key" && ! codex_review_release_signal_seen_after_eyes "$key"; then
+        KEY_TO_PENDING_PRECOMMIT_ACTIONABLE["$key"]=true
+        return 0
+    fi
+
+    KEY_TO_PENDING_PRECOMMIT_ACTIONABLE["$key"]=false
+    NEW_SIGNAL_FOUND=1
+}
+
+record_codex_review_release_signal() {
+    local key="$1"
+    local actor="$2"
+    local timestamp="$3"
+
+    is_codex_actor "$actor" || return 0
+    is_post_commit_activity "$key" "$timestamp" || return 0
+
+    if compare_iso_gt "$timestamp" "${KEY_TO_CODEX_REVIEW_RELEASE_TIME[$key]:-}"; then
+        KEY_TO_CODEX_REVIEW_RELEASE_TIME["$key"]="$timestamp"
+    fi
+}
+
+record_codex_review_reaction() {
+    local key="$1"
+    local actor="$2"
+    local content="$3"
+    local timestamp="$4"
+    local current_signal_time="${KEY_TO_CODEX_REVIEW_SIGNAL_TIME[$key]:-}"
+
+    is_codex_actor "$actor" || return 0
+    is_post_commit_activity "$key" "$timestamp" || return 0
+
+    case "$content" in
+        eyes|+1) ;;
+        *) return 0 ;;
+    esac
+
+    if [[ -n "$current_signal_time" ]] && compare_iso_gt "$current_signal_time" "$timestamp"; then
+        return 0
+    fi
+
+    KEY_TO_CODEX_REVIEW_SIGNAL_TIME["$key"]="$timestamp"
+    if [[ "$content" == "eyes" ]]; then
+        KEY_TO_CODEX_REVIEW_ACTIVE["$key"]=true
+    else
+        KEY_TO_CODEX_REVIEW_ACTIVE["$key"]=false
+        record_codex_review_release_signal "$key" "$actor" "$timestamp"
+    fi
 }
 
 is_pr_open() {
@@ -420,14 +639,15 @@ runtime_baseline_cursor() {
         return 0
     fi
 
-    printf '%s\n' "${KEY_TO_AFTER[$key]:-}"
+    printf '%s\n' ""
 }
 
 effective_baseline_for_key() {
     local key="$1"
     local cursor=""
     local explicit_after="${KEY_TO_AFTER[$key]:-}"
-    local latest_commit="${KEY_TO_LAST_COMMIT[$key]}"
+    local baseline="${KEY_TO_BASELINE[$key]:-${KEY_TO_LAST_COMMIT[$key]:-}}"
+    local latest_commit="${KEY_TO_LAST_COMMIT[$key]:-}"
 
     if [[ -n "$explicit_after" ]]; then
         printf '%s\n' "$explicit_after"
@@ -436,11 +656,11 @@ effective_baseline_for_key() {
 
     cursor="$(runtime_baseline_cursor "$key")"
     if [[ -z "$cursor" ]]; then
-        printf '%s\n' "$latest_commit"
+        printf '%s\n' "$baseline"
         return 0
     fi
 
-    if compare_iso_gt "$cursor" "$latest_commit"; then
+    if [[ -n "$latest_commit" ]] && compare_iso_gt "$cursor" "$latest_commit"; then
         printf '%s\n' "$latest_commit"
         return 0
     fi
@@ -482,17 +702,17 @@ record_actionable_visibility() {
     mark_actionable_reported "$key" "$token"
 }
 
-flag_postcommit_boundary_if_needed() {
+record_codex_boundary_if_needed() {
     local key="$1"
     local timestamp="$2"
     local report_new="$3"
     local baseline="$4"
+    local actor="$5"
 
     [[ "$report_new" == "true" ]] || return 0
     compare_iso_gt "$timestamp" "$baseline" || return 0
     is_post_commit_activity "$key" "$timestamp" || return 0
-
-    POSTCOMMIT_BOUNDARY_FOUND=1
+    record_codex_review_release_signal "$key" "$actor" "$timestamp"
 }
 
 record_actionable_event() {
@@ -502,9 +722,12 @@ record_actionable_event() {
     local display_callback="$4"
     shift 4
 
-    if is_post_commit_activity "$key" "$timestamp"; then
-        NEW_SIGNAL_FOUND=1
-    else
+    KEY_TO_ACTIONABLE_VISIBLE["$key"]=true
+    if compare_iso_gt "$timestamp" "${KEY_TO_LATEST_ACTIONABLE_TIME[$key]:-}"; then
+        KEY_TO_LATEST_ACTIONABLE_TIME["$key"]="$timestamp"
+    fi
+
+    if ! is_post_commit_activity "$key" "$timestamp"; then
         KEY_TO_PENDING_PRECOMMIT_ACTIONABLE["$key"]=true
     fi
 
@@ -514,12 +737,13 @@ record_actionable_event() {
     fi
 }
 
-display_restart_hint() {
-    local key="$1"
-    local timestamp="$2"
-    local current_key
-    local current_after
+build_resume_command() {
+    local current_key="${1:-}"
+    local current_timestamp="${2:-}"
     local command="./watch-prs-for-comments.sh"
+    local key
+    local current_after
+    local any_after=false
 
     if [[ "$CHECK_ONCE" == true ]]; then
         command+=" --check-once"
@@ -529,25 +753,52 @@ display_restart_hint() {
         command+=" --codex-login $(shell_quote "$CODEX_REVIEWER_LOGIN")"
     fi
 
-    for current_key in "${PR_KEYS[@]}"; do
-        if [[ "$current_key" == "$key" ]]; then
-            current_after="$timestamp"
-        else
-            current_after="${KEY_TO_AFTER[$current_key]:-}"
+    for key in "${PR_KEYS[@]}"; do
+        current_after="${KEY_TO_AFTER[$key]:-}"
+
+        if [[ -n "${KEY_TO_SURFACED_CURSOR[$key]:-}" ]]; then
+            current_after="${KEY_TO_SURFACED_CURSOR[$key]}"
+        fi
+
+        if [[ "$key" == "$current_key" && -n "$current_timestamp" ]] && compare_iso_gt "$current_timestamp" "$current_after"; then
+            current_after="$current_timestamp"
         fi
 
         if [[ -n "$current_after" ]]; then
-            command+=" --after $(shell_quote "${current_key}=${current_after}")"
+            any_after=true
+            command+=" --after $(shell_quote "${key}=${current_after}")"
         fi
     done
 
-    for current_key in "${PR_KEYS[@]}"; do
-        command+=" $(shell_quote "$current_key")"
+    [[ "$any_after" == true ]] || return 1
+
+    for key in "${PR_KEYS[@]}"; do
+        command+=" $(shell_quote "$key")"
     done
 
-    echo -e "${BLUE}To ignore this activity and future ones on this PR, restart with the same watch set:${NC}"
+    printf '%s\n' "$command"
+}
+
+display_resume_command() {
+    local header="$1"
+    local current_key="${2:-}"
+    local current_timestamp="${3:-}"
+    local command
+
+    if ! command="$(build_resume_command "$current_key" "$current_timestamp")"; then
+        return 0
+    fi
+
+    echo -e "${BLUE}${header}${NC}"
     echo -e "${BLUE}   ${command}${NC}"
     echo ""
+}
+
+display_restart_hint() {
+    local key="$1"
+    local timestamp="$2"
+
+    display_resume_command "After you have addressed or explicitly acknowledged all feedback shown so far, restart exactly with this command to skip it:" "$key" "$timestamp"
 }
 
 display_issue_comment() {
@@ -635,11 +886,13 @@ scan_pr_activity() {
     local issue_comments
     local review_comments
     local reviews
+    local reactions
     local count=0
     local i
     local timestamp
     local actor
     local body
+    local content
     local file
     local line
     local original_line
@@ -651,10 +904,14 @@ scan_pr_activity() {
     local review_id
 
     register_latest_activity "$key" "${KEY_TO_LAST_COMMIT[$key]}" "head commit"
+    if [[ "$report_new" == "true" ]]; then
+        reset_actionable_scan_state "$key"
+    fi
 
     issue_comments=$(fetch_paginated_array "repos/$repo/issues/$pr/comments?per_page=100") || fail "Failed to fetch issue comments for $key.$(fetch_error_suffix)"
     review_comments=$(fetch_paginated_array "repos/$repo/pulls/$pr/comments?per_page=100") || fail "Failed to fetch review comments for $key.$(fetch_error_suffix)"
     reviews=$(fetch_paginated_array "repos/$repo/pulls/$pr/reviews?per_page=100") || fail "Failed to fetch reviews for $key.$(fetch_error_suffix)"
+    reactions=$(fetch_paginated_array "repos/$repo/issues/$pr/reactions?per_page=100") || fail "Failed to fetch reactions for $key.$(fetch_error_suffix)"
 
     count=$(jq 'length' <<<"$issue_comments")
     for ((i=0; i<count; i++)); do
@@ -665,12 +922,13 @@ scan_pr_activity() {
 
         if is_codex_no_issues_noise "$actor" "$body"; then
             if [[ "$report_new" == "true" ]] && compare_iso_gt "$timestamp" "$baseline" && [[ "${KEY_TO_PENDING_PRECOMMIT_ACTIONABLE[$key]:-false}" == "true" ]]; then
-                flag_postcommit_boundary_if_needed "$key" "$timestamp" "$report_new" "$baseline"
+                record_codex_boundary_if_needed "$key" "$timestamp" "$report_new" "$baseline" "$actor"
             fi
             continue
         fi
 
         register_latest_activity "$key" "$timestamp" "issue comment"
+        record_codex_review_release_signal "$key" "$actor" "$timestamp"
 
         if [[ "$report_new" == "true" ]] && compare_iso_gt "$timestamp" "$baseline"; then
             record_actionable_event "$key" "$timestamp" "issue-comment:${comment_id}" display_issue_comment "$key" "$actor" "$body" "$timestamp"
@@ -691,6 +949,7 @@ scan_pr_activity() {
         commit_id=$(jq -r ".[$i].commit_id // \"\"" <<<"$review_comments")
 
         register_latest_activity "$key" "$timestamp" "review comment"
+        record_codex_review_release_signal "$key" "$actor" "$timestamp"
 
         if [[ "$report_new" == "true" ]] && compare_iso_gt "$timestamp" "$baseline"; then
             record_actionable_event "$key" "$timestamp" "review-comment:${comment_id}" display_review_comment "$key" "$file" "$line" "$original_line" "$start_line" "$end_line" "$commit_id" "$actor" "$body" "$timestamp"
@@ -709,7 +968,7 @@ scan_pr_activity() {
 
         if is_codex_no_issues_noise "$actor" "$body"; then
             if [[ "$report_new" == "true" ]] && compare_iso_gt "$timestamp" "$baseline" && [[ "${KEY_TO_PENDING_PRECOMMIT_ACTIONABLE[$key]:-false}" == "true" ]]; then
-                flag_postcommit_boundary_if_needed "$key" "$timestamp" "$report_new" "$baseline"
+                record_codex_boundary_if_needed "$key" "$timestamp" "$report_new" "$baseline" "$actor"
             fi
             continue
         fi
@@ -718,20 +977,31 @@ scan_pr_activity() {
 
         if [[ "$report_new" == "true" ]] && compare_iso_gt "$timestamp" "$baseline" && ! trimmed_nonempty "$body"; then
             if [[ "${KEY_TO_PENDING_PRECOMMIT_ACTIONABLE[$key]:-false}" == "true" ]]; then
-                flag_postcommit_boundary_if_needed "$key" "$timestamp" "$report_new" "$baseline"
+                record_codex_boundary_if_needed "$key" "$timestamp" "$report_new" "$baseline" "$actor"
             fi
             continue
         fi
 
         trimmed_nonempty "$body" || continue
+        record_codex_review_release_signal "$key" "$actor" "$timestamp"
 
         if [[ "$report_new" == "true" ]] && compare_iso_gt "$timestamp" "$baseline"; then
             record_actionable_event "$key" "$timestamp" "review:${review_id}" display_review_body "$key" "$state" "$actor" "$body" "$timestamp"
         fi
     done
 
-    if [[ "${KEY_TO_PENDING_PRECOMMIT_ACTIONABLE[$key]:-false}" == "true" && "$POSTCOMMIT_BOUNDARY_FOUND" -eq 1 ]]; then
-        NEW_SIGNAL_FOUND=1
+    count=$(jq 'length' <<<"$reactions")
+    for ((i=0; i<count; i++)); do
+        timestamp=$(jq -r ".[$i].created_at" <<<"$reactions")
+        actor=$(jq -r ".[$i].user.login" <<<"$reactions")
+        content=$(jq -r ".[$i].content" <<<"$reactions")
+
+        register_latest_activity "$key" "$timestamp" "reaction"
+        record_codex_review_reaction "$key" "$actor" "$content" "$timestamp"
+    done
+
+    if [[ "$report_new" == "true" ]]; then
+        finalize_actionable_scan_state "$key"
     fi
 }
 
@@ -966,12 +1236,10 @@ first_sweep() {
     local baseline
 
     NEW_SIGNAL_FOUND=0
-    POSTCOMMIT_BOUNDARY_FOUND=0
     note "👀 Checking for existing new activity..."
 
     for key in "${PR_KEYS[@]}"; do
         is_pr_open "$key" || continue
-        POSTCOMMIT_BOUNDARY_FOUND=0
         baseline="$(effective_baseline_for_key "$key")"
         scan_pr_activity "$key" "$baseline" true
     done
@@ -981,6 +1249,7 @@ refresh_pr_state() {
     local key="$1"
     local repo="${KEY_TO_REPO[$key]}"
     local pr="${KEY_TO_PR[$key]}"
+    local previous_state="${KEY_TO_STATE[$key]:-OPEN}"
     local pr_data
     local state
     local title
@@ -1001,16 +1270,16 @@ refresh_pr_state() {
     KEY_TO_STATE["$key"]="$state"
 
     if [[ "$state" != "OPEN" ]]; then
-        reset_review_cycle_runtime_state "$key"
         KEY_TO_LATEST_ACTIVITY_TIME["$key"]=""
         KEY_TO_LATEST_ACTIVITY_TYPE["$key"]=""
         KEY_TO_HEAD_SHA["$key"]=""
         KEY_TO_LAST_COMMIT["$key"]=""
-        if [[ "$state" == "MERGED" ]]; then
+        if [[ "$state" == "MERGED" && "$previous_state" != "$state" ]]; then
             note "🎉 ${key} merged"
-        else
+        elif [[ "$state" != "MERGED" && "$previous_state" != "$state" ]]; then
             warn "ℹ️ ${key} closed without merge"
         fi
+        persist_watcher_state
         return 1
     fi
 
@@ -1025,12 +1294,14 @@ refresh_pr_state() {
     if [[ "$current_head_sha" != "${KEY_TO_HEAD_SHA[$key]:-}" ]]; then
         note "📝 ${key}: new commit detected"
         note "   New baseline: ${current_commit:0:16}"
-        reset_review_cycle_runtime_state "$key"
         KEY_TO_HEAD_SHA["$key"]="$current_head_sha"
         KEY_TO_LAST_COMMIT["$key"]="$current_commit"
     elif [[ "$current_commit" != "${KEY_TO_LAST_COMMIT[$key]}" ]]; then
         KEY_TO_LAST_COMMIT["$key"]="$current_commit"
     fi
+
+    clamp_baseline_to_current_head "$key"
+    persist_watcher_state
 
     return 0
 }
@@ -1048,18 +1319,17 @@ monitor_loop() {
 
             KEY_TO_LATEST_ACTIVITY_TIME["$key"]=""
             KEY_TO_LATEST_ACTIVITY_TYPE["$key"]=""
-            POSTCOMMIT_BOUNDARY_FOUND=0
 
             scan_pr_activity "$key" "$(effective_baseline_for_key "$key")" false
 
             baseline="$(effective_baseline_for_key "$key")"
-            POSTCOMMIT_BOUNDARY_FOUND=0
             scan_pr_activity "$key" "$baseline" true
             validate_after_cutoffs
         done
 
         if [[ "$NEW_SIGNAL_FOUND" -eq 1 ]]; then
             echo ""
+            display_resume_command "IMPORTANT: To skip all feedback surfaced in this watcher run after you address it, restart exactly with:"
             pass "📋 Found new activity to address. Exiting so the agent can process it."
             exit 2
         fi
@@ -1085,6 +1355,7 @@ main() {
 
     command -v gh >/dev/null 2>&1 || fail "GitHub CLI (gh) is not installed"
     command -v jq >/dev/null 2>&1 || fail "jq is required for JSON parsing"
+    command -v flock >/dev/null 2>&1 || fail "flock is required for watcher state locking"
 
     if ! gh auth status >/dev/null 2>&1; then
         fail "Not authenticated with gh"
@@ -1092,16 +1363,20 @@ main() {
 
     resolve_pr_targets
     load_all_pr_metadata
+    load_persisted_watcher_state
+    initialize_watcher_state
     print_targets
     print_pr_status
 
     prime_latest_activity
     validate_after_cutoffs
+    persist_watcher_state
 
     first_sweep
 
     if [[ "$NEW_SIGNAL_FOUND" -eq 1 ]]; then
         echo ""
+        display_resume_command "IMPORTANT: To skip all feedback surfaced in this watcher run after you address it, restart exactly with:"
         pass "📋 Found new activity to address. Exiting so the agent can process it."
         exit 2
     fi
@@ -1119,7 +1394,8 @@ main() {
 
     if [[ "$CHECK_ONCE" == true ]]; then
         if any_pending_precommit_actionable; then
-            warn "⏳ Earlier actionable feedback is visible, but the latest review cycle is still in progress. A normal watch run would keep waiting for a post-commit review signal."
+            display_resume_command "IMPORTANT: To skip all feedback surfaced in this watcher run after you address it, restart exactly with:"
+            warn "⏳ Earlier actionable feedback is visible, but Codex still appears to be reviewing (:eyes:). A normal watch run would keep waiting for a later Codex comment, review, or thumbs-up reaction."
             exit 2
         fi
         warn "⏳ No actionable feedback is currently visible, but the watched PRs are still open. A normal watch run would keep waiting for merge or new feedback."
@@ -1127,7 +1403,7 @@ main() {
     fi
 
     if printf '%s\n' "${KEY_TO_PENDING_PRECOMMIT_ACTIONABLE[@]:-}" | grep -qx 'true'; then
-        warn "⏳ Earlier actionable feedback is visible, but the latest review cycle is still in progress. Waiting for a post-commit review signal before exiting."
+        warn "⏳ Earlier actionable feedback is visible, but Codex still appears to be reviewing (:eyes:). Waiting for a later Codex comment, review, or thumbs-up reaction before exiting."
     else
         pass "✓ No pending actionable feedback yet. Starting monitor until merge or new feedback..."
     fi
