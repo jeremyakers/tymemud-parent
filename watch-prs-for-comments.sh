@@ -1178,7 +1178,7 @@ monitor_loop() {
 
         if [[ "$NEW_SIGNAL_FOUND" -eq 1 ]]; then
             echo ""
-            display_resume_command "IMPORTANT: To skip all feedbak surfaced in this watcher run after you address it, restart exactly with:"
+            display_resume_command "IMPORTANT: To skip all feedback surfaced in this watcher run after you address it, restart exactly with:"
             pass "📋 Found new activity to address. Exiting so the agent can process it."
             exit 2
         fi
@@ -1225,7 +1225,7 @@ main() {
 
     if [[ "$NEW_SIGNAL_FOUND" -eq 1 ]]; then
         echo ""
-        display_resume_command "IMPORTANT: To skip all feedbak surfaced in this watcher run after you address it, restart exactly with:"
+        display_resume_command "IMPORTANT: To skip all feedback surfaced in this watcher run after you address it, restart exactly with:"
         pass "📋 Found new activity to address. Exiting so the agent can process it."
         exit 2
     fi
