@@ -94,6 +94,25 @@ If you are watching exactly one PR, a bare timestamp is still accepted for compa
 ./watch-prs-for-comments.sh --repo jeremyakers/tymemud-lib --after "2026-04-17T22:08:40Z" 63
 ```
 
+### Resume after surfaced feedback
+
+When the watcher exits with actionable feedback, it prints an exact restart command. Agents must copy that command exactly **after** addressing or explicitly acknowledging all feedback shown in that watcher run.
+
+That restart command uses `--after` for each PR that had surfaced feedback. `--after` is the only shared acknowledgement mechanism; the watcher does not persist "this comment was already seen" across people or agents.
+
+Do this:
+
+```bash
+# 1. Address all feedback the watcher printed.
+# 2. Restart with the exact command printed under:
+#    "IMPORTANT: To skip all feedback surfaced in this watcher run..."
+./watch-prs-for-comments.sh \
+  --after jeremyakers/tymemud-src#104=2026-04-18T13:52:32Z \
+  jeremyakers/tymemud-src#104
+```
+
+Do not invent a later `--after` timestamp from the latest commit time. New commits do not acknowledge earlier feedback.
+
 ### Same-repo selector shortcuts with `--repo`
 
 When `--repo owner/repo` is active, you can use either bare PR numbers or full selectors inside `--after`:
@@ -124,7 +143,10 @@ It also does **not** treat approval emojis, thumbs-up reactions, or "no issues f
 ## Baseline Rules
 
 - Default baseline is the PR head commit timestamp
+- The watcher may persist the original baseline anchor locally so restarts do not skip feedback posted before a newer commit
+- Persisted watcher state must not be treated as shared acknowledgement of comments seen by a different person or agent
 - `--after` overrides that baseline for the specified PR only
+- `--after` is the only way to acknowledge and skip already surfaced feedback on a later run
 - `--after` is **exclusive**
   - activity at exactly that timestamp is hidden
   - only activity with a later timestamp is shown
