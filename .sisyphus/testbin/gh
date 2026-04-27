@@ -327,6 +327,14 @@ if [[ "$cmd" == "api" ]]; then
             if [[ "$jq_filter" == ".head.sha" ]]; then printf 'sha-123\n'; else printf '{"head":{"sha":"sha-123"}}\n'; fi
             exit 0
             ;;
+        repos/example/repo/pulls/124)
+            if [[ "$jq_filter" == ".head.sha" ]]; then printf 'sha-124\n'; else printf '{"head":{"sha":"sha-124"}}\n'; fi
+            exit 0
+            ;;
+        repos/example/repo/pulls/125)
+            if [[ "$jq_filter" == ".head.sha" ]]; then printf 'sha-125\n'; else printf '{"head":{"sha":"sha-125"}}\n'; fi
+            exit 0
+            ;;
         repos/example/other/pulls/201)
             if [[ "$jq_filter" == ".head.sha" ]]; then printf 'sha-201\n'; else printf '{"head":{"sha":"sha-201"}}\n'; fi
             exit 0
@@ -335,7 +343,7 @@ if [[ "$cmd" == "api" ]]; then
             printf '2026-04-18T10:00:00Z\n'
             exit 0
             ;;
-        repos/example/repo/commits/sha-119|repos/example/repo/commits/sha-120|repos/example/repo/commits/sha-121|repos/example/repo/commits/sha-122|repos/example/repo/commits/sha-123)
+        repos/example/repo/commits/sha-119|repos/example/repo/commits/sha-120|repos/example/repo/commits/sha-121|repos/example/repo/commits/sha-122|repos/example/repo/commits/sha-123|repos/example/repo/commits/sha-124|repos/example/repo/commits/sha-125)
             printf '2026-04-18T10:20:00Z\n'
             exit 0
             ;;
@@ -433,6 +441,14 @@ if [[ "$cmd" == "api" ]]; then
             printf '[{"id":1231,"created_at":"2026-04-18T10:21:00Z","user":{"login":"reviewer"},"body":"Post-head feedback before Codex eyes."}]\n'
             exit 0
             ;;
+        repos/example/repo/issues/124/comments\?per_page=100)
+            printf '[{"id":1241,"created_at":"2026-04-18T10:10:00Z","user":{"login":"reviewer"},"body":"Pre-commit feedback before Codex eyes."},{"id":1242,"created_at":"2026-04-18T10:22:00Z","user":{"login":"reviewer"},"body":"Non-Codex comment while Codex is still reviewing."}]\n'
+            exit 0
+            ;;
+        repos/example/repo/issues/125/comments\?per_page=100)
+            printf '[{"id":1251,"created_at":"2026-04-18T10:10:00Z","user":{"login":"reviewer"},"body":"Pre-commit feedback before Codex responds."},{"id":1252,"created_at":"2026-04-18T10:22:00Z","user":{"login":"chatgpt-codex-connector[bot]"},"body":"Codex follow-up after active review."}]\n'
+            exit 0
+            ;;
         repos/example/repo/issues/112/comments\?per_page=100|repos/example/repo/issues/113/comments\?per_page=100|repos/example/repo/issues/115/comments\?per_page=100)
             printf '[]\n'
             exit 0
@@ -481,6 +497,14 @@ if [[ "$cmd" == "api" ]]; then
             printf '[{"id":1239,"created_at":"2026-04-18T10:22:00Z","content":"eyes","user":{"login":"chatgpt-codex-connector[bot]"}}]\n'
             exit 0
             ;;
+        repos/example/repo/issues/124/reactions\?per_page=100)
+            printf '[{"id":1249,"created_at":"2026-04-18T10:21:00Z","content":"eyes","user":{"login":"chatgpt-codex-connector[bot]"}}]\n'
+            exit 0
+            ;;
+        repos/example/repo/issues/125/reactions\?per_page=100)
+            printf '[{"id":1259,"created_at":"2026-04-18T10:21:00Z","content":"eyes","user":{"login":"chatgpt-codex-connector[bot]"}}]\n'
+            exit 0
+            ;;
         repos/example/repo/issues/102/reactions\?per_page=100|repos/example/repo/issues/103/reactions\?per_page=100|repos/example/repo/issues/104/reactions\?per_page=100|repos/*/issues/104/reactions\?per_page=100|repos/example/repo/issues/105/reactions\?per_page=100|repos/example/repo/issues/106/reactions\?per_page=100|repos/example/repo/issues/107/reactions\?per_page=100|repos/example/repo/issues/108/reactions\?per_page=100|repos/example/repo/issues/109/reactions\?per_page=100|repos/example/repo/issues/110/reactions\?per_page=100|repos/example/repo/issues/111/reactions\?per_page=100|repos/example/repo/issues/112/reactions\?per_page=100|repos/example/repo/issues/113/reactions\?per_page=100|repos/example/repo/issues/115/reactions\?per_page=100|repos/example/repo/issues/117/reactions\?per_page=100|repos/example/repo/issues/118/reactions\?per_page=100|repos/example/other/issues/201/reactions\?per_page=100)
             printf '[]\n'
             exit 0
@@ -489,7 +513,7 @@ if [[ "$cmd" == "api" ]]; then
             printf '[]\n'
             exit 0
             ;;
-        repos/example/repo/pulls/107/comments\?per_page=100|repos/example/repo/pulls/108/comments\?per_page=100|repos/example/repo/pulls/109/comments\?per_page=100|repos/example/repo/pulls/110/comments\?per_page=100|repos/example/repo/pulls/112/comments\?per_page=100|repos/example/repo/pulls/115/comments\?per_page=100|repos/example/repo/pulls/117/comments\?per_page=100|repos/example/repo/pulls/118/comments\?per_page=100|repos/example/repo/pulls/119/comments\?per_page=100|repos/example/repo/pulls/120/comments\?per_page=100|repos/example/repo/pulls/121/comments\?per_page=100|repos/example/repo/pulls/122/comments\?per_page=100|repos/example/repo/pulls/123/comments\?per_page=100)
+        repos/example/repo/pulls/107/comments\?per_page=100|repos/example/repo/pulls/108/comments\?per_page=100|repos/example/repo/pulls/109/comments\?per_page=100|repos/example/repo/pulls/110/comments\?per_page=100|repos/example/repo/pulls/112/comments\?per_page=100|repos/example/repo/pulls/115/comments\?per_page=100|repos/example/repo/pulls/117/comments\?per_page=100|repos/example/repo/pulls/118/comments\?per_page=100|repos/example/repo/pulls/119/comments\?per_page=100|repos/example/repo/pulls/120/comments\?per_page=100|repos/example/repo/pulls/121/comments\?per_page=100|repos/example/repo/pulls/122/comments\?per_page=100|repos/example/repo/pulls/123/comments\?per_page=100|repos/example/repo/pulls/124/comments\?per_page=100|repos/example/repo/pulls/125/comments\?per_page=100)
             printf '[]\n'
             exit 0
             ;;
@@ -502,7 +526,7 @@ if [[ "$cmd" == "api" ]]; then
             printf '[{"id":1032,"created_at":"2026-04-18T09:56:00Z","user":{"login":"reviewer"},"body":"Earlier inline note.","path":"src/mock.c","line":12,"original_line":12,"start_line":12,"end_line":12,"commit_id":"deadbeef103"}]\n'
             exit 0
             ;;
-        repos/example/repo/pulls/102/reviews\?per_page=100|repos/example/repo/pulls/104/reviews\?per_page=100|repos/*/pulls/104/reviews\?per_page=100|repos/example/repo/pulls/105/reviews\?per_page=100|repos/example/repo/pulls/106/reviews\?per_page=100|repos/example/repo/pulls/110/reviews\?per_page=100|repos/example/repo/pulls/115/reviews\?per_page=100|repos/example/repo/pulls/117/reviews\?per_page=100|repos/example/repo/pulls/118/reviews\?per_page=100|repos/example/repo/pulls/119/reviews\?per_page=100|repos/example/repo/pulls/120/reviews\?per_page=100|repos/example/repo/pulls/121/reviews\?per_page=100|repos/example/repo/pulls/122/reviews\?per_page=100|repos/example/repo/pulls/123/reviews\?per_page=100|repos/example/other/pulls/201/reviews\?per_page=100)
+        repos/example/repo/pulls/102/reviews\?per_page=100|repos/example/repo/pulls/104/reviews\?per_page=100|repos/*/pulls/104/reviews\?per_page=100|repos/example/repo/pulls/105/reviews\?per_page=100|repos/example/repo/pulls/106/reviews\?per_page=100|repos/example/repo/pulls/110/reviews\?per_page=100|repos/example/repo/pulls/115/reviews\?per_page=100|repos/example/repo/pulls/117/reviews\?per_page=100|repos/example/repo/pulls/118/reviews\?per_page=100|repos/example/repo/pulls/119/reviews\?per_page=100|repos/example/repo/pulls/120/reviews\?per_page=100|repos/example/repo/pulls/121/reviews\?per_page=100|repos/example/repo/pulls/122/reviews\?per_page=100|repos/example/repo/pulls/123/reviews\?per_page=100|repos/example/repo/pulls/124/reviews\?per_page=100|repos/example/repo/pulls/125/reviews\?per_page=100|repos/example/other/pulls/201/reviews\?per_page=100)
             printf '[]\n'
             exit 0
             ;;

@@ -37,9 +37,9 @@ declare -A KEY_TO_ACTIONABLE_VISIBLE=()
 declare -A KEY_TO_LATEST_ACTIONABLE_TIME=()
 declare -A KEY_TO_CODEX_REVIEW_ACTIVE=()
 declare -A KEY_TO_CODEX_REVIEW_SIGNAL_TIME=()
+declare -A KEY_TO_CODEX_REVIEW_RELEASE_TIME=()
 declare -A KEY_TO_LATEST_ACTIVITY_TIME=()
 declare -A KEY_TO_LATEST_ACTIVITY_TYPE=()
-POSTCOMMIT_BOUNDARY_TIME=""
 STATE_FILE="${PR_WATCHER_STATE_FILE:-.sisyphus/watch-prs-for-comments.state.json}"
 
 usage() {
@@ -308,6 +308,7 @@ reset_review_cycle_runtime_state() {
     KEY_TO_LATEST_ACTIONABLE_TIME["$key"]=""
     KEY_TO_CODEX_REVIEW_ACTIVE["$key"]=false
     KEY_TO_CODEX_REVIEW_SIGNAL_TIME["$key"]=""
+    KEY_TO_CODEX_REVIEW_RELEASE_TIME["$key"]=""
 }
 
 clamp_baseline_to_current_head() {
@@ -407,6 +408,10 @@ initialize_watcher_state() {
         if [[ -z "${KEY_TO_CODEX_REVIEW_SIGNAL_TIME[$key]:-}" ]]; then
             KEY_TO_CODEX_REVIEW_SIGNAL_TIME["$key"]=""
         fi
+
+        if [[ -z "${KEY_TO_CODEX_REVIEW_RELEASE_TIME[$key]:-}" ]]; then
+            KEY_TO_CODEX_REVIEW_RELEASE_TIME["$key"]=""
+        fi
     done
 }
 
@@ -433,15 +438,11 @@ is_codex_review_active_for_key() {
 codex_review_release_signal_seen_after_eyes() {
     local key="$1"
     local signal_time="${KEY_TO_CODEX_REVIEW_SIGNAL_TIME[$key]:-}"
-    local latest_actionable="${KEY_TO_LATEST_ACTIONABLE_TIME[$key]:-}"
+    local release_time="${KEY_TO_CODEX_REVIEW_RELEASE_TIME[$key]:-}"
 
     [[ -n "$signal_time" ]] || return 0
 
-    if compare_iso_gt "$latest_actionable" "$signal_time"; then
-        return 0
-    fi
-
-    compare_iso_gt "$POSTCOMMIT_BOUNDARY_TIME" "$signal_time"
+    compare_iso_gt "$release_time" "$signal_time"
 }
 
 reset_actionable_scan_state() {
@@ -450,7 +451,6 @@ reset_actionable_scan_state() {
     KEY_TO_ACTIONABLE_VISIBLE["$key"]=false
     KEY_TO_LATEST_ACTIONABLE_TIME["$key"]=""
     KEY_TO_PENDING_PRECOMMIT_ACTIONABLE["$key"]=false
-    POSTCOMMIT_BOUNDARY_TIME=""
 }
 
 finalize_actionable_scan_state() {
@@ -465,6 +465,19 @@ finalize_actionable_scan_state() {
 
     KEY_TO_PENDING_PRECOMMIT_ACTIONABLE["$key"]=false
     NEW_SIGNAL_FOUND=1
+}
+
+record_codex_review_release_signal() {
+    local key="$1"
+    local actor="$2"
+    local timestamp="$3"
+
+    is_codex_actor "$actor" || return 0
+    is_post_commit_activity "$key" "$timestamp" || return 0
+
+    if compare_iso_gt "$timestamp" "${KEY_TO_CODEX_REVIEW_RELEASE_TIME[$key]:-}"; then
+        KEY_TO_CODEX_REVIEW_RELEASE_TIME["$key"]="$timestamp"
+    fi
 }
 
 record_codex_review_reaction() {
@@ -491,6 +504,7 @@ record_codex_review_reaction() {
         KEY_TO_CODEX_REVIEW_ACTIVE["$key"]=true
     else
         KEY_TO_CODEX_REVIEW_ACTIVE["$key"]=false
+        record_codex_review_release_signal "$key" "$actor" "$timestamp"
     fi
 }
 
@@ -666,19 +680,17 @@ record_actionable_visibility() {
     mark_actionable_reported "$key" "$token"
 }
 
-flag_postcommit_boundary_if_needed() {
+record_codex_boundary_if_needed() {
     local key="$1"
     local timestamp="$2"
     local report_new="$3"
     local baseline="$4"
+    local actor="$5"
 
     [[ "$report_new" == "true" ]] || return 0
     compare_iso_gt "$timestamp" "$baseline" || return 0
     is_post_commit_activity "$key" "$timestamp" || return 0
-
-    if compare_iso_gt "$timestamp" "$POSTCOMMIT_BOUNDARY_TIME"; then
-        POSTCOMMIT_BOUNDARY_TIME="$timestamp"
-    fi
+    record_codex_review_release_signal "$key" "$actor" "$timestamp"
 }
 
 record_actionable_event() {
@@ -888,12 +900,13 @@ scan_pr_activity() {
 
         if is_codex_no_issues_noise "$actor" "$body"; then
             if [[ "$report_new" == "true" ]] && compare_iso_gt "$timestamp" "$baseline" && [[ "${KEY_TO_PENDING_PRECOMMIT_ACTIONABLE[$key]:-false}" == "true" ]]; then
-                flag_postcommit_boundary_if_needed "$key" "$timestamp" "$report_new" "$baseline"
+                record_codex_boundary_if_needed "$key" "$timestamp" "$report_new" "$baseline" "$actor"
             fi
             continue
         fi
 
         register_latest_activity "$key" "$timestamp" "issue comment"
+        record_codex_review_release_signal "$key" "$actor" "$timestamp"
 
         if [[ "$report_new" == "true" ]] && compare_iso_gt "$timestamp" "$baseline"; then
             record_actionable_event "$key" "$timestamp" "issue-comment:${comment_id}" display_issue_comment "$key" "$actor" "$body" "$timestamp"
@@ -914,6 +927,7 @@ scan_pr_activity() {
         commit_id=$(jq -r ".[$i].commit_id // \"\"" <<<"$review_comments")
 
         register_latest_activity "$key" "$timestamp" "review comment"
+        record_codex_review_release_signal "$key" "$actor" "$timestamp"
 
         if [[ "$report_new" == "true" ]] && compare_iso_gt "$timestamp" "$baseline"; then
             record_actionable_event "$key" "$timestamp" "review-comment:${comment_id}" display_review_comment "$key" "$file" "$line" "$original_line" "$start_line" "$end_line" "$commit_id" "$actor" "$body" "$timestamp"
@@ -932,7 +946,7 @@ scan_pr_activity() {
 
         if is_codex_no_issues_noise "$actor" "$body"; then
             if [[ "$report_new" == "true" ]] && compare_iso_gt "$timestamp" "$baseline" && [[ "${KEY_TO_PENDING_PRECOMMIT_ACTIONABLE[$key]:-false}" == "true" ]]; then
-                flag_postcommit_boundary_if_needed "$key" "$timestamp" "$report_new" "$baseline"
+                record_codex_boundary_if_needed "$key" "$timestamp" "$report_new" "$baseline" "$actor"
             fi
             continue
         fi
@@ -941,12 +955,13 @@ scan_pr_activity() {
 
         if [[ "$report_new" == "true" ]] && compare_iso_gt "$timestamp" "$baseline" && ! trimmed_nonempty "$body"; then
             if [[ "${KEY_TO_PENDING_PRECOMMIT_ACTIONABLE[$key]:-false}" == "true" ]]; then
-                flag_postcommit_boundary_if_needed "$key" "$timestamp" "$report_new" "$baseline"
+                record_codex_boundary_if_needed "$key" "$timestamp" "$report_new" "$baseline" "$actor"
             fi
             continue
         fi
 
         trimmed_nonempty "$body" || continue
+        record_codex_review_release_signal "$key" "$actor" "$timestamp"
 
         if [[ "$report_new" == "true" ]] && compare_iso_gt "$timestamp" "$baseline"; then
             record_actionable_event "$key" "$timestamp" "review:${review_id}" display_review_body "$key" "$state" "$actor" "$body" "$timestamp"
@@ -1358,7 +1373,7 @@ main() {
     if [[ "$CHECK_ONCE" == true ]]; then
         if any_pending_precommit_actionable; then
             display_resume_command "IMPORTANT: To skip all feedback surfaced in this watcher run after you address it, restart exactly with:"
-            warn "⏳ Earlier actionable feedback is visible, but Codex still appears to be reviewing (:eyes:). A normal watch run would keep waiting for a later Codex comment or thumbs-up reaction."
+            warn "⏳ Earlier actionable feedback is visible, but Codex still appears to be reviewing (:eyes:). A normal watch run would keep waiting for a later Codex comment, review, or thumbs-up reaction."
             exit 2
         fi
         warn "⏳ No actionable feedback is currently visible, but the watched PRs are still open. A normal watch run would keep waiting for merge or new feedback."
@@ -1366,7 +1381,7 @@ main() {
     fi
 
     if printf '%s\n' "${KEY_TO_PENDING_PRECOMMIT_ACTIONABLE[@]:-}" | grep -qx 'true'; then
-        warn "⏳ Earlier actionable feedback is visible, but Codex still appears to be reviewing (:eyes:). Waiting for a later Codex comment or thumbs-up reaction before exiting."
+        warn "⏳ Earlier actionable feedback is visible, but Codex still appears to be reviewing (:eyes:). Waiting for a later Codex comment, review, or thumbs-up reaction before exiting."
     else
         pass "✓ No pending actionable feedback yet. Starting monitor until merge or new feedback..."
     fi
