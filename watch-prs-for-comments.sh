@@ -313,11 +313,19 @@ clamp_baseline_to_current_head() {
 
 persist_watcher_state() {
     local tmp_file
+    local lock_file
+    local lock_fd
     local state_json='{}'
     local key
 
     mkdir -p "$(dirname "$STATE_FILE")"
-    tmp_file="${STATE_FILE}.tmp"
+    lock_file="${STATE_FILE}.lock"
+    tmp_file="${STATE_FILE}.$$.tmp"
+
+    exec {lock_fd}>"$lock_file"
+    if ! flock "$lock_fd"; then
+        fail "Could not lock watcher state file: $STATE_FILE"
+    fi
 
     if [[ -f "$STATE_FILE" ]]; then
         if ! state_json=$(jq 'if type == "object" then . else {} end' "$STATE_FILE"); then
@@ -336,6 +344,8 @@ persist_watcher_state() {
 
     printf '%s\n' "$state_json" >"$tmp_file"
     mv "$tmp_file" "$STATE_FILE"
+    flock -u "$lock_fd"
+    exec {lock_fd}>&-
 }
 
 load_persisted_watcher_state() {
@@ -1194,6 +1204,7 @@ main() {
 
     command -v gh >/dev/null 2>&1 || fail "GitHub CLI (gh) is not installed"
     command -v jq >/dev/null 2>&1 || fail "jq is required for JSON parsing"
+    command -v flock >/dev/null 2>&1 || fail "flock is required for watcher state locking"
 
     if ! gh auth status >/dev/null 2>&1; then
         fail "Not authenticated with gh"
