@@ -301,6 +301,16 @@ reset_review_cycle_runtime_state() {
     KEY_TO_REPORTED_ACTIONABLE_KEYS["$key"]=$'\n'
 }
 
+clamp_baseline_to_current_head() {
+    local key="$1"
+    local baseline="${KEY_TO_BASELINE[$key]:-}"
+    local current_head="${KEY_TO_LAST_COMMIT[$key]:-}"
+
+    if [[ -n "$baseline" && -n "$current_head" ]] && compare_iso_gt "$baseline" "$current_head"; then
+        KEY_TO_BASELINE["$key"]="$current_head"
+    fi
+}
+
 persist_watcher_state() {
     local tmp_file
     local state_json='{}'
@@ -352,6 +362,8 @@ initialize_watcher_state() {
         if [[ -z "${KEY_TO_BASELINE[$key]:-}" ]]; then
             KEY_TO_BASELINE["$key"]="${KEY_TO_LAST_COMMIT[$key]:-}"
         fi
+
+        clamp_baseline_to_current_head "$key"
 
         if [[ -z "${KEY_TO_REPORTED_ACTIONABLE_KEYS[$key]:-}" ]]; then
             KEY_TO_REPORTED_ACTIONABLE_KEYS["$key"]=$'\n'
@@ -492,6 +504,7 @@ effective_baseline_for_key() {
     local cursor=""
     local explicit_after="${KEY_TO_AFTER[$key]:-}"
     local baseline="${KEY_TO_BASELINE[$key]:-${KEY_TO_LAST_COMMIT[$key]:-}}"
+    local latest_commit="${KEY_TO_LAST_COMMIT[$key]:-}"
 
     if [[ -n "$explicit_after" ]]; then
         printf '%s\n' "$explicit_after"
@@ -501,6 +514,11 @@ effective_baseline_for_key() {
     cursor="$(runtime_baseline_cursor "$key")"
     if [[ -z "$cursor" ]]; then
         printf '%s\n' "$baseline"
+        return 0
+    fi
+
+    if [[ -n "$latest_commit" ]] && compare_iso_gt "$cursor" "$latest_commit"; then
+        printf '%s\n' "$latest_commit"
         return 0
     fi
 
@@ -1119,6 +1137,7 @@ refresh_pr_state() {
         KEY_TO_LAST_COMMIT["$key"]="$current_commit"
     fi
 
+    clamp_baseline_to_current_head "$key"
     persist_watcher_state
 
     return 0
