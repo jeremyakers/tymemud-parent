@@ -28,12 +28,14 @@ declare -A KEY_TO_STATE=()
 declare -A KEY_TO_HEAD_SHA=()
 declare -A KEY_TO_LAST_COMMIT=()
 declare -A KEY_TO_AFTER=()
+declare -A KEY_TO_BASELINE=()
 declare -A KEY_TO_SURFACED_CURSOR=()
 declare -A KEY_TO_PENDING_PRECOMMIT_ACTIONABLE=()
 declare -A KEY_TO_REPORTED_ACTIONABLE_KEYS=()
 declare -A KEY_TO_LATEST_ACTIVITY_TIME=()
 declare -A KEY_TO_LATEST_ACTIVITY_TYPE=()
 POSTCOMMIT_BOUNDARY_FOUND=0
+STATE_FILE="${PR_WATCHER_STATE_FILE:-.sisyphus/watch-prs-for-comments.state.json}"
 
 usage() {
     cat <<'EOF'
@@ -299,6 +301,66 @@ reset_review_cycle_runtime_state() {
     KEY_TO_REPORTED_ACTIONABLE_KEYS["$key"]=$'\n'
 }
 
+persist_watcher_state() {
+    local tmp_file
+    local state_json='{}'
+    local key
+
+    mkdir -p "$(dirname "$STATE_FILE")"
+    tmp_file="${STATE_FILE}.tmp"
+
+    for key in "${PR_KEYS[@]}"; do
+        state_json=$(jq \
+            --arg key "$key" \
+            --arg baseline "${KEY_TO_BASELINE[$key]:-}" \
+            '.[$key] = {
+                baseline: $baseline
+            }' <<<"$state_json")
+    done
+
+    printf '%s\n' "$state_json" >"$tmp_file"
+    mv "$tmp_file" "$STATE_FILE"
+}
+
+load_persisted_watcher_state() {
+    local key
+
+    [[ -f "$STATE_FILE" ]] || return 0
+
+    for key in "${PR_KEYS[@]}"; do
+        KEY_TO_BASELINE["$key"]=$(jq -r --arg key "$key" '.[$key].baseline // ""' "$STATE_FILE")
+    done
+}
+
+initialize_watcher_state() {
+    local key
+    local explicit_after
+
+    for key in "${PR_KEYS[@]}"; do
+        explicit_after="${KEY_TO_AFTER[$key]:-}"
+
+        if [[ -n "$explicit_after" ]]; then
+            KEY_TO_BASELINE["$key"]="$explicit_after"
+            reset_review_cycle_runtime_state "$key"
+            continue
+        fi
+
+        if [[ -z "${KEY_TO_BASELINE[$key]:-}" ]]; then
+            KEY_TO_BASELINE["$key"]="${KEY_TO_LAST_COMMIT[$key]:-}"
+        fi
+
+        if [[ -z "${KEY_TO_REPORTED_ACTIONABLE_KEYS[$key]:-}" ]]; then
+            KEY_TO_REPORTED_ACTIONABLE_KEYS["$key"]=$'\n'
+        fi
+
+        if [[ -z "${KEY_TO_PENDING_PRECOMMIT_ACTIONABLE[$key]:-}" ]]; then
+            KEY_TO_PENDING_PRECOMMIT_ACTIONABLE["$key"]=false
+        fi
+    done
+
+    persist_watcher_state
+}
+
 any_pending_precommit_actionable() {
     local key
 
@@ -420,14 +482,14 @@ runtime_baseline_cursor() {
         return 0
     fi
 
-    printf '%s\n' "${KEY_TO_AFTER[$key]:-}"
+    printf '%s\n' ""
 }
 
 effective_baseline_for_key() {
     local key="$1"
     local cursor=""
     local explicit_after="${KEY_TO_AFTER[$key]:-}"
-    local latest_commit="${KEY_TO_LAST_COMMIT[$key]}"
+    local baseline="${KEY_TO_BASELINE[$key]:-${KEY_TO_LAST_COMMIT[$key]:-}}"
 
     if [[ -n "$explicit_after" ]]; then
         printf '%s\n' "$explicit_after"
@@ -436,12 +498,7 @@ effective_baseline_for_key() {
 
     cursor="$(runtime_baseline_cursor "$key")"
     if [[ -z "$cursor" ]]; then
-        printf '%s\n' "$latest_commit"
-        return 0
-    fi
-
-    if compare_iso_gt "$cursor" "$latest_commit"; then
-        printf '%s\n' "$latest_commit"
+        printf '%s\n' "$baseline"
         return 0
     fi
 
@@ -514,12 +571,13 @@ record_actionable_event() {
     fi
 }
 
-display_restart_hint() {
-    local key="$1"
-    local timestamp="$2"
-    local current_key
-    local current_after
+build_resume_command() {
+    local current_key="${1:-}"
+    local current_timestamp="${2:-}"
     local command="./watch-prs-for-comments.sh"
+    local key
+    local current_after
+    local any_after=false
 
     if [[ "$CHECK_ONCE" == true ]]; then
         command+=" --check-once"
@@ -529,25 +587,52 @@ display_restart_hint() {
         command+=" --codex-login $(shell_quote "$CODEX_REVIEWER_LOGIN")"
     fi
 
-    for current_key in "${PR_KEYS[@]}"; do
-        if [[ "$current_key" == "$key" ]]; then
-            current_after="$timestamp"
-        else
-            current_after="${KEY_TO_AFTER[$current_key]:-}"
+    for key in "${PR_KEYS[@]}"; do
+        current_after="${KEY_TO_AFTER[$key]:-}"
+
+        if [[ -n "${KEY_TO_SURFACED_CURSOR[$key]:-}" ]]; then
+            current_after="${KEY_TO_SURFACED_CURSOR[$key]}"
+        fi
+
+        if [[ "$key" == "$current_key" && -n "$current_timestamp" ]] && compare_iso_gt "$current_timestamp" "$current_after"; then
+            current_after="$current_timestamp"
         fi
 
         if [[ -n "$current_after" ]]; then
-            command+=" --after $(shell_quote "${current_key}=${current_after}")"
+            any_after=true
+            command+=" --after $(shell_quote "${key}=${current_after}")"
         fi
     done
 
-    for current_key in "${PR_KEYS[@]}"; do
-        command+=" $(shell_quote "$current_key")"
+    [[ "$any_after" == true ]] || return 1
+
+    for key in "${PR_KEYS[@]}"; do
+        command+=" $(shell_quote "$key")"
     done
 
-    echo -e "${BLUE}To ignore this activity and future ones on this PR, restart with the same watch set:${NC}"
+    printf '%s\n' "$command"
+}
+
+display_resume_command() {
+    local header="$1"
+    local current_key="${2:-}"
+    local current_timestamp="${3:-}"
+    local command
+
+    if ! command="$(build_resume_command "$current_key" "$current_timestamp")"; then
+        return 0
+    fi
+
+    echo -e "${BLUE}${header}${NC}"
     echo -e "${BLUE}   ${command}${NC}"
     echo ""
+}
+
+display_restart_hint() {
+    local key="$1"
+    local timestamp="$2"
+
+    display_resume_command "After you have addressed or explicitly acknowledged all feedback shown so far, restart exactly with this command to skip it:" "$key" "$timestamp"
 }
 
 display_issue_comment() {
@@ -981,6 +1066,7 @@ refresh_pr_state() {
     local key="$1"
     local repo="${KEY_TO_REPO[$key]}"
     local pr="${KEY_TO_PR[$key]}"
+    local previous_state="${KEY_TO_STATE[$key]:-OPEN}"
     local pr_data
     local state
     local title
@@ -1001,16 +1087,16 @@ refresh_pr_state() {
     KEY_TO_STATE["$key"]="$state"
 
     if [[ "$state" != "OPEN" ]]; then
-        reset_review_cycle_runtime_state "$key"
         KEY_TO_LATEST_ACTIVITY_TIME["$key"]=""
         KEY_TO_LATEST_ACTIVITY_TYPE["$key"]=""
         KEY_TO_HEAD_SHA["$key"]=""
         KEY_TO_LAST_COMMIT["$key"]=""
-        if [[ "$state" == "MERGED" ]]; then
+        if [[ "$state" == "MERGED" && "$previous_state" != "$state" ]]; then
             note "🎉 ${key} merged"
-        else
+        elif [[ "$state" != "MERGED" && "$previous_state" != "$state" ]]; then
             warn "ℹ️ ${key} closed without merge"
         fi
+        persist_watcher_state
         return 1
     fi
 
@@ -1025,12 +1111,13 @@ refresh_pr_state() {
     if [[ "$current_head_sha" != "${KEY_TO_HEAD_SHA[$key]:-}" ]]; then
         note "📝 ${key}: new commit detected"
         note "   New baseline: ${current_commit:0:16}"
-        reset_review_cycle_runtime_state "$key"
         KEY_TO_HEAD_SHA["$key"]="$current_head_sha"
         KEY_TO_LAST_COMMIT["$key"]="$current_commit"
     elif [[ "$current_commit" != "${KEY_TO_LAST_COMMIT[$key]}" ]]; then
         KEY_TO_LAST_COMMIT["$key"]="$current_commit"
     fi
+
+    persist_watcher_state
 
     return 0
 }
@@ -1060,6 +1147,7 @@ monitor_loop() {
 
         if [[ "$NEW_SIGNAL_FOUND" -eq 1 ]]; then
             echo ""
+            display_resume_command "IMPORTANT: To skip all feedbak surfaced in this watcher run after you address it, restart exactly with:"
             pass "📋 Found new activity to address. Exiting so the agent can process it."
             exit 2
         fi
@@ -1092,6 +1180,8 @@ main() {
 
     resolve_pr_targets
     load_all_pr_metadata
+    load_persisted_watcher_state
+    initialize_watcher_state
     print_targets
     print_pr_status
 
@@ -1102,6 +1192,7 @@ main() {
 
     if [[ "$NEW_SIGNAL_FOUND" -eq 1 ]]; then
         echo ""
+        display_resume_command "IMPORTANT: To skip all feedbak surfaced in this watcher run after you address it, restart exactly with:"
         pass "📋 Found new activity to address. Exiting so the agent can process it."
         exit 2
     fi
@@ -1119,6 +1210,7 @@ main() {
 
     if [[ "$CHECK_ONCE" == true ]]; then
         if any_pending_precommit_actionable; then
+            display_resume_command "IMPORTANT: To skip all feedback surfaced in this watcher run after you address it, restart exactly with:"
             warn "⏳ Earlier actionable feedback is visible, but the latest review cycle is still in progress. A normal watch run would keep waiting for a post-commit review signal."
             exit 2
         fi
