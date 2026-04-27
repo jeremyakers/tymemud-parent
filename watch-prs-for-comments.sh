@@ -321,6 +321,25 @@ clamp_baseline_to_current_head() {
     fi
 }
 
+read_watcher_state_json() {
+    local state_json
+
+    if [[ ! -f "$STATE_FILE" ]]; then
+        printf '{}\n'
+        return 0
+    fi
+
+    if ! state_json=$(jq -s 'if length == 1 and (.[0] | type == "object") then .[0] else {} end' "$STATE_FILE"); then
+        fail "Could not parse watcher state file: $STATE_FILE"
+    fi
+
+    if [[ -z "${state_json//[[:space:]]/}" ]]; then
+        state_json='{}'
+    fi
+
+    printf '%s\n' "$state_json"
+}
+
 persist_watcher_state() {
     local tmp_file
     local lock_file
@@ -337,11 +356,7 @@ persist_watcher_state() {
         fail "Could not lock watcher state file: $STATE_FILE"
     fi
 
-    if [[ -f "$STATE_FILE" ]]; then
-        if ! state_json=$(jq 'if type == "object" then . else {} end' "$STATE_FILE"); then
-            fail "Could not parse watcher state file: $STATE_FILE"
-        fi
-    fi
+    state_json=$(read_watcher_state_json)
 
     for key in "${PR_KEYS[@]}"; do
         state_json=$(jq \
@@ -359,12 +374,15 @@ persist_watcher_state() {
 }
 
 load_persisted_watcher_state() {
+    local state_json
     local key
 
     [[ -f "$STATE_FILE" ]] || return 0
 
+    state_json=$(read_watcher_state_json)
+
     for key in "${PR_KEYS[@]}"; do
-        KEY_TO_BASELINE["$key"]=$(jq -r --arg key "$key" '.[$key].baseline // ""' "$STATE_FILE")
+        KEY_TO_BASELINE["$key"]=$(jq -r --arg key "$key" '.[$key].baseline // ""' <<<"$state_json")
     done
 }
 
@@ -448,6 +466,10 @@ codex_review_release_signal_seen_after_eyes() {
 reset_actionable_scan_state() {
     local key="$1"
 
+    # Only clear per-scan actionable visibility here. Codex :eyes: state is
+    # intentionally sticky once observed; the GitHub reactions API only shows
+    # current reactions, and disappearance alone must not release the hold.
+    # A later Codex comment, review, or +1 reaction is the explicit release.
     KEY_TO_ACTIONABLE_VISIBLE["$key"]=false
     KEY_TO_LATEST_ACTIONABLE_TIME["$key"]=""
     KEY_TO_PENDING_PRECOMMIT_ACTIONABLE["$key"]=false
