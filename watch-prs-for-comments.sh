@@ -32,11 +32,13 @@ declare -A KEY_TO_BASELINE=()
 declare -A KEY_TO_SURFACED_CURSOR=()
 declare -A KEY_TO_PENDING_PRECOMMIT_ACTIONABLE=()
 declare -A KEY_TO_REPORTED_ACTIONABLE_KEYS=()
+declare -A KEY_TO_ACTIONABLE_VISIBLE=()
+declare -A KEY_TO_LATEST_ACTIONABLE_TIME=()
 declare -A KEY_TO_CODEX_REVIEW_ACTIVE=()
 declare -A KEY_TO_CODEX_REVIEW_SIGNAL_TIME=()
 declare -A KEY_TO_LATEST_ACTIVITY_TIME=()
 declare -A KEY_TO_LATEST_ACTIVITY_TYPE=()
-POSTCOMMIT_BOUNDARY_FOUND=0
+POSTCOMMIT_BOUNDARY_TIME=""
 STATE_FILE="${PR_WATCHER_STATE_FILE:-.sisyphus/watch-prs-for-comments.state.json}"
 
 usage() {
@@ -301,6 +303,8 @@ reset_review_cycle_runtime_state() {
     KEY_TO_SURFACED_CURSOR["$key"]=""
     KEY_TO_PENDING_PRECOMMIT_ACTIONABLE["$key"]=false
     KEY_TO_REPORTED_ACTIONABLE_KEYS["$key"]=$'\n'
+    KEY_TO_ACTIONABLE_VISIBLE["$key"]=false
+    KEY_TO_LATEST_ACTIONABLE_TIME["$key"]=""
     KEY_TO_CODEX_REVIEW_ACTIVE["$key"]=false
     KEY_TO_CODEX_REVIEW_SIGNAL_TIME["$key"]=""
 }
@@ -387,6 +391,14 @@ initialize_watcher_state() {
             KEY_TO_PENDING_PRECOMMIT_ACTIONABLE["$key"]=false
         fi
 
+        if [[ -z "${KEY_TO_ACTIONABLE_VISIBLE[$key]:-}" ]]; then
+            KEY_TO_ACTIONABLE_VISIBLE["$key"]=false
+        fi
+
+        if [[ -z "${KEY_TO_LATEST_ACTIONABLE_TIME[$key]:-}" ]]; then
+            KEY_TO_LATEST_ACTIONABLE_TIME["$key"]=""
+        fi
+
         if [[ -z "${KEY_TO_CODEX_REVIEW_ACTIVE[$key]:-}" ]]; then
             KEY_TO_CODEX_REVIEW_ACTIVE["$key"]=false
         fi
@@ -415,6 +427,43 @@ is_codex_review_active_for_key() {
 
     [[ "${KEY_TO_CODEX_REVIEW_ACTIVE[$key]:-false}" == "true" ]] || return 1
     is_post_commit_activity "$key" "$signal_time"
+}
+
+codex_review_release_signal_seen_after_eyes() {
+    local key="$1"
+    local signal_time="${KEY_TO_CODEX_REVIEW_SIGNAL_TIME[$key]:-}"
+    local latest_actionable="${KEY_TO_LATEST_ACTIONABLE_TIME[$key]:-}"
+
+    [[ -n "$signal_time" ]] || return 0
+
+    if compare_iso_gt "$latest_actionable" "$signal_time"; then
+        return 0
+    fi
+
+    compare_iso_gt "$POSTCOMMIT_BOUNDARY_TIME" "$signal_time"
+}
+
+reset_actionable_scan_state() {
+    local key="$1"
+
+    KEY_TO_ACTIONABLE_VISIBLE["$key"]=false
+    KEY_TO_LATEST_ACTIONABLE_TIME["$key"]=""
+    KEY_TO_PENDING_PRECOMMIT_ACTIONABLE["$key"]=false
+    POSTCOMMIT_BOUNDARY_TIME=""
+}
+
+finalize_actionable_scan_state() {
+    local key="$1"
+
+    [[ "${KEY_TO_ACTIONABLE_VISIBLE[$key]:-false}" == "true" ]] || return 0
+
+    if is_codex_review_active_for_key "$key" && ! codex_review_release_signal_seen_after_eyes "$key"; then
+        KEY_TO_PENDING_PRECOMMIT_ACTIONABLE["$key"]=true
+        return 0
+    fi
+
+    KEY_TO_PENDING_PRECOMMIT_ACTIONABLE["$key"]=false
+    NEW_SIGNAL_FOUND=1
 }
 
 record_codex_review_reaction() {
@@ -626,7 +675,9 @@ flag_postcommit_boundary_if_needed() {
     compare_iso_gt "$timestamp" "$baseline" || return 0
     is_post_commit_activity "$key" "$timestamp" || return 0
 
-    POSTCOMMIT_BOUNDARY_FOUND=1
+    if compare_iso_gt "$timestamp" "$POSTCOMMIT_BOUNDARY_TIME"; then
+        POSTCOMMIT_BOUNDARY_TIME="$timestamp"
+    fi
 }
 
 record_actionable_event() {
@@ -636,9 +687,12 @@ record_actionable_event() {
     local display_callback="$4"
     shift 4
 
-    if is_post_commit_activity "$key" "$timestamp"; then
-        NEW_SIGNAL_FOUND=1
-    else
+    KEY_TO_ACTIONABLE_VISIBLE["$key"]=true
+    if compare_iso_gt "$timestamp" "${KEY_TO_LATEST_ACTIONABLE_TIME[$key]:-}"; then
+        KEY_TO_LATEST_ACTIONABLE_TIME["$key"]="$timestamp"
+    fi
+
+    if ! is_post_commit_activity "$key" "$timestamp"; then
         KEY_TO_PENDING_PRECOMMIT_ACTIONABLE["$key"]=true
     fi
 
@@ -815,6 +869,9 @@ scan_pr_activity() {
     local review_id
 
     register_latest_activity "$key" "${KEY_TO_LAST_COMMIT[$key]}" "head commit"
+    if [[ "$report_new" == "true" ]]; then
+        reset_actionable_scan_state "$key"
+    fi
 
     issue_comments=$(fetch_paginated_array "repos/$repo/issues/$pr/comments?per_page=100") || fail "Failed to fetch issue comments for $key.$(fetch_error_suffix)"
     review_comments=$(fetch_paginated_array "repos/$repo/pulls/$pr/comments?per_page=100") || fail "Failed to fetch review comments for $key.$(fetch_error_suffix)"
@@ -905,12 +962,8 @@ scan_pr_activity() {
         record_codex_review_reaction "$key" "$actor" "$content" "$timestamp"
     done
 
-    if [[ "${KEY_TO_PENDING_PRECOMMIT_ACTIONABLE[$key]:-false}" == "true" && "$POSTCOMMIT_BOUNDARY_FOUND" -eq 1 ]]; then
-        NEW_SIGNAL_FOUND=1
-    fi
-
-    if [[ "${KEY_TO_PENDING_PRECOMMIT_ACTIONABLE[$key]:-false}" == "true" ]] && ! is_codex_review_active_for_key "$key"; then
-        NEW_SIGNAL_FOUND=1
+    if [[ "$report_new" == "true" ]]; then
+        finalize_actionable_scan_state "$key"
     fi
 }
 
@@ -1145,12 +1198,10 @@ first_sweep() {
     local baseline
 
     NEW_SIGNAL_FOUND=0
-    POSTCOMMIT_BOUNDARY_FOUND=0
     note "👀 Checking for existing new activity..."
 
     for key in "${PR_KEYS[@]}"; do
         is_pr_open "$key" || continue
-        POSTCOMMIT_BOUNDARY_FOUND=0
         baseline="$(effective_baseline_for_key "$key")"
         scan_pr_activity "$key" "$baseline" true
     done
@@ -1230,12 +1281,10 @@ monitor_loop() {
 
             KEY_TO_LATEST_ACTIVITY_TIME["$key"]=""
             KEY_TO_LATEST_ACTIVITY_TYPE["$key"]=""
-            POSTCOMMIT_BOUNDARY_FOUND=0
 
             scan_pr_activity "$key" "$(effective_baseline_for_key "$key")" false
 
             baseline="$(effective_baseline_for_key "$key")"
-            POSTCOMMIT_BOUNDARY_FOUND=0
             scan_pr_activity "$key" "$baseline" true
             validate_after_cutoffs
         done
